@@ -1,0 +1,12 @@
+<!-- menu-vertical-videos.liquid -->
+
+{%- capture ap_video -%}vapmenuitem_cvideo_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_video_mute -%}vapmenuitem_video_mute_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_video_loop -%}vapmenuitem_video_loop_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_video_height -%}vapmenuitem_video_height_{{ intVertical }}{%- endcapture -%}
+
+<div class="block-video js-menu-video">
+    <video {% if settings[ap_video_mute] %}muted{% endif %} {% if settings[ap_video_loop] %}loop{% endif %} onmouseover="this.play()" onmouseout="this.pause()">
+      <source type="video/mp4" src="{{settings[ap_video]}}">
+    </video>
+  </div>

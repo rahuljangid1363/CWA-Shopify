@@ -1,0 +1,297 @@
+<!-- categories-list.liquid -->
+{{ 'categories-list.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+
+<div class="categories-list">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+      <h2 class="section-header">{{ section.settings.heading | escape }}</h2>
+      <p class="section-text">{{ section.settings.text_decoration }}</p>
+        <div class="row">
+            {%- for block in section.blocks -%}
+            {%- case block.settings.width -%}
+            {%- when '16%' -%}
+            {%- assign block_width = 'col-sm-6 col-md-4 col-xl-2' -%}
+            {%- when '25%' -%}
+            {%- assign block_width = 'col-md-3' -%}
+            {%- when '33%' -%}
+            {%- assign block_width = 'col-lg-4 col-md-6' -%}
+            {%- when '50%' -%}
+            {%- assign block_width = 'col-md-6' -%}
+            {%- when '66%' -%}
+            {%- assign block_width = 'col-lg-8 col-md-6' -%}
+            {%- when '75%' -%}
+            {%- assign block_width = 'col-md-9' -%}
+            {%- when '83%' -%}
+            {%- assign block_width = 'col-sm-6 col-md-8 col-xl-10' -%}
+            {%- when '100%' -%}
+            {%- assign block_width = 'col-12' -%}
+            {%- endcase -%}
+            <div class="{{block_width}}">
+              <div class="categories-list-content {%- if section.settings.effects_image -%}{{ 'categories-list-effects' | prepend: ' ' }}{%- endif -%}">
+                <div class="categories-image">
+                    {%- if block.settings.image_categories != blank -%}
+                    <div class="categories-list-blog"
+                    >
+                      <img class="categories-list__image"
+                      srcset="{%- if block.settings.image_categories.width >= 165 -%}{{ block.settings.image_categories | img_url: '165x' }} 165w,{%- endif -%}
+                        {%- if block.settings.image_categories.width >= 372 -%}{{ block.settings.image_categories | img_url: '372x' }} 372w,{%- endif -%}
+                        {%- if block.settings.image_categories.width >= 480 -%}{{ block.settings.image_categories | img_url: '480x' }} 480w,{%- endif -%}
+                        {%- if block.settings.image_categories.width >= 850 -%}{{ block.settings.image_categories | img_url: '850x' }} 850w,{%- endif -%}
+                        {%- if block.settings.image_categories.width >= 1070 -%}{{ block.settings.image_categories | img_url: '1070x' }} 1070w,{%- endif -%}
+                        {%- if block.settings.image_categories.width >= 1500 -%}{{ block.settings.image_categories | img_url: '1500x' }} 1500w,{%- endif -%}"
+                      src="{{ block.settings.image_categories | img_url: 'master' }}"
+                      sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                      alt="{{ block.settings.image_categories.alt | escape }}"
+                      loading="lazy"
+                      width="{{ block.settings.image_categories.width }}"
+                      height="{{ block.settings.image_categories.height }}"
+                    >
+                    </div>
+                    {%- else -%}
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                </div>
+                <div class="categories-list-block-text">
+                  <h3 class="categories-list-header">{{ block.settings.header__text | escape }}</h3>
+                  <ul>
+                    <li><a href="{{ block.settings.btn_item_1 | default:'#' }}" title="{{ block.settings.btn_items_1_text }}">{{ block.settings.btn_items_1_text }}</li>
+                    <li><a href="{{ block.settings.btn_item_2 | default:'#' }}" title="{{ block.settings.btn_items_2_text }}">{{ block.settings.btn_items_2_text }}</li>
+                    <li><a href="{{ block.settings.btn_item_3 | default:'#' }}" title="{{ block.settings.btn_items_3_text }}">{{ block.settings.btn_items_3_text }}</li>
+                    <li><a href="{{ block.settings.btn_item_4 | default:'#' }}" title="{{ block.settings.btn_items_4_text }}">{{ block.settings.btn_items_4_text }}</li>
+                    <li><a href="{{ block.settings.btn_item_5 | default:'#' }}" title="{{ block.settings.btn_items_5_text }}">{{ block.settings.btn_items_5_text }}</li>
+                    <li><a href="{{ block.settings.btn_item_6 | default:'#' }}" title="{{ block.settings.btn_items_6_text }}">{{ block.settings.btn_items_6_text }}</li>
+                  </ul>
+                  <a class="link-base link-categories" href="{{ block.settings.btn_link | default:'#' }}" title="{{ block.settings.btn_text }}">{{ block.settings.btn_text }}
+                    <i class="leofar leofa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            {%- endfor -%}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.categories-list.name",
+  "class": "spaced-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.categories-list.settings.fullwidth.label",
+      "default": false
+    },
+    {
+      "id": "background-color",
+      "type": "color",
+      "label": "t:sections.categories-list.settings.background-color.label"
+    },
+    {
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "t:sections.categories-list.settings.margin_desktop.label",
+      "info": "t:sections.categories-list.settings.margin_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "t:sections.categories-list.settings.padding_desktop.label",
+      "info": "t:sections.categories-list.settings.padding_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "t:sections.categories-list.settings.margin_mobile.label",
+      "info": "t:sections.categories-list.settings.margin_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "t:sections.categories-list.settings.padding_mobile.label",
+      "info": "t:sections.categories-list.settings.padding_mobile.info"
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "t:sections.categories-list.settings.heading.label",
+      "default": "categories list"
+    },
+    {
+      "type": "text",
+      "id": "text_decoration",
+      "label": "t:sections.categories-list.settings.text_decoration.label",
+      "default": "categories list"
+    },
+    {
+    "type": "checkbox",
+    "id": "effects_image",
+    "label": "t:sections.categories-list.settings.effects_image.label",
+    "default": true
+    }
+  ],
+  "blocks": [
+    {
+        "type": "categories_list",
+        "name": "t:sections.categories-list.blocks.categories_list.name",
+        "settings": [
+        {
+        "type": "select",
+        "id": "width",
+        "label": "t:sections.categories-list.blocks.categories_list.settings.width.label",
+        "default": "16%",
+        "options": [
+          {
+            "value": "16%",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.width.options__1.label"
+          },
+          {
+            "value": "25%",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.width.options__2.label"
+          },
+          {
+            "value": "33%",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.width.options__3.label"
+          },
+          {
+            "value": "50%",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.width.options__4.label"
+          },
+          {
+            "value": "66%",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.width.options__5.label"
+          },
+          {
+            "value": "75%",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.width.options__6.label"
+          },
+          {
+            "value": "83%",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.width.options__7.label"
+          },
+          {
+            "value": "100%",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.width.options__8.label"
+          }
+        ]
+       },
+       {
+        "type": "image_picker",
+        "id": "image_categories",
+        "label": "t:sections.categories-list.blocks.categories_list.settings.image_categories.label"
+      },
+       {
+        "type": "text",
+        "id": "header__text",
+        "label": "t:sections.categories-list.blocks.categories_list.settings.header__text.label",
+        "default": "Header"
+        },
+        {
+            "type": "text",
+            "id": "btn_items_1_text",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_items_1_text.label",
+            "default": "hype"
+          },
+          {
+            "type": "url",
+            "id": "btn_item_1",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_item_1.label"
+          },
+          {
+            "type": "text",
+            "id": "btn_items_2_text",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_items_2_text.label",
+            "default": "Catwork"
+          },
+          {
+            "type": "url",
+            "id": "btn_item_2",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_item_2.label"
+          },
+          {
+            "type": "text",
+            "id": "btn_items_3_text",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_items_3_text.label",
+            "default": "Fifa"
+          },
+          {
+            "type": "url",
+            "id": "btn_item_3",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_item_3.label"
+          },
+          {
+            "type": "text",
+            "id": "btn_items_4_text",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_items_4_text.label",
+            "default": "Metro"
+          },
+          {
+            "type": "url",
+            "id": "btn_item_4",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_item_4.label"
+          },
+          {
+            "type": "text",
+            "id": "btn_items_5_text",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_items_5_text.label",
+            "default": "Puma"
+          },
+          {
+            "type": "url",
+            "id": "btn_item_5",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_item_5.label"
+          },
+          {
+            "type": "text",
+            "id": "btn_items_6_text",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_items_6_text.label",
+            "default": "Lavie"
+          },
+          {
+            "type": "url",
+            "id": "btn_item_6",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_item_6.label"
+          },
+          {
+            "type": "text",
+            "id": "btn_text",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_text.label",
+            "default": "Show More"
+          },
+          {
+            "type": "url",
+            "id": "btn_link",
+            "label": "t:sections.categories-list.blocks.categories_list.settings.btn_link.label"
+          }
+        ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.categories-list.presets.name",
+      "blocks": [
+        {
+            "type": "categories_list"
+        },
+        {
+            "type": "categories_list"
+        },
+        {
+            "type": "categories_list"
+        },
+        {
+            "type": "categories_list"
+        },
+        {
+            "type": "categories_list"
+        },
+        {
+            "type": "categories_list"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

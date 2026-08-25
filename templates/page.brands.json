@@ -1,0 +1,258 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "logo": {
+      "type": "logo-carousel",
+      "blocks": {
+        "c74b379b-fa05-4341-aa86-194a37f1172d": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/unsplash-lu0H9DVMBLE-1000x1000.jpg",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "6ef58a6d-de9c-4ff5-8679-b2e599ac1035": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/unsplash-ljh4yQb5EBE-1000x1000.jpg",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "f2f9606f-f8d6-4fca-80f3-61a033773b61": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/unsplash-9kMl3X6UxzA-1000x1000.jpg",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "9d73ea9b-9818-477b-aa82-e855537473bc": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/unsplash-guBbFANRGds-1000x1000.jpg",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "aad3788a-ad12-4467-adca-547d7f81752d": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/unsplash-Kw_zQBAChws-1000x1000.jpg",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "8f052979-6507-4590-b392-abe732f53f9a": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/unsplash-9uu4r2Dz2bg-1000x1000.jpg",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "b011e240-a384-4141-b298-e534a4220f0c": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/unsplash-tCYA3ShyXIY-1000x1000.jpg",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        }
+      },
+      "block_order": [
+        "c74b379b-fa05-4341-aa86-194a37f1172d",
+        "6ef58a6d-de9c-4ff5-8679-b2e599ac1035",
+        "f2f9606f-f8d6-4fca-80f3-61a033773b61",
+        "9d73ea9b-9818-477b-aa82-e855537473bc",
+        "aad3788a-ad12-4467-adca-547d7f81752d",
+        "8f052979-6507-4590-b392-abe732f53f9a",
+        "b011e240-a384-4141-b298-e534a4220f0c"
+      ],
+      "settings": {
+        "fullwidth": false,
+        "background-color": "#f6f6f4",
+        "margin_desktop": "",
+        "padding_desktop": "",
+        "margin_mobile": "",
+        "padding_mobile": "",
+        "heading": "",
+        "text_decoration": "",
+        "color_svg": "#fff",
+        "color_svg_hover": "#000",
+        "effect_image": true,
+        "slidesToShow": 5,
+        "slidesToScroll": 1,
+        "rows": 1,
+        "autoplay": false,
+        "autoplaySpeed": 5000,
+        "speed": 800,
+        "pauseOnHover": false,
+        "arrows": false,
+        "dots": false,
+        "draggable": true,
+        "infinite": true,
+        "slidesToShow_992": 3,
+        "slidesToScroll_992": 3,
+        "arrows_992": false,
+        "dots_992": false,
+        "slidesToShow_767": 3,
+        "slidesToScroll_767": 3,
+        "arrows_767": false,
+        "dots_767": false,
+        "slidesToShow_450": 3,
+        "slidesToScroll_450": 3,
+        "arrows_450": false,
+        "dots_450": false
+      }
+    },
+    "brands": {
+      "type": "brands",
+      "blocks": {
+        "6bbc6321-3d35-4068-af8a-ac5cd13e733b": {
+          "type": "character",
+          "settings": {
+            "title": "a",
+            "linklist": "brand-a"
+          }
+        },
+        "5410c38c-de4f-4023-9c27-eedbc3b286c6": {
+          "type": "character",
+          "settings": {
+            "title": "b",
+            "linklist": "brand-b"
+          }
+        },
+        "f8219f8a-ba47-4bfc-9ccc-589b444d4524": {
+          "type": "character",
+          "settings": {
+            "title": "c",
+            "linklist": "brand-c"
+          }
+        },
+        "9bba77b1-9fe9-40c9-82da-d29f39ae275e": {
+          "type": "character",
+          "settings": {
+            "title": "d",
+            "linklist": "brand-d"
+          }
+        },
+        "1a4fc619-ed39-4615-a73a-2638459f47dd": {
+          "type": "character",
+          "settings": {
+            "title": "e",
+            "linklist": "brand-i"
+          }
+        },
+        "2f0c4c86-f836-4de5-8f54-237675d7336e": {
+          "type": "character",
+          "settings": {
+            "title": "g",
+            "linklist": "brand-g"
+          }
+        },
+        "eecc1921-ed1a-48d5-8874-9ae7a8b6d03d": {
+          "type": "character",
+          "settings": {
+            "title": "j",
+            "linklist": "brand-j"
+          }
+        },
+        "3e1eab32-691c-4f4e-80b1-34c43c94139b": {
+          "type": "character",
+          "settings": {
+            "title": "l",
+            "linklist": "brand-l"
+          }
+        },
+        "2438a5c8-afc6-4537-b3e9-80e134cb906c": {
+          "type": "character",
+          "settings": {
+            "title": "m",
+            "linklist": "brand-m"
+          }
+        },
+        "9cada9c7-46fa-4e08-b2e1-7feae0fadb4f": {
+          "type": "character",
+          "settings": {
+            "title": "s",
+            "linklist": "brand-s"
+          }
+        },
+        "8a63a415-e69a-419e-94e2-a9bbf02d0d15": {
+          "type": "character",
+          "settings": {
+            "title": "t",
+            "linklist": "brand-t"
+          }
+        },
+        "223e6bb2-4ede-46da-beb7-4279e7843fa7": {
+          "type": "character",
+          "settings": {
+            "title": "v",
+            "linklist": "brand-v"
+          }
+        },
+        "029325b2-c405-40f5-abe9-ec3a4112225b": {
+          "type": "character",
+          "settings": {
+            "title": "w",
+            "linklist": "brand-w"
+          }
+        },
+        "e60e565f-38a4-4406-af72-eaa31f69c83b": {
+          "type": "character",
+          "settings": {
+            "title": "z",
+            "linklist": "brand-z"
+          }
+        }
+      },
+      "block_order": [
+        "6bbc6321-3d35-4068-af8a-ac5cd13e733b",
+        "5410c38c-de4f-4023-9c27-eedbc3b286c6",
+        "f8219f8a-ba47-4bfc-9ccc-589b444d4524",
+        "9bba77b1-9fe9-40c9-82da-d29f39ae275e",
+        "1a4fc619-ed39-4615-a73a-2638459f47dd",
+        "2f0c4c86-f836-4de5-8f54-237675d7336e",
+        "eecc1921-ed1a-48d5-8874-9ae7a8b6d03d",
+        "3e1eab32-691c-4f4e-80b1-34c43c94139b",
+        "2438a5c8-afc6-4537-b3e9-80e134cb906c",
+        "9cada9c7-46fa-4e08-b2e1-7feae0fadb4f",
+        "8a63a415-e69a-419e-94e2-a9bbf02d0d15",
+        "223e6bb2-4ede-46da-beb7-4279e7843fa7",
+        "029325b2-c405-40f5-abe9-ec3a4112225b",
+        "e60e565f-38a4-4406-af72-eaa31f69c83b"
+      ],
+      "settings": {
+        "heading": "All Brands",
+        "subheading": "<p>Promotions, new products and sales. Directly to your inbox.</p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "logo",
+    "brands"
+  ]
+}

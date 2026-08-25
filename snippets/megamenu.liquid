@@ -1,0 +1,40 @@
+<!-- megamenu.liquid -->
+
+{%- capture apvideo -%}apmenuitem_evideo_{{ intMega }}{%- endcapture -%}
+{%- capture approduct -%}apmenuitem_eproduct_{{ intMega }}{%- endcapture -%}
+{%- capture aphtml -%}apmenuitem_ehtml_{{ intMega }}{%- endcapture -%}
+{%- capture aplink -%}apmenuitem_eblocklinks_{{ intMega }}{%- endcapture -%}
+{%- capture ordervideo -%}apmenuitem_ovideo_{{ intMega }}{%- endcapture -%}
+{%- capture orderproduct -%}apmenuitem_oproduct_{{ intMega }}{%- endcapture -%}
+{%- capture orderhtml -%}apmenuitem_ohtml_{{ intMega }}{%- endcapture -%}
+{%- capture orderlink -%}apmenuitem_oblocklinks_{{ intMega }}{%- endcapture -%}
+{%- capture ap_colvideo -%}apmenuitem_columns_blockvideo_{{ intMega }}{%- endcapture -%}
+{%- capture ap_colproduct -%}apmenuitem_columns_blockproducts_{{ intMega }}{%- endcapture -%}
+{%- capture ap_colhtml -%}apmenuitem_columns_blockhtml_{{ intMega }}{%- endcapture -%}
+{%- capture ap_collink -%}apmenuitem_columns_blocklinks_{{ intMega }}{%- endcapture -%}
+<div class="container">
+  <div class="row">
+    {%- if settings[aplink] -%}
+    <div class="mega-col col-lg-{{ settings[ap_collink] }} order-{{settings[orderlink]}}">
+      {%- render 'menu-blocklinks', intMega:intMega -%}
+    </div>
+    {%- endif -%}
+    {%- if settings[apvideo] -%}
+    <div class="mega-col col-lg-{{ settings[ap_colvideo] }} order-{{settings[ordervideo]}}">
+      {%- render 'menu-blockvideos', intMega:intMega -%}
+    </div>
+    {%- endif -%}
+    {%- if settings[approduct] -%}
+    <div class="mega-col col-lg-{{ settings[ap_colproduct] }} order-{{settings[orderproduct]}}">
+      {%- capture collection_menu -%}apmenuitem_cproduct_{{ intMega }}{%- endcapture -%}
+      {%- capture collection_menu_title -%}apmenuitem_tproduct_{{ intMega }}{%- endcapture -%}
+      {%- render 'menu-blockproducts', intMega:intMega -%}
+    </div>
+    {%- endif -%}
+    {%- if settings[aphtml] -%}
+    <div class="mega-col col-lg-{{ settings[ap_colhtml] }} order-{{settings[orderhtml]}}">
+      {%- render 'menu-blockhtml', intMega:intMega -%}
+    </div>
+    {%- endif -%}
+  </div>
+</div>

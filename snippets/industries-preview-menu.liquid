@@ -1,0 +1,144 @@
+<!-- industries-preview-menu.liquid -->
+<!-- Two-panel hover menu: left = list of links, right = preview that swaps per hovered item. -->
+<style>
+.industries-menu{
+  display: flex;
+  min-width: 620px;
+  max-width: 780px;
+}
+.industries-menu__list{
+  width: 240px;
+  flex-shrink: 0;
+  border-right: 1px solid #eee;
+  padding: 10px 0;
+  max-height: 420px;
+  overflow-y: auto;
+}
+.industries-menu__item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 22px;
+  cursor: pointer;
+}
+.industries-menu__item a{
+  color: #333333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+.industries-menu__item .industries-menu__arrow{
+  color: #b3b3b3;
+  font-size: 13px;
+}
+.industries-menu__item:hover,
+.industries-menu__item.active{
+  background-color: #f5f8fc;
+}
+.industries-menu__item:hover a,
+.industries-menu__item.active a{
+  color: #3075cc;
+}
+.industries-menu__item:hover .industries-menu__arrow,
+.industries-menu__item.active .industries-menu__arrow{
+  color: #3075cc;
+}
+.industries-menu__panels{
+  flex: 1;
+  padding: 28px;
+  position: relative;
+}
+.industries-menu__panel{
+  display: none;
+}
+.industries-menu__panel.active{
+  display: block;
+}
+.industries-menu__panel h4{
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #121212;
+}
+.industries-menu__panel-image{
+  width: 100%;
+  max-width: 280px;
+  height: 160px;
+  border-radius: 6px;
+  background-color: #eef1f4;
+  overflow: hidden;
+}
+.industries-menu__panel-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.industries-menu__viewmore{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  color: #3075cc;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+@media (max-width: 991px){
+  .industries-menu{
+    flex-direction: column;
+    min-width: unset;
+  }
+  .industries-menu__list{
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    max-height: none;
+  }
+  .industries-menu__panels{
+    padding: 20px;
+  }
+}
+</style>
+<div class="industries-menu">
+  <div class="industries-menu__list">
+    {%- for block in blocks -%}
+      <div class="industries-menu__item{% if forloop.first %} active{% endif %}" data-panel="industries-panel-{{ forloop.index }}" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.link | default: '#' }}">{{ block.settings.title }}</a>
+        <span class="industries-menu__arrow">&rsaquo;</span>
+      </div>
+    {%- endfor -%}
+  </div>
+  <div class="industries-menu__panels">
+    {%- for block in blocks -%}
+      <div class="industries-menu__panel{% if forloop.first %} active{% endif %}" id="industries-panel-{{ forloop.index }}">
+        <h4>{{ block.settings.title }}</h4>
+        <div class="industries-menu__panel-image">
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="280" height="160">
+          {%- endif -%}
+        </div>
+        <a href="{{ block.settings.link | default: '#' }}" class="industries-menu__viewmore">View More <span>&rarr;</span></a>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+<script>
+(function(){
+  document.querySelectorAll('.industries-menu').forEach(function(menu){
+    if (menu.dataset.bound) return;
+    menu.dataset.bound = 'true';
+    var items = menu.querySelectorAll('.industries-menu__item');
+    items.forEach(function(item){
+      item.addEventListener('mouseenter', function(){
+        var targetId = item.getAttribute('data-panel');
+        items.forEach(function(i){ i.classList.remove('active'); });
+        menu.querySelectorAll('.industries-menu__panel').forEach(function(p){ p.classList.remove('active'); });
+        item.classList.add('active');
+        var panel = menu.querySelector('#' + targetId);
+        if (panel) panel.classList.add('active');
+      });
+    });
+  });
+})();
+</script>

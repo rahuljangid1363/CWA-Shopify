@@ -1,0 +1,40 @@
+<!-- verticalmenu.liquid -->
+
+{%- capture apvideo -%}vapmenuitem_evideo_{{ intVertical }}{%- endcapture -%}
+{%- capture approduct -%}vapmenuitem_eproduct_{{ intVertical }}{%- endcapture -%}
+{%- capture aphtml -%}vapmenuitem_ehtml_{{ intVertical }}{%- endcapture -%}
+{%- capture aplink -%}vapmenuitem_eblocklinks_{{ intVertical }}{%- endcapture -%}
+{%- capture ordervideo -%}vapmenuitem_ovideo_{{ intVertical }}{%- endcapture -%}
+{%- capture orderproduct -%}vapmenuitem_oproduct_{{ intVertical }}{%- endcapture -%}
+{%- capture orderhtml -%}vapmenuitem_ohtml_{{ intVertical }}{%- endcapture -%}
+{%- capture orderlink -%}vapmenuitem_oblocklinks_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_colvideo -%}vapmenuitem_columns_blockvideo_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_colproduct -%}vapmenuitem_columns_blockproducts_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_colhtml -%}vapmenuitem_columns_blockhtml_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_collink -%}vapmenuitem_columns_blocklinks_{{ intVertical }}{%- endcapture -%}
+<div class="container">
+  <div class="row">
+    {%- if settings[aplink] -%}
+    <div class="vertical-col col-lg-{{ settings[ap_collink] }} order-{{settings[orderlink]}}">
+      {%- render 'menu-vertical-link', intVertical:intVertical -%}
+    </div>
+    {%- endif -%}
+    {%- if settings[apvideo] -%}
+    <div class="vertical-col col-lg-{{ settings[ap_colvideo] }} order-{{settings[ordervideo]}}">
+      {%- render 'menu-vertical-videos', intVertical:intVertical -%}
+    </div>
+    {%- endif -%}
+    {%- if settings[approduct] -%}
+    <div class="vertical-col col-lg-{{ settings[ap_colproduct] }} order-{{settings[orderproduct]}}">
+      {%- capture collection_menu -%}vapmenuitem_cproduct_{{ intVertical }}{%- endcapture -%}
+      {%- capture collection_menu_title -%}vapmenuitem_tproduct_{{ intVertical }}{%- endcapture -%}
+      {%- render 'menu-vertical-products', intVertical:intVertical -%}
+    </div>
+    {%- endif -%}
+    {%- if settings[aphtml] -%}
+    <div class="vertical-col col-lg-{{ settings[ap_colhtml] }} order-{{settings[orderhtml]}}">
+      {%- render 'menu-vertical-html', intVertical:intVertical -%}
+    </div>
+    {%- endif -%}
+  </div>
+</div>

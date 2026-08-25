@@ -1,0 +1,130 @@
+<!-- popup.liquid -->
+{% if section.settings.enber_popup %}
+<div class="modal fade" id="ap_load_popup" data-delay="{{ section.settings.delay_popup }}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body">
+        <div class="modal-image {% if section.settings.image_popup != blank %}media{% else %}image-popup--placeholder placeholder{% endif %}"
+        style="padding-bottom: {{ 1 | divided_by: section.settings.image_popup.aspect_ratio | times: 100 }}%;"
+        >
+        {% if section.settings.image_popup != blank %}
+            <img
+            srcset="{%- if section.settings.image_popup.width >= 165 -%}{{ section.settings.image_popup | img_url: '165x' }} 165w,{%- endif -%}
+              {%- if section.settings.image_popup.width >= 360 -%}{{ section.settings.image_popup | img_url: '360x' }} 360w,{%- endif -%}
+              {%- if section.settings.image_popup.width >= 535 -%}{{ section.settings.image_popup | img_url: '535x' }} 535w,{%- endif -%}
+              {%- if section.settings.image_popup.width >= 850 -%}{{ section.settings.image_popup | img_url: '850x' }} 850w,{%- endif -%}
+              {%- if section.settings.image_popup.width >= 1070 -%}{{ section.settings.image_popup | img_url: '1070x' }} 1070w,{%- endif -%}
+              {%- if section.settings.image_popup.width >= 1500 -%}{{ section.settings.image_popup | img_url: '1500x' }} 1500w,{%- endif -%}"
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            sizes="(min-width: {{ section.settings.page_width }}px) {{ section.settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+            alt="{{ section.settings.image_popup.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image_popup.width }}"
+            height="{{ section.settings.image_popup.height }}"
+          >
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          </div>
+          <h5 class="modal-title">{{ section.settings.title_popup }}</h5>
+          <p class="modal-text">{{ section.settings.text_popup }}</p>
+          <div class="modal-email">
+            {%- if section.settings.email_popup -%}
+            <div class="form-vertical">
+              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="newsletter-form__field-wrapper">
+                <div class="field">
+                  <input
+                    id="NewsletterForm--{{ block.id }}"
+                    type="email"
+                    name="contact[email]"
+                    class="field__input"
+                    value="{{ form.email }}"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    {% if form.errors %}
+                      autofocus
+                      aria-invalid="true"
+                      aria-describedby="ContactFooter-error"
+                    {% elsif form.posted_successfully? %}
+                      aria-describedby="ContactFooter-success"
+                    {% endif %}
+                    placeholder="{{ 'newsletter.label' | t }}"
+                  >
+                  <label class="field__label" for="NewsletterForm--{{ block.id }}">
+                    {{ 'newsletter.label' | t }}
+                  </label>
+                </div>
+                {%- if form.errors -%}
+                  <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+                {%- endif -%}
+              </div>
+              <button type="submit" class="button button--secondary newsletter-form__button" name="commit" id="Subscribe">
+                {{ 'newsletter.button_label' | t }}
+              </button>
+              {%- if form.posted_successfully? -%}
+                <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
+              {%- endif -%}
+            {%- endform -%}
+            </div>
+            {%- endif -%}
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+  {% schema %}
+  {
+    "name": "t:sections.popup.name",
+    "class": "index-section",
+    "settings": [
+        {
+        "type": "checkbox",
+        "id": "enber_popup",
+        "label": "t:sections.popup.settings.enber_popup.label",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "image_popup",
+        "label": "t:sections.popup.settings.image_popup.label"
+      },
+      {
+        "type": "text",
+        "id": "title_popup",
+        "default": "Join our newletter and get 20% discount",
+        "label": "t:sections.popup.settings.title_popup.label"
+      },
+      {
+        "type": "textarea",
+        "id": "text_popup",
+        "default": "This website uses cookies to ensure you get the best experience on our website.",
+        "label": "t:sections.popup.settings.text_popup.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "email_popup",
+        "label": "t:sections.popup.settings.email_popup.label",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "delay_popup",
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "label": "t:sections.popup.settings.delay_popup.label",
+        "default": 5,
+        "unit": "s"
+      }
+    ]
+  }
+  {% endschema %}
+  

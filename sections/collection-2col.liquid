@@ -1,0 +1,574 @@
+<!-- collection-2col.liquid -->
+
+{{ 'collection-2row.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+{%- style -%}
+.collection-2row .sub-title{
+  color:{{section.settings.color_sub_title }};
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.collection-2row .sub-title span{
+  border-top:1px solid {{section.settings.color_sub_title }};
+}
+{%- endstyle -%}
+<div class="collection-1 collection-2row">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+      <div class="{% if section.settings.style_heading == 'column' %}heading-title text-center{% elsif section.settings.style_heading == 'row' %}heading{% endif %}"> 
+        <p class="sub-title">{{ section.settings.sub_title }}</p>
+        <h2 class="section-header">{{ section.settings.heading | escape }}</h2>
+        <p class="section-text">{{ section.settings.text_decoration }}</p>
+        {%- if section.settings.btn_text != blank -%}
+            <a class="link-base" href="{{ section.settings.btn_link | default:'#' }}" title="{{ section.settings.btn_text }}">{{ section.settings.btn_text }}
+              <i class="leofar leofa-arrow-right"></i>
+            </a>
+        {%- endif -%}
+      </div>
+        <div class="row collection-1-row">
+            
+            <div class="col-lg-6">
+              {%- for block in section.blocks -%}
+              {% case block.type %}
+                {% when 'collectionleft' %}
+                  <div class="collection-1-content collection-left" id="collection-{{ block.id }}">
+                    {%- style -%}
+                      .collection-2row #collection-{{ block.id }} .link-base{
+                        background-color:{{ block.settings.bg_button }};
+                        color:{{ block.settings.color_button }};
+                        border: 1px solid {{ block.settings.border_button }};
+                      }
+                      .collection-2row #collection-{{ block.id }} .link-base:hover{
+                        background-color:{{ block.settings.bg_button_hover }};
+                        color:{{ block.settings.color_button_hover }};
+                        border: 1px solid {{ block.settings.border_button_hover }};
+                      }
+                    {%- endstyle -%}
+                      <a class="link-collection-1" href="{{ block.settings.collection.url | default:'#' }}">
+                        <div class="collection-content collection-{% if section.settings.effects_image %}image-hover{% else %}image{% endif %} {% if block.settings.image_collection != blank %}media{% else %}image-collection__media--placeholder placeholder{% endif %}" style="padding-bottom: {{ 1 | divided_by: block.settings.image_collection.aspect_ratio | times: 100 }}%;" >
+                          {%- if block.settings.image_collection != blank -%}
+                          <img
+                          srcset="{%- if block.settings.image_collection.width >= 165 -%}{{ block.settings.image_collection | img_url: '165x' }} 165w,{%- endif -%}
+                            {%- if block.settings.image_collection.width >= 360 -%}{{ block.settings.image_collection | img_url: '360x' }} 360w,{%- endif -%}
+                            {%- if block.settings.image_collection.width >= 535 -%}{{ block.settings.image_collection | img_url: '535x' }} 535w,{%- endif -%}
+                            {%- if block.settings.image_collection.width >= 750 -%}{{ block.settings.image_collection | img_url: '750x' }} 750w,{%- endif -%}
+                            {%- if block.settings.image_collection.width >= 1070 -%}{{ block.settings.image_collection | img_url: '1070x' }} 1070w,{%- endif -%}
+                            {%- if block.settings.image_collection.width >= 1500 -%}{{ block.settings.image_collection | img_url: '1500x' }} 1500w,{%- endif -%}"
+                          src="{{ block.settings.image_collection | img_url: 'master' }}"
+                          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                          alt="{{ block.settings.image_collection.alt | escape }}"
+                          loading="lazy"
+                          width="{{ block.settings.image_collection.width }}"
+                          height="{{ block.settings.image_collection.height }}"
+                        >
+                        {%- else -%}
+                        {%- capture current -%}{%- cycle 1, 2, 3, 4, 5, 6 -%}{%- endcapture -%}
+                        {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                        {%- endif -%}
+                        </div>
+                        <div class="collection-text-content {%- if block.settings.align_text == 'top' -%}{{ 'top' | prepend: ' ' }}{%- else -%}{{ 'bottom' | prepend: ' ' }}{%- endif -%}">
+                          {%- if block.settings.show_name_collection -%}
+                          <h3 class="title-collection-1">{{ block.settings.collection.title | escape }}{%- if block.settings.collection.title == blank -%}<span>Collection</span>{%- endif -%}</h3>
+                          {%- endif -%}
+                          {%- if block.settings.description != blank -%}
+                            <p class="description-collection-1">{{ block.settings.description }}</p>
+                          {%- endif -%}
+                          {%- if block.settings.show_count_item -%}
+                          <div class="count"><span>{{ block.settings.collection.products_count | escape }} </span>products <i class="leofar leofa-arrow-right"></i></div>
+                          {%- endif -%}
+                          {%- if block.settings.btn_text_count != blank -%}
+                            <div class="cat-button">
+                              <a class="link-base" href="{{ block.settings.btn_link_count | default:'#' }}" title="{{ block.settings.btn_text_count }}">{% if block.settings.show_name_button %}{{ block.settings.collection.title | escape }}{% else %}{{ block.settings.btn_text_count }}{% endif %}
+                                <i class="leofar leofa-arrow-right"></i>
+                              </a>
+                            </div>
+                          {%- endif -%}
+                        </div>
+                    </a>
+                  </div>   
+              {% endcase %}
+              {%- endfor -%}
+            </div>
+            <div class="col-lg-6">
+              <div class="row">
+              {%- for block in section.blocks -%}
+              {%- case block.settings.width -%}
+              {%- when '16%' -%}
+              {%- assign block_width = 'col-lg-2 col-md-4 col-6' -%}
+              {%- when '25%' -%}
+              {%- assign block_width = 'col-lg-3 col-sm-6' -%}
+              {%- when '33%' -%}
+              {%- assign block_width = 'col-lg-4 col-sm-6' -%}
+              {%- when '50%' -%}
+              {%- assign block_width = 'col-lg-6' -%}
+              {%- when '66%' -%}
+              {%- assign block_width = 'col-lg-8 col-sm-6' -%}
+              {%- when '75%' -%}
+              {%- assign block_width = 'col-lg-9 col-sm-6' -%}
+              {%- when '100%' -%}
+              {%- assign block_width = 'col-12' -%}
+              {%- endcase -%}
+              {% case block.type %}
+                 {% when 'collection' %}  
+                  <div class="{{block_width}}">
+                  
+                    <div class="collection-1-content" id="collection-{{ block.id }}">
+                      {%- style -%}
+                      .collection-2row #collection-{{ block.id }} .link-base{
+                        background-color:{{ block.settings.bg_button }};
+                        color:{{ block.settings.color_button }};
+                        border: 1px solid {{ block.settings.border_button }};
+                      }
+                      .collection-2row #collection-{{ block.id }} .link-base:hover{
+                        background-color:{{ block.settings.bg_button_hover }};
+                        color:{{ block.settings.color_button_hover }};
+                        border: 1px solid {{ block.settings.border_button_hover }};
+                      }
+                    {%- endstyle -%}
+                        <a class="link-collection-1" href="{{ block.settings.collection.url | default:'#' }}">
+                          <div class="collection-content collection-{% if section.settings.effects_image %}image-hover{% else %}image{% endif %} {% if block.settings.image_collection != blank %}media{% else %}image-collection__media--placeholder placeholder{% endif %}" style="padding-bottom: {{ 1 | divided_by: block.settings.image_collection.aspect_ratio | times: 100 }}%;" >
+                            {%- if block.settings.image_collection != blank -%}
+                            <img
+                            srcset="{%- if block.settings.image_collection.width >= 165 -%}{{ block.settings.image_collection | img_url: '165x' }} 165w,{%- endif -%}
+                              {%- if block.settings.image_collection.width >= 360 -%}{{ block.settings.image_collection | img_url: '360x' }} 360w,{%- endif -%}
+                              {%- if block.settings.image_collection.width >= 535 -%}{{ block.settings.image_collection | img_url: '535x' }} 535w,{%- endif -%}
+                              {%- if block.settings.image_collection.width >= 750 -%}{{ block.settings.image_collection | img_url: '750x' }} 750w,{%- endif -%}
+                              {%- if block.settings.image_collection.width >= 1070 -%}{{ block.settings.image_collection | img_url: '1070x' }} 1070w,{%- endif -%}
+                              {%- if block.settings.image_collection.width >= 1500 -%}{{ block.settings.image_collection | img_url: '1500x' }} 1500w,{%- endif -%}"
+                            src="{{ block.settings.image_collection | img_url: 'master' }}"
+                            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                            alt="{{ block.settings.image_collection.alt | escape }}"
+                            loading="lazy"
+                            width="{{ block.settings.image_collection.width }}"
+                            height="{{ block.settings.image_collection.height }}"
+                          >
+                          {%- else -%}
+                          {%- capture current -%}{%- cycle 1, 2, 3, 4, 5, 6 -%}{%- endcapture -%}
+                          {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                          {%- endif -%}
+                          </div>
+                          <div class="collection-text-content {%- if block.settings.align_text == 'top' -%}{{ 'top' | prepend: ' ' }}{%- else -%}{{ 'bottom' | prepend: ' ' }}{%- endif -%}">
+                            {%- if block.settings.show_name_collection -%}
+                            <h3 class="title-collection-1">{{ block.settings.collection.title | escape }}{%- if block.settings.collection.title == blank -%}<span>Collection</span>{%- endif -%}</h3>
+                            {%- endif -%}
+                            {%- if block.settings.description != blank -%}
+                              <p class="description-collection-1">{{ block.settings.description }}</p>
+                            {%- endif -%}
+                            {%- if block.settings.show_count_item -%}
+                            <div class="count"><span>{{ block.settings.collection.products_count | escape }} </span>products <i class="leofar leofa-arrow-right"></i></div>
+                            {%- endif -%}
+                            {%- if block.settings.btn_text_count != blank -%}
+                              <div class="cat-button">
+                                <a class="link-base" href="{{ block.settings.btn_link_count | default:'#' }}" title="{{ block.settings.btn_text_count }}">{% if block.settings.show_name_button %}{{ block.settings.collection.title | escape }}{% else %}{{ block.settings.btn_text_count }}{% endif %}
+                                  <i class="leofar leofa-arrow-right"></i>
+                                </a>
+                              </div>
+                            {%- endif -%}
+                        </div>
+                      </a>
+                    </div>
+                    
+                  </div> 
+              {% endcase %}
+              {%- endfor -%}               
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.collection.name",
+  "class": "spaced-section spaced-collection-1",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.collection.settings.fullwidth.label",
+      "default": false
+    },
+    {
+      "id": "background-color",
+      "type": "color",
+      "label": "t:sections.collection.settings.background-color.label"
+    },
+    {
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "t:sections.collection.settings.margin_desktop.label",
+      "info": "t:sections.collection.settings.margin_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "t:sections.collection.settings.padding_desktop.label",
+      "info": "t:sections.collection.settings.padding_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "t:sections.collection.settings.margin_mobile.label",
+      "info": "t:sections.collection.settings.margin_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "t:sections.collection.settings.padding_mobile.label",
+      "info": "t:sections.collection.settings.padding_mobile.info"
+    },
+    {
+      "type": "select",
+      "id": "style_heading",
+      "label": "Style_heading",
+      "default": "column",
+      "options": [
+        {
+          "value": "column",
+          "label": "Column"
+        },
+        {
+          "value": "row",
+          "label": "Row"
+        }
+      ]
+    },
+    {
+      "id": "sub_title",
+      "type": "text",
+      "label": "Sub title",
+      "default": "Sub title"
+    },
+    {
+      "id": "color_sub_title",
+      "type": "color",
+      "label": "Color sub title",
+      "default": "#FE5D02"
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "t:sections.collection.settings.heading.label",
+      "default": "Collection list 1"
+    },
+    {
+      "type": "text",
+      "id": "text_decoration",
+      "label": "t:sections.collection.settings.text_decoration.label",
+      "default": "Collection list 1"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Text button",
+      "default": "View All Categories"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Link button"
+    },
+    {
+    "type": "checkbox",
+    "id": "effects_image",
+    "label": "t:sections.collection.settings.effects_image.label",
+    "default": false
+    }
+  ],
+  "blocks": [
+    {
+        "type": "collection",
+        "name": "Collection right",
+        "settings": [
+        {
+        "type": "select",
+        "id": "width",
+        "label": "t:sections.collection.blocks.collection.settings.width.label",
+        "default": "33%",
+        "options": [
+          {
+            "value": "16%",
+            "label": "16%"
+          },
+          {
+            "value": "25%",
+            "label": "t:sections.collection.blocks.collection.settings.width.options__1.label"
+          },
+          {
+            "value": "33%",
+            "label": "t:sections.collection.blocks.collection.settings.width.options__2.label"
+          },
+          {
+            "value": "50%",
+            "label": "t:sections.collection.blocks.collection.settings.width.options__3.label"
+          },
+          {
+            "value": "66%",
+            "label": "t:sections.collection.blocks.collection.settings.width.options__4.label"
+          },
+          {
+            "value": "75%",
+            "label": "t:sections.collection.blocks.collection.settings.width.options__5.label"
+          },
+          {
+            "value": "100%",
+            "label": "t:sections.collection.blocks.collection.settings.width.options__6.label"
+          }
+        ]
+       },
+       {
+          "type": "image_picker",
+          "id": "image_collection",
+          "label": "t:sections.collection.blocks.collection.settings.image_collection.label"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.collection.blocks.collection.settings.collection.label"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "t:sections.collection.blocks.collection.settings.description.label"
+        },
+        {
+         "type": "checkbox",
+         "id":"show_name_collection",
+         "label":"Show name collection",
+         "default":true
+        },
+        {
+          "type": "checkbox",
+          "id":"show_count_item",
+          "label":"Show quantity",
+          "default":true
+         },
+        {
+          "type": "select",
+          "id": "align_text",
+          "label": "t:sections.collection.blocks.collection.settings.align_text.label",
+          "default": "bottom",
+          "options": [
+            {
+              "value": "top",
+              "label": "t:sections.collection.blocks.collection.settings.align_text.options__1.label"
+            },
+            {
+              "value": "bottom",
+              "label": "t:sections.collection.blocks.collection.settings.align_text.options__2.label"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id":"show_name_button",
+          "label":"Use name of collection",
+          "default":true
+         },
+        {
+            "type": "text",
+            "id": "btn_text_count",
+            "label": "Text button",
+            "default": "Shop all"
+          },
+          {
+            "type": "url",
+            "id": "btn_link_count",
+            "label": "Link button"
+          },
+          {
+            "type": "color",
+            "id": "bg_button",
+            "label": "Background button",
+            "default": "#94BE90"
+          },
+          {
+             "type": "color",
+             "id": "color_button",
+             "label": "Color button",
+             "default": "#fff"
+           },
+           {
+              "type": "color",
+              "id": "border_button",
+              "label": "Border button",
+              "default": "transparent"
+            },
+            {
+               "type": "color",
+               "id": "bg_button_hover",
+               "label": "Background button hover",
+               "default": "#000"
+             },
+             {
+                "type": "color",
+                "id": "color_button_hover",
+                "label": "Color button hover",
+                "default": "#fff"
+              },
+              {
+                 "type": "color",
+                 "id": "border_button_hover",
+                 "label": "Border button hover",
+                 "default": "transparent"
+               }
+        ]
+    },
+    {
+      "type": "collectionleft",
+      "name": "Collection left",
+      "settings": [
+      {
+      "type": "select",
+      "id": "width",
+      "label": "t:sections.collection.blocks.collection.settings.width.label",
+      "default": "33%",
+      "options": [
+        {
+          "value": "16%",
+          "label": "16%"
+        },
+        {
+          "value": "25%",
+          "label": "t:sections.collection.blocks.collection.settings.width.options__1.label"
+        },
+        {
+          "value": "33%",
+          "label": "t:sections.collection.blocks.collection.settings.width.options__2.label"
+        },
+        {
+          "value": "50%",
+          "label": "t:sections.collection.blocks.collection.settings.width.options__3.label"
+        },
+        {
+          "value": "66%",
+          "label": "t:sections.collection.blocks.collection.settings.width.options__4.label"
+        },
+        {
+          "value": "75%",
+          "label": "t:sections.collection.blocks.collection.settings.width.options__5.label"
+        },
+        {
+          "value": "100%",
+          "label": "t:sections.collection.blocks.collection.settings.width.options__6.label"
+        }
+      ]
+     },
+     {
+        "type": "image_picker",
+        "id": "image_collection",
+        "label": "t:sections.collection.blocks.collection.settings.image_collection.label"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "t:sections.collection.blocks.collection.settings.collection.label"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "t:sections.collection.blocks.collection.settings.description.label"
+      },
+      {
+        "type": "checkbox",
+        "id":"show_name_collection",
+        "label":"Show name collection",
+        "default":true
+       },
+       {
+         "type": "checkbox",
+         "id":"show_count_item",
+         "label":"Show quantity",
+         "default":true
+        },
+      {
+        "type": "select",
+        "id": "align_text",
+        "label": "t:sections.collection.blocks.collection.settings.align_text.label",
+        "default": "bottom",
+        "options": [
+          {
+            "value": "top",
+            "label": "t:sections.collection.blocks.collection.settings.align_text.options__1.label"
+          },
+          {
+            "value": "bottom",
+            "label": "t:sections.collection.blocks.collection.settings.align_text.options__2.label"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id":"show_name_button",
+        "label":"Use name of collection",
+        "default":true
+       },
+      {
+          "type": "text",
+          "id": "btn_text_count",
+          "label": "Text button",
+          "default": "Shop all"
+        },
+        {
+          "type": "url",
+          "id": "btn_link_count",
+          "label": "Link button"
+        },
+        {
+          "type": "color",
+          "id": "bg_button",
+          "label": "Background button",
+          "default": "#94BE90"
+        },
+        {
+           "type": "color",
+           "id": "color_button",
+           "label": "Color button",
+           "default": "#fff"
+         },
+         {
+            "type": "color",
+            "id": "border_button",
+            "label": "Border button",
+            "default": "transparent"
+          },
+          {
+             "type": "color",
+             "id": "bg_button_hover",
+             "label": "Background button hover",
+             "default": "#000"
+           },
+           {
+              "type": "color",
+              "id": "color_button_hover",
+              "label": "Color button hover",
+              "default": "#fff"
+            },
+            {
+               "type": "color",
+               "id": "border_button_hover",
+               "label": "Border button hover",
+               "default": "transparent"
+             }
+      ]
+  }
+  ],
+  "presets": [
+    {
+      "name": "Collection 2 col",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

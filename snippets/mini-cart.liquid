@@ -1,0 +1,79 @@
+{% if template contains 'cart' %}
+
+{% else %}
+<mini-cart>
+
+  <div id="minicart" class="product-minincart">
+  	<div class="list-mimicart">
+      {%- for item in cart.items -%}
+        <div class="minicart-item" data-line="{{ forloop.index }}">
+          {% if item.image %}
+            <a class="image-product" href="{{ item.product.url }}">
+              <img class="mimicart-item__image"
+               src="{{ item.image | img_url: '100x' }}"
+               alt="{{ item.image.alt | escape }}"
+               >
+            </a>
+          {% endif %}
+          <div class="minicart-price">
+          <a href="{{ item.product.url }}" class="mimicart-item__name">{{ item.product.title | escape }}</a>
+          <span class="price price--end">
+            {{ item.original_price | money }}
+          </span>
+          <mini-cart-remove-button>
+            <span data-href="{{ item.url_to_remove }}" class="mimicart-item__remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
+              {% render 'icon-remove' %}
+            </span>
+          </mini-cart-remove-button>
+
+          <quantity-input class="quantity">
+            <button class="quantity__button no-js-hidden" name="minus" type="button">
+              <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
+              {% render 'icon-minus' %}
+            </button>
+            <input class="quantity__input"
+                   type="number"
+                   name="updates[]"
+                   value="{{ item.quantity }}"
+                   min="0"
+                   aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                   id="Quantity-{{ item.index | plus: 1 }}"
+                   data-index="{{ item.index | plus: 1 }}"
+                   >
+            <button class="quantity__button no-js-hidden" name="plus" type="button">
+              <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
+              {% render 'icon-plus' %}
+            </button>
+          </quantity-input>
+
+          <!-- <span class="price price--end">
+            {{ item.original_line_price | money }}
+          </span> -->
+        </div>
+          
+        </div>
+      {%- endfor -%}
+  	</div>
+    
+    {% render 'free-shipping' %}
+      
+    <div class="totals">
+      <label>{{ 'sections.cart.subtotal' | t }}</label>: <span class="total_price">{{ cart.total_price | money }}</span>
+    </div>
+    
+    <div class="bottom-minicart">
+      <div class="goto-cart">
+        <a href="{{ routes.cart_url }}" >Go to Cart</a>
+      </div>
+
+      <div class="cart__ctas">
+        <button type="submit" class="cart__checkout-button button" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
+          {{ 'sections.cart.checkout' | t }}
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</mini-cart>
+<script src="{{ 'minicart.js' | asset_url }}" defer="defer"></script>
+{% endif %}

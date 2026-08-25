@@ -1,0 +1,12 @@
+{% if product_card_product.metafields.products.countdown %}
+<div class="wp_countdown">
+    <div class="deal-text">
+        <span>End in:</span>
+    </div>
+    <div class="deal-text-page">
+        <span>Hurry up! Sale ends in:</span>
+    </div>
+    <div class="js-countdown js-countdown--{{ settings.style_coundown }}" data-time="{{product_card_product.metafields.products.countdown}} "></div>
+    <!-- <button class="off" >End</button> -->
+</div>
+{% endif %}

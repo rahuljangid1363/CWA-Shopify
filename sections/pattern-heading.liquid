@@ -1,0 +1,37 @@
+<!-- pattern-heading.liquid -->
+
+{%- comment -%} VARIABLE : pat-heading-title, pat-heading-des {%- endcomment -%}
+
+{%- unless pat-heading-title -%}{%- assign pat-heading-title = section.settings.title -%}{%- endunless -%}
+{%- unless pat-heading-des -%}{%- assign pat-heading-des = section.settings.des -%}{%- endunless -%}
+
+{%- case settings.heading -%}
+
+{%- when '1' -%}{%- comment -%} LAYOUT 1 {%- endcomment -%}
+{%- if pat-heading-title != blank -%}
+<h3 class="section-title section-title-1 mb-lg-4">
+  <span>{{ pat-heading-title }}</span>
+</h3>
+{%- endif -%}
+{%- if pat-heading-des != blank -%}
+<p class="section-des section-des-1">
+  {{ pat-heading-des }}
+</p>
+{%- endif -%}
+
+
+{%- when '2' -%}{%- comment -%} LAYOUT 2 {%- endcomment -%}
+
+{%- if pat-heading-title != blank -%}
+<h3 class="section-title section-title-2 text-center mb-3 mb-lg-4">
+	<span>{{ pat-heading-title }}</span>
+</h3>
+{%- endif -%}
+{%- if pat-heading-des != blank -%}
+<p class="section-des section-des-2 text-center mb-2">
+	{{ pat-heading-des }}
+</p>
+{%- endif -%}
+
+{%- else -%}
+{%- endcase -%}

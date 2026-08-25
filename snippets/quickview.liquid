@@ -1,0 +1,75 @@
+  <!-- quickview.liquid -->
+<div class="modal fade" id="jsQuickview" role="dialog" aria-hidden="true" data-type="{{ settings.select_product_option_display }}">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><i class="leofal leofa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-7">
+            <div id="qv-product-images" class="qv-product-images"></div>
+          </div>
+          <div class="qv-content col-lg-5">
+            <div class="btn-close"></div>
+            <div class="holder">
+              <h3 class="qv-product-title"></h3>
+              <h4 class="qv-product-type hide"></h4>
+              <h5 class="qv-product-price"></h5>
+              <s class="qv-product-compare-price"></s>
+              <hr />
+              <div class="qv-add-to-cart clearfix">
+                {%- if settings.select_product_option_display == 'list' -%}
+                	<div class="qv-product-options list-product-options"></div>
+                {%- else -%}
+                	<div class="qv-product-options"></div>
+                {%- endif -%}
+                
+                <div class="product-form__input product-form__quantity">
+                  <label class="form__label" for="Quantity-{{ section.id }}">
+                    {{ 'products.product.quantity.label' | t }}
+                  </label>
+                  <quantity-input class="quantity">
+                    <button class="quantity__button no-js-hidden" name="minus" type="button">
+                      <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                      {% render 'icon-minus' %}
+                    </button>
+                    <input class="quantity__input"
+                        type="number"
+                        name="quantity"
+                        min="1"
+                        value="1"
+                        form="product-form-quickview"
+                      >
+                    <button class="quantity__button no-js-hidden" name="plus" type="button">
+                      <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                      {% render 'icon-plus' %}
+                    </button>
+                  </quantity-input>
+                </div>
+                
+                <product-form>
+                  <form method="post" id="product-form-quickview" action="/cart/add" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form">
+                    <input type="hidden" name="id" value="" class="variant-id">
+                    <input type="hidden" name="form_type" value="product">
+                    <input type="hidden" name="utf8" value="✓">
+                    <div class="product-form__buttons">
+                      <button type="submit" name="add" class="product-form__submit button button--full-width">
+                        Add to cart
+                      </button>
+                    </div>
+                  </form>
+                </product-form>
+              </div>
+              {%- render 'free-shipping' -%}
+              <div class="qv-product-description"></div>
+              <a class="qv-view-product" href="#">
+                {{'general.quickview.view_full' | t }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

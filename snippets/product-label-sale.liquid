@@ -1,0 +1,15 @@
+{% if settings.sale_label_enable %}
+  {%- if product.compare_at_price > product.price -%}
+    {%- assign sale_minus = product.compare_at_price_min | minus: product.price_min -%}
+    {%- assign sale_percent =  sale_minus | times:100 | divided_by: product.compare_at_price_min -%}
+    
+    <div class="product-label product-label-sale" aria-hidden="true">
+        {% if settings.sale_label_layout == 'text' %}
+        {{ settings.sale_label_text | default:'sale' }}
+        {% else %}
+        {{ sale_percent | append: '%'}}
+        {%- endif -%}
+    </div>
+
+  {%- endif -%}
+{%- endif -%}

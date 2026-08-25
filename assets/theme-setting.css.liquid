@@ -1,0 +1,183 @@
+{% if settings.name_font_body_user != blank and settings.font_body_user != blank and settings.font_body_user_2 != blank and settings.font_user %}
+  {% if settings.font_body_user != settings.font_body_user_2 %}
+  @font-face {
+    font-family: '{{settings.name_font_body_user | replace: " ", "-" }}';
+      /* src: url('fonts/Roboto-Regular.eot'); */
+      src: local('☺'), url('{{settings.font_body_user}}') format('woff'),
+        local('☺'), url('{{settings.font_body_user_2}}') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+          font-display:swap;
+          }
+  {% endif %}
+  {%- assign body-font = settings.name_font_body_user | replace: " ", "-" -%}  
+{% elsif settings.font_body_google != blank and settings.font_google %}
+      {% render 'font-base.css', font_name: settings.font_body_google %}
+      {%- assign body-font = settings.font_body_google -%}
+    {%- else -%}
+      {%- assign body-font = settings.type_body_font.family -%}
+      {%- unless settings.type_body_font.system? -%}
+        {%- endunless -%}
+
+    {% endif %}
+    {% if settings.name_font_header_user != blank and settings.font_header_user != blank and settings.font_header_user_2 != blank and settings.font_user %}
+      {% if settings.font_header_user != settings.font_header_user_2 %}
+          @font-face {
+            font-family: '{{settings.name_font_header_user | replace: " ", "-" }}';
+            /* src: url('fonts/Roboto-Regular.eot'); */
+            src: local('☺'), url('{{settings.font_header_user}}') format('woff'),
+            local('☺'), url('{{settings.font_header_user_2}}') format('woff2');
+            /* url('fonts/Roboto-Regular.ttf') format('truetype'), url('fonts/Roboto-Regular.svg') format('svg'); */
+            font-weight: normal;
+            font-style: normal;
+            font-display:swap;
+          }
+      {% endif %}
+    	{%- assign header-font = settings.name_font_header_user | replace: " ", "-" -%}
+    {% elsif settings.font_header_google != blank and settings.font_google %}
+      {%- assign header-font = settings.font_header_google -%}
+   {%- else -%}
+      {%- assign header-font = settings.type_header_font.family -%}
+    {% endif %}
+{%- liquid
+      assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+    %}
+
+{{ settings.type_body_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+      {{ settings.type_header_font | font_face: font_display: 'swap' }}
+
+      :root {
+        --g-font-1: {{ body-font }}, Sans-serif;
+        --g-font-2: {{ header-font }}, serif;
+        --font-body-family: {{ body-font }};
+        --font-body-style: {{ settings.type_body_font.style }};
+        --font-body-weight: {{ settings.type_body_font.weight }};
+
+        --font-heading-family: {{ header-font }};
+        --font-heading-style: {{ settings.type_header_font.style }};
+        --font-heading-weight: {{ settings.type_header_font.weight }};
+
+        --color-background-sould-out-label: {{ settings.sold_out_color_scheme }};
+        --color-text-sould-out-label: {{ settings.sold_out_background_scheme }};
+        --color-background-new-label: {{ settings.new_label_bg }};
+        --color-text-new-label: {{ settings.new_label_cl }};
+        --color-background-sale-label: {{ settings.sale_label_bg }};
+        --color-text-sale-label: {{ settings.sale_label_cl }};
+
+        --color-menu-vertical-text: {{ settings.color_menu_vertical_text }};
+        --color-menu-vertical-text-hover: {{ settings.color_menu_vertical_text_hover }};
+        --color-label-vertical-text: {{ settings.menu_label_vertical_text }};
+        --color-label-vertical-text-hover: {{ settings.menu_label_vertical_text_hover }};
+        
+        --color-menu_text: {{ settings.color_menu_text }};
+        --color-menu_text_hover: {{ settings.color_menu_text_hover }};
+        --color-label_text: {{ settings.menu_label_text }};
+        --color-label_text_hover: {{ settings.menu_label_text_hover }};
+
+        --color-base-header: {{ settings.colors_title_content_labels }};
+        --color-base-link: {{ settings.colors_link_content_labels }};
+        --color-base-link-hover: {{ settings.colors_link_hover_content_labels }};
+        --color-label-new: {{ settings.menu_label_new }};
+        --color-label-hot: {{ settings.menu_label_hot }};
+        --color-label-feature: {{ settings.menu_label_feature }};
+        --color-label-sale: {{ settings.menu_label_sale }};
+        --color-label-other: {{ settings.menu_label_other }};        
+
+        --payment-terms-background-color: {{ settings.colors_background_1 }};
+
+        --gradient-base-background-1: {% if settings.gradient_background_1 != blank %}{{ settings.gradient_background_1 }}{% else %}{{ settings.colors_background_1 }}{% endif %};
+        --gradient-base-background-2: {% if settings.gradient_background_2 != blank %}{{ settings.gradient_background_2 }}{% else %}{{ settings.colors_background_2 }}{% endif %};
+        --gradient-base-accent-1: {% if settings.gradient_accent_1 != blank %}{{ settings.gradient_accent_1 }}{% else %}{{ settings.colors_accent_1 }}{% endif %};
+          : {% if settings.gradient_accent_2 != blank %}{{ settings.gradient_accent_2 }}{% else %}{{ settings.colors_accent_2 }}{% endif %};
+
+        --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      html {
+        box-sizing: border-box;
+        font-size: 62.5%;
+        height: 100%;
+      }
+
+      body {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-columns: 100%;
+        min-height: 100%;
+        margin: 0;
+        font-size: 1.4rem;
+        letter-spacing: 0rem;
+        line-height: 1.8;
+        font-family: {{ body-font }};
+        font-weight: 400;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      .h0,
+      .h1,
+      .h2,
+      .h3,
+      .h4,
+      .h5 {
+        font-family: {{ header-font }};
+        font-weight: 400;
+        letter-spacing: 0rem;
+        color: var(--color-base-header);
+        line-height: 1.3;
+      }
+
+      @media screen and (min-width: 750px) {
+        body {
+          font-size: 1.4rem;
+        }
+      }
+    .slide-slick .slider-conten:first-child,
+    .slick-initialized.slide-slick .slider-conten{
+      position: relative;
+      left: unset;
+      top: unset;
+    }
+    .slide-slick .slider-conten{
+      position: absolute;
+      left: -99999px;
+      top: -999px;
+    }
+    @media only screen and (max-width: 600px) {
+      .vertical-bars svg, .site-header__icon-menu svg{
+        width: 20px;
+        height: 20px;
+      }
+      .image-slide-show__media--placeholder .placeholder-svg {
+        height: 100%;
+        width: 100%;
+        min-height: 300px;
+      }
+      .text-slider {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+      }
+      .js-cookie-policy{
+    	display: none;
+      }
+    }

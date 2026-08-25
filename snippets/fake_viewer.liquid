@@ -1,0 +1,7 @@
+<!-- fake-viewer.liquid -->
+{% assign fake_view_text = settings.fake_view_text_suffix | split: "%c%" %}
+<div class="fake-view text-center my-3">
+  <span> {{fake_view_text[0]}}</span>
+  <span class="js-fake-view bg-theme p-1 text-white d-inline-block" data-min="{{settings.fake_view_min}}" data-max="{{settings.fake_view_max}}" data-duration="{{settings.fake_view_duration | times:1000}}"></span>
+  <span> {{fake_view_text[1]}}</span>
+</div>

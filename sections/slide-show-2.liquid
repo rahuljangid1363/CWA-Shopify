@@ -1,0 +1,384 @@
+<!-- slide-show-2.liquid -->
+{{ 'slide-show-2.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+
+<div class="slide-show-2">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+      <div class="row">
+        <div class="col-xl-8">
+          
+            <div class="slide-show-2-image">
+                <div class="slide-show-2-product">
+                    <div class="slide-show-2-slide apslick ap-custom-slick"
+                    data-setting='{"accessibility": false, "arrows": {{ section.settings.arrows }},
+                    "dots": {{ section.settings.dots }}, "draggable": {{ section.settings.draggable }},
+                    "infinite": {{ section.settings.infinite }}, "autoplay": {{ section.settings.autoplay }},
+                    "autoplaySpeed": {{ section.settings.autoplaySpeed }}, "speed": {{ section.settings.speed }},
+                    "slidesToShow": {{ section.settings.slidesToShow }}, "slidesToScroll": {{ section.settings.slidesToScroll }},
+                    "vertical": false, "mobileFirst": false, "pauseOnHover": {{ section.settings.pauseOnHover }},
+                    "rows": {{ section.settings.rows }}, "slidesPerRow": 1, "rtl": 1,
+                    "slidesToShow_992": {{ section.settings.slidesToShow_992 }}, "slidesToScroll_992": {{ section.settings.slidesToScroll_992 }},
+                    "arrows_992": {{ section.settings.arrows_992 }}, "dots_992": {{ section.settings.dots_992 }},
+                    "slidesToShow_767": {{ section.settings.slidesToShow_767 }}, "slidesToScroll_767": {{ section.settings.slidesToScroll_767 }},
+                    "arrows_767": {{ section.settings.arrows_767 }}, "dots_767": {{ section.settings.dots_767 }},
+                    "slidesToShow_450": {{ section.settings.slidesToShow_450 }}, "slidesToScroll_450": {{ section.settings.slidesToScroll_450 }},
+                    "arrows_450": {{ section.settings.arrows_450 }}, "dots_450": {{ section.settings.dots_450 }}}'>
+
+                    {%- for block in section.blocks -%}
+                      {%- case block.type -%}
+                      {%- when 'image' -%}
+                    <div class="collection-image-slide" id="ap-slick-content-{{block.id}}" {{ block.shopify_attributes }}>
+                      <div class="slide-image-2 {% if block.settings.image_slide != blank %}media{% else %}image-collection-carousel__media--placeholder placeholder{% endif %}"
+                      style="padding-bottom: {{ 1 | divided_by: block.settings.image_slide.aspect_ratio | times: 100 }}%;"
+                      >
+                          {%- if block.settings.image_slide != blank -%}
+                          <img
+                              srcset="{%- if block.settings.image_slide.width >= 165 -%}{{ block.settings.image_slide | img_url: '165x' }} 165w,{%- endif -%}
+                              {%- if block.settings.image_slide.width >= 360 -%}{{ block.settings.image_slide | img_url: '360x' }} 360w,{%- endif -%}
+                              {%- if block.settings.image_slide.width >= 535 -%}{{ block.settings.image_slide | img_url: '535x' }} 535w,{%- endif -%}
+                              {%- if block.settings.image_slide.width >= 750 -%}{{ block.settings.image_slide | img_url: '750x' }} 750w,{%- endif -%}
+                              {%- if block.settings.image_slide.width >= 1285 -%}{{ block.settings.image_slide | img_url: '1285x' }} 1285w,{%- endif -%}
+                              {%- if block.settings.image_slide.width >= 1500 -%}{{ block.settings.image_slide | img_url: '1500x' }} 1500w,{%- endif -%}"
+                              src="{{ block.settings.image_slide | img_url: 'master' }}"
+                              sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                              alt="{{ block.settings.image_slide.alt | escape }}"
+                              loading="lazy"
+                              width="{{ block.settings.image_slide.width }}"
+                              height="{{ block.settings.image_slide.height }}"
+                          >
+                          
+                          {%- else -%}
+                              {{ 'image' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                          {%- endif -%}
+                        </div>
+                      </div>
+                      {%- endcase -%}
+                      {%- endfor -%}
+                </div>
+              </div>
+            </div>
+
+            
+        </div>
+
+        <div class="col-xl-4">
+          {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                    
+              {%- when 'collection' -%}
+                <div class="slide-collection-content">
+                    <a class="link-collection" href="{{ block.settings.collection.url | default:'#' }}">
+                      {%- if block.settings.image_collection != blank -%}
+                      <div class="slide-collection-image {% if block.settings.image_collection != blank %}media{% else %}image-collection-carousel__media--placeholder placeholder{% endif %}"
+                      style="padding-bottom: {{ 1 | divided_by: block.settings.image_collection.aspect_ratio | times: 100 }}%;"
+                      >
+                        <img class="img-slide-show-2"
+                        srcset="{%- if block.settings.image_collection.width >= 165 -%}{{ block.settings.image_collection | img_url: '165x' }} 165w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 360 -%}{{ block.settings.image_collection | img_url: '360x' }} 360w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 610 -%}{{ block.settings.image_collection | img_url: '610x' }} 610w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 750 -%}{{ block.settings.image_collection | img_url: '750x' }} 750w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 1070 -%}{{ block.settings.image_collection | img_url: '1070x' }} 1070w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 1500 -%}{{ block.settings.image_collection | img_url: '1500x' }} 1500w,{%- endif -%}"
+                        src="{{ block.settings.image_collection | img_url: 'master' }}"
+                        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                        alt="{{ block.settings.image_collection.alt | escape }}"
+                        loading="lazy"
+                        width="{{ block.settings.image_collection.width }}"
+                        height="{{ block.settings.image_collection.height }}"
+                      >    
+                        </div>
+                    {%- else -%}
+                    {%- capture current -%}{%- cycle 1, 2, 3, 4, 5, 6 -%}{%- endcapture -%}
+                    {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                    <h3 class="slide-title-collection">Collection</h3>
+                    {%- endif -%}
+                    <h3 class="slide-title-collection">{{ block.settings.collection.title | escape }}</h3>
+                    </a>
+                </div>
+                {%- endcase -%}
+            {%- endfor -%}
+        </div>
+      </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "t:sections.slide-show-2.name",
+  "class": "spaced-section spaced-slide-2",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.slide-show-2.settings.fullwidth.label",
+      "default": false
+    },
+    {
+      "id": "background-color",
+      "type": "color",
+      "label": "t:sections.slide-show-2.settings.background-color.label"
+    },
+    {
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "t:sections.slide-show-2.settings.margin_desktop.label",
+      "info": "t:sections.slide-show-2.settings.margin_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "t:sections.slide-show-2.settings.padding_desktop.label",
+      "info": "t:sections.slide-show-2.settings.padding_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "t:sections.slide-show-2.settings.margin_mobile.label",
+      "info": "t:sections.slide-show-2.settings.margin_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "t:sections.slide-show-2.settings.padding_mobile.label",
+      "info": "t:sections.slide-show-2.settings.padding_mobile.info"
+    },
+      {
+        "type": "range",
+        "id": "slidesToShow",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "t:sections.slide-show-2.settings.slidesToShow.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "slidesToScroll",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "t:sections.slide-show-2.settings.slidesToScroll.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "rows",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "label": "t:sections.slide-show-2.settings.rows.label",
+        "default": 1
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "t:sections.slide-show-2.settings.autoplay.label",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "autoplaySpeed",
+        "min": 1000,
+        "max": 5000,
+        "step": 1000,
+        "label": "t:sections.slide-show-2.settings.autoplaySpeed.label",
+        "default": 2000
+      },
+      {
+        "type": "range",
+        "id": "speed",
+        "min": 300,
+        "max": 1000,
+        "step": 100,
+        "label": "t:sections.slide-show-2.settings.speed.label",
+        "default": 500
+      },
+      {
+        "type": "checkbox",
+        "id": "pauseOnHover",
+        "label": "t:sections.slide-show-2.settings.pauseOnHover.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "t:sections.slide-show-2.settings.arrows.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "t:sections.slide-show-2.settings.dots.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "draggable",
+        "label": "t:sections.slide-show-2.settings.draggable.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "infinite",
+        "label": "t:sections.slide-show-2.settings.infinite.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:sections.slide-show-2.settings.header.content"
+      },
+      {
+        "type": "range",
+        "id": "slidesToShow_992",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "t:sections.slide-show-2.settings.slidesToShow_992.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "slidesToScroll_992",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "t:sections.slide-show-2.settings.slidesToScroll_992.label",
+        "default": 1
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows_992",
+        "label": "t:sections.slide-show-2.settings.arrows_992.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dots_992",
+        "label": "t:sections.slide-show-2.settings.dots_992.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:sections.slide-show-2.settings.header_1.content"
+      },
+      {
+        "type": "range",
+        "id": "slidesToShow_767",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "t:sections.slide-show-2.settings.slidesToShow_767.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "slidesToScroll_767",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "t:sections.slide-show-2.settings.slidesToScroll_767.label",
+        "default": 1
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows_767",
+        "label": "t:sections.slide-show-2.settings.arrows_767.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dots_767",
+        "label": "t:sections.slide-show-2.settings.dots_767.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:sections.slide-show-2.settings.header_2.content"
+      },
+      {
+        "type": "range",
+        "id": "slidesToShow_450",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "t:sections.slide-show-2.settings.slidesToShow_450.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "slidesToScroll_450",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "t:sections.slide-show-2.settings.slidesToScroll_450.label",
+        "default": 1
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows_450",
+        "label": "t:sections.slide-show-2.settings.arrows_450.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dots_450",
+        "label": "t:sections.slide-show-2.settings.dots_450.label",
+        "default": true
+      }
+  ],
+  "blocks": [
+    {
+        "type": "image",
+        "name": "t:sections.slide-show-2.blocks.image.name",
+        "settings": [
+            {
+            "type": "image_picker",
+            "id": "image_slide",
+            "label": "t:sections.slide-show-2.blocks.image.settings.image_slide.label"
+            }
+        ]
+    },
+    
+    {
+      "type": "collection",
+      "name": "t:sections.slide-show-2.blocks.collection.name",
+      "settings": [
+      {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.slide-show-2.blocks.collection.settings.collection.label"
+          },
+          {
+          "type": "image_picker",
+          "id": "image_collection",
+          "label": "t:sections.slide-show-2.blocks.collection.settings.image_collection.label"
+          }
+      ]
+  }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.slide-show-2.presets.name",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

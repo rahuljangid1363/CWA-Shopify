@@ -1,0 +1,18 @@
+.list-megamenu{
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.list-megamenu li a{
+    color: #000;
+    font-size: 1.4rem;
+    padding: 1.5rem 2.5rem;
+    transition: .3s ease-in;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.list-megamenu li a:hover{
+    color: #000;
+}

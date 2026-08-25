@@ -1,0 +1,91 @@
+<!-- blog-template-5.liquid -->
+
+{{ 'blog-template-5.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+
+<div class="blog-post">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+        <h2 class="section-header">{{ section.settings.heading | escape }}</h2>
+        <p class="section-text">{{ section.settings.text_decoration }}</p>
+        
+        <div class="blog-list blog-slick apslick"
+            data-setting='{"accessibility": false, "arrows": {{ section.settings.arrows }},
+            "dots": {{ section.settings.dots }}, "draggable": {{ section.settings.draggable }},
+            "infinite": {{ section.settings.infinite }}, "autoplay": {{ section.settings.autoplay }},
+            "autoplaySpeed": {{ section.settings.autoplaySpeed }}, "speed": {{ section.settings.speed }},
+            "slidesToShow": {{ section.settings.slidesToShow }}, "slidesToScroll": {{ section.settings.slidesToScroll }},
+            "vertical": false, "mobileFirst": false, "pauseOnHover": {{ section.settings.pauseOnHover }},
+            "rows": {{ section.settings.rows }}, "slidesPerRow": 1, "rtl": 1,
+            "slidesToShow_992": {{ section.settings.slidesToShow_992 }}, "slidesToScroll_992": {{ section.settings.slidesToScroll_992 }},
+            "arrows_992": {{ section.settings.arrows_992 }}, "dots_992": {{ section.settings.dots_992 }},
+            "slidesToShow_767": {{ section.settings.slidesToShow_767 }}, "slidesToScroll_767": {{ section.settings.slidesToScroll_767 }},
+            "arrows_767": {{ section.settings.arrows_767 }}, "dots_767": {{ section.settings.dots_767 }},
+            "slidesToShow_450": {{ section.settings.slidesToShow_450 }}, "slidesToScroll_450": {{ section.settings.slidesToScroll_450 }},
+            "arrows_450": {{ section.settings.arrows_450 }}, "dots_450": {{ section.settings.dots_450 }}}'>
+            {%- for article in section.settings.blog.articles -%}
+            <div class="blog-items blog-layout-items-5">
+                <a class="blog-link" href="{{ article.url }}">
+                    <div class="article-card__image media"
+                    style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"
+                    >
+                    <img
+                        srcset="{%- if article.image.src.width >= 165 -%}{{ article.image.src | img_url: '165x' }} 165w,{%- endif -%}
+                        {%- if article.image.src.width >= 360 -%}{{ article.image.src | img_url: '360x' }} 360w,{%- endif -%}
+                        {%- if article.image.src.width >= 600 -%}{{ article.image.src | img_url: '600x' }} 600w,{%- endif -%}
+                        {%- if article.image.src.width >= 720 -%}{{ article.image.src | img_url: '720x' }} 720w,{%- endif -%}
+                        {%- if article.image.src.width >= 1000 -%}{{ article.image.src | img_url: '1000x' }} 1000w,{%- endif -%}
+                        {%- if article.image.src.width >= 1500 -%}{{ article.image.src | img_url: '1500x' }} 1500w,{%- endif -%}"
+                        src="{{ article.image.src | img_url: 'master' }}"
+                        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                        alt="{{ article.image.src.alt | escape }}"
+                        width="{{ article.image.width }}"
+                        height="{{ article.image.height }}"
+                        loading="lazy"
+                        class="motion-reduce"
+                    >
+                    </div>
+                </a>
+                    <div class="blog-content-top">
+                        {%- if section.settings.tags_blog -%}
+                            <p class="blog__meta">
+                                {%- if article.tags.size > 0 -%}
+                                {%- for tag in article.tags -%}
+                                <a href="{{ article.url }}" class="link-body-color"><strong>{{ tag }}</strong></a>{% unless forloop.last %}, {% endunless %}
+                                {%- endfor -%}
+                                {%- endif -%}
+                            </p>
+                        {%- endif -%}
+                        <h2 class="blog-title">
+                            {{ article.title | escape }}
+                        </h2>
+                    </div>
+                    <div class="blog-content-bottom">
+                        {%- if section.settings.show_date -%}
+                            <span class="blog-date">
+                            {{- article.published_at | time_tag: "%d %B %Y" -}}
+                            </span>
+                        {%- endif -%}
+                        {%- if section.settings.show_author -%}
+                            <span class="blog-author">{{ article.author -}}</span>
+                        {%- endif -%}
+                    </div>
+                
+            </div>
+            {%- endfor -%}
+            {%- if section.settings.blog == blank -%}
+            {%- for i in (1..6) -%}
+            <div class="blog-items">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            {%- endfor -%}
+            {%- endif -%}
+        </div>
+        {%- if section.settings.show_view_all -%}
+            <div class="btn-view-blog">
+                <a class="link-blog-all" href="{{ section.settings.blog.url }}">
+                {{ 'sections.featured_blog.view_all' | t }}
+                </a>
+            </div>
+            {%- endif -%}
+    </div>
+</div>

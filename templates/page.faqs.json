@@ -1,0 +1,166 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "page-faqs": {
+      "type": "page-faqs",
+      "blocks": {
+        "fa21d058-943c-40ea-bd52-0c40dd0e744d": {
+          "type": "html",
+          "settings": {
+            "title": "Shopify Ecommerce Platform",
+            "des": ""
+          }
+        },
+        "904687cd-80f4-4389-9e2d-1e2b88374ce7": {
+          "type": "faq",
+          "settings": {
+            "title": "What is Shopify?",
+            "answer": "Shopify is the world’s most powerful e-commerce platform that allows anyone to easily sell online, at a retail location, and everywhere in between."
+          }
+        },
+        "3ea4ee54-cfdf-4074-b2b9-eb293189786a": {
+          "type": "faq",
+          "settings": {
+            "title": "How do I setup my store?",
+            "answer": "When you buy this theme you get full access to our comprehensive and easy to follow instructions on setting up the theme for your store.\nIf you’re looking for more generic Shopify store setup instructions, there are plenty of resources available on Shopify’s own website."
+          }
+        },
+        "4bd17bba-94ac-4f40-80bc-c10373ae3d3a": {
+          "type": "faq",
+          "settings": {
+            "title": "Do I need a Designer/Programmer for my store?",
+            "answer": "We’ve designed the theme to be as flexible and configurable as possible but also made it simple to use. You would only need a designer/developer if you wanted to custom code something that the theme doesn’t do natively."
+          }
+        },
+        "48e8d95f-6f36-4cb1-94d4-f53d7708f76c": {
+          "type": "html",
+          "settings": {
+            "title": "Apollo framework",
+            "des": ""
+          }
+        },
+        "cbdb713b-c423-4d3f-8997-058459cb4d8c": {
+          "type": "faq",
+          "settings": {
+            "title": "Where can I buy this theme?",
+            "answer": "We only sell this theme at Themeforest, you can buy there. If you need a trial version, please contact <a href=\"mailto:demo@demo.com\">demo@demo.com</a>"
+          }
+        },
+        "2cf50ec5-8220-4d97-8ee2-dcab9bfbf304": {
+          "type": "faq",
+          "settings": {
+            "title": "When you purchase a theme is that a one-time fee?",
+            "answer": "Yes, unlike other themes, you get free upgrades and support for 6-months and you only pay a one-time fee, unless stated otherwise."
+          }
+        },
+        "f192b09c-21bb-4a72-8805-a4289f03ef3c": {
+          "type": "faq",
+          "settings": {
+            "title": "Can I trial a theme before buying it?",
+            "answer": "Yes, please contact us via email demo@demo.com"
+          }
+        },
+        "f807e2be-4345-4ed7-9cd4-998fa007abca": {
+          "type": "faq",
+          "settings": {
+            "title": "Can I use the theme for multiple shops?",
+            "answer": "All of our themes are subject to a one-store license, so if you want to utilize the same theme in several live stores, you’ll have to purchase multiple licenses."
+          }
+        },
+        "a89c6525-cefc-4c0f-b90e-7f3c2bfc5272": {
+          "type": "faq",
+          "settings": {
+            "title": "Does this theme work with all Shopify plans?",
+            "answer": "Yes, it works with all plans."
+          }
+        },
+        "ee3feea3-a271-4b7d-b481-23b70f65b79d": {
+          "type": "faq",
+          "settings": {
+            "title": "Is it necessary to pay for the service to setup the store?",
+            "answer": "No, we’ve designed the theme to be as intuitive to use as possible and we have also provided step-by-step instructions inside our theme description."
+          }
+        },
+        "f1521253-d6b3-41a6-a829-c9fab63d8b68": {
+          "type": "html",
+          "settings": {
+            "title": "Support service",
+            "des": ""
+          }
+        },
+        "2c10f84e-e3be-4e08-a2a0-21f58b6fe710": {
+          "type": "faq",
+          "settings": {
+            "title": "What is the scope of your support?",
+            "answer": "Our support includes general inquiries regarding theme functionality; help with customizing the theme settings and any observed defect or theme issues. It doesn’t cover issues, such as errors due to third- party plugins or as an after effect of changes made to the theme code. For the full details on the extent of our support, please visit our Support Policy page."
+          }
+        },
+        "9e235d2b-9ba4-4c46-8450-98680757e1b9": {
+          "type": "faq",
+          "settings": {
+            "title": "What if I need help with Shopify issues?",
+            "answer": "General shop inquiries, such as uploading products, creating collections, adding discount codes, managing domains, etc. can be best addressed by reaching Shopify Support specifically and/or by checking on their broad documentation accessible in the Shopify Manual."
+          }
+        },
+        "cd738ae4-e518-4d0a-8083-a59b99b5a6db": {
+          "type": "faq",
+          "settings": {
+            "title": "How fast do you respond to support inquiries?",
+            "answer": "We aim to give feedback to all requests within 24 hours, but please allow 1-2 business days for the response. Our support team is primarily based in the UTC +7 and is available during standard business hours. We have a weekend staff to answer basic queries too."
+          }
+        },
+        "a45d5134-6891-4e12-9e1c-c63e87ba8af4": {
+          "type": "faq",
+          "settings": {
+            "title": "Do you provide phone support? What about Skype?",
+            "answer": "We don’t offer telephone or video call support as of now. <br>\nPlease contact with us via:<br>\nEmail: demo@demo.com<br>\nSupport skype: designer"
+          }
+        }
+      },
+      "block_order": [
+        "fa21d058-943c-40ea-bd52-0c40dd0e744d",
+        "904687cd-80f4-4389-9e2d-1e2b88374ce7",
+        "3ea4ee54-cfdf-4074-b2b9-eb293189786a",
+        "4bd17bba-94ac-4f40-80bc-c10373ae3d3a",
+        "48e8d95f-6f36-4cb1-94d4-f53d7708f76c",
+        "cbdb713b-c423-4d3f-8997-058459cb4d8c",
+        "2cf50ec5-8220-4d97-8ee2-dcab9bfbf304",
+        "f192b09c-21bb-4a72-8805-a4289f03ef3c",
+        "f807e2be-4345-4ed7-9cd4-998fa007abca",
+        "a89c6525-cefc-4c0f-b90e-7f3c2bfc5272",
+        "ee3feea3-a271-4b7d-b481-23b70f65b79d",
+        "f1521253-d6b3-41a6-a829-c9fab63d8b68",
+        "2c10f84e-e3be-4e08-a2a0-21f58b6fe710",
+        "9e235d2b-9ba4-4c46-8450-98680757e1b9",
+        "cd738ae4-e518-4d0a-8083-a59b99b5a6db",
+        "a45d5134-6891-4e12-9e1c-c63e87ba8af4"
+      ],
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "subheading": "Below FAQ are some common concerns of our clients before purchasing the theme, if you have other questions, please just send it to <a href=\"mailto:demo@demo.com\">demo@demo.com</a>",
+        "faqs_form_enable": true,
+        "heading_faqs": "Ask Your Questions",
+        "faqs_form_pos": "left",
+        "layout": "layout-2",
+        "cl_mix_1": "#000000",
+        "cl_mix_2": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "page-faqs"
+  ]
+}

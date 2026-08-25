@@ -1,0 +1,84 @@
+
+{%- if section.settings.enable -%}
+{{ 'recently-viewed.css' | asset_url | stylesheet_tag }}
+
+<div class="recently-viewed-show">
+  <div class="img-viewed" title="Recently Viewed" data-setting='{"accessibility": false, "arrows": false,
+            "dots": false, "draggable": true,
+            "infinite": true, "autoplay": true,
+            "autoplaySpeed": 10000, "speed": 1000,
+            "slidesToShow": 1, "slidesToScroll": 1,
+            "vertical": false, "mobileFirst": false, "pauseOnHover": false,
+            "rows": 1, "slidesPerRow": 1, "rtl": 1,
+            "slidesToShow_992": 1, "slidesToScroll_992": 1,
+            "arrows_992": false, "dots_992": false,
+            "slidesToShow_767": 1, "slidesToScroll_767": 1,
+            "arrows_767": false, "dots_767": false,
+            "slidesToShow_450": 1, "slidesToScroll_450": 1,
+            "arrows_450": false, "dots_450": false}'>
+  </div>
+  <div class="recently-viewed-content">
+    <div class="recently-viewed-banner">
+    </div>
+    <div class="recently-viewed">
+      <div class="recently-viewed-header">
+        {%- if section.settings.title != blank -%}
+        <h4>{{section.settings.title}}</h4>
+        {%- endif -%}
+        <button type="button" class="close">
+          {% render 'icon-close' %}
+        </button>
+      </div>
+      <div class="recently-viewed-body">
+        <div class="js-recently-view-content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{%- endif -%}
+{% javascript %}
+$( document ).ready(function() {
+  $('.img-viewed').click(function(e){
+    $('.recently-viewed-content').addClass('active');
+    setTimeout(function(){ 
+      $('.recently-viewed').addClass('show');
+     }, 200);
+  });
+  $('.recently-viewed-banner, .close').click(function(e){
+    $('.recently-viewed-content').removeClass('active');
+  });
+});
+{% endjavascript %}
+
+
+{% schema %}
+{
+  "name": "t:sections.recently-viewed.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "t:sections.recently-viewed.settings.enable.label",
+      "default":true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.recently-viewed.settings.title.label",
+      "default":"Recently viewed"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "t:sections.recently-viewed.settings.limit.label",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    }
+  ]
+}
+{% endschema %}

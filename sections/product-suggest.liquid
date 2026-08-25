@@ -1,0 +1,120 @@
+<!-- product-suggest.liquid -->
+
+{%- if section.settings.enable -%}
+
+<link rel="preload" href="{{ 'product-suggest.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'product-suggest.css' | asset_url }}"></noscript>
+
+<section class="product-notification" data-time="{{section.settings.duration | times: 1000}}">
+  <a href="javascript:void(0)" title="Close" class="close-notifi">&times;</a>
+  <div class="product-suggest">
+    <a class="product-image" href="/"><img src="{%- render 'srcBlank' -%}" alt=""></a>
+    <div class="column-right">
+      <label>{{section.settings.text}} </label>
+      <a class="product-name" href="/"></a>
+      <div class="from-ago"></div>
+      <div class="time-ago"></div>
+    </div>
+  </div>
+  <div class="hide">
+    {%- for block in section.blocks -%}
+      {%- assign product = all_products[block.settings.product] -%}
+      {%- if block.settings.image_ratio == "square" -%}
+          {%- assign image = product.featured_image | img_url: '200x200' -%}
+      {%- else -%}
+          {%- assign image = product.featured_image | img_url: '200x' -%}
+      {%- endif -%}
+      <div class="data-product" data-id="{{product.id}}" data-image="{{image}}" data-url="/products/{{product.handle}}" data-title="{{product.title}}" data-alt="{{product.title}}" data-local="{{block.settings.local}}" data-time="{{block.settings.time}}"></div>
+
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.product-suggest.name",
+  "max_blocks": 100,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "t:sections.product-suggest.settings.enable.label"
+    },
+    {
+      "type": "range",
+      "id": "duration",
+      "label": "t:sections.product-suggest.settings.duration.label",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "unit": "s",
+      "default": 7
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:sections.product-suggest.settings.text.label",
+      "default":"Someone recently bought"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "t:sections.product-suggest.blocks.product.name",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.product-suggest.blocks.product.settings.product.label"
+        },
+        {
+          "type": "select",
+          "id": "image_ratio",
+          "label": "t:sections.product-suggest.blocks.product.settings.image_ratio.label",
+          "default": "adapt",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.product-suggest.blocks.product.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.product-suggest.blocks.product.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.product-suggest.blocks.product.settings.image_ratio.options__3.label"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "local",
+          "label": "t:sections.product-suggest.blocks.product.settings.local.label",
+          "default": "in Blackburn, UK"
+        },
+        {
+          "type": "text",
+          "id": "time",
+          "label": "t:sections.product-suggest.blocks.product.settings.time.label",
+          "default": "about 21 minutes ago"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "product"
+      },
+      {
+        "type": "product"
+      },
+      {
+        "type": "product"
+      }
+    ]
+  }
+}
+{% endschema %}

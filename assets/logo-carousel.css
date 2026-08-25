@@ -1,0 +1,56 @@
+.logo-carousel{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-carousel-content{
+    width: 100%;
+    margin: 0;
+    padding: 5rem 0px;
+}
+.logo-image{
+    margin: 0 1.5rem;
+}
+.logo-image.slick-slide.slick-active{
+    display: flex;
+    justify-content: center;
+}
+.image-effect a img{
+    opacity: 0.4;
+    transition: all 0.5s ease-out 0s;
+}
+
+.image-effect a:hover img{
+    opacity: 1;
+    transform: scale(1.1);
+}
+.logo-content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.advanced__image{
+    margin: 0 auto;
+}
+.logo-description{
+    font-size: 16px;
+    line-height: 40px;
+    padding-top: 20px;
+}
+
+.logo_media.media{
+    background-color: transparent;
+    text-align: center;
+}
+.logo-carousel .icon{
+    padding: 10px;
+    overflow: hidden;
+}
+
+@media(min-width: 768px){
+    .logo-carousel-content{
+        padding: 8rem 0;
+    }
+}

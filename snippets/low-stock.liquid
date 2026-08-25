@@ -1,0 +1,19 @@
+{% assign variant_ids = "" %}
+{% assign variant_qty = "" %}
+{% for variant in product.variants  %}
+	{%- if variant_ids == '' -%}
+		{% assign variant_ids = variant.id %}
+		{% assign variant_qty = variant.inventory_quantity %}
+	{%- else -%}
+		{% assign variant_ids = variant_ids | append: "," | append: variant.id %}
+		{% assign variant_qty = variant_qty | append: "," | append: variant.inventory_quantity %}
+	{%- endif -%}
+{% endfor %}
+
+<div id="low-stock-block" class="js-hurrify {% if product.selected_or_first_available_variant.inventory_management %}{% if product.selected_or_first_available_variant.inventory_quantity >= 10 or product.selected_or_first_available_variant.inventory_quantity <= 0 %}hide{% endif %}{% else %}hide{% endif %}" data-ids="{{variant_ids}}" data-qty="{{variant_qty}}">
+    <p class="text-danger font-weight-bold">Hurrify, only a few left:</p>
+    <div class="progress">
+      <div class="progress-bar" style="width:{{product.selected_or_first_available_variant.inventory_quantity | times: 10}}%">{{product.selected_or_first_available_variant.inventory_quantity}}
+      </div>
+    </div>
+</div>

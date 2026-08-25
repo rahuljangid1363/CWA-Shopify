@@ -1,0 +1,373 @@
+<!-- brands.liquid -->
+<style>
+  .section-brand{
+    margin-top: 40px;
+    padding: 0 20px;
+    padding-bottom: 80px;
+  }
+.section-brand-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 30px 0 20px
+}
+
+.section-brand .menu-label>span:before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid;
+  left: 50%;
+  bottom: -6px;
+  margin-left: -5px
+}
+
+.section-brand .menu-label--new>span:before {
+  border-top-color: var(--color-label-new);
+}
+
+.section-brand .menu-label--hot>span:before {
+  border-top-color: var(--color-label-hot);
+}
+.section-brand .menu-label--feature>span:before {
+  border-top-color: var(--color-label-feature);
+}
+.section-brand .menu-label--sale>span:before {
+  border-top-color: var(--color-label-sale);
+}
+
+.section-brand .menu-label--other>span:before {
+  border-top-color: var(--color-label-other);
+}
+
+.section-brand-links .brand_link {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e1e1e1;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -1px;
+}
+
+.section-brand-links .brand_link.disabled {
+  pointer-events: none;
+  color: #b3b3b3
+}
+
+.section-brand__subheading {
+  margin-bottom: 10px
+}
+
+.title_brand {
+  text-transform: uppercase;
+  font-weight: 700;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100px;
+  flex: 0 0 100px;
+  width: 100px
+}
+
+.content_brand {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center
+}
+
+.link_brand {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap
+}
+
+.link_brand li {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 160px;
+  flex: 0 0 160px;
+  min-width: 160px;
+  line-height: 50px;
+}
+
+.link_brand a {
+  color: #222;
+  position: relative
+}
+
+.link_brand a:hover {
+  color: #000
+}
+
+.section-brand hr {
+  border-color: #e1e1e1;
+  margin: 16px 0;
+}
+
+.section-brand .first hr {
+  border-color: transparent!important;
+  background: transparent;
+}
+
+.section-brand h3{
+  font-size: 2.8rem;
+  font-weight: bold;
+}
+
+.section-brand .menu-label{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 14px;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
+.section-brand__subheading {
+  margin: 10px 0
+}
+
+.s-brand .menu-label {
+  top: -24px;
+  line-height: 14px;
+}
+</style>
+<div class="section-brand container">
+  {%- if section.settings.heading != blank -%}
+  <h3 class="section-brand__heading text-center">
+    {{section.settings.heading}}
+  </h3>
+  {%- endif -%}
+  {%- if section.settings.subheading != blank -%}
+  <div class="section-brand__subheading text-center">
+    {{section.settings.subheading}}
+  </div>
+  {%- endif -%}
+  {%- assign characters = 'a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,other' -%}
+  {%- assign arrayChar = characters | split: ',' -%}
+  {%- capture brandList -%}
+    <div class="section-brand-links">
+      {%- for char in arrayChar -%}
+      {%- assign isDisabled = true -%}
+      {%- for block in section.blocks -%}
+      {%- if block.settings.title == char -%}
+      {%- assign isDisabled = false -%}
+      {%- break -%}
+      {%- endif -%}
+      {%- endfor -%}
+      <a href="#brands-{{char}}" class="brand_link {% if isDisabled %}disabled{% endif %}">
+        {%- if char == 'other' -%}#{%- else -%}{{ char | capitalize }}{%- endif -%}
+      </a>
+      {%- endfor -%}
+    </div>
+  {%- endcapture -%}
+  {{brandList}}
+  {%- for block in section.blocks -%}
+  <div id="brands-{{block.settings.title}}" class="s-brand {% if forloop.first %}first{% endif %}">
+    <hr />
+    <div class="content_brand">
+      <div class="title_brand">
+        <h3>
+          {%- if block.settings.title == 'other' -%}#{%- else -%}{{block.settings.title}}{%- endif -%}
+        </h3>
+      </div>
+      <ul class="link_brand list--inline list-unstyled">
+        {%- for link in linklists[block.settings.linklist].links -%}
+        <li>
+          <a target="_blank" href="{{link.url}}" title="{{link.title}}">
+            {%- include 'processMenuTitle' with itemName.link.title, itemName: link.title -%}
+            {%- include 'processMenuLabel' with itemName.link.title, itemName: link.title -%}
+          </a>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+  {%- endfor -%}
+  {{brandList}}
+</div>
+{% schema %}
+{
+  "name": "t:sections.brands.name",
+  "class": "page-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.brands.settings.heading.label",
+      "default": "All Brands"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "t:sections.brands.settings.subheading.label",
+      "default": "<p>Promotions, new products and sales. Directly to your inbox.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "character",
+      "name": "t:sections.brands.blocks.character.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "title",
+          "label": "t:sections.brands.blocks.character.settings.title.label",
+          "default": "a",
+          "options": [
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__1.label",
+              "value": "a"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__2.label",
+              "value": "b"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__3.label",
+              "value": "c"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__4.label",
+              "value": "d"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__5.label",
+              "value": "e"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__6.label",
+              "value": "f"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__7.label",
+              "value": "g"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__8.label",
+              "value": "h"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__9.label",
+              "value": "i"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__10.label",
+              "value": "j"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__11.label",
+              "value": "k"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__12.label",
+              "value": "l"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__13.label",
+              "value": "m"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__14.label",
+              "value": "n"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__15.label",
+              "value": "o"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__16.label",
+              "value": "p"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__17.label",
+              "value": "q"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__18.label",
+              "value": "r"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__19.label",
+              "value": "s"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__20.label",
+              "value": "t"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__21.label",
+              "value": "u"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__22.label",
+              "value": "v"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__23.label",
+              "value": "w"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__24.label",
+              "value": "x"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__25.label",
+              "value": "y"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__26.label",
+              "value": "z"
+            },
+            {
+              "label": "t:sections.brands.blocks.character.settings.title.options__27.label",
+              "value": "other"
+            }
+          ]
+        },
+        {
+          "type": "link_list",
+          "id": "linklist",
+          "label": "t:sections.brands.blocks.character.settings.linklist.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- include 'processMenuTitle' with itemName:link.title -%}"
+  to: "{%- include 'processMenuTitle' with itemName.link.title, itemName: link.title
+    -%}"
+  position: 4473..4554
+- from: "{%- include 'processMenuLabel' with itemName:link.title -%}"
+  to: "{%- include 'processMenuLabel' with itemName.link.title, itemName: link.title
+    -%}"
+  position: 4567..4648
+{%- endcomment -%}

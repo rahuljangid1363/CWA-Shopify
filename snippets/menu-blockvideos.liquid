@@ -1,0 +1,12 @@
+<!-- menu-blockvideos.liquid -->
+
+{%- capture ap_video -%}apmenuitem_cvideo_{{ intMega }}{%- endcapture -%}
+{%- capture ap_video_mute -%}apmenuitem_video_mute_{{ intMega }}{%- endcapture -%}
+{%- capture ap_video_loop -%}apmenuitem_video_loop_{{ intMega }}{%- endcapture -%}
+{%- capture ap_video_height -%}apmenuitem_video_height_{{ intMega }}{%- endcapture -%}
+
+<div class="block-video js-menu-video">
+    <video {% if settings[ap_video_mute] %}muted{% endif %} {% if settings[ap_video_loop] %}loop{% endif %} onmouseover="this.play()" onmouseout="this.pause()">
+      <source type="video/mp4" src="{{settings[ap_video]}}">
+    </video>
+  </div>

@@ -1,0 +1,255 @@
+<!-- footer-4.liquid -->
+{{ 'footer-4.css' | asset_url | stylesheet_tag }}
+
+<footer class="footer-4">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+        <div class="footer-top-content">
+          {%- if section.settings.show_logo -%}
+            {% render 'logo_footer' %}
+          {%- endif -%}
+
+          {%- if section.settings.menu != blank -%}
+            {% render 'mega-menu-footer' %}
+          {%- endif -%}
+        </div>
+
+        <div class="footer-center-content">
+            <div class="row">
+              {%- for block in section.blocks -%}
+              {%- case block.settings.width -%}
+                {%- when '16.67%' -%}
+                {%- assign block_width = 'col-lg-2' -%}
+                {%- when '25%' -%}
+                {%- assign block_width = 'col-lg-3 col-sm-6' -%}
+                {%- when '33.33%' -%}
+                {%- assign block_width = 'col-xl-4 col-lg-5' -%}
+                {%- when '50%' -%}
+                {%- assign block_width = 'col-lg-6' -%}
+                {%- when '66.67%' -%}
+                {%- assign block_width = 'col-xl-8 col-lg-7' -%}
+                {%- when '75%' -%}
+                {%- assign block_width = 'col-lg-9' -%}
+                {%- when '83.33%' -%}
+                {%- assign block_width = 'col-lg-10' -%}
+                {%- when '100%' -%}
+                {%- assign block_width = 'col-12' -%}
+                {%- endcase -%}
+                <div class="footer-block-width {{block_width}}">
+                  {%- case block.type -%}
+                    {%- when 'text-content' -%}
+                    <div class="text-content">
+                        <h2 class="title-footer-content">{{ block.settings.header_content_footer }}</h2>
+                        <ul class="list-content-footer">
+                            {{ block.settings.text_content_footer }}
+                        </ul>
+                    </div>
+    
+                    {%- when 'menu' -%}
+                    <div class="menu-footer">
+                        <h2 class="title-footer">{{ block.settings.title_menu }}
+                            <span class="drawer__nav-toggle--open">
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </h2>
+                        {%- render 'vertical-menu-footer', block:block -%}
+                    </div>
+                  {%- endcase -%}
+                </div>
+            {%- endfor -%}
+            </div>
+        </div>
+
+        
+        <div class="footer-bottom-content">
+          {%- if section.settings.show_copyright -%}
+            <div class="bottom-footer-coppy">
+              {% render 'footer-copyright' %}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.icon_card_footer -%}
+          <div class="bottom-footer-card">
+              {% render 'icon-card-footer' %}
+          </div>
+      {%- endif -%} 
+        </div>
+    </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "t:sections.footer-4.name",
+    "class": "section-footer",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "fullwidth",
+        "label": "t:sections.footer-4.settings.fullwidth.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_logo",
+        "label": "t:sections.footer-4.settings.show_logo.label",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "t:sections.footer-4.settings.image.label"
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "t:sections.footer-4.settings.menu.label",
+        "default": "main-menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_copyright",
+        "label": "t:sections.footer-4.settings.show_copyright.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "icon_card_footer",
+        "label": "t:sections.footer-4.settings.icon_card_footer.label",
+        "default": true
+      }
+    ],
+    "blocks": [
+    {
+      "type": "text-content",
+      "name": "t:sections.footer-4.blocks.text-content.name",
+      "settings": [
+      {
+        "type": "select",
+        "id": "width",
+        "label": "t:sections.footer-4.blocks.text-content.settings.width.label",
+        "default": "25%",
+        "options": [
+          {
+            "value": "16.67%",
+            "label": "t:sections.footer-4.blocks.text-content.settings.width.options__1.label"
+          },
+          {
+            "value": "25%",
+            "label": "t:sections.footer-4.blocks.text-content.settings.width.options__2.label"
+          },
+          {
+            "value": "33.33%",
+            "label": "t:sections.footer-4.blocks.text-content.settings.width.options__3.label"
+          },
+          {
+            "value": "50%",
+            "label": "t:sections.footer-4.blocks.text-content.settings.width.options__4.label"
+          },
+          {
+            "value": "66.67%",
+            "label": "t:sections.footer-4.blocks.text-content.settings.width.options__5.label"
+          },
+          {
+            "value": "75%",
+            "label": "t:sections.footer-4.blocks.text-content.settings.width.options__6.label"
+          },
+          {
+            "value": "83.33%",
+            "label": "t:sections.footer-4.blocks.text-content.settings.width.options__7.label"
+          },
+          {
+            "value": "100%",
+            "label": "t:sections.footer-4.blocks.text-content.settings.width.options__8.label"
+          }
+        ]
+       },  
+        {
+          "type": "text",
+          "id": "header_content_footer",
+          "label": "t:sections.footer-4.blocks.text-content.settings.header_content_footer.label",
+          "default": "title content"
+        },
+        {
+          "type": "liquid",
+          "id": "text_content_footer",
+          "label": "t:sections.footer-4.blocks.text-content.settings.text_content_footer.label",
+          "default": "<li>Monday Closed</li><li>Tuesday - Friday 10 - 18</li><li>Saturday 10 - 16</li>"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "t:sections.footer-4.blocks.menu.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "width",
+          "label": "t:sections.footer-4.blocks.menu.settings.width.label",
+          "default": "25%",
+          "options": [
+            {
+              "value": "16.67%",
+              "label": "t:sections.footer-4.blocks.menu.settings.width.options__1.label"
+            },
+            {
+              "value": "25%",
+              "label": "t:sections.footer-4.blocks.menu.settings.width.options__2.label"
+            },
+            {
+              "value": "33.33%",
+              "label": "t:sections.footer-4.blocks.menu.settings.width.options__3.label"
+            },
+            {
+              "value": "50%",
+              "label": "t:sections.footer-4.blocks.menu.settings.width.options__4.label"
+            },
+            {
+              "value": "66.67%",
+              "label": "t:sections.footer-4.blocks.menu.settings.width.options__5.label"
+            },
+            {
+              "value": "75%",
+              "label": "t:sections.footer-4.blocks.menu.settings.width.options__6.label"
+            },
+            {
+              "value": "83.33%",
+              "label": "t:sections.footer-4.blocks.menu.settings.width.options__7.label"
+            },
+            {
+              "value": "100%",
+              "label": "t:sections.footer-4.blocks.menu.settings.width.options__8.label"
+            }
+          ]
+        },
+        {
+            "type": "text",
+            "id": "title_menu",
+            "label": "t:sections.footer-4.blocks.menu.settings.title_menu.label",
+            "default": "title menu"
+        },
+        {
+            "type": "link_list",
+            "id": "menu",
+            "label": "t:sections.footer-4.blocks.menu.settings.menu.label",
+            "default": "main-menu"
+          }
+      ]
+    }
+    ],
+    "default": {
+        "blocks": [
+          {
+            "type": "menu"
+          },
+          {
+            "type": "menu"
+          },
+          {
+            "type": "menu"
+          },
+          {
+            "type": "menu"
+          }
+        ]
+      }
+  }
+{% endschema %}

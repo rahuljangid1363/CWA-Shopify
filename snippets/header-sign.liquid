@@ -1,0 +1,34 @@
+<!-- header-sign.liquid -->
+
+{{ 'header-sign.css' | asset_url | stylesheet_tag }}
+
+<div class="header-sign">
+    <button class="show_login" type="button">
+      {%- render 'icon-user' -%}
+      <span class="d-none">icon-user</span>
+    </button>
+
+    <div class="mini-acount">
+      {% if customer %}
+      <p><a>Hello {{customer.first_name }}</a></p>
+        
+        <p><a href="/account/logout" title="{{'layout.customer.log_out' | t}}" class="site-header__link">
+          Logout
+        </a>
+        </p>
+      <p><a href="/account" title="My acount">My account</a></p>
+      {%- else -%}
+      	<p><a href="/account/login" class="site-header__link">Sign in</a></p>
+        <p><a href="/account/register" title="Register">Register</a></p>
+      {%- endif -%}
+        
+        
+        <p><a href="/pages/wishlist" title="Wishlist">Wishlist (<span class="js-wishlist-count"></span>)</a></p>
+        <p><a href="/pages/compare" class="site-header__compare" title="Compare">
+          Compare
+          (<span class="js-compare-count text-center"></span>)
+          </a></p>
+        <p><a href="/cart" title="Checkout">Checkout</a></p>
+    </div>
+
+  </div>

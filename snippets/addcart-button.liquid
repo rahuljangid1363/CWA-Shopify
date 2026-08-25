@@ -1,0 +1,26 @@
+{%- if product_card_product.metafields.products.affiliate_product.value -%}
+
+{%- else -%}
+<product-form style="{%- if product_card_product.selected_or_first_available_variant.available == false -%}display:none{%- endif -%}">
+    {%- form 'product', product_card_product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+    <input class="product-id" type="hidden" name="id" value="{{ product_card_product.selected_or_first_available_variant.id }}">
+    <div class="product-form__buttons">
+      <button
+              type="submit"
+              name="add"
+              class="product-form__submit button button--full-width"
+              {% if product_card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+              >
+        {%- if product_card_product.selected_or_first_available_variant.available -%}
+        {%- render 'icon-addcard' -%}
+        {%- else -%}
+        {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+        <span class="name-btn-product">Add to Cart</span>
+        <span class="text-btn-product">Add to Cart</span>
+      </button>
+      
+    </div>
+    {%- endform -%}
+  </product-form>
+{%- endif -%}

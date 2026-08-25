@@ -1,0 +1,519 @@
+<!-- slide-show.liquid -->
+
+<link rel="stylesheet" href="{{ 'slide-show.css' | asset_url }}" media="print" onload="this.media='all'">
+{% render 'section-style' %}
+{%- style -%}
+.slide-show .slide-box{
+  min-height:630px;
+}
+@media (min-width:1200px){
+  .slide-show .slide-box{
+    min-height:750px;
+  }
+}
+{%- endstyle -%}
+
+<div class="slide-show" data-delay='{%- if section.settings.enberslidesDelay -%}{{ section.settings.slidesDelay }}{%- else -%}0{%- endif -%}'>
+  <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}larger-container{%- endif -%}">
+      <div class="slide slide-slick ap-custom-slick"
+      data-setting='{"accessibility": false, "arrows": {{ section.settings.arrows }},
+      "dots": {{ section.settings.dots }}, "draggable": {{ section.settings.draggable }},
+      "infinite": {{ section.settings.infinite }}, "autoplay": {{ section.settings.autoplay }},
+      "autoplaySpeed": {{ section.settings.autoplaySpeed }}, "speed": {{ section.settings.speed }},
+      "slidesToShow": {{ section.settings.slidesToShow }}, "slidesToScroll": {{ section.settings.slidesToScroll }},
+      "vertical": false, "mobileFirst": false, "pauseOnHover": {{ section.settings.pauseOnHover }},
+      "rows": {{ section.settings.rows }}, "slidesPerRow": 1, "rtl": 1,
+      "slidesToShow_992": {{ section.settings.slidesToShow_992 }}, "slidesToScroll_992": {{ section.settings.slidesToScroll_992 }},
+      "arrows_992": {{ section.settings.arrows_992 }}, "dots_992": {{ section.settings.dots_992 }},
+      "slidesToShow_767": {{ section.settings.slidesToShow_767 }}, "slidesToScroll_767": {{ section.settings.slidesToScroll_767 }},
+      "arrows_767": {{ section.settings.arrows_767 }}, "dots_767": {{ section.settings.dots_767 }},
+      "slidesToShow_450": {{ section.settings.slidesToShow_450 }}, "slidesToScroll_450": {{ section.settings.slidesToScroll_450 }},
+      "arrows_450": {{ section.settings.arrows_450 }}, "dots_450": {{ section.settings.dots_450 }}}'>
+          {%- for block in section.blocks -%}
+          <div class="slider-conten" id="ap-slick-content-{{block.id}}" {{ block.shopify_attributes }}>
+            <div class="slide-image {% if block.settings.image_slide != blank %}media{% else %}image-slide-show__media--placeholder placeholder{% endif %}" style="padding-bottom: {{ 1 | divided_by: block.settings.image_slide.aspect_ratio | times: 100 }}%;"
+            >
+            <style style="display: none;">
+              .slide-show #ap-slick-content-{{block.id}} .link-base{
+                background-color:{{ block.settings.bg_button }};
+                color:{{ block.settings.color_button }};
+                border: 1px solid {{ block.settings.border_button }};
+              }
+            </style>
+              {%- if block.settings.image_slide != blank -%}
+              <img
+                    srcset="{%- if block.settings.image_slide.width >= 165 -%}{{ block.settings.image_slide | img_url: '1920x' }} 1920w,{%- endif -%}"
+                    src="{{ block.settings.image_slide | img_url: '1920x' }}"
+                    sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                    alt="{{ block.settings.image_slide.alt | escape }}"
+                    loading="lazy"
+                    width="{{ block.settings.image_slide.width }}"
+                    height="{{ block.settings.image_slide.height }}"
+                  >
+              {%- else -%}
+              {%- capture current -%}{%- cycle 1, 2 -%}{%- endcapture -%}
+                  {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="box-content-slide">
+              <div class="container position-relative h-100">
+                <div class="text-slider d-flex flex-column justify-content-{% if block.settings.item_align == 'top' %}start{% elsif block.settings.item_align == 'center' %}center{% elsif block.settings.item_align == 'bottom' %}end{% endif %} 
+                {% if block.settings.box_align == 'left' %}left{% elsif block.settings.box_align == 'center' %}center{% elsif block.settings.box_align == 'right' %}right{% endif %}
+                text-{%- if block.settings.text_align == 'left' -%}start{%- elsif block.settings.text_align == 'center' -%}center{%- elsif block.settings.text_align == 'right' -%}end{%- endif -%}" style="transform: translateX({{ block.settings.translateX }});">
+                    <ul class="list-text">
+                      <li>  
+                        <h4 class="sub-title-slide" style="color: {{ block.settings.color_sub }};">{{ block.settings.sub_title }}</h4>
+                      </li>
+                      <li>    
+                        <h2 class="title-slide" style="color: {{ block.settings.color_title }};">{{ block.settings.title }}</h2>
+                      </li>
+                      <li> 
+                        <div class="sale" style="color: {{ block.settings.color_text_sale }};">{{ block.settings.text_sale }}</div>
+                      </li>
+                      <li>  
+                        <p class="description-slide" style="color: {{ block.settings.color_des }};">{{ block.settings.content }}</p>
+                      </li>
+                      <li>
+                        {%- if block.settings.link != blank -%}
+                          <a class="link-base link-{%- if block.settings.text_align == 'left' -%}left{%- elsif block.settings.text_align == 'center' -%}center{%- elsif block.settings.text_align == 'right' -%}right{%- endif -%}" href="{{ block.settings.btn_link | default:'#' }}" title="{{ block.settings.link }}">
+                              {{ block.settings.link }}
+                              <i class="leofar leofa-arrow-right"></i>
+                          </a>
+                        {%- endif -%}
+                      </li>
+                    </ul>
+                  
+                 
+                    
+                  
+                   
+                </div> 
+              </div>
+            </div>
+          </div>
+          {%- endfor -%}
+      </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.slide-show.name",
+  "tag": "section",
+  "class": "slide-show-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.slide-show.settings.fullwidth.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "t:sections.slide-show.settings.margin_desktop.label",
+      "info": "t:sections.slide-show.settings.margin_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "t:sections.slide-show.settings.padding_desktop.label",
+      "info": "t:sections.slide-show.settings.padding_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "t:sections.slide-show.settings.margin_mobile.label",
+      "info": "t:sections.slide-show.settings.margin_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "t:sections.slide-show.settings.padding_mobile.label",
+      "info": "t:sections.slide-show.settings.padding_mobile.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enberslidesDelay",
+      "label": "t:sections.slide-show.settings.enberslidesDelay.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "slidesDelay",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.slidesDelay.label",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.slidesToShow.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.slidesToScroll.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.rows.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "t:sections.slide-show.settings.autoplay.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplaySpeed",
+      "min": 1000,
+      "max": 5000,
+      "step": 1000,
+      "label": "t:sections.slide-show.settings.autoplaySpeed.label",
+      "default": 5000
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 300,
+      "max": 1000,
+      "step": 100,
+      "label": "t:sections.slide-show.settings.speed.label",
+      "default": 500
+    },
+    {
+      "type": "checkbox",
+      "id": "pauseOnHover",
+      "label": "t:sections.slide-show.settings.pauseOnHover.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows",
+      "label": "t:sections.slide-show.settings.arrows.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:sections.slide-show.settings.dots.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "draggable",
+      "label": "t:sections.slide-show.settings.draggable.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "infinite",
+      "label": "t:sections.slide-show.settings.infinite.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.slide-show.settings.header.content"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow_992",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.slidesToShow_992.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll_992",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.slidesToScroll_992.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows_992",
+      "label": "t:sections.slide-show.settings.arrows_992.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_992",
+      "label": "t:sections.slide-show.settings.dots_992.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.slide-show.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow_767",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.slidesToShow_767.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll_767",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.slidesToScroll_767.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows_767",
+      "label": "t:sections.slide-show.settings.arrows_767.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_767",
+      "label": "t:sections.slide-show.settings.dots_767.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.slide-show.settings.header_2.content"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow_450",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.slidesToShow_450.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll_450",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.slide-show.settings.slidesToScroll_450.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows_450",
+      "label": "t:sections.slide-show.settings.arrows_450.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_450",
+      "label": "t:sections.slide-show.settings.dots_450.label",
+      "default": true
+    },
+    {
+      "type":"checkbox",
+      "id":"show_inter",
+      "label":"Show link internet",
+      "default":true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "t:sections.slide-show.blocks.slide.name",
+      "settings": [
+      {
+        "type": "image_picker",
+        "id": "image_slide",
+        "label": "t:sections.slide-show.blocks.slide.settings.image_slide.label"
+      },
+     
+       {
+          "type": "text",
+          "id": "sub_title",
+          "label": "t:sections.slide-show.blocks.slide.settings.sub_title.label",
+          "default": "Sub-title slider-show"
+        },
+        {
+          "type": "color",
+          "id": "color_sub",
+          "label": "Color sub title",
+          "default": "#FE5D02"
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "label": "t:sections.slide-show.blocks.slide.settings.title.label",
+          "default": "Title slider-show"
+        },
+        {
+          "type": "color",
+          "id": "color_title",
+          "label": "Color title",
+          "default": "#000"
+        },
+        {
+          "id": "text_sale",
+          "type": "text",
+          "label": "Text sale",
+          "default": "Save up 20%"
+        },
+        {
+          "type": "color",
+          "id": "color_text_sale",
+          "label": "Color text sale",
+          "default": "#fff"
+        },
+        {
+          "id": "content",
+          "type": "text",
+          "label": "t:sections.slide-show.blocks.slide.settings.content.label",
+          "default": "We are at the end of the ‘50s: an interesting series of armchairs and"
+        },
+        {
+          "type": "color",
+          "id": "color_des",
+          "label": "Color description",
+          "default": "#000"
+        },
+        {
+          "type":"header",
+          "content":"Slide button"
+        },
+        {
+          "id": "link",
+          "type": "text",
+          "label": "t:sections.slide-show.blocks.slide.settings.link.label",
+          "default": "Show More"
+        },
+        {
+          "id": "btn_link",
+          "type": "url",
+          "label": "t:sections.slide-show.blocks.slide.settings.btn_link.label"
+        },
+        {
+          "type": "select",
+          "id": "box_align",
+          "label": "Box align",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "left"
+            },
+            {
+              "value": "center",
+              "label": "center"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            }
+          ]
+         },
+         {
+          "type": "text",
+          "id": "translateX",
+          "label": "Translate X box",
+          "info":"if you want to adjust the position of box-content,you can use it. Example:10%,-10%,20px,-230px..."
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "t:sections.slide-show.blocks.slide.settings.text_align.label",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "t:sections.slide-show.blocks.slide.settings.text_align.options__1.label"
+            },
+            {
+              "value": "center",
+              "label": "t:sections.slide-show.blocks.slide.settings.text_align.options__2.label"
+            },
+            {
+              "value": "right",
+              "label": "t:sections.slide-show.blocks.slide.settings.text_align.options__3.label"
+            }
+          ]
+         },
+         {
+          "type": "select",
+          "id": "item_align",
+          "label": "t:sections.slide-show.blocks.slide.settings.item_align.label",
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": "t:sections.slide-show.blocks.slide.settings.item_align.options__1.label"
+            },
+            {
+              "value": "center",
+              "label": "t:sections.slide-show.blocks.slide.settings.item_align.options__2.label"
+            },
+            {
+              "value": "bottom",
+              "label": "t:sections.slide-show.blocks.slide.settings.item_align.options__3.label"
+            }
+          ]
+         },
+         {
+            "type": "color",
+            "id": "bg_button",
+            "label": "Background button",
+            "default": "#94BE90"
+          },
+          {
+             "type": "color",
+             "id": "color_button",
+             "label": "Color button",
+             "default": "#fff"
+           },
+           {
+              "type": "color",
+              "id": "border_button",
+              "label": "Border button",
+              "default": "transparent"
+            }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "t:sections.slide-show.presets.name",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

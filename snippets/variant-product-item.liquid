@@ -1,0 +1,46 @@
+<div class="variants-product-item input" data-handle='{{ product_card_product.handle }}'>
+    {%- for option in product_card_product.options_with_values -%}
+    {%- assign checked = 1 -%}
+  	{% assign isColor = false %}
+    {% assign optionName = option.name | handleize %}
+    {% if optionName contains 'colo' %}
+    {% assign isColor = true %}
+    {% endif %}
+    {% assign option_index = forloop.index %}
+
+    <div class="variants-item variants-item-{{ option.name | downcase | replace: " ", "-"}}">
+      <legend class="form__label">{{ option.name }}</legend>
+      {%- for value in option.values -%}
+      
+      {% for variant in product_card_product.variants  %}
+        {% assign vOption = 'option' | append: option_index %}
+        {% if value ==  variant[vOption] %}
+          {% assign currenVariant = variant %}
+          {% break %}
+        {%  endif %}
+      {% endfor %}
+      {% assign hasImage = false %}
+      {% if isColor and currenVariant.image %}
+      	{% assign hasImage = true %}
+      {% endif %}
+      
+      {%- assign active = 'active' | prepend: " " -%}
+      <div class="variant {% if checked == 1 %} {{active}} {% endif %} variant-{{ value | downcase | replace: " ", "-" }}">
+        <input type="radio" class="{{ option.name }}-{{product_card_product.id}}" 
+               id="{{ option.name }}-{{ forloop.index0 }}-{{product_card_product.id}}" 
+               name="{{ option.name }}" 
+               value="{{ value | escape }}" 
+               {%- if checked == 1 -%}checked="checked"{%- endif -%}>
+        <label for="{{ option.name }}-{{ forloop.index0 }}-{{product_card_product.id}}" {%- if bg_color == '' -%} class="label-image"{%- endif -%}>
+          {%- if hasImage -%}
+          	<img src="{{currenVariant.image.src | img_url:'50x'}}" alt="{{ option.name }}">
+          {%- else -%}
+          	{{ value }}
+          {%- endif -%}
+        </label>
+      </div>
+      {%- assign checked = 0 -%}
+      {%- endfor -%}
+    </div>
+    {%- endfor -%}
+  </div>

@@ -1,0 +1,13 @@
+<!-- header-logo.liquid -->
+
+<a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+  {%- if settings.logo != blank -%}
+    <img srcset="{{ settings.logo | img_url: 'master' }}"
+      src="{{ settings.logo | img_url: master }}"
+      loading="lazy"
+      class="header__heading-logo"
+      alt="{{ settings.logo.alt | default: shop.name | escape }}">
+  {%- else -%}
+    <span class="h2">{{ shop.name }}</span>
+  {%- endif -%}
+</a>

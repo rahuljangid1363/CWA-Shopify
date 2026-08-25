@@ -1,0 +1,95 @@
+.header-sign{
+  position: relative;
+}
+
+.icon-leofal{
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 300;
+    font-style: normal;
+    display: block;
+    font-size: 3rem;
+  }
+  .icon-leofal:before{
+    content: '\f7a4';
+  }
+
+  .mini-acount{
+	width: 15rem;
+	z-index: 9999;
+	background-color: #fff;
+	color: #666;
+	padding: 1rem;
+	position: absolute;
+	font-size: 1.3rem;
+	top: 100%;
+	right: 0;
+	border: 0.1rem solid #eaeaea;
+  box-shadow: 0 0 3rem 0 rgb(0 0 0 / 5%);
+}
+
+.mini-acount p{
+	margin: 0;
+}
+.mini-acount a{
+	color: #666;
+	display: inline-block;
+	width: 100%;
+	padding: 0.8rem 1rem;
+  font-size: 1.3rem;
+  font-family: var(--g-font-1);
+}
+.mini-acount a:hover{
+  color: #000;
+}
+  .mini-acount{
+  display: none;
+  } 
+  
+.mini-acount .text-hide{
+	font-size: 1.3rem;
+	padding: 0.8rem 1rem;
+}
+.mini-acount .js-wishlist-count, .mini-acount .js-compare-count{
+	display: inline-block;
+    position: unset;
+    background-color: transparent;
+    color: #666;
+    width: unset;
+	  width: unset;
+    font-size: 1.3rem;
+    height: unset;
+    border-radius: unset;
+    text-align: center;
+    line-height: 1.3rem;
+}
+.block_currencies ul{
+  padding: 0;
+}
+.block_currencies .title-currencies{
+  padding: 1rem;
+}
+.currencies{
+  display: flex;
+  flex-wrap: wrap;
+}
+.header-sign button{
+  border: none;
+  background: transparent;
+  padding: 1rem;
+}
+@media(max-width: 374px){
+    
+	.mini-acount{
+		right: 0.5rem;
+	}
+  }
+  @media (max-width:991px) {
+    .site-header__compare {
+      display: none
+    }
+  }
+@media (min-width:992px) {
+  .header-sign:hover .mini-acount{
+    display: block;
+  }
+}

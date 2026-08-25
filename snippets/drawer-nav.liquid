@@ -1,0 +1,44 @@
+<!-- drawer-nav.liquid -->
+<div class="grid grid--no-gutters meganav__scroller meganav__scroller--has-list">
+    <div class="grid__item meganav__list">
+      {%- for childlink in link.links -%}
+      <li class="drawer__nav-item">
+        {%- if childlink.links != blank -%}
+        {%- assign grandchild_list_handle = childlink.title | handleize -%}
+        <div class="drawer__nav-has-sublist">
+          <a href="{{ childlink.url }}" 
+             class="meganav__link drawer__nav-link drawer__nav-link--split{% if childlink.active %} meganav__link--active{% endif %}" 
+             id="DrawerLabel-{{ grandchild_list_handle }}"
+             {% if childlink.active %} aria-current="page"{% endif %}
+             >
+            {%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title -%}
+            {%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title -%}
+          </a>
+          <button data-toggle="collapse" data-target="#DrawerLinklist-{{ grandchild_list_handle }}" type="button" aria-controls="DrawerLinklist-{{ grandchild_list_handle }}" class="text-link drawer__nav-toggle-btn drawer__nav-toggle-btn--small collapsed" aria-label="{{ link.title }} {{ 'general.drawers.menu' | t }}" aria-expanded="false">
+            <span class="drawer__nav-toggle--open">
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </span>
+            <span class="drawer__nav-toggle--close">
+              <i class="fa fa-angle-up" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        {%- endif -%}
+    </li>
+    {%- endfor -%}
+    </div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'processMenuTitle' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 741..831
+- from: "{%- render 'processMenuLabel' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 845..935
+{%- endcomment -%}

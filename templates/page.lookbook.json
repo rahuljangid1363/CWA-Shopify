@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "page-lookbook": {
+      "type": "page-lookbook",
+      "blocks": {
+        "c4341b8f-e8d8-4fd0-90fb-025a6ad928e0": {
+          "type": "slide",
+          "settings": {
+            "image_slide": "shopify://shop_images/unsplash-jCctpZe3sZo-1200x1200.jpg",
+            "link": "SHOP THIS LOOK",
+            "btn_link": ""
+          }
+        },
+        "3d52cd50-656f-420d-a567-19ffb10643eb": {
+          "type": "slide",
+          "settings": {
+            "image_slide": "shopify://shop_images/unsplash-1cL5E2Bow8w-1200x1200.jpg",
+            "link": "SHOP THIS LOOK",
+            "btn_link": ""
+          }
+        },
+        "fb8d2ae5-ec33-42a6-ade5-4e958ea7a7de": {
+          "type": "slide",
+          "settings": {
+            "image_slide": "shopify://shop_images/unsplash-Fpcy-AdFhUg-1200x1200.jpg",
+            "link": "SHOP THIS LOOK",
+            "btn_link": ""
+          }
+        },
+        "eceb6394-8031-4ff3-a503-af01fd2afd48": {
+          "type": "slide",
+          "settings": {
+            "image_slide": "shopify://shop_images/unsplash-tCYA3ShyXIY-1200x1200.jpg",
+            "link": "SHOP THIS LOOK",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "c4341b8f-e8d8-4fd0-90fb-025a6ad928e0",
+        "3d52cd50-656f-420d-a567-19ffb10643eb",
+        "fb8d2ae5-ec33-42a6-ade5-4e958ea7a7de",
+        "eceb6394-8031-4ff3-a503-af01fd2afd48"
+      ],
+      "settings": {
+        "slidesDelay": 15,
+        "slidesToShow": 2,
+        "slidesToScroll": 1,
+        "rows": 1,
+        "autoplay": true,
+        "autoplaySpeed": 5000,
+        "speed": 500,
+        "pauseOnHover": false,
+        "arrows": true,
+        "dots": true,
+        "draggable": true,
+        "infinite": true,
+        "slidesToShow_992": 2,
+        "slidesToScroll_992": 1,
+        "arrows_992": true,
+        "dots_992": true,
+        "slidesToShow_767": 1,
+        "slidesToScroll_767": 1,
+        "arrows_767": true,
+        "dots_767": true,
+        "slidesToShow_450": 1,
+        "slidesToScroll_450": 1,
+        "arrows_450": true,
+        "dots_450": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "page-lookbook"
+  ]
+}

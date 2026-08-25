@@ -1,0 +1,28 @@
+.blog-items.blog-layout-items-4{
+    padding: 0 15px;
+    text-align: center;
+}
+
+.blog-post .blog-list{
+    margin: 0 -15px;
+}
+
+.blog-layout-items-4 .blog-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize;
+    margin-top: 20px;
+}
+
+.blog-layout-items-4 .blog-date{
+    padding-right: 10px;
+}
+
+@media (min-width: 992px){
+    .blog-items.blog-layout-items-4:nth-child(2n+1) {
+        margin-top: 60px;
+    }
+}

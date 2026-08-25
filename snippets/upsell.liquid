@@ -1,0 +1,42 @@
+{%- assign product_upsell = product.metafields.products.upsell.value -%}
+{%- if product_upsell -%}
+<div class="modal fade show" id="jsUpsell" role="dialog" data-delay="{{upsell_delay}}" aria-modal="true">
+  <div class="modal-dialog modal-dialog--upsell modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><svg version="1.1" class="icon icon-close" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 31.112 31.112" style="enable-background:new 0 0 31.112 31.112;" xml:space="preserve"><polygon points="31.112,1.414 29.698,0 15.556,14.142 1.414,0 0,1.414 14.142,15.556 0,29.698 1.414,31.112 15.556,16.97 29.698,31.112 31.112,29.698 16.97,15.556 "></polygon><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></button>
+      </div>
+      <div class="modal-body">
+        <p class="upsell-promotion">{{upsell_header}}</p>
+        <div class="card-wrapper">
+          <div class="grid__item">
+              <div>
+                <a href="{{ product_upsell.url | default: '#' }}" class="full-unstyled-link">
+                <img
+                     src="{{ product_upsell.featured_media | img_url: '200x' }}"
+                     alt="{{ product_upsell.featured_media.alt | escape }}"
+                     loading="lazy"
+                     >
+                </a>
+              </div>
+              <div>
+                <a href="{{ product_upsell.url | default: '#' }}" class="full-unstyled-link">
+                  {%- if product_upsell.featured_media -%}
+                    <span class="card-information__text h5">
+                      {{ product_upsell.title | escape }}
+                    </span>
+                  {%- endif -%}
+                  </a>
+              </div>
+          
+              {% render 'variant-product-item', product_card_product: product_upsell %}
+
+              {% render 'price', product: product_upsell, price_class: '' %}
+              {% render 'addcart-button', product_card_product: product_upsell, product_form_id: product_form_id %}
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}

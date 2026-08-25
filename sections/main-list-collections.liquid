@@ -1,0 +1,337 @@
+<style>
+.collections-hero{
+  padding: 32px 0 8px;
+}
+.collections-hero h1{
+  font-size: 32px;
+  font-weight: 700;
+  color: #121212;
+  margin: 0 0 6px;
+}
+.collections-hero p{
+  font-size: 15px;
+  color: #666666;
+  margin: 0;
+}
+.collections-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 28px 0 8px;
+  list-style: none;
+  margin: 0;
+}
+@media (max-width: 991px){
+  .collections-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 576px){
+  .collections-grid{ grid-template-columns: 1fr; }
+}
+.collections-card{
+  position: relative;
+  border: 1px solid #eef0f2;
+  border-radius: 10px;
+  padding: 24px 20px 20px;
+  background: #ffffff;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.collections-card:hover{
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+.collections-card__badge{
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #eaf1fc;
+  color: #3075cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.collections-card__badge svg{ width: 22px; height: 22px; }
+.collections-card__image{
+  width: 100%;
+  height: 150px;
+  border-radius: 6px;
+  background-color: #f5f6f7;
+  overflow: hidden;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.collections-card__image img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.collections-card h3{
+  font-size: 17px;
+  font-weight: 700;
+  color: #121212;
+  margin: 0 0 8px;
+}
+.collections-card p{
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0 0 14px;
+  min-height: 42px;
+}
+.collections-card a.collections-card__link{
+  font-size: 14px;
+  font-weight: 600;
+  color: #3075cc;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.collections-card a.collections-card__link:hover{
+  text-decoration: underline;
+}
+.collections-card__cover-link{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.collections-card--more{
+  background: #f4f7fc;
+  border-color: #e3ebf7;
+}
+.collections-trust{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+  padding: 32px 24px;
+  background: #F5FCFF;
+  border-radius: 10px;
+}
+@media (max-width: 767px){
+  .collections-trust{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px){
+  .collections-trust{ grid-template-columns: 1fr; }
+}
+.collections-trust__item{
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.collections-trust__icon{
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #3075cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.collections-trust__icon svg{ width: 20px; height: 20px; }
+.collections-trust__item h4{
+  font-size: 15px;
+  font-weight: 700;
+  color: #121212;
+  margin: 0 0 4px;
+}
+.collections-trust__item p{
+  font-size: 13px;
+  color: #666666;
+  margin: 0;
+  line-height: 1.4;
+}
+</style>
+
+<div class="page-width">
+  <div class="collections-hero">
+    <h1>{{ section.settings.title | escape }}</h1>
+    {%- if section.settings.subtitle != blank -%}
+      <p>{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- liquid
+    case section.settings.sort
+      when 'products_high' or 'products_low'
+        assign collections = collections | sort: 'all_products_count'
+      when 'date' or 'date_reversed'
+        assign collections = collections | sort: 'published_at'
+    endcase
+
+    if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
+      assign collections = collections | reverse
+    endif
+
+    assign grid_limit = section.settings.grid_limit
+    assign show_more_tile = false
+    if collections.size > grid_limit
+      assign show_more_tile = true
+    endif
+  -%}
+
+  {%- capture icon_0 -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="14" height="10" rx="1"/><path d="M17 8h3l1 2v4h-4"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/></svg>{%- endcapture -%}
+  {%- capture icon_1 -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>{%- endcapture -%}
+  {%- capture icon_2 -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>{%- endcapture -%}
+  {%- capture icon_3 -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>{%- endcapture -%}
+  {%- capture icon_4 -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>{%- endcapture -%}
+  {%- capture icon_5 -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3L5 7v10a2 2 0 002 2h10a2 2 0 002-2V7l-4-4z"/><path d="M9 3v4h6V3"/></svg>{%- endcapture -%}
+  {%- assign icon_set = icon_0 | append: '||' | append: icon_1 | append: '||' | append: icon_2 | append: '||' | append: icon_3 | append: '||' | append: icon_4 | append: '||' | append: icon_5 | split: '||' -%}
+
+  <ul class="collections-grid" role="list">
+    {%- for collection in collections limit: grid_limit -%}
+      {%- assign icon_index = forloop.index0 | modulo: 6 -%}
+      <li class="collections-card">
+        <a class="collections-card__cover-link" href="{{ collection.url }}" aria-label="{{ collection.title | escape }}"></a>
+        <div class="collections-card__badge">{{ icon_set[icon_index] }}</div>
+        <div class="collections-card__image">
+          {%- if collection.featured_image != blank -%}
+            <img src="{{ collection.featured_image | img_url: '400x' }}" alt="{{ collection.title | escape }}" loading="lazy" width="400" height="{{ 400 | divided_by: collection.featured_image.aspect_ratio }}">
+          {%- endif -%}
+        </div>
+        <h3>{{ collection.title }}</h3>
+        <p>{{ collection.description | strip_html | truncatewords: 14 }}</p>
+        <span class="collections-card__link">View collection <span aria-hidden="true">&rarr;</span></span>
+      </li>
+    {%- endfor -%}
+
+    {%- if show_more_tile -%}
+      <li class="collections-card collections-card--more">
+        <a class="collections-card__cover-link" href="{{ section.settings.more_link | default: '/collections' }}" aria-label="{{ section.settings.more_title | escape }}"></a>
+        <div class="collections-card__badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <h3>{{ section.settings.more_title }}</h3>
+        <p>{{ section.settings.more_text }}</p>
+        <span class="collections-card__link">{{ section.settings.more_link_label }} <span aria-hidden="true">&rarr;</span></span>
+      </li>
+    {%- endif -%}
+  </ul>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="collections-trust">
+      {%- for block in section.blocks -%}
+        <div class="collections-trust__item" {{ block.shopify_attributes }}>
+          <div class="collections-trust__icon">{{ block.settings.icon }}</div>
+          <div>
+            <h4>{{ block.settings.title }}</h4>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-list-collections.name",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.main-list-collections.settings.title.label",
+      "default": "Collections"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Browse our product collections by category"
+    },
+    {
+      "type": "select",
+      "id": "sort",
+      "options": [
+        { "value": "alphabetical", "label": "t:sections.main-list-collections.settings.sort.options__1.label" },
+        { "value": "alphabetical_reversed", "label": "t:sections.main-list-collections.settings.sort.options__2.label" },
+        { "value": "date_reversed", "label": "t:sections.main-list-collections.settings.sort.options__3.label" },
+        { "value": "date", "label": "t:sections.main-list-collections.settings.sort.options__4.label" },
+        { "value": "products_high", "label": "t:sections.main-list-collections.settings.sort.options__5.label" },
+        { "value": "products_low", "label": "t:sections.main-list-collections.settings.sort.options__6.label" }
+      ],
+      "default": "alphabetical",
+      "label": "t:sections.main-list-collections.settings.sort.label"
+    },
+    {
+      "type": "range",
+      "id": "grid_limit",
+      "min": 3,
+      "max": 24,
+      "step": 1,
+      "default": 7,
+      "label": "Collections to show before \"More\" tile"
+    },
+    {
+      "type": "header",
+      "content": "\"More Collections\" tile"
+    },
+    {
+      "type": "text",
+      "id": "more_title",
+      "label": "Title",
+      "default": "More Collections"
+    },
+    {
+      "type": "text",
+      "id": "more_text",
+      "label": "Text",
+      "default": "Explore more specialized products and solutions."
+    },
+    {
+      "type": "text",
+      "id": "more_link_label",
+      "label": "Link label",
+      "default": "View all collections"
+    },
+    {
+      "type": "url",
+      "id": "more_link",
+      "label": "Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Icon (SVG)",
+          "default": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z\"/><path d=\"M9 12l2 2 4-4\"/></svg>"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Trusted Quality"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Premium products from reliable brands"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-list-collections.name",
+      "blocks": [
+        { "type": "trust_item" },
+        { "type": "trust_item" },
+        { "type": "trust_item" },
+        { "type": "trust_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,91 @@
+<!-- footer-5.liquid -->
+{{ 'footer-5.css' | asset_url | stylesheet_tag }}
+
+<footer class="footer-5">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+        <div class="footer-top">
+            <div class="row justify-content-center">
+              <div class="footer-block--newsletter">
+                <h2 class="footer-block__heading">{{ section.settings.newsletter_heading | escape }}</h2>
+                <p class="footer-block__description">{{ section.settings.newsletter_description }}</p>
+                {%- if section.settings.newsletter_enable -%}
+                    {% render 'newlester' %}
+                {%- endif -%}
+              </div>
+                <div class="col-md-12">
+                  {%- if section.settings.menu != blank -%}
+                    {% render 'mega-menu-footer' %}
+                  {%- endif -%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+            <div class="row">
+              {%- if section.settings.show_copyright -%}
+                <div class="col-lg-6 col-md-6">
+                  {% render 'footer-copyright' %}
+                </div>
+              {%- endif -%}
+              {%- if section.settings.show_social -%}
+                <div class="col-lg-6 col-md-6">
+                    {% render 'social_footer' %}
+                </div>
+              {%- endif -%}
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% schema %}
+{
+    "name": "t:sections.footer-5.name",
+    "class": "section-footer",
+    "tag": "section",
+    "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.footer-5.settings.fullwidth.label",
+      "default": false
+    },
+    {
+      "id": "newsletter_enable",
+      "type": "checkbox",
+      "default": true,
+      "label": "t:sections.footer-5.settings.newsletter_enable.label"
+    },
+    {
+      "id": "newsletter_heading",
+      "type": "text",
+      "default": "Sign up to our emails",
+      "label": "t:sections.footer-5.settings.newsletter_heading.label"
+    },
+    {
+      "id": "newsletter_description",
+      "type": "text",
+      "default": "Be the first to know about our new arrivals and exclusive offers.",
+      "label": "t:sections.footer-5.settings.newsletter_description.label"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.footer-5.settings.menu.label",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_copyright",
+      "label": "t:sections.footer-5.settings.show_copyright.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "t:sections.footer-5.settings.show_social.label",
+      "default": true
+    }
+    ]
+  }
+{% endschema %}

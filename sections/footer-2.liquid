@@ -1,0 +1,534 @@
+<!-- footer-2.liquid -->
+
+{{ 'footer-2.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .footer-2 .title-footer{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 22px;
+    text-transform: uppercase;
+    margin-bottom:30px;
+    color:{{ section.settings.color_title_footer }};
+  }
+  .footer-2 .center-footer ul li,.footer-2 .center-footer ul li a{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom:30px;
+    line-height: 24px;
+    color:{{ section.settings.color_text_footer }};
+  }
+  .footer-2 .center-footer ul li:last-child, .footer-2 .center-footer ul li a:last-child{
+    margin-bottom:0px;
+  }
+  .list-content-footer li{
+    display:flex;
+    align-items:center;
+  }
+  .list-content-footer li svg{
+    margin-right:10px;
+  }
+{%- endstyle -%}
+<footer class="footer-2">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+      {%- if section.settings.newsletter_enable -%}
+        <div class="top-footer">
+          <div class="newlester-footer">
+            <h2 class="footer-block__heading">{{ section.settings.newsletter_heading | escape }}</h2>
+                {% render 'newlester' %}
+          </div>
+        </div>
+      {%- endif -%}
+        
+        <div class="center-footer">
+          <div class="row">
+            {%- for block in section.blocks -%}
+            {%- case block.settings.width -%}
+              {%- when '16.67%' -%}
+              {%- assign block_width = 'col-md-2' -%}
+              {%- when '25%' -%}
+              {%- assign block_width = 'col-lg-3 col-md-6 pd-respon' -%}
+              {%- when '33.33%' -%}
+              {%- assign block_width = 'col-xl-4 col-md-5' -%}
+              {%- when '50%' -%}
+              {%- assign block_width = 'col-lg-6' -%}
+              {%- when '66.67%' -%}
+              {%- assign block_width = 'col-xl-8 col-md-7' -%}
+              {%- when '75%' -%}
+              {%- assign block_width = 'col-md-9' -%}
+              {%- when '83.33%' -%}
+              {%- assign block_width = 'col-md-10' -%}
+              {%- when '100%' -%}
+              {%- assign block_width = 'col-12' -%}
+              {%- endcase -%}
+            <div class="{{block_width}}">
+              {%- case block.type -%}
+
+                {%- when 'logo' -%}
+                <div class="logo-footer">
+                  {%- render 'header-logo' -%}
+                </div>
+
+                {%- when 'text-content' -%}
+                <div class="text-content">
+                    <h2 class="title-footer-content title-footer">{{ block.settings.header_content_footer }}</h2>
+                    <ul class="list-content-footer">
+                        {{ block.settings.text_content_footer }}
+                    </ul>
+                </div>
+
+                {%- when 'menu' -%}
+                <div class="menu-footer">
+                    <h2 class="title-footer">{{ block.settings.title_menu }}
+                        <span class="drawer__nav-toggle--open">
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </h2>
+                    {%- render 'vertical-menu-footer', block:block -%}
+                </div>
+
+                {%- when 'socials' -%}
+                  <div class="icon-top">
+                    <h2 class="title-footer">{{ block.settings.title_social }}</h2>
+                      {% render 'social_footer' %}
+                  </div>
+                
+                  {%- when "image" -%}
+                  <div class="image-box">
+                    <h2 class="title-footer">{{ block.settings.title_image }}</h2>
+                    <div class="list-image">
+                      <div class="list-image-item">
+                        <img src="{{ block.settings.image1 | img_url: 'master' }}" alt="">
+                      </div>
+                      <div class="list-image-item">
+                        <img src="{{ block.settings.image2 | img_url: 'master' }}" alt="">
+                      </div>
+                      <div class="list-image-item">
+                        <img src="{{ block.settings.image3 | img_url: 'master' }}" alt="">
+                      </div>
+                      <div class="list-image-item">
+                        <img src="{{ block.settings.image4 | img_url: 'master' }}" alt="">
+                      </div>
+                      <div class="list-image-item">
+                        <img src="{{ block.settings.image5 | img_url: 'master' }}" alt="">
+                      </div>
+                      <div class="list-image-item">
+                        <img src="{{ block.settings.image6 | img_url: 'master' }}" alt="">
+                      </div>
+                    </div>
+                  </div>
+              {%- endcase -%}
+            </div>
+            {%- endfor -%}
+          </div>
+        </div>
+        
+        <div class="bottom-footer">
+            <div class="row bottom-footer-coppy">
+                {%- if section.settings.show_copyright -%}
+                    <div class="col-md-4">
+                        {% render 'footer-copyright' %}
+                    </div>
+                {%- endif -%}
+                {%- if section.settings.icon_card_footer -%}
+                    <div class="col-md-4">
+                        {% render 'icon-card-footer' %}
+                    </div>
+                {%- endif -%}
+                {%- if section.settings.designer != blank -%}
+                  <div class="col-md-4 designer text-center text-md-end">
+                      {{ section.settings.designer }}
+                  </div>
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "t:sections.footer-2.name",
+    "class": "section-footer",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "fullwidth",
+        "label": "t:sections.footer-2.settings.fullwidth.label",
+        "default": false
+      },
+      {
+        "type":"color",
+        "id":"color_title_footer",
+        "label":"Color title footer",
+        "default":"#000"
+      },
+      {
+        "type":"color",
+        "id":"color_text_footer",
+        "label":"Color text footer",
+        "default":"#666666"
+      },
+      {
+        "id": "newsletter_enable",
+        "type": "checkbox",
+        "default": true,
+        "label": "t:sections.footer-2.settings.newsletter_enable.label"
+      },
+      {
+        "id": "newsletter_heading",
+        "type": "text",
+        "default": "Sign up to our emails",
+        "label": "t:sections.footer-2.settings.newsletter_heading.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_copyright",
+        "label": "t:sections.footer-2.settings.show_copyright.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social",
+        "label": "t:sections.footer-2.settings.show_social.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "icon_card_footer",
+        "label": "t:sections.footer-2.settings.icon_card_footer.label",
+        "default": true
+      },
+      {
+          "type": "text",
+          "id": "designer",
+          "label": "Designer",
+          "default":"Designed by<span> OpalThemes</span>."
+      }
+    ],
+    "blocks": [
+    {
+      "type": "logo",
+      "name": "t:sections.footer-2.blocks.logo.name",
+      "settings": [
+      {
+        "type": "select",
+        "id": "width",
+        "label": "t:sections.footer-2.blocks.logo.settings.width.label",
+        "default": "25%",
+        "options": [
+          {
+            "value": "16.67%",
+            "label": "t:sections.footer-2.blocks.logo.settings.width.options__1.label"
+          },
+          {
+            "value": "25%",
+            "label": "t:sections.footer-2.blocks.logo.settings.width.options__2.label"
+          },
+          {
+            "value": "33.33%",
+            "label": "t:sections.footer-2.blocks.logo.settings.width.options__3.label"
+          },
+          {
+            "value": "50%",
+            "label": "t:sections.footer-2.blocks.logo.settings.width.options__4.label"
+          },
+          {
+            "value": "66.67%",
+            "label": "t:sections.footer-2.blocks.logo.settings.width.options__5.label"
+          },
+          {
+            "value": "75%",
+            "label": "t:sections.footer-2.blocks.logo.settings.width.options__6.label"
+          },
+          {
+            "value": "83.33%",
+            "label": "t:sections.footer-2.blocks.logo.settings.width.options__7.label"
+          },
+          {
+            "value": "100%",
+            "label": "t:sections.footer-2.blocks.logo.settings.width.options__8.label"
+          }
+        ]
+       }
+      ]
+    },
+    {
+      "type": "text-content",
+      "name": "t:sections.footer-2.blocks.text-content.name",
+      "settings": [
+      {
+        "type": "select",
+        "id": "width",
+        "label": "t:sections.footer-2.blocks.text-content.settings.width.label",
+        "default": "25%",
+        "options": [
+          {
+            "value": "16.67%",
+            "label": "t:sections.footer-2.blocks.text-content.settings.width.options__1.label"
+          },
+          {
+            "value": "25%",
+            "label": "t:sections.footer-2.blocks.text-content.settings.width.options__2.label"
+          },
+          {
+            "value": "33.33%",
+            "label": "t:sections.footer-2.blocks.text-content.settings.width.options__3.label"
+          },
+          {
+            "value": "50%",
+            "label": "t:sections.footer-2.blocks.text-content.settings.width.options__4.label"
+          },
+          {
+            "value": "66.67%",
+            "label": "t:sections.footer-2.blocks.text-content.settings.width.options__5.label"
+          },
+          {
+            "value": "75%",
+            "label": "t:sections.footer-2.blocks.text-content.settings.width.options__6.label"
+          },
+          {
+            "value": "83.33%",
+            "label": "t:sections.footer-2.blocks.text-content.settings.width.options__7.label"
+          },
+          {
+            "value": "100%",
+            "label": "t:sections.footer-2.blocks.text-content.settings.width.options__8.label"
+          }
+        ]
+       },  
+        {
+          "type": "text",
+          "id": "header_content_footer",
+          "label": "t:sections.footer-2.blocks.text-content.settings.header_content_footer.label",
+          "default": "title content"
+        },
+        {
+          "type": "liquid",
+          "id": "text_content_footer",
+          "label": "t:sections.footer-2.blocks.text-content.settings.text_content_footer.label",
+          "default": "<li>Monday Closed</li><li>Tuesday - Friday 10 - 18</li><li>Saturday 10 - 16</li>"
+        }
+      ]
+    },
+    {
+     "type": "socials",
+     "name":"Socials",
+     "settings":[
+     {
+      "type": "select",
+      "id": "width",
+      "label": "t:sections.footer-2.blocks.menu.settings.width.label",
+      "default": "25%",
+      "options": [
+        {
+          "value": "16.67%",
+          "label": "t:sections.footer-2.blocks.menu.settings.width.options__1.label"
+        },
+        {
+          "value": "25%",
+          "label": "t:sections.footer-2.blocks.menu.settings.width.options__2.label"
+        },
+        {
+          "value": "33.33%",
+          "label": "t:sections.footer-2.blocks.menu.settings.width.options__3.label"
+        },
+        {
+          "value": "50%",
+          "label": "t:sections.footer-2.blocks.menu.settings.width.options__4.label"
+        },
+        {
+          "value": "66.67%",
+          "label": "t:sections.footer-2.blocks.menu.settings.width.options__5.label"
+        },
+        {
+          "value": "75%",
+          "label": "t:sections.footer-2.blocks.menu.settings.width.options__6.label"
+        },
+        {
+          "value": "83.33%",
+          "label": "t:sections.footer-2.blocks.menu.settings.width.options__7.label"
+        },
+        {
+          "value": "100%",
+          "label": "t:sections.footer-2.blocks.menu.settings.width.options__8.label"
+        }
+      ]
+    },
+    {
+        "type": "text",
+        "id": "title_social",
+        "label": "Title social",
+        "default": "title social"
+    }
+     ]
+    },
+
+    {
+      "type": "image",
+      "name":"Image",
+      "settings":[
+      {
+       "type": "select",
+       "id": "width",
+       "label": "t:sections.footer-2.blocks.menu.settings.width.label",
+       "default": "25%",
+       "options": [
+         {
+           "value": "16.67%",
+           "label": "t:sections.footer-2.blocks.menu.settings.width.options__1.label"
+         },
+         {
+           "value": "25%",
+           "label": "t:sections.footer-2.blocks.menu.settings.width.options__2.label"
+         },
+         {
+           "value": "33.33%",
+           "label": "t:sections.footer-2.blocks.menu.settings.width.options__3.label"
+         },
+         {
+           "value": "50%",
+           "label": "t:sections.footer-2.blocks.menu.settings.width.options__4.label"
+         },
+         {
+           "value": "66.67%",
+           "label": "t:sections.footer-2.blocks.menu.settings.width.options__5.label"
+         },
+         {
+           "value": "75%",
+           "label": "t:sections.footer-2.blocks.menu.settings.width.options__6.label"
+         },
+         {
+           "value": "83.33%",
+           "label": "t:sections.footer-2.blocks.menu.settings.width.options__7.label"
+         },
+         {
+           "value": "100%",
+           "label": "t:sections.footer-2.blocks.menu.settings.width.options__8.label"
+         }
+       ]
+     },
+     {
+         "type": "text",
+         "id": "title_image",
+         "label": "Title image",
+         "default": "title image"
+     },
+     {
+         "type": "image_picker",
+         "id": "image1",
+         "label": "Image"
+     },
+     {
+         "type": "image_picker",
+         "id": "image2",
+         "label": "Image"
+     },
+     {
+         "type": "image_picker",
+         "id": "image3",
+         "label": "Image"
+     },
+     {
+         "type": "image_picker",
+         "id": "image4",
+         "label": "Image"
+     },
+     {
+         "type": "image_picker",
+         "id": "image5",
+         "label": "Image"
+     },
+     {
+         "type": "image_picker",
+         "id": "image6",
+         "label": "Image"
+     }
+      ]
+     },
+
+
+    {
+      "type": "menu",
+      "name": "t:sections.footer-2.blocks.menu.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "width",
+          "label": "t:sections.footer-2.blocks.menu.settings.width.label",
+          "default": "25%",
+          "options": [
+            {
+              "value": "16.67%",
+              "label": "t:sections.footer-2.blocks.menu.settings.width.options__1.label"
+            },
+            {
+              "value": "25%",
+              "label": "t:sections.footer-2.blocks.menu.settings.width.options__2.label"
+            },
+            {
+              "value": "33.33%",
+              "label": "t:sections.footer-2.blocks.menu.settings.width.options__3.label"
+            },
+            {
+              "value": "50%",
+              "label": "t:sections.footer-2.blocks.menu.settings.width.options__4.label"
+            },
+            {
+              "value": "66.67%",
+              "label": "t:sections.footer-2.blocks.menu.settings.width.options__5.label"
+            },
+            {
+              "value": "75%",
+              "label": "t:sections.footer-2.blocks.menu.settings.width.options__6.label"
+            },
+            {
+              "value": "83.33%",
+              "label": "t:sections.footer-2.blocks.menu.settings.width.options__7.label"
+            },
+            {
+              "value": "100%",
+              "label": "t:sections.footer-2.blocks.menu.settings.width.options__8.label"
+            }
+          ]
+        },
+        {
+            "type": "text",
+            "id": "title_menu",
+            "label": "t:sections.footer-2.blocks.menu.settings.title_menu.label",
+            "default": "title menu"
+        },
+        {
+            "type": "link_list",
+            "id": "menu",
+            "label": "t:sections.footer-2.blocks.menu.settings.menu.label",
+            "default": "main-menu"
+          },
+          {
+              "type": "link_list",
+              "id": "menu2",
+              "label": "t:sections.footer-2.blocks.menu.settings.menu.label",
+              "default": "main-menu"
+            }
+      ]
+    }
+    ],
+    "default": {
+        "blocks": [
+          {
+            "type": "logo"
+          },
+          {
+            "type": "text-content"
+          },
+          {
+            "type": "menu"
+          },
+          {
+            "type": "menu"
+          }
+        ]
+      }
+  }
+{% endschema %}

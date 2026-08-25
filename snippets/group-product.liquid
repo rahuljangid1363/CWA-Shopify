@@ -1,0 +1,45 @@
+<!-- group_products.liquid -->
+
+{%- assign product_1 = product.metafields.products.group_product_1.value  -%}
+{%- assign product_2 = product.metafields.products.group_product_2.value -%}
+{%- assign product_3 = product.metafields.products.group_product_3.value -%}
+{%- assign product_4 = product.metafields.products.group_product_4.value -%}
+{%- assign product_5 = product.metafields.products.group_product_5.value -%}
+{%- assign product_6 = product.metafields.products.group_product_6.value -%}
+
+
+{%- if block.settings.group_product_enable -%}
+{%- if product_6 or product_5 or product_4 or product_3 or product_2 or product_1 -%}
+<h3 class="header-group-title">{{ block.settings.group_product_title }}</h3>
+<div class="group_products">
+  <div class="group_products-list">
+    {% render 'group-product-template', product: product %}
+
+    {%- if product_6 -%}
+      {% render 'group-product-template', product: product_6 %}
+    {%- endif -%}
+    
+    {%- if product_5 -%}
+      {% render 'group-product-template', product: product_5 %}
+    {%- endif -%}
+    
+    {%- if product_4 -%}
+      {% render 'group-product-template', product: product_4 %}
+    {%- endif -%}
+    
+    {%- if product_3 -%}
+      {% render 'group-product-template', product: product_3 %}
+    {%- endif -%}
+    
+    {%- if product_2 -%}
+      {% render 'group-product-template', product: product_2 %}
+    {%- endif -%}
+    
+    {%- if product_1 -%}
+      {% render 'group-product-template', product: product_1 %}
+    {%- endif -%}
+  </div>
+  <div class="group-cart-products"><button class="add-group-cart">{{ 'products.product.add_to_cart' | t }}</button></div>
+</div>
+{%- endif -%}
+{%- endif -%}

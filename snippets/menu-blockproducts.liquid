@@ -1,0 +1,22 @@
+<!-- menu-blockproducts.liquid -->
+
+{%- capture collection_menu -%}apmenuitem_cproduct_{{ intMega }}{%- endcapture -%}
+{%- capture collection_menu_title -%}apmenuitem_tproduct_{{ intMega }}{%- endcapture -%}
+{%- assign imagesize = 'adapt' -%}
+{%- assign collection_name = settings[collection_menu] -%}
+{%- assign collection_products = collections[settings[collection_menu]].products -%}
+{%- assign on_sale = false -%}
+<div class="products_menu">
+  {%- if settings[collection_menu_title] != blank -%}
+  <div class="menu-title">
+    {{ settings[collection_menu_title] }}
+  </div>
+  {%- endif -%}
+  <div class="product-block">
+    <div class="dots-negative d-flex" id="mgmenu-collection-{{intMega}}">
+        {%- for product in collection_products limit: 2 -%}
+        {%- render 'product-card', product_card_product: product, media_size: imagesize -%}
+        {%- endfor -%}
+    </div>
+  </div>
+</div>

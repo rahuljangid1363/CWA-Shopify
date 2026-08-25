@@ -1,0 +1,28 @@
+<div class="main-product-image-scroll-fixed-3-columns">
+  <div id="product-gallery-image-zoom" class="product-full-image">
+    {%- for media in product.media -%}
+    {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+      {%- if media.media_type == 'image' -%}
+      <div class="list-zoom-item">
+    	<img class="product-full-image-zoom"
+         srcset="{% if media.preview_image.width >= 288 %}{{ media | img_url: '288x' }} 288w,{% endif %}
+                 {% if media.preview_image.width >= 576 %}{{ media | img_url: '576x' }} 576w,{% endif %}
+                 {% if media.preview_image.width >= 550 %}{{ media | img_url: '550x' }} 550w,{% endif %}
+                 {% if media.preview_image.width >= 1100 %}{{ media | img_url: '1100x' }} 1100w{% endif %}"
+         src="{{ media | img_url: '1100x' }}"
+         sizes="(min-width: 1200px) calc((1200px - 10rem)), (min-width: 750px) calc((100vw - 11.5rem)), calc(100vw - 4rem)"
+         loading="lazy"
+         alt="{{ media.preview_image.alt | escape }}"
+         data-zoom-image="{{ media | img_url: '2000x' }}"
+          data-url="{{ media | img_url: '2000x' }}"
+          data-height="{{media.height}}"
+          data-width="{{media.width}}"
+         >
+      </div>
+      {% endif %}
+
+ 	{%- endunless -%}
+    {%- endfor -%}
+    
+  </div>
+</div>

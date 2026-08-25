@@ -1,0 +1,857 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "colors_solid_button_labels": "#FFFFFF",
+    "color_main": "#3075CC",
+    "colors_accent_1": "#121212",
+    "colors_accent_2": "#f7f7f7",
+    "colors_background_1": "#ffffff",
+    "colors_background_2": "#f7f7f7",
+    "colors_text": "#000000",
+    "colors_title_content_labels": "#000000",
+    "colors_link_content_labels": "#000000",
+    "colors_link_hover_content_labels": "#59805b",
+    "colors_outline_button_labels": "#121212",
+    "menu_label_hot": "#ff414c",
+    "menu_label_feature": "#3075cc",
+    "menu_label_sale": "#fe9931",
+    "type_header_font": "times_new_roman_n4",
+    "type_body_font": "amiri_n4",
+    "font_google": true,
+    "font_header_google": "",
+    "font_body_google": "Roboto",
+    "font_user": true,
+    "name_font_header_user": "Be Vietnam Pro",
+    "font_header_user": "https://cdn.shopify.com/s/files/1/0611/9650/1168/files/BeVietnamPro-Regular.woff?v=1646987389",
+    "font_header_user_2": "https://cdn.shopify.com/s/files/1/0611/9650/1168/files/BeVietnamPro-Regular.woff2?v=1646987389",
+    "name_font_body_user": "Be Vietnam Pro",
+    "font_body_user": "https://cdn.shopify.com/s/files/1/0611/9650/1168/files/BeVietnamPro-Regular.woff?v=1646987389",
+    "font_body_user_2": "https://cdn.shopify.com/s/files/1/0611/9650/1168/files/BeVietnamPro-Regular.woff2?v=1646987389",
+    "enable_rtl": false,
+    "content_layout": "full_width",
+    "content_layout_align": "left",
+    "page_width": "1200",
+    "header": "header-4",
+    "footer": "footer-1",
+    "bloggrid": "blog-2",
+    "productgrid": "product-3",
+    "logo": "shopify://shop_images/CWA_Logo.png",
+    "favicon": "shopify://shop_images/favIcon_2.png",
+    "vmain_linklist": "main-menu",
+    "color_menu_vertical_text": "#121212",
+    "color_menu_vertical_text_hover": "#3075cc",
+    "menu_label_vertical_text": "#000000",
+    "menu_label_vertical_text_hover": "#3075cc",
+    "vapmenuitem_title_1": "",
+    "vapmenuitem_width_1": 160,
+    "vapmenuitem_eblocklinks_1": true,
+    "vapmenuitem_mega_link_1": "",
+    "vapmenuitem_columns_blocklinks_1": "12",
+    "vapmenuitem_columns_1": "12",
+    "vapmenuitem_childlink_1": "home",
+    "vapmenuitem_evideo_1": false,
+    "vapmenuitem_columns_blockvideo_1": "12",
+    "vapmenuitem_eproduct_1": false,
+    "vapmenuitem_columns_blockproducts_1": "12",
+    "vapmenuitem_cproduct_1": "men",
+    "vapmenuitem_ehtml_1": false,
+    "vapmenuitem_columns_blockhtml_1": "12",
+    "vapmenuitem_chtml_1": "",
+    "vapmenuitem_title_2": "SHOP",
+    "vapmenuitem_width_2": 660,
+    "vapmenuitem_eblocklinks_2": true,
+    "vapmenuitem_columns_blocklinks_2": "12",
+    "vapmenuitem_columns_2": "4",
+    "vapmenuitem_childlink_2": "shop",
+    "vapmenuitem_evideo_2": false,
+    "vapmenuitem_columns_blockvideo_2": "12",
+    "vapmenuitem_ehtml_2": false,
+    "vapmenuitem_columns_blockhtml_2": "4",
+    "vapmenuitem_eihtml_2": false,
+    "vapmenuitem_ihtml_2": "shopify://shop_images/img_menu1_535x_778b106f-33f6-441e-84cf-dd99cb645b8b.jpg",
+    "vapmenuitem_title_3": "",
+    "vapmenuitem_width_3": 660,
+    "vapmenuitem_eblocklinks_3": true,
+    "vapmenuitem_columns_blocklinks_3": "12",
+    "vapmenuitem_columns_3": "4",
+    "vapmenuitem_childlink_3": "page-menu",
+    "vapmenuitem_evideo_3": false,
+    "vapmenuitem_columns_blockvideo_3": "12",
+    "vapmenuitem_ehtml_3": true,
+    "vapmenuitem_columns_blockhtml_3": "12",
+    "vapmenuitem_eihtml_3": true,
+    "vapmenuitem_ihtml_3": "shopify://shop_images/menu-product-1_750x_38fc425d-fdde-4b6f-b409-e9e8f94da370.jpg",
+    "color_menu_text": "#000000",
+    "color_menu_text_hover": "#3075cc",
+    "menu_label_text": "#000000",
+    "menu_label_text_hover": "#3075cc",
+    "apmenuitem_title_1": "",
+    "apmenuitem_width_1": 160,
+    "apmenuitem_eblocklinks_1": true,
+    "apmenuitem_mega_link_1": "",
+    "apmenuitem_columns_blocklinks_1": "12",
+    "apmenuitem_columns_1": "12",
+    "apmenuitem_childlink_1": "home",
+    "apmenuitem_evideo_1": false,
+    "apmenuitem_columns_blockvideo_1": "12",
+    "apmenuitem_eproduct_1": false,
+    "apmenuitem_columns_blockproducts_1": "6",
+    "apmenuitem_tproduct_1": "Product",
+    "apmenuitem_cproduct_1": "men",
+    "apmenuitem_ehtml_1": false,
+    "apmenuitem_columns_blockhtml_1": "6",
+    "apmenuitem_thtml_1": "HTML",
+    "apmenuitem_eihtml_1": true,
+    "apmenuitem_ihtml_1": "shopify://shop_images/image3_cate.jpg",
+    "apmenuitem_title_2": "shop",
+    "apmenuitem_width_2": 640,
+    "apmenuitem_eblocklinks_2": true,
+    "apmenuitem_columns_blocklinks_2": "12",
+    "apmenuitem_columns_2": "4",
+    "apmenuitem_childlink_2": "shop",
+    "apmenuitem_evideo_2": false,
+    "apmenuitem_columns_blockvideo_2": "12",
+    "apmenuitem_ehtml_2": false,
+    "apmenuitem_columns_blockhtml_2": "4",
+    "apmenuitem_eihtml_2": false,
+    "apmenuitem_title_3": "product",
+    "apmenuitem_width_3": 660,
+    "apmenuitem_eblocklinks_3": true,
+    "apmenuitem_columns_blocklinks_3": "12",
+    "apmenuitem_columns_3": "4",
+    "apmenuitem_childlink_3": "product",
+    "apmenuitem_ehtml_3": true,
+    "apmenuitem_columns_blockhtml_3": "12",
+    "apmenuitem_eihtml_3": true,
+    "apmenuitem_ihtml_3": "shopify://shop_images/unsplash-B77ypBmpYuw-1920x1080.jpg",
+    "apmenuitem_title_4": "",
+    "apmenuitem_width_4": 580,
+    "coupon_time": 10,
+    "spend_free_shipping_text": "Spend %% for <b>FREE SHIPPING</b>",
+    "free_shipping_bar1": "#cccccc",
+    "free_shipping_bar2": "#000000",
+    "enable_countdown_page": true,
+    "enable_countdown_card": false,
+    "style_coundown": "countdown--2",
+    "sold_out_background_scheme": "#ffffff",
+    "sold_out_color_scheme": "#fe9931",
+    "new_label_bg": "#e56d6d",
+    "new_label_cl": "#ffffff",
+    "sale_label_layout": "text",
+    "sale_label_bg": "#b0d3ff",
+    "color_breadcrumbs": "#000000",
+    "color_breadcrumbs_active": "#7b7b7b",
+    "bg_breadcrumb": "#F5FCFF",
+    "limit_ranger": 0,
+    "show_title_breadcumbs": false,
+    "align_bread": "center",
+    "style_breadcrumb": "style_1",
+    "layout_bread": "container-fluid",
+    "social_twitter_link": "https://twitter.com/?lang=vi",
+    "social_facebook_link": "",
+    "social_pinterest_link": "https://www.pinterest.com/",
+    "social_instagram_link": "",
+    "social_tiktok_link": "",
+    "social_tumblr_link": "",
+    "social_snapchat_link": "#",
+    "social_youtube_link": "https://www.youtube.com/",
+    "social_vimeo_link": "",
+    "show_search_categories": false,
+    "show_multiple_currencies": true,
+    "list_currencies": "EUR,AUD,GBP,JPY,CAD",
+    "page_wishlist": "wishlist",
+    "content_for_layout": "2-col",
+    "colors_sub_title_content_labels": "#000000",
+    "menu_label_vertical_title": "#fffb00",
+    "menu_label_title": "#c9ea20",
+    "font_header": true,
+    "font_body": true,
+    "sale_badge_color_scheme": "accent-1",
+    "main_menu": "megamenu",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-bar-0": {
+            "type": "announcement",
+            "settings": {
+              "text": "Welcome to our store",
+              "color_scheme": "background-1",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "announcement-bar-0"
+        ],
+        "settings": {}
+      },
+      "header-1": {
+        "type": "header-1",
+        "settings": {
+          "fullwidth": false,
+          "background-color": "",
+          "header_announcement_bar": true,
+          "text_announcement_bar": "<ul>\n<li>\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"13\" viewbox=\"0 0 17 13\" fill=\"none\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.547119 0H16.5471V12.7179H0.547119V0ZM1.77789 1.23077V2.677L8.54712 5.68555L15.3163 2.677V1.23077H1.77789ZM15.3163 4.02385L8.54712 7.0324L1.77789 4.02385V11.4872H15.3163V4.02385Z\" fill=\"#CB8161\"></path>\n</svg>\nMon - Sun: 7am - 8pm\n</li>\n<li>\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewbox=\"0 0 16 16\" fill=\"none\">\n<path d=\"M8.61539 7.38462H11.8974V8.61539H7.38462L7.38461 4.10256H8.61538L8.61539 7.38462Z\" fill=\"#CB8161\"></path>\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8ZM8 1.23077C4.26146 1.23077 1.23077 4.26146 1.23077 8C1.23077 11.7385 4.26146 14.7692 8 14.7692C11.7385 14.7692 14.7692 11.7385 14.7692 8C14.7692 4.26146 11.7385 1.23077 8 1.23077Z\" fill=\"#CB8161\"></path>\n</svg>\ncustomer_support@example.com\n</li>\n</ul>",
+          "color_text_topbar": "#999999",
+          "color_link_topbar": "#e56d6d",
+          "login_topbar": true,
+          "currencies_topbar": true,
+          "header_search_left": true,
+          "phone_number": "",
+          "phone_right": "24/7 Helpline <p>666 - 880 - 33388</p>",
+          "header_seach": true,
+          "header_sign": false,
+          "header_wishlist": true,
+          "currencies": false,
+          "header_card": true,
+          "enable_transparent": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick links",
+              "menu": "footer"
+            }
+          },
+          "footer-1": {
+            "type": "text",
+            "settings": {
+              "heading": "Heading",
+              "subtext": "<p>Share store details, promotions, or brand content with your customers.</p>"
+            }
+          }
+        },
+        "block_order": [
+          "footer-0",
+          "footer-1"
+        ],
+        "settings": {
+          "color_scheme": "background-1",
+          "newsletter_enable": true,
+          "newsletter_heading": "Subscribe to our emails",
+          "show_social": false,
+          "enable_country_selector": true,
+          "enable_language_selector": true,
+          "payment_enable": true
+        }
+      },
+      "newslester": {
+        "type": "newslester",
+        "settings": {
+          "heading": "Subscribe to our newsletter",
+          "subheading": "<p>Promotions, new products and sales. Directly to your inbox.</p>"
+        }
+      },
+      "product-suggest": {
+        "type": "product-suggest",
+        "blocks": {
+          "df32b8b8-1e34-4082-a9dd-8179e8a0388b": {
+            "type": "product",
+            "settings": {
+              "product": "aervoe-1076-military-paint-digital-light-coyote-12oz",
+              "image_ratio": "adapt",
+              "local": "in Blackburn, UK",
+              "time": "about 21 minutes ago"
+            }
+          },
+          "299d2bd7-a20b-46cf-93ca-dca37f1647e9": {
+            "type": "product",
+            "settings": {
+              "product": "bosch-gop18v-brushless-starlockplus-multi-tool-2",
+              "image_ratio": "adapt",
+              "local": "in Blackburn, UK",
+              "time": "about 21 minutes ago"
+            }
+          },
+          "e03b2ac6-a0a4-4abf-b3f0-268785bd6735": {
+            "type": "product",
+            "settings": {
+              "product": "powermatic-1792014ak-2014-pm-lathe-1hp-w-stand",
+              "image_ratio": "adapt",
+              "local": "in Blackburn, UK",
+              "time": "about 21 minutes ago"
+            }
+          }
+        },
+        "block_order": [
+          "df32b8b8-1e34-4082-a9dd-8179e8a0388b",
+          "299d2bd7-a20b-46cf-93ca-dca37f1647e9",
+          "e03b2ac6-a0a4-4abf-b3f0-268785bd6735"
+        ],
+        "settings": {
+          "enable": true,
+          "duration": 5,
+          "text": "Someone recently bought"
+        }
+      },
+      "recently-viewed": {
+        "type": "recently-viewed",
+        "settings": {
+          "enable": true,
+          "title": "Recently viewed",
+          "limit": 4
+        }
+      },
+      "popup": {
+        "type": "popup",
+        "settings": {
+          "enber_popup": true,
+          "title_popup": "Join our newletter and get 20% discount",
+          "text_popup": "This website uses cookies to ensure you get the best experience on our website.",
+          "email_popup": true,
+          "delay_popup": 5
+        }
+      },
+      "header-2": {
+        "type": "header-2",
+        "settings": {
+          "fullwidth": false,
+          "background-color": "",
+          "header_seach": true,
+          "header_sign": true,
+          "header_wishlist": true,
+          "currencies": true,
+          "header_card": true,
+          "enable_transparent": false
+        }
+      },
+      "footer-1": {
+        "type": "footer-1",
+        "blocks": {
+          "footer-desc": {
+            "type": "text-content",
+            "settings": {
+              "width": "33%",
+              "header_content_footer": "",
+              "icon_phone": "",
+              "text_content_footer": "<li>Controlled Water Analytics supplies water and wastewater instrumentation, analyzers, transmitters, valves and critical spares for industrial applications.</li>",
+              "phone_number": "",
+              "phone_text": "",
+              "text_align": "start me-auto",
+              "block_image": "shopify://shop_images/CWA_Logo.png"
+            }
+          },
+          "footer-products": {
+            "type": "text-content",
+            "settings": {
+              "width": "16%",
+              "header_content_footer": "Products",
+              "icon_phone": "",
+              "text_content_footer": "<li><a href=\"/collections/flow-measurement\">Flow Measurement</a></li><li><a href=\"/collections/liquid-analysis\">Liquid Analysis</a></li><li><a href=\"/collections/level-measurement\">Level Measurement</a></li><li><a href=\"/collections/pressure-measurement\">Pressure Measurement</a></li><li><a href=\"/collections/gas-detection\">Gas Detection</a></li><li><a href=\"/collections/temperature-measurement\">Temperature Measurement</a></li><li><a href=\"/collections/data-acquisition-control\">Data Acquisition & Control</a></li><li><a href=\"/collections/pumps-water-treatment\">Pumps & Water Treatment</a></li>",
+              "phone_number": "",
+              "phone_text": "",
+              "text_align": "start me-auto"
+            }
+          },
+          "footer-industries": {
+            "type": "text-content",
+            "settings": {
+              "width": "16%",
+              "header_content_footer": "Industries",
+              "icon_phone": "",
+              "text_content_footer": "<li><a href=\"/pages/water-wastewater\">Water & Wastewater</a></li><li><a href=\"/pages/mining\">Mining</a></li><li><a href=\"/pages/energy-utilities\">Energy & Utilities</a></li><li><a href=\"/pages/food-beverage\">Food & Beverage</a></li><li><a href=\"/pages/industrial-processing\">Industrial Processing</a></li><li><a href=\"/pages/engineering-construction\">Engineering & Construction</a></li>",
+              "phone_number": "",
+              "phone_text": "",
+              "text_align": "start me-auto"
+            }
+          },
+          "footer-resources": {
+            "type": "text-content",
+            "settings": {
+              "width": "16%",
+              "header_content_footer": "Technical Resources",
+              "icon_phone": "",
+              "text_content_footer": "<li><a href=\"/pages/product-data-sheets\">Product Data Sheets</a></li><li><a href=\"/pages/installation-guides\">Installation Guides</a></li><li><a href=\"/pages/product-specifications\">Product Specifications</a></li><li><a href=\"/pages/faq\">FAQs</a></li><li><a href=\"{{ routes.search_url }}\">Search by Product Code</a></li>",
+              "phone_number": "",
+              "phone_text": "",
+              "text_align": "start me-auto"
+            }
+          },
+          "footer-company": {
+            "type": "text-content",
+            "settings": {
+              "width": "16%",
+              "header_content_footer": "Company & Support",
+              "icon_phone": "",
+              "text_content_footer": "<li><a href=\"/pages/about\">About CWA</a></li><li><a href=\"/pages/contact\">Contact</a></li><li><a href=\"{{ shop.shipping_policy.url | default: \"/pages/shipping-delivery\" }}\">Shipping & Delivery</a></li><li><a href=\"{{ shop.refund_policy.url | default: \"/pages/returns\" }}\">Returns</a></li><li><a href=\"{{ shop.privacy_policy.url }}\">Privacy Policy</a></li><li><a href=\"{{ shop.terms_of_service.url }}\">Terms & Conditions</a></li>",
+              "phone_number": "",
+              "phone_text": "",
+              "text_align": "start me-auto"
+            }
+          }
+        },
+        "block_order": [
+          "footer-desc",
+          "footer-products",
+          "footer-industries",
+          "footer-resources",
+          "footer-company"
+        ],
+        "custom_css": [
+          "li a{color:#BFC9D5}"
+        ],
+        "settings": {
+          "fullwidth": false,
+          "style_footer": "style_footer-2",
+          "bg_footer_1": "shopify://shop_images/CTA_bg.png",
+          "show_logo": false,
+          "color_text_footer": "#999999",
+          "image": "shopify://shop_images/CWA_Logo.png",
+          "text_location": "",
+          "text_email": "",
+          "show_social": false,
+          "show_copyright": true,
+          "icon_card_footer": false,
+          "designer": "Designed by<span> OpalThemes.<span></span></span>"
+        }
+      },
+      "footer-2": {
+        "type": "footer-2",
+        "blocks": {
+          "c7eb6cd4-99fc-412f-9da3-5d46bace7ef7": {
+            "type": "text-content",
+            "settings": {
+              "width": "25%",
+              "header_content_footer": "About Us",
+              "text_content_footer": "<li>Skinny Teatox is the #1 Teatox in the \nUnited States, United Kingdom, Canada, \nIreland, Sweden, Norway, Singapore, \nNetherlands, and France\n</li>\n<li>Made with 100% natural ingredients that \npromote good health.</li>"
+            }
+          },
+          "4222a322-13d3-42e7-b51f-3736fc950d01": {
+            "type": "text-content",
+            "settings": {
+              "width": "25%",
+              "header_content_footer": "Contact Us",
+              "text_content_footer": "<li> <div class=\"icon\"> <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"19\" viewBox=\"0 0 14 19\" fill=\"none\">\n          <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M6.75 0.25C3.022 0.25 0 3.272 0 7C0 9.722 0.948 10.482 6.056 17.887C6.391 18.371 7.109 18.371 7.444 17.887C12.552 10.482 13.5 9.722 13.5 7C13.5 3.272 10.478 0.25 6.75 0.25ZM6.75 16.912C1.853 9.83 1.125 9.267 1.125 7C1.125 5.497 1.71 4.085 2.773 3.023C3.835 1.96 5.247 1.375 6.75 1.375C8.253 1.375 9.665 1.96 10.727 3.023C11.79 4.085 12.375 5.497 12.375 7C12.375 9.267 11.648 9.829 6.75 16.912Z\" fill=\"#666666\"/>\n          </svg></div>Sydney road, Billboard Street 2219-11C.Apple Town, Your Country.</li>\n          <li> <div class=\"icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"18\" viewBox=\"0 0 12 18\" fill=\"none\">\n          <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M6.75 14.625C6.75 14.003 6.247 13.5 5.625 13.5C5.003 13.5 4.5 14.003 4.5 14.625C4.5 15.247 5.003 15.75 5.625 15.75C6.247 15.75 6.75 15.247 6.75 14.625ZM11.25 1.688C11.25 0.756 10.494 0 9.562 0H1.688C0.756 0 0 0.756 0 1.688V16.312C0 17.244 0.756 18 1.688 18H9.562C10.494 18 11.25 17.244 11.25 16.312V1.688ZM10.125 1.688V16.312C10.125 16.622 9.872 16.875 9.562 16.875H1.688C1.378 16.875 1.125 16.622 1.125 16.312V1.688C1.125 1.378 1.378 1.125 1.688 1.125H9.562C9.872 1.125 10.125 1.378 10.125 1.688Z\" fill=\"#666666\"/>\n          </svg></div>(305) 533-1122, (305) 112-7788</li>\n          <li><div class=\"icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"14\" viewBox=\"0 0 18 14\" fill=\"none\">\n          <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M16.312 0H1.688C0.756 0 0 0.756 0 1.688V11.812C0 12.744 0.756 13.5 1.688 13.5H16.312C17.244 13.5 18 12.744 18 11.812V1.688C18 0.756 17.244 0 16.312 0ZM1.688 1.125H16.312C16.622 1.125 16.875 1.378 16.875 1.688V3.143C16.105 3.793 15.005 4.69 11.58 7.407C10.986 7.878 9.816 9.014 9 9C8.184 9.014 7.01 7.878 6.42 7.407C2.995 4.69 1.895 3.793 1.125 3.143V1.688C1.125 1.378 1.378 1.125 1.688 1.125ZM16.312 12.375H1.688C1.378 12.375 1.125 12.122 1.125 11.812V4.605C1.927 5.263 3.192 6.279 5.72 8.286C6.441 8.863 7.713 10.132 9 10.125C10.28 10.136 11.542 8.877 12.28 8.286C14.808 6.279 16.073 5.263 16.875 4.605V11.812C16.875 12.122 16.622 12.375 16.312 12.375Z\" fill=\"#666666\"/>\n          </svg></div>johndoe@mail.com\n        </li>"
+            }
+          },
+          "80685a87-b772-47a7-8c2e-328330961a7c": {
+            "type": "image",
+            "settings": {
+              "width": "25%",
+              "title_image": "our gallery",
+              "image1": "shopify://shop_images/blog_h17_2-150x150.jpg",
+              "image2": "shopify://shop_images/blog_h12_1-150x150.jpg",
+              "image3": "shopify://shop_images/blog_h12_3-150x150.jpg",
+              "image4": "shopify://shop_images/blog_h15_2-150x150.jpg",
+              "image5": "shopify://shop_images/blog_h17_1-150x150.jpg",
+              "image6": "shopify://shop_images/blog_h17_3-150x150.jpg"
+            }
+          },
+          "8c393f36-1396-4377-9438-76bf413bd4d4": {
+            "type": "menu",
+            "settings": {
+              "width": "25%",
+              "title_menu": "My account",
+              "menu": "my-account",
+              "menu2": "my-account-2"
+            }
+          }
+        },
+        "block_order": [
+          "c7eb6cd4-99fc-412f-9da3-5d46bace7ef7",
+          "4222a322-13d3-42e7-b51f-3736fc950d01",
+          "80685a87-b772-47a7-8c2e-328330961a7c",
+          "8c393f36-1396-4377-9438-76bf413bd4d4"
+        ],
+        "settings": {
+          "fullwidth": false,
+          "color_title_footer": "#000000",
+          "color_text_footer": "#666666",
+          "newsletter_enable": false,
+          "newsletter_heading": "Sign up to our emails",
+          "show_copyright": true,
+          "show_social": true,
+          "icon_card_footer": true,
+          "designer": "Designed by<span> OpalThemes</span>."
+        }
+      },
+      "footer-5": {
+        "type": "footer-5",
+        "settings": {
+          "fullwidth": false,
+          "newsletter_enable": true,
+          "newsletter_heading": "Sign up to our emails",
+          "newsletter_description": "Be the first to know about our new arrivals and exclusive offers.",
+          "menu": "main-menu",
+          "show_copyright": true,
+          "show_social": true
+        }
+      },
+      "header-3": {
+        "type": "header-3",
+        "settings": {
+          "fullwidth": true,
+          "enable_transparent": false,
+          "bg_logo": "#94be90",
+          "enable_announcement_bar": true,
+          "color_announcement": "#999999",
+          "text_announcement_bar_left": "<ul>\n    <li><a href=\"#\"> Get the App Track</a></li>\n    <li><a href=\"#\"> Your Order</a></li>\n    <li><a href=\"#\"> Customer Care</a></li>\n    <li><a href=\"#\"> FAQ</a></li>\n  </ul>",
+          "show_signin_top": true,
+          "bkg_announcement_bar": "",
+          "text_style_2": false,
+          "border_announcement_bar": false,
+          "announcement_bar_text_left": "Need virtual style advice? /",
+          "announcement_bar_link_left": "+991 234 5647",
+          "announcement_bar_link1_right": "SHOWROOMS",
+          "btn_link_1": "",
+          "announcement_bar_link2_right": "HELP CENTRE",
+          "btn_link_2": "",
+          "currencies": true,
+          "background-color": "",
+          "logo_align_2": "left",
+          "phone_contact": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" viewbox=\"0 0 19 19\" fill=\"none\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M4.00081 2.41481C2.48479 3.99099 2.32986 6.43954 3.64721 8.196L4.82877 9.77142C6.07956 11.4391 7.56105 12.9206 9.22877 14.1714L10.8042 15.353C12.5606 16.6703 15.0092 16.5154 16.5854 14.9994L14.0002 12.4142L12.9791 13.4354C12.5124 13.902 11.7995 14.0177 11.2093 13.7225C8.6424 12.4391 6.56106 10.3578 5.27764 7.79094C4.98251 7.20067 5.09819 6.48778 5.56484 6.02114L6.58599 4.99999L4.00081 2.41481ZM2.64832 0.937651C3.39494 0.191032 4.60545 0.191029 5.35207 0.937651L8.0002 3.58578C8.78125 4.36682 8.78125 5.63315 8.0002 6.4142L7.22067 7.19373C8.26655 9.13878 9.86141 10.7336 11.8065 11.7795L12.586 11C13.367 10.2189 14.6334 10.2189 15.4144 11L18.0625 13.6481C18.8092 14.3947 18.8092 15.6052 18.0625 16.3519C15.7854 18.629 12.1804 18.8852 9.60419 16.953L8.02877 15.7714C6.20943 14.4069 4.59327 12.7908 3.22877 10.9714L2.04721 9.396C0.115016 6.81974 0.371214 3.21476 2.64832 0.937651Z\" fill=\"#82D175\"></path>\n</svg>\n666 - 880 - 33388",
+          "header_seach": true,
+          "header_sign": true,
+          "header_wishlist": true,
+          "header_card": true,
+          "header_category": true
+        }
+      },
+      "footer-3": {
+        "type": "footer-3",
+        "blocks": {
+          "615eeafa-86c2-4062-baf0-7f4b767dd7c7": {
+            "type": "logo",
+            "settings": {
+              "width": "16.67%"
+            }
+          },
+          "a9eb1195-5e49-4b3a-9e26-19781c29efa9": {
+            "type": "menu",
+            "settings": {
+              "width": "50%",
+              "menu": "main-menu"
+            }
+          },
+          "04a46888-8d17-4ad6-8f8d-c95189a9ffd9": {
+            "type": "show_social",
+            "settings": {
+              "width": "33.33%",
+              "show_social": true
+            }
+          }
+        },
+        "block_order": [
+          "615eeafa-86c2-4062-baf0-7f4b767dd7c7",
+          "a9eb1195-5e49-4b3a-9e26-19781c29efa9",
+          "04a46888-8d17-4ad6-8f8d-c95189a9ffd9"
+        ],
+        "settings": {
+          "fullwidth": false,
+          "newsletter_enable": true,
+          "newsletter_heading": "Sign up to our emails",
+          "newsletter_description": "Sign up with your email address to receive updates.",
+          "show_copyright": true
+        }
+      },
+      "footer-4": {
+        "type": "footer-4",
+        "blocks": {
+          "d64f8df1-eafb-4c19-8496-37f5b89331b1": {
+            "type": "menu",
+            "settings": {
+              "width": "25%",
+              "title_menu": "title menu",
+              "menu": "main-menu"
+            }
+          },
+          "94725550-89f1-4428-9c5b-0d8b99d288a2": {
+            "type": "menu",
+            "settings": {
+              "width": "25%",
+              "title_menu": "title menu",
+              "menu": "main-menu"
+            }
+          },
+          "31e8b709-d849-4698-9bc5-ff3dfb4ddb4d": {
+            "type": "menu",
+            "settings": {
+              "width": "25%",
+              "title_menu": "title menu",
+              "menu": "main-menu"
+            }
+          },
+          "30da8cda-cfbc-441a-a56f-8322508594fa": {
+            "type": "menu",
+            "settings": {
+              "width": "25%",
+              "title_menu": "title menu",
+              "menu": "main-menu"
+            }
+          }
+        },
+        "block_order": [
+          "d64f8df1-eafb-4c19-8496-37f5b89331b1",
+          "94725550-89f1-4428-9c5b-0d8b99d288a2",
+          "31e8b709-d849-4698-9bc5-ff3dfb4ddb4d",
+          "30da8cda-cfbc-441a-a56f-8322508594fa"
+        ],
+        "settings": {
+          "fullwidth": false,
+          "show_logo": true,
+          "menu": "main-menu",
+          "show_copyright": true,
+          "icon_card_footer": true
+        }
+      },
+      "header-4": {
+        "type": "header-4",
+        "custom_css": [
+          ".phoneText {color: #c8ecfb;}"
+        ],
+        "settings": {
+          "fullwidth": false,
+          "header_announcement_bar": false,
+          "color_announcement_bar_left": "rgba(0,0,0,0)",
+          "color_text_announcement_bar": "#666666",
+          "text_announcement_bar_left": "Welcome to our store",
+          "text_announcement_bar_right": "Welcome to our store",
+          "show_signin_top": true,
+          "background_color": "#00142d",
+          "color_text_headcenter": "#ffffff",
+          "logo_align": "center",
+          "phone_contact": "24/7 Helpline<br>\n<span class=\"phoneText\">666 - 880 - 33388</span>",
+          "header_seach": true,
+          "header_sign": true,
+          "header_wishlist": true,
+          "currencies": true,
+          "header_card": true,
+          "enable_transparent": false,
+          "text_block_menu": ""
+        },
+        "blocks": {
+          "industry-1": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Water & Wastewater",
+              "image": "",
+              "link": "/pages/water-wastewater"
+            }
+          },
+          "industry-2": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Data Center",
+              "image": "",
+              "link": "/pages/data-center"
+            }
+          },
+          "industry-3": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Chemical",
+              "image": "",
+              "link": "/pages/chemical"
+            }
+          },
+          "industry-4": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Oil & Gas",
+              "image": "",
+              "link": "/pages/oil-gas"
+            }
+          },
+          "industry-5": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Energy Storage & Cooling",
+              "image": "",
+              "link": "/pages/energy-storage-cooling"
+            }
+          },
+          "industry-6": {
+            "type": "industry_item",
+            "settings": {
+              "title": "HVAC Industry",
+              "image": "",
+              "link": "/pages/hvac-industry"
+            }
+          },
+          "industry-7": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Mining & Others",
+              "image": "",
+              "link": "/pages/mining-others"
+            }
+          },
+          "industry-8": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Food & Baverage",
+              "image": "",
+              "link": "/pages/food-beverage"
+            }
+          },
+          "industry-9": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Textile & Dyeing",
+              "image": "",
+              "link": "/pages/textile-dyeing"
+            }
+          },
+          "industry-10": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Pulp & Paper",
+              "image": "",
+              "link": "/pages/pulp-paper"
+            }
+          }
+        },
+        "block_order": [
+          "industry-1",
+          "industry-2",
+          "industry-3",
+          "industry-4",
+          "industry-5",
+          "industry-6",
+          "industry-7",
+          "industry-8",
+          "industry-9",
+          "industry-10"
+        ]
+      },
+      "header-5": {
+        "type": "header-5",
+        "settings": {
+          "fullwidth": false,
+          "header_announcement_bar": true,
+          "text_announcement_bar": "Free shipping worldwide",
+          "text_announcement_bar_middle": "International click and collect",
+          "background-color": "",
+          "color_text_topbar": "#999999",
+          "header_seach": true,
+          "show_signin_top": true,
+          "header_sign": true,
+          "header_wishlist": true,
+          "currencies": true,
+          "header_card": true
+        }
+      },
+      "advanced-content": {
+        "type": "advanced-content",
+        "blocks": {
+          "9af3ba20-c77c-4166-9357-fcc2a574d539": {
+            "type": "text_list",
+            "settings": {
+              "width": "100%",
+              "header__text": "Header",
+              "text__content": "text advanced to product",
+              "btn_text": "Show More",
+              "btn_link": "",
+              "text_align": "left"
+            }
+          }
+        },
+        "block_order": [
+          "9af3ba20-c77c-4166-9357-fcc2a574d539"
+        ],
+        "settings": {
+          "fullwidth": false,
+          "background-color": "",
+          "margin_desktop": "",
+          "padding_desktop": "",
+          "margin_mobile": "",
+          "padding_mobile": "",
+          "heading": "",
+          "text_decoration": "Multimedia advanced-content"
+        }
+      },
+      "banner-cart": {
+        "type": "banner-cart",
+        "settings": {
+          "fullwidth": false,
+          "background-color": "",
+          "margin_desktop": "",
+          "padding_desktop": "",
+          "margin_mobile": "",
+          "padding_mobile": "",
+          "heading": "Banner cart",
+          "text_decoration": "Banner cart"
+        }
+      }
+    },
+    "content_for_index": [],
+    "new_label_enable": false,
+    "sale_label_enable": false
+  },
+  "presets": {
+    "Default": {
+      "colors_solid_button_labels": "#FFFFFF",
+      "colors_accent_1": "#121212",
+      "colors_accent_2": "#334FB4",
+      "colors_text": "#121212",
+      "colors_outline_button_labels": "#121212",
+      "colors_background_1": "#FFFFFF",
+      "colors_background_2": "#F3F3F3",
+      "type_header_font": "assistant_n4",
+      "type_body_font": "assistant_n4",
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "blocks": {
+            "announcement-bar-0": {
+              "type": "announcement",
+              "settings": {
+                "color_scheme": "background-1"
+              }
+            }
+          },
+          "block_order": [
+            "announcement-bar-0"
+          ],
+          "settings": {}
+        }
+      }
+    },
+    "Craft": {
+      "colors_solid_button_labels": "#EFECEC",
+      "colors_accent_1": "#2A332F",
+      "colors_accent_2": "#476154",
+      "colors_text": "#1C1A1A",
+      "colors_outline_button_labels": "#7B8382",
+      "colors_background_1": "#EFECEC",
+      "colors_background_2": "#C1BCAE",
+      "type_header_font": "americana_n4",
+      "type_body_font": "quattrocento_sans_n4",
+      "sections": {
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "menu": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "menu",
+            "text"
+          ],
+          "settings": {
+            "color_scheme": "accent-1"
+          }
+        }
+      }
+    }
+  }
+}

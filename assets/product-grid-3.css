@@ -1,0 +1,197 @@
+.product-grid-3 .card__badge span{
+    margin: 0;
+}
+
+.servicer-product.servicer-product-grid-3 .btn-product{
+    padding: 1rem;
+    border-radius: 50%;
+    text-align: center;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e5e5e5;
+}
+
+.card-wrapper .servicer-product-grid-3 .button{
+    border-radius: 50%;
+}
+
+.product-grid-3 .product-card__overlay{
+    flex-direction: column;
+}
+
+.product-grid-3 .product-form__buttons{
+    width: 4rem;
+    height: 4rem;
+  }
+
+.product-grid-3  button{
+    max-width: 4rem;
+    min-width: unset;
+}
+
+.servicer-product.servicer-product-grid-3{
+    right: 15px;
+    left: unset;
+    top: 35rem;
+    transform: translate(0, 0);
+}
+
+.product-grid-3 .btn-product:hover .name-btn-product, .card-wrapper.product-grid-3 .button:hover .name-btn-product{
+    transform: translate(0,50%);
+}
+
+@media (min-width: 992px){
+    .card-wrapper.product-grid-3:hover .servicer-product {
+        right: 15px;
+        left: unset;
+        top: 35px;
+        transform: unset;
+    }
+
+    .servicer-product.servicer-product-grid-3{
+        top: 35px;
+        right: -15px;
+        left: unset;
+    }
+}
+
+
+product-grid-3 .servicer-product .btn-product{
+    margin: 0 0.2rem 1rem;
+    right: 110%;
+    bottom: 50%;
+    transform: translate(0, 50%);
+    left: unset;
+    top: unset;
+    margin: 0;
+}
+
+.product-grid-3 .btn-product .name-btn-product:before, .card-wrapper.product-grid-3 .button .name-btn-product:before{
+    top: 50%;
+    margin-left: 0;
+    left: 100%;
+    transform: rotate(-90deg) translate(50%, 0);
+}
+
+.product-grid-3 button.product-form__submit.button.button--full-width{
+    position: relative;
+    margin: auto;
+}
+.product-grid-3 button.product-form__submit.button.button--full-width:hover{
+    opacity: 1;
+}
+.card-wrapper.product-grid-3 .button:hover .name-btn-product{
+    display: none;
+}
+.card-wrapper .servicer-product-grid-3 .button:hover, .card-wrapper .servicer-product-grid-3 .btn-product:hover{
+    transform: unset;
+    color: #fff;
+    background: #000;
+
+}
+
+.card-wrapper .servicer-product-grid-3 .button .name-btn-product, .servicer-product-grid-3 .btn-product .name-btn-product{
+    right: 110%;
+    bottom: 50%;
+    transform: translate(0, 50%);
+    left: unset;
+    top: unset;
+    margin: 0;
+}
+/* add */
+.product-grid-3{
+    position: relative;
+}
+.product-grid-3:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    visibility: hidden;
+    opacity: 0;
+    border-radius: 5px;
+    transform: scale(1);
+    background-color: #fff;
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+    border: 1px solid var(--border);
+    margin-bottom: -60px;
+}
+.card-wrapper.product-grid-3:hover:before {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .3s ease,visibility 0s ease,transform .3s ease;
+    transform: scale(1);
+}
+.product-grid-3 .product-form__buttons{
+    width: 100%;
+    height: auto;
+   
+}
+.product-grid-3 .product-form__buttons .button{
+    background-color: var(--g-main);
+    border-radius: 5px;
+    max-width: 100%;
+    align-items: center;
+}
+.product-grid-3 .text-btn-product{
+    display: block;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    color: #fff;
+}
+.product-grid-3 .product-form__buttons .button svg{
+    color: #fff;
+    margin-right: 10px;
+}
+.product-grid-3 .card-hover{
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    position: absolute;
+    top: calc(100% - 10px );
+    left: 0;
+    padding: 0px 10px;
+    width: 100%;
+    transition: all .3s ease;
+}
+.product-grid-3:hover {
+    z-index: 2;
+}
+.product-grid-3:hover .card-hover{
+    opacity: 1;
+    width: 100%;
+    visibility: visible;
+    display: block;
+    border-top: none;
+    animation: showcart .5s forwards;
+}
+.product-grid-3:hover::before{
+opacity: 1;
+visibility: visible;
+}
+.product-grid-3 .product-form__submit svg{
+    width: 24px;
+    height: 24px;
+}
+.product-grid-3 .price{
+    margin-bottom: 0 !important;
+    justify-content: flex-start;
+}
+.product-grid-3 .card-information__wrapper{
+    text-align: left;
+}
+@keyframes showcart{
+    0%{
+        
+        transform: translateY(-50%);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}

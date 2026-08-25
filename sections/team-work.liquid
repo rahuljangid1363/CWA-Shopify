@@ -1,0 +1,175 @@
+<!-- team-work.liquid -->
+<style>
+  .person__avatar{
+    margin-bottom: 20px;
+  }
+  h3.person__name{
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 5px;
+    line-height: 22px;
+  }
+  h4.person__name{
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 100;
+    color: #b0b0b0;
+    line-height: 22px;
+  }
+  ul.person__social.list-unstyled{
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+  }
+  .aboutus_section a.link--text.list-social__link{
+    color: #999999;
+    text-align: center;
+    border: 1px solid #e1e1e1;
+    border-radius: 50%;
+    display: inline-block;
+    transition: all ease .45s;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+  }
+  .aboutus_section a.link--text.list-social__link:hover{
+    color: #000;
+    border: 1px solid #000;
+  }
+  .aboutus_section a.link--text.list-social__link svg.icon.icon-tiktok{
+    margin-left: 3px;
+  }
+
+  .aboutus_section .list-social__link{
+    padding: 0;
+  }
+</style>
+<section class="aboutus_section">
+    <div class="container">
+      {%- if section.settings.team_title != blank -%}
+      <h3 class="aboutus-title mb-5">{{section.settings.team_title}}</h3>
+      {%- endif -%}
+      <div class="row">
+        {%- for block in section.blocks -%}
+        <div class="col-lg-3 col-12 col-sm-6 col-person text-center">
+          <div class="person__avatar">
+            {%- if block.settings.team_avatar != blank -%}
+            <div class="{% if block.settings.team_avatar != blank %}media{% else %}image-aboutus__media--placeholder placeholder{% endif %}"
+                    style="padding-bottom: {{ 1 | divided_by: block.settings.team_avatar.aspect_ratio | times: 100 }}%;"
+            >
+                <img class="advanced__image"
+                srcset="{%- if block.settings.team_avatar.width >= 165 -%}{{ block.settings.team_avatar | img_url: '1920x' }} 1920w,{%- endif -%}"
+                src="{{ block.settings.team_avatar | img_url: 'master' }}"
+                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                alt="{{ block.settings.team_avatar.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.team_avatar.width }}"
+                height="{{ block.settings.team_avatar.height }}"
+            >
+            </div>
+            {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <h3 class="person__name">
+            {{ block.settings.title_person }}
+          </h3>
+          <h4 class="person__name">
+            {{ block.settings.subtitle_person }}
+          </h4>
+          <ul class="person__social list-unstyled">
+            <li class="list-social__item">
+            <a href="{{ section.settings.team_fb }}" class="link--text list-social__link" aria-describedby="a11y-external-message" title="facebook">
+                {%- render 'icon-facebook' -%}
+                <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+            </a>
+            </li>
+            <li class="list-social__item">
+            <a href="{{ section.settings.team_tw }}" class="link--text list-social__link" aria-describedby="a11y-external-message" title="twitter">
+                {%- render 'icon-twitter' -%}
+                <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+            </a>
+            </li>
+            <li class="list-social__item">
+            <a href="{{ section.settings.team_tiktok }}" class="link--text list-social__link" aria-describedby="a11y-external-message" title="tiktok">
+                {%- render 'icon-tiktok' -%}
+            </a>
+            </li>
+          </ul>
+          <p class="person__info">
+            {{ block.settings.team_des }}
+          </p>
+  
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+{% schema %}
+    {
+      "name": "t:sections.teamwork_about.name",
+      "tag": "section",
+      "max_blocks": 20,
+      "class": "spaced-section",
+      "settings":[
+        {
+            "type":"text",
+            "id":"team_title",
+            "default":"Meet our people",
+            "label": "t:sections.teamwork_about.settings.team_title.label"
+        },
+        {
+            "type":"url",
+            "id":"team_fb",
+            "label": "t:sections.teamwork_about.settings.team_fb.label"
+        },
+        {
+            "type":"url",
+            "id":"team_tw",
+            "label": "t:sections.teamwork_about.settings.team_tw.label"
+        },
+        {
+            "type":"url",
+            "id":"team_tiktok",
+            "label": "t:sections.teamwork_about.settings.team_tiktok.label"
+        }
+        ],
+        "blocks": [
+        {
+            "type": "teamwork",
+            "name": "t:sections.teamwork_about.blocks.teamwork.name",
+            "settings": [
+             {
+               "type":"header",
+               "content": "t:sections.teamwork_about.blocks.teamwork.settings.header.content"
+             },
+             {
+               "type":"image_picker",
+               "id":"team_avatar",
+               "label": "t:sections.teamwork_about.blocks.teamwork.settings.team_avatar.label"
+             },
+             {
+               "type":"text",
+               "id":"title_person",
+               "label": "t:sections.teamwork_about.blocks.teamwork.settings.title_person.label",
+               "default":"Emma Watson"
+             },
+             {
+                "type":"text",
+                "id":"subtitle_person",
+                "label": "t:sections.teamwork_about.blocks.teamwork.settings.subtitle_person.label",
+                "default":"CEO/FOUNDER"
+              },
+             {
+               "type":"textarea",
+               "id":"team_des",
+               "label": "t:sections.teamwork_about.blocks.teamwork.settings.team_des.label",
+               "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore"
+             }
+           ]
+          }
+        ]
+    }
+{% endschema %}

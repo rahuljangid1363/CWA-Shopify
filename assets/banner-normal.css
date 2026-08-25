@@ -1,0 +1,181 @@
+.banner-normal{
+   padding: 50px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+}
+.banner-normal .text-banner{
+    width: 100%;
+}
+.banner-normal .title-banner{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    margin-bottom: 20px;
+    line-height: 68px;
+    text-transform: uppercase;
+}
+.banner-normal .title-banner span{
+    font-family: 'Comforter Brush';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 68px;
+    text-transform: lowercase;
+}
+.banner-normal .line{
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+.banner-normal .description-banner{
+    font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+}
+.banner-normal .line{
+    width: 40px;
+    height: 0px;
+    display: block;
+    transform: rotate(90deg);
+}
+
+
+.banner-normal .link-center{
+    margin: 0 auto;
+}
+
+.banner-normal .link-right{
+    margin: 0 0 0 auto;
+}
+.banner-normal .link-base{
+    max-width: max-content;
+    margin-top: 30px ;
+}
+.banner-normal .banner-countdown{
+    margin-top: 30px;
+}
+/* add */
+.banner-normal-box{
+    position: relative;
+}
+.banner-normal-box .text-banner{
+    position: absolute;
+    width:100%;
+    top: 0;
+    z-index: 1; 
+    height: 100%;
+}
+.banner-normal-box .text-box{
+    width: max-content;
+    height: 100%;
+}
+.image-banner-normal img{
+    max-width: 100%;
+    height: auto;
+}
+@media (min-width:1600px) {
+    .banner-normal-box .text-banner{
+        padding: 0px 20%;
+    }
+}
+@media (min-width:1500px) {
+   .banner-normal-box .image-banner-normal{
+        margin-bottom: -100px;
+      
+    }
+    .banner-normal .link-base{
+        margin-bottom: 50px;
+    }
+    .banner-normal-box .text-box{
+        height: 90%;
+    }
+    .banner-normal{
+        padding: 0;
+    }
+}
+@media (min-width:1200px) and (max-width:1600px){
+    .banner-normal-box .text-banner{
+        padding: 0px 10%;
+    }
+}
+@media (min-width:992px) and (max-width:1200px){
+    .banner-normal-box .text-banner{
+        padding: 0px 10%;
+    }
+    .banner-normal .sub-title{
+        font-size: 10px;
+        line-height: 1.5;
+    }
+    .banner-normal-box .section-header{
+        font-size: 38px;
+        line-height: 1.3;
+    }
+    .banner-normal .description-banner{
+        font-size: 11px;
+        line-height: 1.5;
+    }
+    .banner-normal .link-base{
+        padding: 15px 20px;
+    }
+}
+@media (min-width:768px) and (max-width:992px){
+
+    .banner-normal .sub-title{
+        font-size: 8px;
+        line-height: 1.2;
+    }
+    .banner-normal-box .section-header{
+        font-size: 35px;
+        line-height: 1.3;
+    }
+    .banner-normal .description-banner{
+        font-size: 10px;
+        line-height: 1.2;
+    }
+    .banner-normal .link-base{
+        padding: 10px 15px; 
+        font-size: 11px;
+    }
+}
+@media (max-width:768px) {
+    .banner-normal .sub-title{
+        font-size: 7px;
+        line-height: 1;
+        margin-bottom: 7px;
+    }
+    .banner-normal-box .section-header{
+        font-size: 30px;
+        line-height: 1.2;
+    }
+    .banner-normal .description-banner{
+        font-size: 8px;
+        line-height: 1.2;
+    }
+    .banner-normal .link-base{
+        padding: 10px 15px; 
+        font-size: 10px;
+        margin-top: 20px;
+    }
+}
+@media (max-width:520px) {
+    .banner-normal .sub-title{
+        font-size: 5px;
+    line-height: 1;
+    margin-bottom: 5px;
+    }
+    .banner-normal-box .section-header{
+        font-size: 15px;
+        line-height: 1.2;
+    }
+    .banner-normal .description-banner{
+        font-size: 5px;
+        line-height: 1.2;
+    }
+    .banner-normal .link-base{
+        padding: 5px 8px;
+        font-size: 7px;
+        margin-top: 10px;
+    }
+}

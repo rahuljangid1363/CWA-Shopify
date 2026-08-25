@@ -1,0 +1,15 @@
+{%- if block.settings.menu != blank -%}
+    <nav class="footer-menu d-flex">
+        <ul class="list-verticalmenu menu1" role="list">
+        {%- for link in block.settings.menu.links -%}
+            <li>
+                {%- if link != blank -%}
+                <a href="{{ link.url }}" class="footer-link"{%- if link.current -%} aria-current="page"{%- endif -%}>
+                    <span {%- if link.current -%} class="footer-active-menu"{%- endif -%}>{{ link.title | escape }}</span>
+                </a>
+                {%- endif -%}
+            </li>
+        {%- endfor -%}
+        </ul>
+    </nav>
+{%- endif -%}

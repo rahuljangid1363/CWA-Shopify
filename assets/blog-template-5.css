@@ -1,0 +1,41 @@
+.blog-items.blog-layout-items-5{
+    padding: 0 15px;
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.blog-post .blog-list{
+    margin: 0 -15px;
+}
+
+.blog-layout-items-5 .blog-content-top {
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.blog-layout-items-5 .blog-content-top .blog-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize;
+}
+
+.blog-layout-items-5 .blog-content-bottom{
+    position: absolute;
+    top: 100%;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+}

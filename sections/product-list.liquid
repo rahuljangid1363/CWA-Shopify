@@ -1,0 +1,221 @@
+<!-- product-list.liquid -->
+
+{{ 'product-list.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+
+<div class="product-list">
+  <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+    <h2 class="section-header">{{ section.settings.heading | escape }}</h2>
+    <p class="section-text">{{ section.settings.text_decoration }}</p>
+    <ul class="row list-{%- if section.settings.product_none -%}hiden{%- else -%}visibility{%- endif -%}">
+      {%- if section.settings.collection != blank -%}
+        {%- for product in section.settings.collection.products limit: section.settings.show_desktop -%}
+          <li class="col-lg-3 col-sm-6 col-12 {% if forloop.index > section.settings.show_mobile %}small--hide{% endif %} slick-product-list">
+            {%- if section.settings.collection.products.size == 1 -%}
+            {% render 'product-card',
+              product_card_product: product,
+              media_size: section.settings.image_ratio,
+              show_secondary_image: section.settings.show_secondary_image,
+              add_image_padding: section.settings.add_image_padding,
+              show_vendor: section.settings.show_vendor
+            %}
+          {%- else -%}
+            {% render 'product-card',
+              product_card_product: product,
+              media_size: section.settings.image_ratio,
+              show_secondary_image: section.settings.show_secondary_image,
+              add_image_padding: section.settings.add_image_padding,
+              show_vendor: section.settings.show_vendor
+            %}
+          {%- endif -%}
+          </li>
+          {%- endfor -%}
+          {%- else -%}
+          {%- for i in (1..4) -%}
+          <li class="col-lg-3 col-sm-6 col-12 product-placeholder">
+            {%- capture current -%}{%- cycle 1, 2, 3, 4, 5, 6 -%}{%- endcapture -%}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+            <h3>Product</h3>
+          </li>
+          {%- endfor -%}
+          {%- endif -%}
+    </ul>
+    {%- if section.settings.btn_text != blank -%}
+    <div class="button-link-content">
+      <a class="button-content" href="{{ section.settings.btn_link | default:'#' }}" title="{{ section.settings.btn_text }}">
+        <span>{{ section.settings.btn_text }}</span>
+      </a>
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.product-list.name",
+  "class": "spaced-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.product-list.settings.fullwidth.label",
+      "default": false
+    },
+    {
+      "id": "background-color",
+      "type": "color",
+      "label": "t:sections.product-list.settings.background-color.label"
+    },
+    {
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "t:sections.product-list.settings.margin_desktop.label",
+      "info": "t:sections.product-list.settings.margin_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "t:sections.product-list.settings.padding_desktop.label",
+      "info": "t:sections.product-list.settings.padding_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "t:sections.product-list.settings.margin_mobile.label",
+      "info": "t:sections.product-list.settings.margin_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "t:sections.product-list.settings.padding_mobile.label",
+      "info": "t:sections.product-list.settings.padding_mobile.info"
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "t:sections.product-list.settings.heading.label",
+      "default": "Product list"
+    },
+    {
+      "type": "text",
+      "id": "text_decoration",
+      "label": "t:sections.product-list.settings.text_decoration.label",
+      "default": "Product list"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "t:sections.product-list.settings.collection.label"
+    },
+    {
+      "type": "select",
+      "id": "productgrid",
+      "label": "t:settings_schema.layout.settings.productgrid.label",
+      "default": "product-1",
+      "options": [
+        {
+          "value": "product-1",
+          "label": "t:settings_schema.layout.settings.productgrid.options__1.label"
+        },
+        {
+          "value": "product-2",
+          "label": "t:settings_schema.layout.settings.productgrid.options__2.label"
+        },
+        {
+          "value": "product-3",
+          "label": "t:settings_schema.layout.settings.productgrid.options__3.label"
+        },
+        {
+          "value": "product-4",
+          "label": "t:settings_schema.layout.settings.productgrid.options__4.label"
+        },
+        {
+          "value": "product-5",
+          "label": "t:settings_schema.layout.settings.productgrid.options__5.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "product_none",
+      "label": "t:sections.product-list.settings.product_none.label",
+      "default": false
+    },
+    {
+        "type": "select",
+        "id": "image_ratio",
+        "label": "t:sections.product-list.settings.image_ratio.label",
+        "default": "adapt",
+        "options": [
+          {
+            "value": "adapt",
+            "label": "t:sections.product-list.settings.image_ratio.options__1.label"
+          },
+          {
+            "value": "portrait",
+            "label": "t:sections.product-list.settings.image_ratio.options__2.label"
+          },
+          {
+            "value": "square",
+            "label": "t:sections.product-list.settings.image_ratio.options__3.label"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "show_desktop",
+        "min": 4,
+        "max": 12,
+        "step": 4,
+        "label": "t:sections.product-list.settings.show_desktop.label",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "show_mobile",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "label": "t:sections.product-list.settings.show_mobile.label",
+        "default": 4
+      },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "t:sections.product-list.settings.btn_text.label",
+      "default": "Show More"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "t:sections.product-list.settings.btn_link.label"
+    },  
+    {
+      "id": "show_secondary_image",
+      "type": "checkbox",
+      "default": true,
+      "label": "t:sections.product-list.settings.show_secondary_image.label"
+    },
+    {
+        "id": "add_image_padding",
+        "type": "checkbox",
+        "default": false,
+        "label": "t:sections.product-list.settings.add_image_padding.label"
+      },
+    {
+      "id": "show_vendor",
+      "type": "checkbox",
+      "default": false,
+      "label": "t:sections.product-list.settings.show_vendor.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.product-list.presets.name"
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,51 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+<style>
+.container--wishlist .media img{
+  position: relative;
+  width: 100%;
+  height: auto; 
+}
+
+.container--wishlist .grid__item{
+  margin-bottom: 20px;
+}
+
+.js-btn-remove-wishlist{
+    background: #f44336;
+    opacity: 0.8;
+    border: none;
+    padding: 5px 15px;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.js-btn-remove-wishlist:hover{
+  opacity: 1;
+}
+
+.container--wishlist .grid__item{
+  text-align: center;
+}
+
+.container--wishlist .card-information__text{
+  font-size: 1.6rem;
+}
+</style>
+<product-wishlistpage>
+  <div class="page-width container--wishlist">
+      <div class="content-block">
+          <div class="row js-wishlist-content">
+            <ul class="grid grid--2-col grid--3-col-tablet grid--one-third-max grid--4-col-desktop grid--quarter-max">
+              {%- for product in collections.all.products limit: 1 -%}
+                <li class="grid__item wishlist-template" style="display:none">
+                  {% render 'product-grid-1',
+                      product_card_product: product,
+                      media_size: 'adapt'
+                    %}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+      </div>
+  </div>
+</product-wishlistpage>

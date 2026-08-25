@@ -1,0 +1,66 @@
+<!-- cross-sell.liquid -->
+{%- assign product_1 = product.metafields.products.cross_sell_1.value -%}
+{%- assign product_2 = product.metafields.products.cross_sell_2.value -%}
+{%- assign product_3 = product.metafields.products.cross_sell_3.value -%}
+{%- assign product_4 = product.metafields.products.cross_sell_4.value -%}
+
+{%- if product_1 or product_2 or product_3 or product_4 -%}
+
+<div class="modal fade" id="jsCrosssell" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog--crosssell modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">{%- render 'icon-close' -%}</button>
+      </div>
+      <div class="modal-body">
+        <div class="row row-crosssell">
+          <div class="col-lg-4 col-md-6">
+            <div class="js-cross-added" style="display: block;">
+              <span class="alert alert-success d-inline-block mb-2">Added to cart.</span>
+              <div><img src="{{ product.featured_media | img_url: '150x' }} "></div>
+              <p class="cross-item-title">{{product.title}}</p>
+              <div></div>
+            </div>
+          </div>
+          <div class="col-lg-4 cross-cart-items">
+            <div class="js-mini-cart-content"></div>
+          </div>
+          <div class="col-lg-4 col-md-6 cross-cart-wrap">
+            <div class="js-mini-cart-right">
+              <h4>Shopping Cart</h4>
+              <div>Item(s): <b class="js-cart-count"></b></div>
+              <div class="mini-cart-total">
+                Total: <span class="js-cart-total"></span>
+              </div>
+              <div class="mini-cart-btns">
+                <a class="btn btn-theme js-cart-btn-cart" href="/cart">View Cart</a>
+                <a class="btn btn-theme js-cart-btn-checkout" href="/checkout">Check Out</a>
+              </div>
+              {% render 'free-shipping' %}
+            </div>
+          </div>
+        </div>
+        <div class="block-cross-sell hide">
+          <h4>USUALLY BOUGHT WITH</h4>
+          <div class="js-crosssell row justify-content-center">
+            <ul class="grid grid--2-col negative-margin product-grid grid--3-col-tablet grid--one-third-max grid--4-col-desktop grid--quarter-max">
+              {%- if product_2 -%}
+              	<li class="grid__item">{%- render 'product-grid-1', product_card_product: product_2 media_size: 'adapt' -%}</li>
+              {%- endif -%}
+              {%- if product_4 -%}
+              	<li class="grid__item">{%- render 'product-grid-1', product_card_product: product_4 media_size: 'adapt' -%}</li>
+              {%- endif -%}
+              {%- if product_3 -%}
+              	<li class="grid__item">{%- render 'product-grid-1', product_card_product: product_3 media_size: 'adapt' -%}</li>
+              {%- endif -%}
+              {%- if product_1 -%}
+              	<li class="grid__item">{%- render 'product-grid-1', product_card_product: product_1 media_size: 'adapt' -%}</li>
+              {%- endif -%}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}

@@ -1,0 +1,127 @@
+/* announcement-bar */
+.header-announcement-bar{
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.color-transparent .header-announcement-bar{
+    background-color: transparent;
+}
+
+.header-announcement-bar p{
+    margin: 0;
+}
+
+.header-center{
+    position: relative;
+}
+
+.head-seach{
+    align-self: center;
+}
+
+.header-logo{
+    text-align: center;
+    padding: 30px 0px;
+}
+.phone-number p{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+}
+.header-1 .form-search{
+    left: 0;
+    right: unset;
+}
+.header-1 .site-nav{
+    justify-content: center;
+}
+.header-1 .header-bottom{
+    border-top: 1px solid #E5E5E5;
+}
+/* home 5 */
+.header-1 .header-announcement-bar-left ul{
+    display: flex;
+    align-items: center;
+}
+.header-1 .header-announcement-bar-left ul li{
+    margin-right: 20px;
+}
+.header-1 .login-topbar,.header-1 .login-content{
+    display: flex;
+    align-items: center;
+}
+.header-1 .login-content{
+    margin: 0px 15px;
+}
+.header-1 .login-topbar .dropdown-toggle::after{
+    margin: 0px;
+}
+.header-1 .login-topbar .block_currencies{
+    padding: 0px 10px;
+}
+.header-1 .header-announcement-bar-left ul svg{
+margin-right: 10px;
+}
+.header-1 .header-search-left .search-media{
+    display: none;
+}
+.header-1 .header-search-left .form-search{
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    
+}
+.header-1 .header-search-left .icon-search form.search.search-modal__form{
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+}
+.header-1 .header-search-left .icon-search .field__button{
+    background-color: #fff;
+    color: #000;
+}
+.header-1 .header-search-left .field__label{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 26px;
+    color: #666666;
+}
+.header-1 .phone-right{
+    font-style: normal;
+font-weight: 400;
+margin-right: 20px;
+font-size: 12px;
+line-height: 18px;
+}
+.header-1 .phone-right p{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: var( --g-main);
+    margin:0;
+}
+@media(min-width: 992px) and (max-width: 1399px){
+    .header-1 .header-menubar .site-nav{
+        justify-content: center;
+    }
+}
+
+@media(max-width: 991px){
+    .header-1 .head-seach{
+        display: flex;
+    }
+}
+@media (max-width:567px) {
+    .header-1 .icon-search{
+        display: none;
+    }
+    .header-1 .login-content{
+        margin:0px;
+    }
+}

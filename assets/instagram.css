@@ -1,0 +1,11 @@
+div#instafeed img {
+    width: 100%;
+}
+
+#instafeed .item.slick-slide{
+margin: 0 5px;
+}
+
+.instagram-section{
+ margin: 0 -5px;   
+}

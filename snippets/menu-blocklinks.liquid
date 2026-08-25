@@ -1,0 +1,77 @@
+<!-- menu-blocklink.liquid -->
+
+{%- capture ap_col_links -%}apmenuitem_columns_{{ intMega }}{%- endcapture -%}
+{%- capture ap_html_title -%}apmenuitem_mega_link_{{ intMega }}{%- endcapture -%}
+{%- capture ap_html_menu -%}apmenuitem_childlink_{{ intMega }}{%- endcapture -%}
+<div class="row">
+  {%- if settings[ap_html_title] != blank -%}
+  	<div class="menu-title">{{ settings[ap_html_title] }}</div>
+  {%- endif -%}
+  {% if settings[ap_html_menu].links %}
+    {%- for childlink in settings[ap_html_menu].links -%}
+    <div class="col-lg-{{ settings[ap_col_links] }}">
+      <div class="mega-col-inner ">
+        <div class="menu-title">
+          <a href="{{ childlink.url }}" title="{%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title -%}">
+            {%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title -%}
+            {%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title -%}
+          </a>
+          {%- if childlink.links != blank -%}
+          <span class="drawer__nav-toggle--open">
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </span>
+          {%- endif -%}
+        </div>
+        {%- if childlink.links != blank -%}
+        <div class="widget-inner">
+          <ul class="nav-links">
+            
+            {%- for grandchildlink in childlink.links -%}
+            <li>
+              <a href="{{ grandchildlink.url }}" title="{%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName: grandchildlink.title -%}">
+                {%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName: grandchildlink.title -%}
+                {%- render 'processMenuLabel' with itemName.grandchildlink.title, itemName: grandchildlink.title -%}
+              </a>
+            </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- endfor -%}
+  {%- else -%}
+  <p>Please configure menu content in theme customization</p>
+  {%- endif -%}
+
+  </div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'processMenuTitle' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 685..775
+- from: "{%- render 'processMenuTitle' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 790..880
+- from: "{%- render 'processMenuLabel' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 893..983
+- from: "{%- render 'processMenuTitle' with itemName:grandchildlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName:
+    grandchildlink.title -%}"
+  position: 1472..1572
+- from: "{%- render 'processMenuTitle' with itemName:grandchildlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName:
+    grandchildlink.title -%}"
+  position: 1591..1691
+- from: "{%- render 'processMenuLabel' with itemName:grandchildlink.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.grandchildlink.title, itemName:
+    grandchildlink.title -%}"
+  position: 1708..1808
+{%- endcomment -%}

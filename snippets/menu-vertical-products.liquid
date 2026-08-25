@@ -1,0 +1,22 @@
+<!-- menu-vertical-products.liquid -->
+
+{%- capture collection_menu -%}vapmenuitem_cproduct_{{ intVertical }}{%- endcapture -%}
+{%- capture collection_menu_title -%}vapmenuitem_tproduct_{{ intVertical }}{%- endcapture -%}
+{%- assign imagesize = 'adapt' -%}
+{%- assign collection_name = settings[collection_menu] -%}
+{%- assign collection_products = collections[settings[collection_menu]].products -%}
+{%- assign on_sale = false -%}
+<div class="products_menu">
+  {%- if settings[collection_menu_title] != blank -%}
+  <div class="menu-title">
+    {{ settings[collection_menu_title] }}
+  </div>
+  {%- endif -%}
+  <div class="product-block">
+    <div class="dots-negative d-flex" id="mgmenu-collection-{{intVertical}}">
+        {%- for product in collection_products limit: 2 -%}
+        {%- render 'product-card', product_card_product: product, media_size: imagesize -%}
+        {%- endfor -%}
+    </div>
+  </div>
+</div>

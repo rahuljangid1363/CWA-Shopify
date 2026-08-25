@@ -1,0 +1,197 @@
+<!-- page-demoHTML.liquid -->
+{{ 'page-demoHTML.css' | asset_url | stylesheet_tag }}
+
+{%- capture uniqueID -%}{{ 'now' | date: "%N" }}{%- endcapture -%}
+
+<!-- Main box -->
+<div class="mainbox-wrap">
+  <div class="html-contents">
+    <div class="html-item">
+      <div class="row">
+        <div class="col-12 col-left">
+          <div class="container">
+            <textarea id="htmlCode-Mainbox" name="message" class="html-code"></textarea>
+          </div>
+        </div>
+        <div class="col-12 col-mid-main">
+          <div class="container">
+            <button class="btn btn-danger btn-html-view" data-id="Mainbox">Try view {% render 'icon-arrow-down' %}</button>
+            <button class="btn btn-outline-danger" id="js-formatCode">Beautiful Code {% render 'icon-idea' %}</button>
+            <button class="btn btn-success btn-html-copy" data-id="Mainbox">Copy to clipboard {% render 'icon-copy' %}</button>
+            <button class="btn btn-outline-secondary btn-html-copy float-right" id="js-downloadCode">Save as *.html {% render 'icon-download' %}</button>
+          </div>
+        </div>
+        <div class="col-12 col-right">
+          <div id="htmlView-Mainbox" class="html-view">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-demoHTML">
+  <div class="html-contents">
+    {%- render 'htmlbuilder-layout' -%}
+
+    <h3 class="html-title mt-5 mb-5">2. Build elements</h3>
+
+    {%- render 'htmlbuilder-text' -%}
+    {%- render 'htmlbuilder-divided' -%}
+    {%- render 'htmlbuilder-banner' -%}
+    {%- render 'htmlbuilder-snippet' -%}
+
+    <h3 id="html-dynamic" class="html-title pt-3 mt-5 mb-5"># Other components</h3>
+    {%- for block in section.blocks -%}
+    <div class="html-item" {{ block.shopify_attributes }}>
+      <h4 id="html-{{block.id}}" class="html-title">{{block.settings.title}}</h4>
+      {%- if block.settings.info != blank -%}
+      <p class="py-2">
+        {{block.settings.info}}
+      </p>
+      {%- endif -%}
+      <div class="row no-gutters">
+        <div class="col-md-7 col-left">
+          <textarea id="htmlCode-{{block.id}}" class="html-code">{{block.settings.html}}</textarea>
+        </div>
+        <div class="col-md-2 col-mid">
+          <button class="btn btn-outline-secondary btn-html-view" data-id="{{block.id}}">Preview{%- render 'icon-arrow-right' -%}</button>
+          <button class="btn btn-secondary btn-html-copy" data-id="{{block.id}}">Copy {%- render 'icon-copy' -%}</button>
+        </div>
+        <div class="col-md-3 col-right">
+          <div id="htmlView-{{block.id}}" class="html-view shadow">
+            {{block.settings.html}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    {%- endfor -%}
+
+    {%- render 'htmlbuilder-icon' -%}
+    {%- render 'htmlbuilder-howthisworks' -%}
+  </div>
+</div>
+
+<!-- Bottom bar -->
+<ul class="list-unstyled main-list">
+  <li>
+    <a href="#html-howthisworks">How this works?</a>
+  </li>
+  <li>
+    <a class="btn btn-secondary pt-0" href="#html-layout" title="Layouts" data-tooltip="true">{%- render 'icon-app-alt' -%}</a>
+  </li>
+  <li>
+    <a href="#html-text" title="Heading, text" data-tooltip="true">{%- render 'icon-typography' -%}</a>
+  </li>
+  <li>
+    <a href="#html-divided" title="Divided" data-tooltip="true">{%- render 'icon-minus' -%}</a>
+  </li>
+  <li>
+    <a href="#html-banner" title="Banners" data-tooltip="true">{%- render 'icon-picture-alt' -%}</a>
+  </li>
+  <li>
+    <a href="#html-snippet" title="Snippets" data-tooltip="true">{%- render 'icon-gear-alt' -%}</a>
+  </li>
+  <li>
+    <a href="#html-dynamic" title="Others" data-tooltip="true">{%- render 'icon-more' -%}</a>
+  </li>
+  <li>
+    <a href="#html-icon" title="Icons" data-tooltip="true">{%- render 'icon-star-alt' -%}</a>
+  </li>
+  <li>
+    <a class="btn btn-danger pt-0" href="#shopify-section-page-demoHTML" title="Main editor" data-tooltip="true">{%- render 'icon-home' -%}</a>
+  </li>
+</ul>
+
+<!-- https://cdnjs.com/libraries/codemirror -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.2/codemirror.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.2/theme/material.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.2/codemirror.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.2/mode/xml/xml.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.2/mode/htmlmixed/htmlmixed.min.js"></script>
+<script>CodeMirror.defineExtension("autoFormatRange",function(e,n){var t=this,o=t.getMode(),r=t.getRange(e,n).split("\n"),i=CodeMirror.copyState(o,t.getTokenAt(e).state),a=t.getOption("tabSize"),s="",d=0,f=0==e.ch;function l(){s+="\n",f=!0,++d}for(var g=0;g<r.length;++g){for(var c=new CodeMirror.StringStream(r[g],a);!c.eol();){var p=CodeMirror.innerMode(o,i),u=o.token(c,i),v=c.current();c.start=c.pos,f&&!/\S/.test(v)||(s+=v,f=!1),!f&&p.mode.newlineAfterToken&&p.mode.newlineAfterToken(u,v,c.string.slice(c.pos)||r[g+1]||"",p.state)&&l()}!c.pos&&o.blankLine&&o.blankLine(i),f||l()}t.operation(function(){t.replaceRange(s,e,n);for(var o=e.line+1,r=e.line+d;o<=r;++o)t.indentLine(o,"smart")})}),CodeMirror.defineExtension("autoIndentRange",function(e,n){var t=this;this.operation(function(){for(var o=e.line;o<=n.line;o++)t.indentLine(o,"smart")})});</script>
+<script>
+  window.onload = function(){
+    var selectorID = document.getElementById('htmlCode-Mainbox');
+    var htmlEditor = CodeMirror.fromTextArea(selectorID, {
+      lineNumbers: true,
+      mode: 'htmlmixed',
+      theme: 'material',
+    });
+
+    function formatCode(){
+      var totalLines = htmlEditor.lineCount();  
+      htmlEditor.autoFormatRange({line:0, ch:0}, {line:totalLines});
+    }
+
+    //https://stackoverflow.com/questions/51315044/how-do-i-save-the-content-of-the-editor-not-the-whole-html-page
+    function saveTextAsFile() {
+      var textToWrite = htmlEditor.getValue();
+      var textFileAsBlob = new Blob([textToWrite], {
+        type: "text/plain;charset=utf-8"
+      });
+      var fileNameToSaveAs = "HTML-builder-in-Shopify.html";
+      var downloadLink = document.createElement("a");
+      downloadLink.download = fileNameToSaveAs;
+      downloadLink.innerHTML = "Download File";
+      if (window.webkitURL != null) {
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+      } else {
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+      }
+      downloadLink.click();
+    }
+
+    htmlEditor.on("change",function(){
+      selectorID.value= htmlEditor.getValue();
+    });
+
+    htmlEditor.setValue('<!-- \n\nPaste your HTML code here\n👉 Click [Try view] to preview\n👉 Click [Beautiful code] to format HTML codes\n👉 Click [Copy to clipboard] and use in the product description, collection description, page, blog, article, theme settings, metafields,... \n\n-->\n');
+    document.getElementById("js-formatCode").addEventListener("click", formatCode);
+    document.getElementById("js-downloadCode").addEventListener("click", saveTextAsFile);
+  };
+
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+  
+</script>
+
+{% schema %}
+{
+  "name": "DemoHTML",
+  "class": "page-section",
+  "settings": [
+    
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Unordered list"
+        },
+        {
+          "type": "textarea",
+          "id": "info",
+          "label": "More information"
+        },
+        {
+          "type": "liquid",
+          "id": "html",
+          "label": "HTML codes"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

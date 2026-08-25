@@ -1,0 +1,130 @@
+.recently-viewed-show{
+ display: none; 
+}
+.img-viewed{
+  position: fixed;
+  z-index: 99;
+  bottom: calc(3vh + 60px);
+  right: 4vh;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+}
+
+.img-viewed img{
+  width: 100%;
+}
+
+.recently-viewed{
+  max-width: 850px;
+  margin: 0 auto;
+  position: relative;
+  transform: translateY(-70%);
+  top: 50%;
+  max-width: 850px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 5px;
+  transition: transform .3s ease-out;
+  z-index: 9999;
+}
+
+.recently-viewed.show{
+  transform: translateY(-50%); 
+}
+.img-viewed:hover{
+  cursor: pointer;
+}
+.recently-viewed-banner{
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.7);
+  z-index: 999;
+}
+.recently-viewed-content.active .recently-viewed-banner{
+  opacity: 1;
+  display: block;
+}
+.recently-viewed-content{
+  color: #000;
+  z-index: 99;
+  display: none;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+  .js-recently-view-button.active {
+    opacity: 1;
+    visibility: visible
+  }
+  .js-recently-view-button.fade-viewed .recently-viewed{
+    transform: translateY(-50%);
+  }
+  
+
+  @media (max-width:767px) {
+    .js-recently-view-button {
+      bottom: 3vh;
+      right: 3vh
+    }
+    .img-viewed{
+      bottom:calc(6vh + 60px);
+    }
+  }
+
+  .js-recently-view-content{
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px;
+    flex-wrap: wrap;
+    
+  }
+  .js-recently-view-content > div{
+    width: calc(33% - 20px);
+    display: flex;
+    align-items: center;
+    margin: 0 10px 15px;
+    border: 1px solid #e1e1e1;
+  }
+  .js-recently-view-content > div img{
+    max-width: 90px;
+  }
+
+  .js-recently-view-content > div .product-name{
+    padding: 0 15px;
+  }
+  .recently-viewed-header{
+    padding: 25px 25px 10px;
+  }
+  .recently-viewed-header h4{
+    font-weight: 700;
+    color: var(--color-base-text);
+  }
+  .recently-viewed-content.active{
+    display: block;
+    opacity: 1;
+  }
+
+.close{
+  background: transparent;
+  border: none;
+  padding: 25px 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.close svg{
+  width: 15px;
+  
+}

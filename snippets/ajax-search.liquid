@@ -1,0 +1,20 @@
+<form action="/search" method="get" role="search" class="search search-modal__form">
+  <div class="collection-select-search">
+    <select>
+      <option value="">All</option>
+      {% for collection in collections %}
+      <option value="{{collection.handle}}">{{collection.title}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="field">
+    <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="" placeholder="Search">
+    <label class="field__label" for="Search-In-Modal">Search</label>
+    <input type="hidden" name="options[prefix]" value="last">
+    <button class="search__button field__button focus-inset" aria-label="Search">
+      <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+        <use href="#icon-search">
+        </use></svg>
+    </button>
+  </div>
+</form>

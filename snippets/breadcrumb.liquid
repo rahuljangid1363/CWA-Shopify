@@ -1,0 +1,143 @@
+{% unless template == 'index' %}
+<style>
+  .g-breadcrumb{
+    flex-direction: column;
+    color:{{settings.color_breadcrumbs}} ;
+    padding:40px 0;
+    margin:0;
+    background:{{settings.bg_breadcrumb}};}
+  .g-breadcrumb a,.g-breadcrumb span{
+    padding:0 3px;
+    font-size:14px;
+    line-height:20px;
+    display:inline-block
+  }
+  .g-breadcrumb h1{
+    color:{{settings.color_breadcrumbs_active}};
+    font-family: var(--g-font-1);
+  }
+  .g-breadcrumb a{
+    color:{{settings.color_breadcrumbs_active}};
+    border-bottom: 1px solid currentColor;
+    padding: 0;
+    margin: 5px 3px;
+  }
+  
+  .breadcrumb .icon{
+    height: 14px;
+    vertical-align: baseline;
+    width: auto;
+  }
+  
+  .g-breadcrumb .container,.g-breadcrumb .container-fluid{z-index: 2;position: relative;}
+  .g-breadcrumb.breadcrumbs-style_2{
+    padding:120px 0;
+    background: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-radius:0;
+  }
+  @media (max-width:576px) {
+    .g-breadcrumb.breadcrumbs-style_2{
+      padding: 50px 0;
+    }
+    .g-breadcrumb.breadcrumbs-style_2 h3{
+      font-size: 26px;
+    }
+  }
+  .g-breadcrumb.breadcrumbs-style_2::before{
+    background:rgba(0,0,0,{{settings.limit_ranger}});
+    position: absolute;
+    z-index: 1;
+    content:"";
+    left: 0;
+    right: 0;
+    bottom:0;
+    top: 0;
+  }
+  .br-title{
+    color:{{settings.color_breadcrumbs}}
+  }
+  .br-title svg{
+    width: 23px;
+    height: 23px;
+  }
+
+</style>
+
+{% assign bgimage = settings.img_breadcrumb %}
+{% if template contains 'collection' and collection.handle %}
+  {% assign bgimage = collection.image.src %}
+  {% if collection.image.src == blank %}
+    {% assign bgimage = settings.img_breadcrumb %}
+  {% endif %}
+{% elsif template contains 'product' and collection.handle %}	
+  {% assign bgimage = collection.image.src %}
+  {% if collection.image.src == blank %}
+    {% assign bgimage = settings.img_breadcrumb %}
+  {% endif %}
+{% endif %}
+<nav class="breadcrumbs-{{settings.style_breadcrumb}} breadcrumb g-breadcrumb lazyload text-{{settings.align_bread}}" 
+     role="navigation" 
+     aria-label="breadcrumbs" 
+     {% unless settings.style_breadcrumb == "style_1" %}
+     	style="background: url('{{ bgimage | img_url: '1080x' }}') center;background-size: cover;"
+	{% endunless%}>
+  <div class="{{settings.layout_bread}}">
+    
+  {% if settings.show_title_breadcumbs %}
+    {% if template contains 'collection' and collection.handle %}
+    <h3 class="mb-2 h1 br-title">{{ collection.title }}</h3>
+    {% elsif template contains 'page' %}
+    <h3 class="mb-2 h1 br-title">{{ page.title }}</h3>
+    {% elsif template contains 'product' and collection.handle %}	
+      <h3 class="mb-2 h1 br-title">{{ collection.title }}</h3>
+    {% elsif template contains 'blog' %}	
+      <h3 class="mb-2 h1 br-title">{{ blog.title }} <svg class="icon icon-rss" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 455.731 455.731" style="enable-background:new 0 0 455.731 455.731;" xml:space="preserve"><g><rect x="0" y="0" style="fill:#F78422;" width="455.731" height="455.731"/><g><path style="fill:#FFFFFF;" d="M296.208,159.16C234.445,97.397,152.266,63.382,64.81,63.382v64.348c70.268,0,136.288,27.321,185.898,76.931c49.609,49.61,76.931,115.63,76.931,185.898h64.348C391.986,303.103,357.971,220.923,296.208,159.16z"/><path style="fill:#FFFFFF;" d="M64.143,172.273v64.348c84.881,0,153.938,69.056,153.938,153.939h64.348C282.429,270.196,184.507,172.273,64.143,172.273z"/><circle style="fill:#FFFFFF;" cx="109.833" cy="346.26" r="46.088"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></h3>
+    {% endif %}
+  {% endif %}
+  </div>
+  <div class="{{settings.layout_bread}}">
+    <a href="/" title="Home"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="home" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="icon icon-home"><path fill="currentColor" d="M541 229.16l-61-49.83v-77.4a6 6 0 0 0-6-6h-20a6 6 0 0 0-6 6v51.33L308.19 39.14a32.16 32.16 0 0 0-40.38 0L35 229.16a8 8 0 0 0-1.16 11.24l10.1 12.41a8 8 0 0 0 11.2 1.19L96 220.62v243a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-128l64 .3V464a16 16 0 0 0 16 16l128-.33a16 16 0 0 0 16-16V220.62L520.86 254a8 8 0 0 0 11.25-1.16l10.1-12.41a8 8 0 0 0-1.21-11.27zm-93.11 218.59h.1l-96 .3V319.88a16.05 16.05 0 0 0-15.95-16l-96-.27a16 16 0 0 0-16.05 16v128.14H128V194.51L288 63.94l160 130.57z" class=""></path></svg> Home</a>
+    {% if template contains 'page' %}
+    <span aria-hidden="true">&rsaquo;</span>
+    <span>{{ page.title }}</span>
+    {% elsif template contains 'product' %}
+    {% if collection.url %}
+    <span aria-hidden="true">&rsaquo;</span>
+    {{ collection.title | link_to: collection.url }}
+    {% endif %}
+    <span aria-hidden="true">&rsaquo;</span>
+    <span>{{ product.title }}</span>
+    {% elsif template contains 'collection' and collection.handle %}
+    <span aria-hidden="true">&rsaquo;</span>
+    {% if current_tags %}
+    {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+    {{ collection.title | link_to: url }}
+    <span aria-hidden="true">&rsaquo;</span>
+    <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span>{{ collection.title }}</span>
+    {% endif %}
+    {% elsif template == 'blog' %}
+    <span aria-hidden="true">&rsaquo;</span>
+    {% if current_tags %}
+    {{ blog.title | link_to: blog.url }}
+    <span aria-hidden="true">&rsaquo;</span>
+    <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span>{{ blog.title }}</span>
+    {% endif %}
+    {% elsif template == 'article' %}
+    <span aria-hidden="true">&rsaquo;</span>
+    {{ blog.title | link_to: blog.url }}
+    <span aria-hidden="true">&rsaquo;</span>
+    <span>{{ article.title }}</span>
+    {% else %}
+    <span aria-hidden="true">&rsaquo;</span>
+    <span>{{ page_title }}</span>
+    {% endif %}
+  </div>
+</nav>
+{% endunless %}

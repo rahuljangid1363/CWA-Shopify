@@ -1,0 +1,67 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "blocks": {
+        "trust-1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z\"/><path d=\"M9 12l2 2 4-4\"/></svg>",
+            "title": "Trusted Quality",
+            "text": "Premium products from reliable brands"
+          }
+        },
+        "trust-2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M1 3h13v13H1zM14 8h4l3 3v5h-7z\"/><circle cx=\"5.5\" cy=\"18.5\" r=\"1.5\"/><circle cx=\"17.5\" cy=\"18.5\" r=\"1.5\"/></svg>",
+            "title": "Fast Delivery",
+            "text": "Quick and secure delivery across the country"
+          }
+        },
+        "trust-3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M4 13a8 8 0 0116 0\"/><path d=\"M4 13v4a2 2 0 002 2h1v-7H5a1 1 0 00-1 1zM20 13v4a2 2 0 01-2 2h-1v-7h1a1 1 0 011 1z\"/><path d=\"M12 19v1a2 2 0 002 2h1\"/></svg>",
+            "title": "Expert Support",
+            "text": "24/7 customer support for your assistance"
+          }
+        },
+        "trust-4": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.7 1.7 0 00.34 1.87l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.7 1.7 0 00-1.87-.34 1.7 1.7 0 00-1.04 1.56V21a2 2 0 01-4 0v-.09A1.7 1.7 0 008.5 19.36a1.7 1.7 0 00-1.87.34l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.7 1.7 0 00.34-1.87 1.7 1.7 0 00-1.56-1.04H2.5a2 2 0 010-4h.09A1.7 1.7 0 004.14 8.5a1.7 1.7 0 00-.34-1.87l-.06-.06a2 2 0 112.83-2.83l.06.06a1.7 1.7 0 001.87.34H8.5a1.7 1.7 0 001.04-1.56V2.5a2 2 0 014 0v.09a1.7 1.7 0 001.04 1.56 1.7 1.7 0 001.87-.34l.06-.06a2 2 0 112.83 2.83l-.06.06a1.7 1.7 0 00-.34 1.87V8.5a1.7 1.7 0 001.56 1.04h.09a2 2 0 010 4h-.09a1.7 1.7 0 00-1.56 1.04z\"/></svg>",
+            "title": "Secure Payments",
+            "text": "Safe and secure payment options"
+          }
+        }
+      },
+      "block_order": [
+        "trust-1",
+        "trust-2",
+        "trust-3",
+        "trust-4"
+      ],
+      "settings": {
+        "subtitle": "Browse our product collections by category",
+        "grid_limit": 7,
+        "more_title": "More Collections",
+        "more_text": "Explore more specialized products and solutions.",
+        "more_link_label": "View all collections",
+        "more_link": "/collections"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

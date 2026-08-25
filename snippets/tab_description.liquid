@@ -1,0 +1,168 @@
+{% if product.metafields.spr.reviews %}
+	{% capture review_data %}{{ product.metafields.spr.reviews }}{% endcapture %}
+	{% assign review_data1 = review_data | split: "reviewCount" %}
+	{% assign review_data2 = review_data1[1] | split: ":" %}
+	{% assign review_data3 = review_data2[1] | split: '"' %}
+	{% assign review_count_value = review_data3[1] | plus: 1 | minus: 1 %}
+{% endif %}
+
+{%- if settings.tab_type == 'accordion' or tab_type == 'accordion' -%}
+	<div id="tab-accordion" class="nav-tab-info-vertical">
+      {%- if settings.show_product_description or tab_type == 'accordion' -%}
+      <div class="card">
+        <div class="card-header active-acc {{settings.tab_title_align}}">
+          <a class="card-link" data-toggle="collapse" data-target="#collapseOne" href="#" aria-expanded="true">
+              <i class="icon-arrow-right"></i> Description
+          </a>
+        </div>
+        <div id="collapseOne" class="collapse show" data-parent="#accordion" style="">
+          <div class="card-body px-4">
+			{{ product.description }}
+          </div>
+        </div>
+      </div>
+      {%- endif -%}
+      
+      {%- if settings.show_specific_tab and settings.specific_tab_title2 and product.metafields.info.tab2.value -%}
+      <div class="card">
+        <div class="card-header {{settings.tab_title_align}}">
+          <a class="collapsed card-link" data-toggle="collapse" data-target="#show_specific_tab2" href="#">
+            <i class="icon-arrow-right"></i> {{settings.specific_tab_title1}}
+          </a>
+        </div>
+        <div id="show_specific_tab2" class="collapse" data-parent="#accordion">
+          {{product.metafields.info.tab2.value}}
+        </div>
+      </div>
+	  {%- endif -%}
+      
+      {%- if settings.show_specific_tab and settings.specific_tab_title3 and product.metafields.info.tab3.value -%}
+      <div class="card">
+        <div class="card-header {{settings.tab_title_align}}">
+          <a class="collapsed card-link" data-toggle="collapse" data-target="#show_specific_tab3" href="#">
+            <i class="icon-arrow-right"></i> {{settings.specific_tab_title1}}
+          </a>
+        </div>
+        <div id="show_specific_tab3" class="collapse" data-parent="#accordion">
+          {{product.metafields.info.tab3.value}}
+        </div>
+      </div>
+	  {%- endif -%}
+      
+      {%- if settings.show_specific_tab and settings.specific_tab_title4 and product.metafields.info.tab4.value -%}
+      <div class="card">
+        <div class="card-header {{settings.tab_title_align}}">
+          <a class="collapsed card-link" data-toggle="collapse" data-target="#show_specific_tab4" href="#">
+            <i class="icon-arrow-right"></i> {{settings.specific_tab_title4}}
+          </a>
+        </div>
+        <div id="show_specific_tab4" class="collapse" data-parent="#accordion">
+          {{product.metafields.info.tab4.value}}
+        </div>
+      </div>
+	  {%- endif -%}
+      
+      {%- if settings.show_product_review or tab_type == 'accordion' -%}
+      <div class="card">
+        <div class="card-header {{settings.tab_title_align}}">
+          <a class="collapsed card-link" data-toggle="collapse" data-target="#collapseThree" href="#">
+            <i class="icon-arrow-right"></i> Review ({{review_count_value}})
+          </a>
+        </div>
+        <div id="collapseThree" class="collapse" data-parent="#accordion">
+          <div class="card-body px-0">
+			<div id='shopify-product-reviews' data-id='{{product.id}}'></div>
+          </div>
+        </div>
+      </div>
+	  {%- endif -%}
+      
+      {%- if settings.show_specific_tab and settings.specific_tab_title1 and product.metafields.info.tab1.value -%}
+      <div class="card">
+        <div class="card-header {{settings.tab_title_align}}">
+          <a class="collapsed card-link" data-toggle="collapse" data-target="#show_specific_tab1" href="#">
+            <i class="icon-arrow-right"></i> {{settings.specific_tab_title1}}
+          </a>
+        </div>
+        <div id="show_specific_tab1" class="collapse" data-parent="#accordion">
+          {{product.metafields.info.tab1.value}}
+        </div>
+      </div>
+	  {%- endif -%}
+      
+    </div>
+{%- else -%}
+	<div id="nav-tab-info" class="">
+      <div class="nav nav-tabs {{settings.tab_title_align}}-content-md-center {{settings.tab_title_align}}-content-start" role="tablist">
+        {%- if settings.show_product_description -%}
+        <a class="nav-item nav-link active" href="#gtab1" data-toggle="tab" role="tab" aria-selected="true">Description</a>
+        {%- endif -%}
+        
+        {%- if settings.show_specific_tab and settings.specific_tab_title1 and product.metafields.info.tab1.value -%}
+        	<a class="nav-item nav-link" href="#show_specific_tab1" data-toggle="tab" role="tab" aria-selected="false">
+              {{settings.specific_tab_title1}}
+            </a>
+        {%- endif -%}
+        {%- if settings.show_specific_tab and settings.specific_tab_title2 and product.metafields.info.tab2.value -%}
+        	<a class="nav-item nav-link" href="#show_specific_tab2" data-toggle="tab" role="tab" aria-selected="false">
+              {{settings.specific_tab_title2}}
+            </a>
+        {%- endif -%}
+        {%- if settings.show_specific_tab and settings.specific_tab_title3 and product.metafields.info.tab3.value -%}
+        	<a class="nav-item nav-link" href="#show_specific_tab3" data-toggle="tab" role="tab" aria-selected="false">
+              {{settings.specific_tab_title3}}
+            </a>
+        {%- endif -%}
+        {%- if settings.show_specific_tab and settings.specific_tab_title4 and product.metafields.info.tab4.value -%}
+        	<a class="nav-item nav-link" href="#show_specific_tab4" data-toggle="tab" role="tab" aria-selected="false">
+              {{settings.specific_tab_title4}}
+            </a>
+        {%- endif -%}
+        
+        {%- if settings.show_product_review -%}
+          <a class="nav-item nav-link" href="#gtab2" data-toggle="tab" role="tab" aria-selected="false">
+            Review ({{review_count_value}})
+          </a>
+		{%- endif -%}
+        
+      </div>
+      <div class="tab-content p-4">
+        {%- if settings.show_product_description -%}
+        <div class="tab-content-value tab-pane active show" id="gtab1" role="tabpanel">
+			{{ product.description }}
+        </div>
+        {%- endif -%}
+        
+        {%- if settings.show_specific_tab and settings.specific_tab_title1 and product.metafields.info.tab1.value -%}
+        	<div class="tab-content-value tab-pane" id="show_specific_tab1" role="tabpanel">
+        	{{product.metafields.info.tab1.value}}
+        	</div>
+        {%- endif -%}
+        
+        {%- if settings.show_specific_tab and settings.specific_tab_title2 and product.metafields.info.tab2.value -%}
+        	<div class="tab-content-value tab-pane" id="show_specific_tab2" role="tabpanel">
+        	{{product.metafields.info.tab2.value}}
+        	</div>
+        {%- endif -%}
+        
+        {%- if settings.show_specific_tab and settings.specific_tab_title3 and product.metafields.info.tab3.value -%}
+        	<div class="tab-content-value tab-pane" id="show_specific_tab3" role="tabpanel">
+        	{{product.metafields.info.tab3.value}}
+        	</div>
+        {%- endif -%}
+        
+        {%- if settings.show_specific_tab and settings.specific_tab_title4 and product.metafields.info.tab4.value -%}
+        	<div class="tab-content-value tab-pane" id="show_specific_tab4" role="tabpanel">
+        	{{product.metafields.info.tab4.value}}
+        	</div>
+        {%- endif -%}
+        
+        {%- if settings.show_product_review -%}
+        <div class="tab-content-value tab-pane" id="gtab2" role="tabpanel">
+          <div id='shopify-product-reviews' data-id='{{product.id}}'></div>
+        </div>
+        {%- endif -%}
+        
+      </div>
+    </div>
+{%- endif -%}

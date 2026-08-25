@@ -1,0 +1,27 @@
+{% layout none %}
+{% capture results %}
+  {% for item in search.results %}
+    {% assign product = item %}
+	{% assign arr_collection = '' %}
+	{% for collection in product.collections %}
+		{% if arr_collection == '' %}
+			{% assign arr_collection = arr_collection | append: collection.handle %}
+		{% else %}
+			{% assign arr_collection = arr_collection | append: ',' | append: collection.handle %}
+		{% endif %}
+    {% endfor %}
+
+    { 
+      "title"    : {{ product.title | json }},
+      "url"      : {{ product.url | within: product.collections.last | json }},
+	  "price"    : {{ product.price | json }},
+      "thumbnail": {{ product.featured_image.src | product_img_url: 'compact' | json }},
+	  "collections": {{arr_collection | split: "," | json }}
+    }
+    {% unless forloop.last %},{% endunless %}
+  {% endfor %}
+{% endcapture %}
+{
+  "results_count": {{ search.results_count }},
+  "results": [{{ results }}]
+}

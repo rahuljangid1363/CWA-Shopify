@@ -1,0 +1,99 @@
+<!-- header-2.liquid -->
+{{ 'header-2.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+
+<header class="header-2 {%- if section.settings.enable_transparent -%}{{ 'color-transparent' | prepend: ' ' }}{%- endif -%}">
+  
+  <div class="header-bottom">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container larger-container{%- endif -%}">
+        <div class="row">
+          <div class="col-6 head-logo logo-padding">
+            {%- render 'header-logo' -%}
+          </div>
+            
+          <div class="col-6 header-icon">
+              {%- if section.settings.header_seach -%}
+                  {%- render 'search-header' -%}
+              {%- endif -%}
+
+              {%- if section.settings.header_wishlist -%}
+                  {%- render 'wishlist-header' -%}
+              {%- endif -%}
+            
+              {%- if section.settings.currencies -%}
+              {%- render 'block-currencies' -%}
+              {%- endif -%}
+            
+              {%- if section.settings.header_sign -%}
+                  {%- render 'header-sign' -%}
+              {%- endif -%}
+
+              {%- if section.settings.header_card -%}
+                  {%- render 'header-cart' -%}
+              {%- endif -%}
+              
+              <div class="header-verticalmenu">
+                {%- render 'icon-verticalmenu' -%}
+                {%- render 'vertical-menu' -%}
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "t:sections.header-2.name",
+  "class": "spaced-header",
+  "tag": "section",
+  "settings": [
+      {
+        "type": "checkbox",
+        "id": "fullwidth",
+        "label": "t:sections.header-2.settings.fullwidth.label",
+        "default": false
+      },
+      {
+        "id": "background-color",
+        "type": "color",
+        "label": "t:sections.header-2.settings.background-color.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "header_seach",
+        "label": "t:sections.header-2.settings.header_seach.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "header_sign",
+        "label": "t:sections.header-2.settings.header_sign.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "header_wishlist",
+        "label": "t:sections.header-2.settings.header_wishlist.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "currencies",
+        "label": "t:sections.header-2.settings.currencies.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "header_card",
+        "label": "t:sections.header-2.settings.header_card.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_transparent",
+        "label": "t:sections.header-2.settings.enable_transparent.label"
+      }
+      ]
+}
+{% endschema %}

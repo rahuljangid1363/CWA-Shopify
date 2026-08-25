@@ -1,0 +1,22 @@
+{%- if product.variants.size == 0 -%}
+	{%- assign id = ''  -%}
+	{%- assign checked = ''  -%}
+{%- else -%}
+	{%- for variant in product.variants -%}
+		{%- if variant.available -%}
+			{%- assign id = variant.id  -%}
+			{%- assign checked = 'checked'  -%}
+			{% break %}
+		{%- endif -%}
+	{%- endfor -%}
+{%- endif -%}
+
+<div class="group_products-item {%- if id == '' -%}disable{%- endif -%}">
+  
+  <input class="group_product-item" type="checkbox" value="{{id}}" {{checked}}>
+  <div>
+    <img src="{{product.featured_media | img_url: '200x' }}" alt="{{ product.title | escape }}">
+    {% render 'quickview-button', handle: product.handle %}
+  </div>
+  <a href="{{product.handle}}">{{product.title}}</a>
+</div>

@@ -1,0 +1,159 @@
+<!-- header-5.liquid -->
+{{ 'header-5.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+{%-  style  -%}
+.header-5-announcement-bar p,.header-5 .header-5-announcement-bar-right .signin-top{
+  color:{{ section.settings.color_text_topbar }};
+}
+{%- endstyle -%}
+<header class="header-5 {%- if section.settings.enable_transparent -%}{{ 'color-transparent' | prepend: ' ' }}{%- endif -%}">
+  {%- if section.settings.header_announcement_bar -%}
+    <div class="header-5-announcement-bar">
+      <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+        <div class="row d-flex justify-content-between">
+          <div class="col-xl-4 col-md-6 header-5-announcement-bar-left d-none d-md-block">
+              <p>{{ section.settings.text_announcement_bar }}</p>
+          </div>
+          <div class="col-md-4 header-5-announcement-bar-middle text-center d-none d-xl-block">
+            <p>{{ section.settings.text_announcement_bar_middle }}</p>
+          </div>
+          <div class="col-xl-4 col-md-6 header-5-announcement-bar-right d-flex justify-content-center justify-content-md-end">
+            {%- if section.settings.currencies -%}
+                {%- render 'block-currencies' -%}
+            {%- endif -%}
+            {%- if section.settings.show_signin_top -%}
+            <div class="signin-top">
+              {% if customer %}
+                <p><a>Hello {{customer.first_name }}</a></p>
+                  
+                  <p><a href="/account/logout" title="{{'layout.customer.log_out' | t}}" class="site-header__link">
+                    Logout
+                  </a>
+                  </p>
+                <p><a href="/account" title="My acount">My account</a></p>
+                {%- else -%}
+                  Welcome Guess!
+                  <p><a href="/account/login" class="site-header__link">Sign in</a></p>or
+                  <p><a href="/account/register" title="Register">Register</a></p>
+              {%- endif -%}
+          
+            </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+  <div class="header-5-center">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+      <div class="header-categories color-{%- if section.settings.enable_transparent -%}transparent{%- else -%}{{ section.settings.color_scheme }}{%- endif -%}">
+        <div class="row">
+            <div class="col-lg-2 col header-logo">
+                {%- render 'header-logo' -%}
+            </div>
+
+            <div class="col-1 col-lg-7 icon-mobile">
+                {%- render 'icon-megamenu-mobile' -%}
+                {%- render 'block-menu' -%}
+            </div>
+
+            <div class="col-2 col-lg-3 d-flex header-categories">
+                {%- if section.settings.header_seach -%}
+                    {%- render 'search-header' -%}
+                {%- endif -%}
+                {%- if section.settings.header_wishlist -%}
+                {%- render 'wishlist-header' -%}
+                {%- endif -%}
+                {%- if section.settings.header_sign -%}
+                {%- render 'header-sign' -%}
+                {%- endif -%}
+                {%- if section.settings.header_card -%}
+                {%- render 'header-cart' -%}
+                {%- endif -%}
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "t:sections.header-5.name",
+  "class": "spaced-header",
+  "tag": "section",
+  "settings": [
+      {
+        "type": "checkbox",
+        "id": "fullwidth",
+        "label": "t:sections.header-5.settings.fullwidth.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "header_announcement_bar",
+        "label": "t:sections.header-5.settings.header_announcement_bar.label",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "text_announcement_bar",
+        "label": "t:sections.header-5.settings.text_announcement_bar.label",
+        "default": "Free shipping worldwide"
+      },
+      {
+        "type": "textarea",
+        "id": "text_announcement_bar_middle",
+        "label": "Text announcement middle ",
+        "default": "International click and collect"
+      },
+      {
+        "id": "background-color",
+        "type": "color",
+        "label": "t:sections.header-5.settings.background-color.label"
+      },
+      {
+        "type":"color",
+        "id":"color_text_topbar",
+        "label":"Color text topbar",
+        "default":"#999999"
+      },
+      {
+        "type": "checkbox",
+        "id": "header_seach",
+        "label": "t:sections.header-5.settings.header_seach.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_signin_top",
+        "label": "Enable sign in topbar",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "header_sign",
+        "label": "t:sections.header-5.settings.header_sign.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "header_wishlist",
+        "label": "t:sections.header-5.settings.header_wishlist.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "currencies",
+        "label": "t:sections.header-5.settings.currencies.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "header_card",
+        "label": "t:sections.header-5.settings.header_card.label",
+        "default": true
+      }
+      ]
+}
+{% endschema %}

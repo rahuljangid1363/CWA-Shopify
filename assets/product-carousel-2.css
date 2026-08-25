@@ -1,0 +1,18 @@
+
+.popular-categories .slick-slider{
+    overflow: hidden;
+}
+
+.product-carousel-2 .slick-slide + .slick-slide{
+    margin-left: 15px;
+}
+
+.product-carousel-2-right .product-items{
+    margin: 5px 0;
+}
+
+@media(max-width: 1199px){
+    .product-carousel-2-slick .product-items{
+        margin-bottom: 10px;
+    }
+}

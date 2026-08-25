@@ -1,0 +1,29 @@
+{%- if itemName contains '[' and itemName contains ']' -%}
+	{%- assign menu_label = itemName | split: "}" -%}
+	{%- if menu_label.size == 2 -%}
+    {%- for label in menu_label -%}
+        {%- if forloop.first == true -%}
+		  {%- assign icon = label | remove: "{" -%}
+          {%- render 'list-icons', icon: icon -%}
+        {%- else -%}
+          {{ label | escape | split: '[' | first }}
+        {%- endif -%}      
+      {%- endfor -%}
+    {%- else -%}
+      {{itemName | escape | split: '[' | first}}
+    {%- endif -%}
+{%- else -%}
+	{%- assign menu_label = itemName | split: "}" -%}
+	{%- if menu_label.size == 2 -%}
+    {%- for label in menu_label -%}
+        {%- if forloop.first == true -%}
+		  {%- assign icon = label | remove: "{" -%}
+          {%- render 'list-icons', icon: icon -%}
+        {%- else -%}
+          {{ label | escape }}
+        {%- endif -%}      
+      {%- endfor -%}
+    {%- else -%}
+      {{itemName | escape}}
+    {%- endif -%}
+{%- endif -%}

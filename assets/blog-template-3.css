@@ -1,0 +1,68 @@
+.blog-items.blog-layout-items-3{
+    padding: 0 15px;
+}
+
+.blog-post .blog-list{
+    margin: 0 -15px;
+}
+
+.blog-items.blog-layout-items-3 .motion-reduce{
+    transform: scale(1);
+    transition: all 0.5s ease 0s!important;
+}
+
+.blog-items.blog-layout-items-3:hover .motion-reduce{
+    transition: all 0.5s ease 0s!important;
+    transform: scale(1.1);
+}
+
+.blog-layout-items-3 .blog-content{
+    margin-top: 20px;
+}
+
+.blog-layout-items-3 .blog-content-top{
+    display: flex;
+    font-size: 16px;
+}
+
+.blog-layout-items-3 .blog-date{
+    color: #999;
+}
+
+.blog-layout-items-3 .blog-author{
+    margin: 0 10px;
+}
+
+.blog-layout-items-3 .blog-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+.blog-layout-items-3 .button-link{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.blog-layout-items-3 .button-link::before{
+    content: "\f061";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: -5px;
+    right: -30px;
+    font-family: "Font Awesome 5 Pro";
+    transform: rotate(-50deg);
+    transition: all 0.5s;
+}
+
+.blog-layout-items-3 .button-link:hover:before {
+    transform: rotate(0deg);
+}

@@ -1,0 +1,73 @@
+<!-- menu-vertical-link.liquid -->
+
+{%- capture ap_col_links -%}vapmenuitem_columns_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_html_title -%}vapmenuitem_mega_link_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_html_menu -%}vapmenuitem_childlink_{{ intVertical }}{%- endcapture -%}
+<div class="row">
+  {%- if settings[ap_html_title] != blank -%}
+  	<div class="menu-title">{{ settings[ap_html_title] }}</div>
+  {%- endif -%}
+  
+    {%- for childlink in settings[ap_html_menu].links -%}
+    <div class="col-lg-{{ settings[ap_col_links] }}">
+      <div class="vertical-col-inner ">
+        <div class="menu-title">
+          <a href="{{ childlink.url }}" title="{%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title -%}">
+            {%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title -%}
+            {%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title -%}
+          </a>
+          {%- if childlink.links != blank -%}
+          <span class="drawer__ver-toggle--open">
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </span>
+          {%- endif -%}
+        </div>
+        <div class="widget-inner">
+          <ul class="nav-links">
+            {%- if childlink.links != blank -%}
+            {%- for grandchildlink in childlink.links -%}
+            <li>
+              <a href="{{ grandchildlink.url }}" title="{%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName: grandchildlink.title -%}">
+                {%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName: grandchildlink.title -%}
+                {%- render 'processMenuLabel' with itemName.grandchildlink.title, itemName: grandchildlink.title -%}
+              </a>
+            </li>
+            {%- endfor -%}
+            {%- endif -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {%- endfor -%}
+
+  </div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'processMenuTitle' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 685..775
+- from: "{%- render 'processMenuTitle' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 791..881
+- from: "{%- render 'processMenuLabel' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 895..985
+- from: "{%- render 'processMenuTitle' with itemName:grandchildlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName:
+    grandchildlink.title -%}"
+  position: 1478..1578
+- from: "{%- render 'processMenuTitle' with itemName:grandchildlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName:
+    grandchildlink.title -%}"
+  position: 1598..1698
+- from: "{%- render 'processMenuLabel' with itemName:grandchildlink.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.grandchildlink.title, itemName:
+    grandchildlink.title -%}"
+  position: 1716..1816
+{%- endcomment -%}

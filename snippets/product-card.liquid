@@ -1,0 +1,10 @@
+{%- case section.settings.productgrid -%}
+  {%- when 'product-1' -%} {% render 'product-grid-1', product_card_product: product_card_product, media_size: media_size, show_secondary_image: show_secondary_image, add_image_padding: add_image_padding, show_vendor: show_vendor %}
+  {%- when 'product-2' -%} {% render 'product-grid-2', product_card_product: product_card_product, media_size: media_size, show_secondary_image: show_secondary_image, add_image_padding: add_image_padding, show_vendor: show_vendor %}
+  {%- when 'product-3' -%} {% render 'product-grid-3', product_card_product: product_card_product, media_size: media_size, show_secondary_image: show_secondary_image, add_image_padding: add_image_padding, show_vendor: show_vendor %}
+  {%- when 'product-4' -%} {% render 'product-grid-4', product_card_product: product_card_product, media_size: media_size, show_secondary_image: show_secondary_image, add_image_padding: add_image_padding, show_vendor: show_vendor %}
+  {%- when 'product-5' -%} {% render 'product-grid-5', product_card_product: product_card_product, media_size: media_size, show_secondary_image: show_secondary_image, add_image_padding: add_image_padding, show_vendor: show_vendor %}
+{%- else -%}
+  {% render 'product-grid-1', product_card_product: product_card_product, media_size: media_size, show_secondary_image: show_secondary_image, add_image_padding: add_image_padding, show_vendor: show_vendor %}
+{%- endcase -%}
+

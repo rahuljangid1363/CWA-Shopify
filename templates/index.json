@@ -1,0 +1,703 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1648263537a3e0a84a": {
+      "type": "slide-show",
+      "blocks": {
+        "slide_KL6HdT": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image_slide": "shopify://shop_images/agent_generate_image_-_Professional_industrial_product_photography__a_new_low-angle.png",
+            "sub_title": "Sub-title slider-show",
+            "color_sub": "#fe5d02",
+            "title": "Title slider-show",
+            "color_title": "#000000",
+            "text_sale": "Save up 20%",
+            "color_text_sale": "#ffffff",
+            "content": "We are at the end of the ‘50s: an interesting series of armchairs and",
+            "color_des": "#000000",
+            "link": "Show More",
+            "btn_link": "",
+            "box_align": "center",
+            "translateX": "",
+            "text_align": "center",
+            "item_align": "center",
+            "bg_button": "#94be90",
+            "color_button": "#ffffff",
+            "border_button": "rgba(0,0,0,0)"
+          }
+        },
+        "slide_abzWAa": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image_slide": "shopify://shop_images/hero-sectioncwa_1.png",
+            "sub_title": "Sub-title slider-show",
+            "color_sub": "#3075cc",
+            "title": "Title slider-show",
+            "color_title": "#ffffff",
+            "text_sale": "Save up 20%",
+            "color_text_sale": "#ffffff",
+            "content": "We are at the end of the ‘50s: an interesting series of armchairs and",
+            "color_des": "#ffffff",
+            "link": "Show More",
+            "btn_link": "",
+            "box_align": "left",
+            "translateX": "",
+            "text_align": "left",
+            "item_align": "center",
+            "bg_button": "#3075cc",
+            "color_button": "#ffffff",
+            "border_button": "rgba(0,0,0,0)"
+          }
+        },
+        "d17110be-0c7a-4c5c-a648-a78b39ac790a": {
+          "type": "slide",
+          "settings": {
+            "image_slide": "shopify://shop_images/ChatGPT_Image_Aug_17_2026_05_41_12_PM.png",
+            "sub_title": "",
+            "color_sub": "#ffffff",
+            "title": "Water & Wastewater Instrumentation Specialists",
+            "color_title": "#ffffff",
+            "text_sale": "",
+            "color_text_sale": "#5193e6",
+            "content": "Trusted in operating treatment plants across Australia",
+            "color_des": "#ffffff",
+            "link": "Explore Products",
+            "btn_link": "shopify://collections/all",
+            "box_align": "left",
+            "translateX": "",
+            "text_align": "left",
+            "item_align": "center",
+            "bg_button": "#3075cc",
+            "color_button": "#ffffff",
+            "border_button": "rgba(0,0,0,0)"
+          }
+        }
+      },
+      "block_order": [
+        "slide_KL6HdT",
+        "slide_abzWAa",
+        "d17110be-0c7a-4c5c-a648-a78b39ac790a"
+      ],
+      "custom_css": [
+        ".title-slide {text-shadow: 5px 2px #17191a;}",
+        ".list-text {width: 50%;}",
+        ".description-slide {font-size: 24px !important;}"
+      ],
+      "settings": {
+        "fullwidth": true,
+        "margin_desktop": "",
+        "padding_desktop": "0px",
+        "margin_mobile": "",
+        "padding_mobile": "0px",
+        "enberslidesDelay": false,
+        "slidesDelay": 15,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "rows": 1,
+        "autoplay": false,
+        "autoplaySpeed": 5000,
+        "speed": 500,
+        "pauseOnHover": false,
+        "arrows": false,
+        "dots": true,
+        "draggable": true,
+        "infinite": true,
+        "slidesToShow_992": 1,
+        "slidesToScroll_992": 1,
+        "arrows_992": false,
+        "dots_992": false,
+        "slidesToShow_767": 1,
+        "slidesToScroll_767": 1,
+        "arrows_767": false,
+        "dots_767": false,
+        "slidesToShow_450": 1,
+        "slidesToScroll_450": 1,
+        "arrows_450": false,
+        "dots_450": false,
+        "show_inter": true
+      }
+    },
+    "1649045314cbc7bc5a": {
+      "type": "banner-grid",
+      "blocks": {
+        "16490453142a9d24a3-0": {
+          "type": "image",
+          "settings": {
+            "width": "41%",
+            "image": "shopify://shop_images/Flow_Measurement.png",
+            "header_image": "",
+            "color_header": "#ffffff",
+            "subheader_image": "Flow Measurement",
+            "color_sub": "#ffffff",
+            "text_sale": "",
+            "color_text_sale": "#3075cc",
+            "text_image": "",
+            "color_description": "#ffffff",
+            "btn_text": "",
+            "btn_link": "shopify://collections/flow-measurement",
+            "color_button": "#121212",
+            "bg_button": "#ffffff",
+            "border_button": "rgba(0,0,0,0)",
+            "text_align": "left",
+            "item_align": "bottom"
+          }
+        },
+        "0854e544-cd69-46db-82f3-15dd5c024062": {
+          "type": "image2row",
+          "settings": {
+            "width": "33%",
+            "image": "shopify://shop_images/Liquid_Analysis.png",
+            "header_image": "",
+            "color_header": "#000000",
+            "subheader_image": "Liquid Analysis",
+            "color_sub": "#000000",
+            "text_sale": "",
+            "color_text_sale": "#3075cc",
+            "text_image": "",
+            "color_description": "#ffffff",
+            "btn_text": "",
+            "btn_link": "shopify://collections",
+            "color_button": "#ffffff",
+            "bg_button": "rgba(0,0,0,0)",
+            "border_button": "#ffffff",
+            "text_align": "right",
+            "item_align": "bottom",
+            "image2": "shopify://shop_images/Level_Measurement.png",
+            "header_image2": "",
+            "color_header2": "#ffffff",
+            "subheader_image2": "Level Measurement",
+            "color_sub2": "#ffffff",
+            "text_sale2": "",
+            "color_text_sale2": "#3075cc",
+            "text_image2": "",
+            "color_description2": "#ffffff",
+            "btn_text2": "",
+            "btn_link2": "shopify://collections",
+            "color_button2": "#ffffff",
+            "bg_button2": "rgba(0,0,0,0)",
+            "border_button2": "#ffffff",
+            "text_align2": "left",
+            "item_align2": "bottom"
+          }
+        },
+        "16490453142a9d24a3-1": {
+          "type": "image",
+          "settings": {
+            "width": "25%",
+            "image": "shopify://shop_images/Pressure_Measurement.png",
+            "header_image": "",
+            "color_header": "#000000",
+            "subheader_image": "Pressure Measurement",
+            "color_sub": "#000000",
+            "text_sale": "",
+            "color_text_sale": "#3075cc",
+            "text_image": "",
+            "color_description": "#ffffff",
+            "btn_text": "",
+            "btn_link": "shopify://collections",
+            "color_button": "#121212",
+            "bg_button": "#ffffff",
+            "border_button": "rgba(0,0,0,0)",
+            "text_align": "left",
+            "item_align": "top"
+          }
+        }
+      },
+      "block_order": [
+        "16490453142a9d24a3-0",
+        "0854e544-cd69-46db-82f3-15dd5c024062",
+        "16490453142a9d24a3-1"
+      ],
+      "custom_css": [
+        ".banner-grid img {width: 100%;}",
+        ".banner-grid-style-1 {padding: 0 4rem; width: 50%;}",
+        ".banner-up .banner-grid-style-1 {width: 50%; left: 55%; right: 0 !important; text-align: right; align-items: end;}"
+      ],
+      "settings": {
+        "fullwidth": false,
+        "background-color": "",
+        "margin_desktop": "60px 0px 0px 0px",
+        "padding_desktop": "",
+        "margin_mobile": "30px 0px 0px 0px",
+        "padding_mobile": "",
+        "heading": "",
+        "text_decoration": "",
+        "width_banner": "full box",
+        "style_banner": "style-1",
+        "effects_image": false,
+        "nopadding": false
+      }
+    },
+    "1653033111explore": {
+      "type": "rich-text",
+      "blocks": {
+        "explore-btn": {
+          "type": "button",
+          "settings": {
+            "button_label": "Explore More",
+            "button_link": "/collections",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "explore-btn"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true
+      }
+    },
+    "165301935421bf9b4c": {
+      "type": "product-tab",
+      "blocks": {
+        "1653019354b34127d8-0": {
+          "type": "collection",
+          "settings": {
+            "title": "featured",
+            "collection": "all"
+          }
+        },
+        "1653019354b34127d8-1": {
+          "type": "collection",
+          "settings": {
+            "title": "flow",
+            "collection": "flow-measurement"
+          }
+        },
+        "1653019354b34127d8-2": {
+          "type": "collection",
+          "settings": {
+            "title": "liquid",
+            "collection": "all"
+          }
+        },
+        "1653019354b34127d8-3": {
+          "type": "collection",
+          "settings": {
+            "title": "level",
+            "collection": "all"
+          }
+        }
+      },
+      "block_order": [
+        "1653019354b34127d8-0",
+        "1653019354b34127d8-1",
+        "1653019354b34127d8-2",
+        "1653019354b34127d8-3"
+      ],
+      "settings": {
+        "fullwidth": false,
+        "background-color": "#f6f6f6",
+        "margin_desktop": "",
+        "padding_desktop": "",
+        "margin_mobile": "",
+        "padding_mobile": "",
+        "heading": "our products",
+        "text_decoration": "",
+        "productgrid": "product-3",
+        "show_ratings": true,
+        "limit": 10,
+        "slidesToShow": 4,
+        "slidesToScroll": 1,
+        "rows": 2,
+        "autoplay": false,
+        "autoplaySpeed": 2000,
+        "speed": 500,
+        "pauseOnHover": false,
+        "arrows": false,
+        "dots": false,
+        "draggable": true,
+        "infinite": true,
+        "slidesToShow_992": 3,
+        "slidesToScroll_992": 1,
+        "arrows_992": false,
+        "dots_992": false,
+        "slidesToShow_767": 2,
+        "slidesToScroll_767": 1,
+        "arrows_767": false,
+        "dots_767": false,
+        "slidesToShow_450": 1,
+        "slidesToScroll_450": 1,
+        "arrows_450": false,
+        "dots_450": false,
+        "show_secondary_image": true,
+        "add_image_padding": false,
+        "show_vendor": true,
+        "image_ratio": "adapt"
+      }
+    },
+    "1653033212b709b17b": {
+      "type": "service",
+      "blocks": {
+        "1653033212a1ab2224-0": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color": "rgba(0,0,0,0)",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M1 3h13v13H1zM14 8h4l3 3v5h-7z\"/><circle cx=\"5.5\" cy=\"18.5\" r=\"1.5\"/><circle cx=\"17.5\" cy=\"18.5\" r=\"1.5\"/></svg>",
+            "header_service": "Ships Australia-wide and to the Pacific",
+            "font_weight": "bold",
+            "color_title": "#121212",
+            "text_service": "",
+            "color_description": "#666666"
+          }
+        },
+        "1653033212a1ab2224-1": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color": "rgba(0,0,0,0)",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M6 2h9l5 5v15H6z\"/><path d=\"M15 2v5h5M9 13h6M9 17h6\"/></svg>",
+            "header_service": "Data sheets on every product — PDF downloads, no sign-up",
+            "font_weight": "bold",
+            "color_title": "#121212",
+            "text_service": "",
+            "color_description": "#666666"
+          }
+        },
+        "1653033212a1ab2224-2": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color": "rgba(0,0,0,0)",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z\"/><path d=\"M9 12l2 2 4-4\"/></svg>",
+            "header_service": "Secure online payment — checkout built for B2B",
+            "font_weight": "bold",
+            "color_title": "#121212",
+            "text_service": "",
+            "color_description": "#666666"
+          }
+        },
+        "c3d8f12d-b89c-434f-a59b-2889b4a5cd84": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color": "rgba(0,0,0,0)",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M3 7l5-3 5 3v6l-5 3-5-3z\"/><path d=\"M13 13l5-3 5 3v6l-5 3-5-3z\" transform=\"translate(-2,2)\"/><path d=\"M8 7v6M13 15v6\"/></svg>",
+            "header_service": "Bulk & multi-line orders — from one unit to a full plant",
+            "font_weight": "bold",
+            "color_title": "#121212",
+            "text_service": "",
+            "color_description": "#666666"
+          }
+        }
+      },
+      "block_order": [
+        "1653033212a1ab2224-0",
+        "1653033212a1ab2224-1",
+        "1653033212a1ab2224-2",
+        "c3d8f12d-b89c-434f-a59b-2889b4a5cd84"
+      ],
+      "settings": {
+        "fullwidth": false,
+        "background-color": "",
+        "margin_desktop": "",
+        "padding_desktop": "",
+        "margin_mobile": "",
+        "padding_mobile": "",
+        "sub_title": "",
+        "color_sub_title": "#59805b",
+        "heading": "",
+        "color_section_header": "#000000",
+        "text_decoration": "",
+        "color_section_text": "#666666",
+        "index_text": "row",
+        "icon-align": "top"
+      }
+    },
+    "16530339040fc194f1": {
+      "type": "product-carousel",
+      "settings": {
+        "fullwidth": true,
+        "background-color": "#00142d",
+        "background-color_content": "rgba(0,0,0,0)",
+        "style_layout": "style2",
+        "margin_desktop": "",
+        "padding_desktop": "",
+        "margin_mobile": "",
+        "padding_mobile": "",
+        "sub_title": "",
+        "color_sub_title": "#59805b",
+        "heading": "Most Searched Products",
+        "color_section_header": "#ffffff",
+        "text_decoration": "",
+        "color_section_text": "#ffffff",
+        "countdown": "2022-7-30T00:00:00",
+        "collection": "all",
+        "productgrid": "product-2",
+        "show_ratings": true,
+        "image_ratio": "adapt",
+        "limit": 3,
+        "slidesToShow": 2,
+        "slidesToScroll": 1,
+        "rows": 1,
+        "autoplay": false,
+        "autoplaySpeed": 2000,
+        "speed": 500,
+        "pauseOnHover": false,
+        "arrows": false,
+        "dots": true,
+        "draggable": true,
+        "infinite": true,
+        "slidesToShow_992": 2,
+        "slidesToScroll_992": 1,
+        "arrows_992": false,
+        "dots_992": true,
+        "slidesToShow_767": 1,
+        "slidesToScroll_767": 1,
+        "arrows_767": false,
+        "dots_767": true,
+        "slidesToShow_450": 1,
+        "slidesToScroll_450": 1,
+        "arrows_450": false,
+        "dots_450": true,
+        "show_secondary_image": true,
+        "add_image_padding": false,
+        "show_vendor": true,
+        "enable_countdown_card": false
+      }
+    },
+    "1653039086fc46e456": {
+      "type": "advanced-content",
+      "blocks": {
+        "16530390864da72ca5-0": {
+          "type": "image",
+          "settings": {
+            "width": "50%",
+            "image": "shopify://shop_images/Image_25.png",
+            "effects_image": false
+          }
+        },
+        "16530390864da72ca5-1": {
+          "type": "text_list",
+          "settings": {
+            "width": "50%",
+            "sub_title": "about cwa",
+            "header__text": "The Self-Serve<br>Instrumentation Store",
+            "text__content": "CWA is an Australian distributor of water and wastewater instrumentation and critical spares. Engineers arrive with a product code from an operations manual, verify the specification, download the data sheet and order online — no phone calls, no email chains.",
+            "text_list_note": "<li class=\"elementor-icon-list-item\"><a href=\"#\"><span class=\"elementor-icon-list-icon\"><i aria-hidden=\"true\" class=\"fas fa-check-circle\"></i></span><span class=\"elementor-icon-list-text\">Australian-owned distributor</span></a></li><li class=\"elementor-icon-list-item\"><a href=\"#\"><span class=\"elementor-icon-list-icon\"><i aria-hidden=\"true\" class=\"fas fa-check-circle\"></i></span><span class=\"elementor-icon-list-text\">AUD pricing on every product</span></a></li><li class=\"elementor-icon-list-item\"><a href=\"#\"><span class=\"elementor-icon-list-icon\"><i aria-hidden=\"true\" class=\"fas fa-check-circle\"></i></span><span class=\"elementor-icon-list-text\">Find any product by CWA code</span></a></li><li class=\"elementor-icon-list-item\"><a href=\"#\"><span class=\"elementor-icon-list-icon\"><i aria-hidden=\"true\" class=\"fas fa-check-circle\"></i></span><span class=\"elementor-icon-list-text\">Serving water, mining, energy & F&B</span></a></li>",
+            "color_text_note": "#666666",
+            "btn_text": "Go To Shop",
+            "btn_link": "",
+            "text_align": "left",
+            "bg_button": "#3075cc",
+            "color_button": "#ffffff",
+            "border_color": "rgba(0,0,0,0)"
+          }
+        }
+      },
+      "block_order": [
+        "16530390864da72ca5-0",
+        "16530390864da72ca5-1"
+      ],
+      "settings": {
+        "fullwidth": false,
+        "background-color": "",
+        "margin_desktop": "",
+        "padding_desktop": "",
+        "margin_mobile": "",
+        "padding_mobile": "",
+        "heading": "",
+        "text_decoration": ""
+      }
+    },
+    "16530419117e4e348f": {
+      "type": "blog-post",
+      "settings": {
+        "fullwidth": false,
+        "background-color": "#f6f6f6",
+        "margin_desktop": "",
+        "padding_desktop": "",
+        "margin_mobile": "",
+        "padding_mobile": "",
+        "sub_title": "",
+        "color_sub_title": "#59805b",
+        "heading": "recent blog",
+        "text_decoration": "",
+        "btn_text": "Show More",
+        "btn_link": "",
+        "blog": "news",
+        "show_view_all": false,
+        "show_date": true,
+        "show_author": true,
+        "show_description": true,
+        "tags_blog": true,
+        "show_link": false,
+        "text_link": "Read More",
+        "slidesToShow": 3,
+        "slidesToScroll": 1,
+        "rows": 1,
+        "autoplay": false,
+        "autoplaySpeed": 2000,
+        "speed": 500,
+        "pauseOnHover": false,
+        "arrows": true,
+        "dots": false,
+        "draggable": true,
+        "infinite": true,
+        "slidesToShow_992": 2,
+        "slidesToScroll_992": 1,
+        "arrows_992": false,
+        "dots_992": false,
+        "slidesToShow_767": 2,
+        "slidesToScroll_767": 1,
+        "arrows_767": false,
+        "dots_767": false,
+        "slidesToShow_450": 1,
+        "slidesToScroll_450": 1,
+        "arrows_450": false,
+        "dots_450": false,
+        "btn_text2": "Readmore",
+        "btn_link2": "",
+        "text_align": "center",
+        "color_button": "#ffffff",
+        "bg_button": "#82d175",
+        "color_hover": "#000000",
+        "bg_hover": "#ffffff"
+      }
+    },
+    "1653097245516b6dce": {
+      "type": "logo-carousel",
+      "blocks": {
+        "165309724527287cec-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_37.png",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "165309724527287cec-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_38.png",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "165309724527287cec-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_1.png",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "165309724527287cec-3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_8.png",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "165309724527287cec-4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_37.png",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        },
+        "165309724527287cec-5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_38.png",
+            "icon": "",
+            "image_link": "",
+            "text_logo": ""
+          }
+        }
+      },
+      "block_order": [
+        "165309724527287cec-0",
+        "165309724527287cec-1",
+        "165309724527287cec-2",
+        "165309724527287cec-3",
+        "165309724527287cec-4",
+        "165309724527287cec-5"
+      ],
+      "settings": {
+        "fullwidth": false,
+        "background-color": "",
+        "margin_desktop": "0",
+        "padding_desktop": "",
+        "margin_mobile": "",
+        "padding_mobile": "",
+        "heading": "",
+        "text_decoration": "",
+        "color_svg": "#121212",
+        "color_svg_hover": "#3075cc",
+        "effect_image": false,
+        "slidesToShow": 6,
+        "slidesToScroll": 1,
+        "rows": 1,
+        "autoplay": false,
+        "autoplaySpeed": 5000,
+        "speed": 800,
+        "pauseOnHover": false,
+        "arrows": false,
+        "dots": false,
+        "draggable": true,
+        "infinite": true,
+        "slidesToShow_992": 3,
+        "slidesToScroll_992": 1,
+        "arrows_992": false,
+        "dots_992": false,
+        "slidesToShow_767": 2,
+        "slidesToScroll_767": 1,
+        "arrows_767": false,
+        "dots_767": false,
+        "slidesToShow_450": 1,
+        "slidesToScroll_450": 1,
+        "arrows_450": false,
+        "dots_450": false
+      }
+    },
+    "1653097817727edcf5": {
+      "type": "newslester",
+      "custom_css": [],
+      "settings": {
+        "fullwidth": false,
+        "bg_color": "#f5f6f7",
+        "bg_image": "shopify://shop_images/ChatGPT_Image_Aug_17_2026_02_47_08_PM_3918aa68-8a66-46f9-8f57-3c5f80c039cd.png",
+        "color_text": "#121212",
+        "color_button": "#ffffff",
+        "bg_color_button": "#3075cc",
+        "sub_title": "",
+        "heading": "Get the latest product releases and special offers",
+        "subheading": "",
+        "style_layout": "left"
+      }
+    }
+  },
+  "order": [
+    "1648263537a3e0a84a",
+    "1649045314cbc7bc5a",
+    "1653033111explore",
+    "165301935421bf9b4c",
+    "1653033212b709b17b",
+    "16530339040fc194f1",
+    "1653039086fc46e456",
+    "16530419117e4e348f",
+    "1653097245516b6dce",
+    "1653097817727edcf5"
+  ]
+}

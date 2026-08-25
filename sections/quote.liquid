@@ -1,0 +1,283 @@
+<link rel="preload" href="{{ 'quote.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'quote.css' | asset_url }}"></noscript>
+{% render 'section-style' %}
+
+<div class="quote-box" {%- if section.settings.bg_image != blank -%} style="background-image:url({{ section.settings.bg_image | img_url:'master'  }});" {%- endif -%}>
+    <div class="title-box">
+        {%- if section.settings.image_title != blank -%}
+            <div class="image-title">
+                <img src="{{ section.settings.image_title | img_url: 'master' }}" alt="">
+            </div>
+        {%- endif -%}
+        <h2 class="section-header">{{ section.settings.heading | escape }}</h2>
+        <p class="section-text">{{ section.settings.text_decoration }}</p>
+    </div>
+    <div class="quote">
+        <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+            <div class="quote-content row">
+                {%- for block in section.blocks -%}
+                {%- case block.settings.width -%}
+                {%- when '25%' -%}
+                {%- assign block_width = 'col-lg-3 col-sm-6  col-12' -%}
+                {%- when '33%' -%}
+                {%- assign block_width = 'col-lg-4 col-md-4' -%}
+                {%- when '50%' -%}
+                {%- assign block_width = 'col-lg-6' -%}
+                {%- when '66%' -%}
+                {%- assign block_width = 'col-lg-8 col-md-12' -%}
+                {%- when '75%' -%}
+                {%- assign block_width = 'col-lg-9 col-md-9' -%}
+                {%- when '100%' -%}
+                {%- assign block_width = 'col-12' -%}
+                {%- endcase -%}
+                <div class="quote-decoration {{block_width}}" id="quote-{{block.id}}" {{ block.shopify_attributes }}>
+                   <div class="box-content">
+                        <div class="team-header">
+                            {%- style -%}
+                                #quote-{{block.id}} .team-header .team-image::before{
+                                    background: linear-gradient(360deg,{{ block.settings.bg_hover }} -3.43%,{{ block.settings.bg_hover }} 17.72%,rgba(148,190,144,.27) 64.11%);
+                                }
+                                #quote-{{block.id}} .team-caption .team-phone,
+                                #quote-{{block.id}} .team-caption .team-email,
+                                #quote-{{block.id}} .team-caption .team-icon-socials ul li svg{
+                                    fill:currentColor;
+                                    color:{{ block.settings.color_hover }};
+                                }
+                                #quote-{{block.id}} .name-quote{
+                                    color:{{ block.settings.name_quote }};
+                                }
+                                #quote-{{block.id}} .address-quote{
+                                    color:{{ block.settings.address_quote }};
+                                }
+                            {%- endstyle -%}
+                            <div class="team-image">
+                                {%- if block.settings.image != blank -%}
+                                    <img
+                                        srcset="
+                                        {%- if block.settings.image.width >= 165 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}"
+                                        src="{{ block.settings.image | img_url: 'master' }}"
+                                        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                                        alt="{{ block.settings.image.alt | escape }}"
+                                        loading="lazy"
+                                        width="{{ block.settings.image.width }}"
+                                        height="{{ block.settings.image.height }}"
+                                    >
+                                {%- else -%}
+                                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                                {%- endif -%}
+                            </div>
+                            <div class="team-caption">
+                                <div class="team-phone">{{ block.settings.team_phone }}</div>
+                                <div class="team-email">{{ block.settings.team_email }}</div>
+                                <div class="team-icon-socials">
+                                    <ul>
+                                        {%- if settings.social_facebook_link != blank -%}
+                                            <li class="list-social__item">
+                                            <a href="{{ settings.social_facebook_link }}" class="link--text list-social__link" aria-describedby="a11y-external-message" title="facebook">
+                                                {%- render 'icon-facebook' -%}
+                                                <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+                                            </a>
+                                            </li>
+                                        {%- endif -%}
+                                        {%- if settings.social_twitter_link != blank -%}
+                                            <li class="list-social__item">
+                                            <a href="{{ settings.social_twitter_link }}" class="link--text list-social__link" aria-describedby="a11y-external-message" title="twitter">
+                                                {%- render 'icon-twitter' -%}
+                                                <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+                                            </a>
+                                            </li>
+                                        {%- endif -%}
+                                        {%- if settings.social_youtube_link != blank -%}
+                                        <li class="list-social__item">
+                                            <a href="{{ settings.social_youtube_link }}" class="link--text list-social__link" aria-describedby="a11y-external-message" title="youtube">
+                                            {%- render 'icon-youtube' -%}
+                                            <!-- <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span> -->
+                                            </a>
+                                        </li>
+                                        {%- endif -%}
+                                        {%- if settings.social_pinterest_link != blank -%}
+                                            <li class="list-social__item">
+                                            <a href="{{ settings.social_pinterest_link }}" class="link--text list-social__link" aria-describedby="a11y-external-message" title="pinterest">
+                                                {%- render 'icon-pinterest' -%}        
+                                            </a>
+                                            </li>
+                                        {%- endif -%}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quote-publisher">
+                            <p class="name-quote">{{ block.settings.name_icon }}</p>
+                            <p class="address-quote">{{ block.settings.city_icon }}</p>
+                        </div>
+                   </div>
+                </div>
+                {%- endfor -%}
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+    "name": "Quote",
+  "tag": "section",
+  "class": "spaced-section spaced-service",
+  "settings": [
+    {
+        "type": "checkbox",
+        "id": "fullwidth",
+        "label": "t:sections.testimonial.settings.fullwidth.label",
+        "default": false
+    },
+    {
+        "id": "background-color",
+        "type": "color",
+        "label": "t:sections.testimonial.settings.background-color.label"
+    },
+    {
+        "id": "bg_image",
+        "type": "image_picker",
+        "label": "Background image"
+    },
+    {
+        "type": "text",
+        "id": "margin_desktop",
+        "label": "t:sections.testimonial.settings.margin_desktop.label",
+        "info": "t:sections.testimonial.settings.margin_desktop.info"
+    },
+    {
+        "type": "text",
+        "id": "padding_desktop",
+        "label": "t:sections.testimonial.settings.padding_desktop.label",
+        "info": "t:sections.testimonial.settings.padding_desktop.info"
+    },
+    {
+        "type": "text",
+        "id": "margin_mobile",
+        "label": "t:sections.testimonial.settings.margin_mobile.label",
+        "info": "t:sections.testimonial.settings.margin_mobile.info"
+    },
+    {
+        "type": "text",
+        "id": "padding_mobile",
+        "label": "t:sections.testimonial.settings.padding_mobile.label",
+        "info": "t:sections.testimonial.settings.padding_mobile.info"
+    },
+    {
+        "type": "image_picker",
+        "id": "image_title",
+        "label": "Image title"
+      },
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "t:sections.testimonial.settings.heading.label",
+        "default": "Quote"
+    },
+    {
+        "type": "text",
+        "id": "text_decoration",
+        "label": "t:sections.testimonial.settings.text_decoration.label",
+        "default": "Quote"
+    }
+  ],
+  "blocks":[
+  {
+    "type": "quote",
+    "name": "Quote",
+    "settings": [
+    {
+        "type": "select",
+        "id": "width",
+        "label": "t:sections.banner-grid.blocks.image.settings.width.label",
+        "default": "33%",
+        "options": [
+          {
+            "value": "25%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__1.label"
+          },
+          {
+            "value": "33%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__2.label"
+          },
+          {
+            "value": "50%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__3.label"
+          },
+          {
+            "value": "66%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__4.label"
+          },
+          {
+            "value": "75%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__5.label"
+          },
+          {
+            "value": "100%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__6.label"
+          }
+        ]
+    },
+    {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Image"
+    },
+    {
+        "type":"text",
+        "id":"team_phone",
+        "label":"Phone",
+        "default":"+(84)4 1800 33555"
+    },
+    {
+        "type":"text",
+        "id":"team_email",
+        "label":"Email",
+        "default":"contact@example.com"
+    },
+    {
+        "type":"color",
+        "id":"bg_hover",
+        "label":"Background hover image",
+        "default":"#94BE90"
+    },
+    {
+        "type":"color",
+        "id":"color_hover",
+        "label":"Color hover image",
+        "default":"#fff"
+    },
+    {
+        "type":"text",
+        "id":"name_icon",
+        "label":"Name",
+        "default":"Jack Black"
+    },
+    {
+        "type":"color",
+        "id":"name_quote",
+        "label":"Color name",
+        "default":"#000"
+    },
+    {
+        "type":"text",
+        "id":"city_icon",
+        "label":"Job",
+        "default":"MANAGER"
+    },
+    {
+        "type":"color",
+        "id":"address_quote",
+        "label":"Color job",
+        "default":"#999999"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+      "name":"Quote"
+  }
+  ]
+}
+{% endschema %}

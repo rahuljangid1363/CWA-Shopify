@@ -1,0 +1,36 @@
+.collection-carousel .container-fluid{
+    padding: 0;
+}
+.collection-content-carousel{
+    margin: 0 15px;
+    position: relative;
+    max-width: 410px;
+    overflow: hidden;
+    
+}
+.title-collection-carousel{
+    position: absolute;
+    bottom: 20px;
+    left: 7%;
+    text-transform: capitalize;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #fff;
+    margin: 0;
+}
+
+.title-collection-carousel span{
+    color: #000;
+}
+.collection-carousel-image-effect .link-collection-carousel{
+    overflow: hidden;
+}
+.collection-carousel-image-effect .link-collection-carousel img{
+    transition: all 0.5s ease-in-out;
+    overflow: hidden;
+}
+
+.collection-carousel-image-effect .link-collection-carousel:hover img{
+    transform: scale3d(1.1, 1.1, 1);
+}

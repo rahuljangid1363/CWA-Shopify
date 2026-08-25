@@ -1,0 +1,38 @@
+<product-comparepage>
+  <div class="container container--compare">
+      <div class="content-block">
+          <div class="row js-compare-content">
+            <table>
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>price</th>
+                  <th>Variants</th>
+                  <th>Vendor</th>
+                  <th>Product type</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+            {%- for product in collections.all.products limit: 1 -%}
+                <tr class="compare-template" style="display: none">
+                  <td><a href="#" class="full-unstyled-link"><img class="product-img" src="" alt=""></a></td>
+                  <td><a href="#" class="full-unstyled-link product-title"></a></td>
+                  <td><div class="product-price"></div></td>
+                  <td>
+                    <div class="product-variants">
+                  	
+                    </div>
+                  </td>
+                  <td><div class="product-vendor"></div></td>
+                  <td><div class="product-type"></div></td>
+                  <td><button class="js-btn-remove-compare" data-handle="">{%- render 'icon-close' -%}</button></td>
+                </tr>
+              {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+      </div>
+  </div>
+</product-comparepage>

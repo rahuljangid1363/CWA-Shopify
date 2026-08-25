@@ -1,0 +1,17 @@
+{%- if settings.free_shipping_enable -%}
+{%- if settings.free_shipping_value != blank -%}
+    {%- assign free_shipping_value = settings.free_shipping_value -%}
+{%- else -%}
+	{%- assign free_shipping_value = 1000 -%}
+{%- endif -%}
+
+<cart-freeshipping>
+  <div class="progress js-free-shipping" data-cost="{{free_shipping_value}}" data-value="{{ cart.total_price }}" {%- if settings.free_shipping_bar1 != blank -%}style="background-color: {{settings.free_shipping_bar1}};"{%- endif -%}>
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100" {%- if settings.free_shipping_bar2 != blank -%}style="background-color: {{settings.free_shipping_bar2}};"{%- endif -%}></div>
+    <span class="free-shipping-content">
+      {%- render 'icon-free-shiping' -%}
+      <span class="js-free-shipping-text" data-free="Your order is free delivery !" data-spend='{{settings.spend_free_shipping_text}}'></span>
+    </span>
+  </div>
+</cart-freeshipping>
+{%- endif -%}

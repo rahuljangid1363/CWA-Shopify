@@ -1,0 +1,105 @@
+<!-- block-menu.liquid -->
+{{ 'block-menu.css' | asset_url | stylesheet_tag }}
+
+<div class="nav-bkg"></div>
+<nav class="nav-bar nav-mega" role="navigation">
+  <div class="menu-close">
+    <button class="button-close" type="button">{%- render 'icon-close' -%}</button>
+  </div>
+  {%- assign industryBlocks = section.blocks | where: 'type', 'industry_item' -%}
+  <ul class="site-nav d-flex">
+    {%- for link in linklists[settings.main_linklist].links -%}
+      {%- assign hasMega = false -%}
+      {%- assign titleCheckMega = link.title | escape | split: '[' | first | split: '}' | last | downcase -%}
+      {%- for i in (1..4) -%}
+        {%- capture apmegamenu_title -%}apmenuitem_title_{{ i }}{%- endcapture -%}
+        {%- assign megamenu_title = settings[apmegamenu_title] | escape | strip | downcase -%}
+        {%- if titleCheckMega == megamenu_title -%}
+          {%- assign hasMega = true -%}
+          {%- assign intMega = i -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if hasMega -%}
+        {%- assign isFullwidth = true -%}
+        {%- assign settingWidth = 'apmenuitem_width_' | append: intMega -%}
+        {%- assign widthMega = settings[settingWidth] -%}
+        {%- if widthMega != 0 -%}
+          {%- assign isFullwidth = false -%}
+        {%- endif -%}
+
+        <li class="site-nav__item site-nav__item-mega {% unless isFullwidth %} site-nav__item-mega--custom{% endunless %} {% if link.active %} site-nav--active{% endif %}" data-width="{{widthMega}}">
+          <a href="{{ link.url }}" class="site-nav__link dropdown-toggle" {% if link.active %} aria-current="page"{% endif %}>
+            <span>
+            {%- render 'processMenuTitle' with itemName.link.title, itemName: link.title -%}
+            {%- render 'processMenuLabel' with itemName.link.title, itemName: link.title -%}
+            </span>
+          </a>
+          <span class="drawer__nav-toggle--open">
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </span>
+          <div class="site__dropdown site-nav__dropdown meganav meganav-{{intMega}} " {%- if widthMega != 0 -%}style="width: {{widthMega}}px;"{%- endif -%}>
+            {%- render 'megamenu', intMega:intMega -%}
+          </div>
+        </li>
+      {%- elsif link.links != blank -%}
+        <li class="site-nav__item site-nav__item-normal {% if link.active %} site-nav--active{% endif %}">
+          <a href="{{ link.url }}" class="site-nav__link dropdown-toggle" {% if link.active %} aria-current="page"{% endif %}>
+            <span>
+            {%- render 'processMenuTitle' with itemName.link.title, itemName: link.title -%}
+            {%- render 'processMenuLabel' with itemName.link.title, itemName: link.title -%}
+            </span>
+          </a>
+          <div class="site__dropdown site-nav__dropdown meganav">
+            {%- if titleCheckMega == 'industries' and industryBlocks.size > 0 -%}
+              {%- render 'industries-preview-menu', blocks: industryBlocks -%}
+            {%- else -%}
+              <ul class="meganav__nav">
+                {%- render 'site-nav', link: link -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        </li>
+        {%- else -%}
+        <li class="site-nav__item{% if link.active %} site-nav--active{% endif %}">
+          <a href="{{ link.url }}" class="site-nav__link"{% if link.active %} aria-current="page"{% endif %}>
+            <span>
+            {%- render 'processMenuTitle' with itemName.link.title, itemName: link.title -%}
+            {%- render 'processMenuLabel' with itemName.link.title, itemName: link.title -%}
+            </span>
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</nav>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'processMenuTitle' with itemName:link.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.link.title, itemName: link.title
+    -%}"
+  position: 1584..1664
+- from: "{%- render 'processMenuLabel' with itemName:link.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.link.title, itemName: link.title
+    -%}"
+  position: 1677..1757
+- from: "{%- render 'processMenuTitle' with itemName:link.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.link.title, itemName: link.title
+    -%}"
+  position: 2473..2553
+- from: "{%- render 'processMenuLabel' with itemName:link.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.link.title, itemName: link.title
+    -%}"
+  position: 2566..2646
+- from: "{%- render 'processMenuTitle' with itemName:link.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.link.title, itemName: link.title
+    -%}"
+  position: 3121..3201
+- from: "{%- render 'processMenuLabel' with itemName:link.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.link.title, itemName: link.title
+    -%}"
+  position: 3214..3294
+{%- endcomment -%}

@@ -1,0 +1,307 @@
+<!-- banner-cart.liquid -->
+{{ 'litetooltip.min.css' | asset_url | stylesheet_tag }}
+{{ 'banner-cart.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+
+<script src="{{ 'litetooltip.min.js' | asset_url }}" defer="defer"></script>
+<div class="imagehotspot-container banner-cart">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container medium-container{%- endif -%}">
+      <h2 class="section-header banner-header">{{ section.settings.heading | escape }}</h2>
+      <p class="section-text banner-text">{{ section.settings.text_decoration }}</p>
+      <div class="row">
+        <div class="banner-cart-container">
+          <div class="banner-content {% if section.settings.image_banner != blank %}media{% else %}image-banner__media--placeholder placeholder{% endif %}"
+          style="padding-bottom: {{ 1 | divided_by: section.settings.image_banner.aspect_ratio | times: 100 }}%;"
+          >
+              {%- if section.settings.image_banner != blank  -%}
+              <img class="banner-cart-image"
+                srcset="{%- if section.settings.image_banner.width >= 165 -%}{{ section.settings.image_banner | img_url: '165x' }} 165w,{%- endif -%}
+                  {%- if section.settings.image_banner.width >= 360 -%}{{ section.settings.image_banner | img_url: '360x' }} 360w,{%- endif -%}
+                  {%- if section.settings.image_banner.width >= 1043 -%}{{ section.settings.image_banner | img_url: '1043x' }} 1043w,{%- endif -%}
+                  {%- if section.settings.image_banner.width >= 1500 -%}{{ section.settings.image_banner | img_url: '1500x' }} 1500w,{%- endif -%}
+                  {%- if section.settings.image_banner.width >= 1920 -%}{{ section.settings.image_banner | img_url: '1920x' }} 1920w,{%- endif -%}"
+                src="{{ section.settings.image_banner | img_url: 'master' }}"
+                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                alt="{{ section.settings.image_banner.alt | escape }}"
+                loading="lazy"
+                width="{{ section.settings.image_banner.width }}"
+                height="{{ section.settings.image_banner.height }}"
+              >
+              {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+          </div>
+          
+          {%- for block in section.blocks -%}
+          {%- case block.type -%}
+
+          {%- when 'content' -%}
+          <div class="banner-cart-description {%- if block.settings.text_align == 'left' -%}{{ 'text-start' | prepend: ' ' }}{%- elsif block.settings.text_align == 'center' -%}{{ 'text-center' | prepend: ' ' }}{%- elsif block.settings.text_align == 'right' -%}{{ 'text-end' | prepend: ' ' }}{%- endif -%}" style="left: {{ block.settings.left }}%">
+              <h5 class="sub-title-banner">{{ block.settings.sub_title }}</h5>
+              <h3 class="title-banner">{{ block.settings.title }}</h3>
+              <p class="text-banner">{{ block.settings.description }}</p>
+              {%- if block.settings.btn_text != blank -%}
+              <a class="button-content" href="{{ block.settings.btn_link | default:'#' }}" title="{{ block.settings.btn_text }}">
+                  <span>{{ block.settings.btn_text }}</span>
+              </a>
+              {%- endif -%}
+          </div>
+
+          {%- when 'product'-%}
+          
+          <div class="banner-hotspots-icons" data-location="{%- if block.settings.align_product == 'top' -%}top{%- elsif block.settings.align_product == 'bottom' -%}bottom{%- elsif block.settings.align_product == 'left' -%}left{%- elsif block.settings.align_product == 'right' -%}right{%- elsif block.settings.align_product == 'top-left' -%}top-left{%- elsif block.settings.align_product == 'top-right' -%}top-right{%- elsif block.settings.align_product == 'bottom-right' -%}bottom-right{%- elsif block.settings.align_product == 'bottom-right' -%}bottom-right{%- endif -%}" style="top: {{ block.settings.top_align }}; left: {{ block.settings.left_align }};">
+            <div class="banner-hotspots-icons-image-wrap">
+              <i class="banner-image-hotspots-icon"></i>
+              {%- if block.settings.product != blank -%}
+                <div class="banner-collage-card">
+                  <div class="banner-hotspots-product">
+                    {%- assign featured_media = block.settings.product.selected_or_first_available_variant.featured_media | default: block.settings.product.featured_media -%}
+                    <a href="{{ block.settings.product.url | default:'#' }}" class="collage-content full-unstyled-link" {{ block.shopify_attributes }}>
+                        <img 
+                             src="{{ featured_media | img_url: '150x' }}"
+                             alt="{{ featured_media.alt | escape }}"
+                             loading="lazy"
+                             >
+                    </a>
+                    <div class="banner-content-product">
+                      <h3 class="card-information__text h4">{{ block.settings.product.title | escape }}</h3>
+                      <div class="product-description">
+                        <p>{{ block.settings.product_content }}</p>
+                      </div>
+                        <a class="link-base" href="{{ block.settings.product_link | default:'#' }}" title="{{ block.settings.product_text }}">{{ block.settings.product_text }}
+                          <i class="leofar leofa-arrow-right"></i>
+                        </a>
+                    </div>
+                  </div>
+                </div>
+          	  {%- endif -%}
+              </div>
+            </div>
+          {%- endcase -%}
+          {%- endfor -%}
+        </div>
+        
+        
+      </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.banner-cart.name",
+  "class": "spaced-section spaced-banner-card",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.banner-cart.settings.fullwidth.label",
+      "default": false
+    },
+    {
+      "id": "background-color",
+      "type": "color",
+      "label": "t:sections.banner-cart.settings.background-color.label"
+    },
+    {
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "t:sections.banner-cart.settings.margin_desktop.label",
+      "info": "t:sections.banner-cart.settings.margin_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "t:sections.banner-cart.settings.padding_desktop.label",
+      "info": "t:sections.banner-cart.settings.padding_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "t:sections.banner-cart.settings.margin_mobile.label",
+      "info": "t:sections.banner-cart.settings.margin_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "t:sections.banner-cart.settings.padding_mobile.label",
+      "info": "t:sections.banner-cart.settings.padding_mobile.info"
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "t:sections.banner-cart.settings.heading.label",
+      "default": "Banner cart"
+    },
+    {
+      "type": "text",
+      "id": "text_decoration",
+      "label": "t:sections.banner-cart.settings.text_decoration.label",
+      "default": "Banner cart"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_banner",
+      "label": "t:sections.banner-cart.settings.image_banner.label"
+    }
+  ],
+  "blocks": [
+    {
+        "type": "content",
+        "name": "t:sections.banner-cart.blocks.content.name",
+        "settings": [
+        
+        {
+            "type": "text",
+            "id": "sub_title",
+            "label": "t:sections.banner-cart.blocks.content.settings.sub_title.label",
+            "default": "sub-header banner"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.banner-cart.blocks.content.settings.title.label",
+            "default": "header banner"
+        },
+        {
+            "type": "text",
+            "id": "description",
+            "label": "t:sections.banner-cart.blocks.content.settings.description.label",
+            "default": "text decoration banner"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "t:sections.banner-cart.blocks.content.settings.btn_text.label",
+            "default": "Show More"
+          },
+          {
+            "type": "url",
+            "id": "btn_link",
+            "label": "t:sections.banner-cart.blocks.content.settings.btn_link.label"
+          },
+          {
+            "id": "text_align",
+            "type": "select",
+            "options": [
+              {
+                "value": "left",
+                "label": "t:sections.banner-cart.blocks.content.settings.text_align.options__1.label"
+              },
+              {
+                "value": "center",
+                "label": "t:sections.banner-cart.blocks.content.settings.text_align.options__2.label"
+              },
+              {
+                "value": "right",
+                "label": "t:sections.banner-cart.blocks.content.settings.text_align.options__3.label"
+              }
+            ],
+            "default": "left",
+            "label": "t:sections.banner-cart.blocks.content.settings.text_align.label"
+          },
+          {
+            "type": "range",
+            "id": "left",
+            "min": 0,
+            "max": 80,
+            "step": 1,
+            "unit": "%",
+            "label": "t:sections.banner-cart.blocks.content.settings.left.label",
+            "default": 50
+          }
+        ]
+    },
+    {
+      "type": "product",
+      "name": "t:sections.banner-cart.blocks.product.name",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.banner-cart.blocks.product.settings.product.label"
+        },
+        {
+          "type": "text",
+          "id": "product_content",
+          "label": "t:sections.banner-cart.blocks.product.settings.product_content.label",
+          "default": "A handsome, adaptable shelf for residential and commercial settings."
+        },
+        {
+          "type": "text",
+          "id": "product_text",
+          "label": "t:sections.banner-cart.blocks.product.settings.product_text.label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "t:sections.banner-cart.blocks.product.settings.product_link.label"
+        },
+        {
+          "id": "align_product",
+          "type": "select",
+          "options": [
+            {
+              "value": "top",
+              "label": "t:sections.banner-cart.blocks.product.settings.align_product.options__1.label"
+            },
+            {
+              "value": "bottom",
+              "label": "t:sections.banner-cart.blocks.product.settings.align_product.options__2.label"
+            },
+            {
+              "value": "left",
+              "label": "t:sections.banner-cart.blocks.product.settings.align_product.options__3.label"
+            },
+            {
+              "value": "right",
+              "label": "t:sections.banner-cart.blocks.product.settings.align_product.options__4.label"
+            },
+            {
+              "value": "top-left",
+              "label": "t:sections.banner-cart.blocks.product.settings.align_product.options__5.label"
+            },
+            {
+              "value": "top-right",
+              "label": "t:sections.banner-cart.blocks.product.settings.align_product.options__6.label"
+            },
+            {
+              "value": "bottom-left",
+              "label": "t:sections.banner-cart.blocks.product.settings.align_product.options__7.label"
+            },
+            {
+              "value": "bottom-right",
+              "label": "t:sections.banner-cart.blocks.product.settings.align_product.options__8.label"
+            }
+          ],
+          "default": "right",
+          "label": "t:sections.banner-cart.blocks.product.settings.align_product.label"
+        },
+        {
+          "type": "text",
+          "id": "top_align",
+          "label": "t:sections.banner-cart.blocks.product.settings.top_align.label",
+          "default": "50%"
+        },
+        {
+          "type": "text",
+          "id": "left_align",
+          "label": "t:sections.banner-cart.blocks.product.settings.left_align.label",
+          "default": "45.5%"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.banner-cart.presets.name",
+      "blocks": [
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

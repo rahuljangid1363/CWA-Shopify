@@ -1,0 +1,150 @@
+<!-- collection-2.liquid -->
+{{ 'collection-2.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+
+<div class="collection-2">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+      <h2 class="section-header">{{ section.settings.heading | escape }}</h2>
+      <p class="section-text">{{ section.settings.text_decoration }}</p>
+        <div class="row">
+            <div class="col-collection" {{ block.shopify_attributes }}>
+                {%- for block in section.blocks -%}
+                <div class="collection-content collection-2-{%- if section.settings.effects_image -%}effect{%- else -%}no-effect{%- endif -%}">
+                    <a class="link-collection-2" href="{{ block.settings.collection.url | default:'#' }}">
+                      <div class="collection-image {% if block.settings.image_collection != blank %}media{% else %}image-collection-2__media--placeholder placeholder{% endif %}"
+                      style="padding-bottom: {{ 1 | divided_by: block.settings.image_collection.aspect_ratio | times: 100 }}%;"
+                      >
+                        {%- if block.settings.image_collection != blank -%}
+                        <img class="img-collection-2"
+                        srcset="{%- if block.settings.image_collection.width >= 190 -%}{{ block.settings.image_collection | img_url: '190x' }} 190w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 360 -%}{{ block.settings.image_collection | img_url: '360x' }} 360w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 535 -%}{{ block.settings.image_collection | img_url: '535x' }} 535w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 750 -%}{{ block.settings.image_collection | img_url: '750x' }} 750w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 1070 -%}{{ block.settings.image_collection | img_url: '1070x' }} 1070w,{%- endif -%}
+                          {%- if block.settings.image_collection.width >= 1500 -%}{{ block.settings.image_collection | img_url: '1500x' }} 1500w,{%- endif -%}"
+                        src="{{ block.settings.image_collection | img_url: 'master' }}"
+                        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                        alt="{{ block.settings.image_collection.alt | escape }}"
+                        loading="lazy"
+                        width="{{ block.settings.image_collection.width }}"
+                        height="{{ block.settings.image_collection.height }}"
+                      >    
+                      {%- else -%}
+                      {%- capture current -%}{%- cycle 1, 2, 3, 4, 5, 6 -%}{%- endcapture -%}
+                      {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- endif -%}
+                      </div>
+                    <h3 class="title-collection-2">{{ block.settings.collection.title | escape }}{%- if block.settings.collection.title == blank -%}<span>Collection</span>{%- endif -%}</h3>
+                    </a>
+                </div>
+                {%- endfor -%}
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.collection-2.name",
+  "class": "spaced-section section-collection-2",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.collection-2.settings.fullwidth.label",
+      "default": false
+    },
+    {
+      "id": "background-color",
+      "type": "color",
+      "label": "t:sections.collection-2.settings.background-color.label"
+    },
+    {
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "t:sections.collection-2.settings.margin_desktop.label",
+      "info": "t:sections.collection-2.settings.margin_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "t:sections.collection-2.settings.padding_desktop.label",
+      "info": "t:sections.collection-2.settings.padding_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "t:sections.collection-2.settings.margin_mobile.label",
+      "info": "t:sections.collection-2.settings.margin_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "t:sections.collection-2.settings.padding_mobile.label",
+      "info": "t:sections.collection-2.settings.padding_mobile.info"
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "t:sections.collection-2.settings.heading.label",
+      "default": "Collection list 2"
+    },
+    {
+      "type": "text",
+      "id": "text_decoration",
+      "label": "t:sections.collection-2.settings.text_decoration.label",
+      "default": "Collection list 2"
+    },
+    {
+    "type": "checkbox",
+    "id": "effects_image",
+    "label": "t:sections.collection-2.settings.effects_image.label",
+    "default": false
+    }
+  ],
+  "blocks": [
+    {
+        "type": "collection",
+        "name": "t:sections.collection-2.blocks.collection.name",
+        "settings": [
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "t:sections.collection-2.blocks.collection.settings.collection.label"
+            },
+            {
+            "type": "image_picker",
+            "id": "image_collection",
+            "label": "t:sections.collection-2.blocks.collection.settings.image_collection.label"
+            }
+        ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.collection-2.presets.name",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

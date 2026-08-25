@@ -1,0 +1,500 @@
+<!-- testimonial.liquid -->
+<link rel="preload" href="{{ 'testimonial.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'testimonial.css' | asset_url }}"></noscript>
+{% render 'section-style' %}
+
+{%- style -%}
+.testimonial .slick-arrow{
+  top: 50%;
+  width: 58px;
+  height: 58px;
+  background-color: {{ section.settings.bg_button }};
+  border-radius: 50%;
+  border-radius: 1px solid {{ section.settings.border_button }};
+}
+.testimonial .slick-next:before, .testimonial .slick-prev:before{
+  color:{{ section.settings.color_button }};
+}
+.testimonial .slick-prev:hover,.testimonial .slick-next:hover{
+  background-color: {{ section.settings.bg_button_hover }} !important;
+  border-radius: 1px solid {{ section.settings.border_button_hover }};
+}
+.testimonial .slick-prev:hover::before,.testimonial .slick-next:hover::before{
+  color: {{ section.settings.color_button_hover }} !important;
+}
+{%- endstyle -%}
+
+
+<div class="testimonial-box" {%- if section.settings.bg_image != blank -%} style="background-image:url({{ section.settings.bg_image | img_url:'master'  }});" {%- endif -%}>
+  <h2 class="section-header">{{ section.settings.heading | escape }}</h2>
+  <p class="section-text">{{ section.settings.text_decoration }}</p>
+  <div class="testimonial">
+      <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+          <div class="testimonial-content testimonial-slick apslick ap-custom-slick"
+              data-setting='{"accessibility": false, "arrows": {{ section.settings.arrows }},
+              "dots": {{ section.settings.dots }}, "draggable": {{ section.settings.draggable }},
+              "infinite": {{ section.settings.infinite }}, "autoplay": {{ section.settings.autoplay }},
+              "autoplaySpeed": {{ section.settings.autoplaySpeed }}, "speed": {{ section.settings.speed }},
+              "slidesToShow": {{ section.settings.slidesToShow }}, "slidesToScroll": {{ section.settings.slidesToScroll }},
+              "vertical": false, "mobileFirst": false, "pauseOnHover": {{ section.settings.pauseOnHover }},
+              "rows": {{ section.settings.rows }}, "slidesPerRow": 1, "rtl": 1,
+              "slidesToShow_992": {{ section.settings.slidesToShow_992 }}, "slidesToScroll_992": {{ section.settings.slidesToScroll_992 }},
+              "arrows_992": {{ section.settings.arrows_992 }}, "dots_992": {{ section.settings.dots_992 }},
+              "slidesToShow_767": {{ section.settings.slidesToShow_767 }}, "slidesToScroll_767": {{ section.settings.slidesToScroll_767 }},
+              "arrows_767": {{ section.settings.arrows_767 }}, "dots_767": {{ section.settings.dots_767 }},
+              "slidesToShow_450": {{ section.settings.slidesToShow_450 }}, "slidesToScroll_450": {{ section.settings.slidesToScroll_450 }},
+              "arrows_450": {{ section.settings.arrows_450 }}, "dots_450": {{ section.settings.dots_450 }}}'>
+              {%- for block in section.blocks -%}
+              <div class="testimonial-decoration" id="ap-slick-content-{{block.id}}" {{ block.shopify_attributes }}>
+                  {%- style -%}
+                    #ap-slick-content-{{block.id}} .title-content{
+                      color:{{ block.settings.color_title_content  }}
+                    }
+                    #ap-slick-content-{{block.id}} .name-testimonial{
+                      color:{{ block.settings.color_name  }};
+                    }
+                    #ap-slick-content-{{block.id}} .address-testimonial{
+                      color:{{ block.settings.color_address  }};
+                    }
+                    #ap-slick-content-{{block.id}} .testimonial_text{
+                      color:{{ block.settings.color_text_content  }};
+                    }
+                    #ap-slick-content-{{block.id}} .icon{
+                      background-color:{{ block.settings.bg_icon }};
+                    }
+                    #ap-slick-content-{{block.id}} .icon svg{
+                      fill:currentColor;
+                      color:{{ block.settings.color_icon }}
+                    }
+                  {%- endstyle -%}
+               
+                  {%- if block.settings.title_content != blank -%}
+                    <div class="testimonial-title">
+                      <h3 class="title-content">
+                        {{ block.settings.title_content }}
+                      </h3>
+                    </div>
+                  {%- endif -%}
+                  <p class="testimonial_text">{{ block.settings.testimonial_text }}</p>
+                  <div class="d-flex testimonial-info-box ">
+                    <!-- icon -->
+                    {%- if block.settings.icon != blank -%}
+                      <div class="icon">
+                        {{ block.settings.icon }}
+                      </div>
+                    {%- endif -%}
+                    <!-- image -->
+                    <div class="testimonial-author">
+                      <div class="img_testimonial">
+                      {%- if block.settings.icon_testimonial != blank -%}
+                        <img
+                        srcset="{%- if block.settings.icon_testimonial.width >= 165 -%}{{ block.settings.icon_testimonial | img_url: '165x' }} 165w,{%- endif -%}
+                          {%- if block.settings.icon_testimonial.width >= 360 -%}{{ block.settings.icon_testimonial | img_url: '360x' }} 360w,{%- endif -%}
+                          {%- if block.settings.icon_testimonial.width >= 535 -%}{{ block.settings.icon_testimonial | img_url: '535x' }} 535w,{%- endif -%}
+                          {%- if block.settings.icon_testimonial.width >= 750 -%}{{ block.settings.icon_testimonial | img_url: '750x' }} 750w,{%- endif -%}
+                          {%- if block.settings.icon_testimonial.width >= 1070 -%}{{ block.settings.icon_testimonial | img_url: '1070x' }} 1070w,{%- endif -%}
+                          {%- if block.settings.icon_testimonial.width >= 1500 -%}{{ block.settings.icon_testimonial | img_url: '1500x' }} 1500w,{%- endif -%}"
+                        src="{{ block.settings.icon_testimonial | img_url: '66x' }}"
+                        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                        alt="{{ block.settings.icon_testimonial.alt | escape }}"
+                        loading="lazy"
+                        width="{{ block.settings.icon_testimonial.width }}"
+                        >
+                      {%- else -%}
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- endif -%}
+                      </div>
+                    </div>
+                    <!-- info -->
+                    <div class="testimonial-publisher">
+                      <p class="name-testimonial">{{ block.settings.name_icon }}</p>
+                      <p class="address-testimonial">{{ block.settings.city_icon }}</p>
+                    </div>
+                  </div>
+                 
+                </div>
+              {%- endfor -%}
+          </div>
+          
+      </div>
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "t:sections.testimonial.name",
+  "tag": "section",
+  "class": "spaced-section spaced-service",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.testimonial.settings.fullwidth.label",
+      "default": false
+    },
+    {
+      "id": "background-color",
+      "type": "color",
+      "label": "t:sections.testimonial.settings.background-color.label"
+    },
+    {
+      "id": "bg_image",
+      "type": "image_picker",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "t:sections.testimonial.settings.margin_desktop.label",
+      "info": "t:sections.testimonial.settings.margin_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "t:sections.testimonial.settings.padding_desktop.label",
+      "info": "t:sections.testimonial.settings.padding_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "t:sections.testimonial.settings.margin_mobile.label",
+      "info": "t:sections.testimonial.settings.margin_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "t:sections.testimonial.settings.padding_mobile.label",
+      "info": "t:sections.testimonial.settings.padding_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.testimonial.settings.heading.label",
+      "default": "Testimonial"
+    },
+    {
+      "type": "text",
+      "id": "text_decoration",
+      "label": "t:sections.testimonial.settings.text_decoration.label",
+      "default": "testimonial"
+    },
+    {
+      "type": "color",
+      "id": "bg_button",
+      "label": "Background color button next and prev",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "border_button",
+      "label": "Border color button next and prev",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "color_button",
+      "label": "Color color button next and prev",
+      "default": "#c4c4c4"
+    },
+    {
+      "type": "color",
+      "id": "bg_button_hover",
+      "label": "Background color button next and prev hover",
+      "default": "#7fb17a"
+    },
+    {
+      "type": "color",
+      "id": "border_button_hover",
+      "label": "Border color button next and prev hover",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "color_button_hover",
+      "label": "Color color button next and prev hover",
+      "default": "#fff"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.testimonial.settings.slidesToShow.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.testimonial.settings.slidesToScroll.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "t:sections.testimonial.settings.rows.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "t:sections.testimonial.settings.autoplay.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplaySpeed",
+      "min": 1000,
+      "max": 5000,
+      "step": 1000,
+      "label": "t:sections.testimonial.settings.autoplaySpeed.label",
+      "default": 5000
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 300,
+      "max": 1000,
+      "step": 100,
+      "label": "t:sections.testimonial.settings.speed.label",
+      "default": 1000
+    },
+    {
+      "type": "checkbox",
+      "id": "pauseOnHover",
+      "label": "t:sections.testimonial.settings.pauseOnHover.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows",
+      "label": "t:sections.testimonial.settings.arrows.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:sections.testimonial.settings.dots.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "draggable",
+      "label": "t:sections.testimonial.settings.draggable.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "infinite",
+      "label": "t:sections.testimonial.settings.infinite.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.testimonial.settings.header.content"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow_992",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.testimonial.settings.slidesToShow_992.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll_992",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.testimonial.settings.slidesToScroll_992.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows_992",
+      "label": "t:sections.testimonial.settings.arrows_992.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_992",
+      "label": "t:sections.testimonial.settings.dots_992.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.testimonial.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow_767",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.testimonial.settings.slidesToShow_767.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll_767",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.testimonial.settings.slidesToScroll_767.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows_767",
+      "label": "t:sections.testimonial.settings.arrows_767.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_767",
+      "label": "t:sections.testimonial.settings.dots_767.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.testimonial.settings.header_2.content"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow_450",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.testimonial.settings.slidesToShow_450.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll_450",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.testimonial.settings.slidesToScroll_450.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows_450",
+      "label": "t:sections.testimonial.settings.arrows_450.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_450",
+      "label": "t:sections.testimonial.settings.dots_450.label",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "t:sections.testimonial.blocks.quote.name",
+      "settings": [
+      {
+        "type": "image_picker",
+        "id": "icon_testimonial",
+        "label": "t:sections.testimonial.blocks.quote.settings.icon_testimonial.label"
+      },
+      
+      {
+        "type": "text",
+        "id": "title_content",
+        "label": "Title content",
+        "default": "Impressive"
+      },
+      {
+        "type":"color",
+        "id":"color_title_content",
+        "label":"Color title content",
+        "default":"#59805B"
+      },
+      {
+        "type": "liquid",
+        "id": "testimonial_text",
+        "label": "t:sections.testimonial.blocks.quote.settings.testimonial_text.label",
+        "default": "“A set of architectural wall shelves really do the trick when it comes to organizing and displaying your stuff. I especially love these sturdy wood ones by Burrow”"
+      },
+      {
+        "type":"color",
+        "id":"color_text_content",
+        "label":"Color text content",
+        "default":"#000"
+      },
+      {
+        "type": "textarea",
+        "id": "icon",
+        "label": "icon"
+      },
+      {
+        "type":"color",
+        "id":"bg_icon",
+        "label":"Background icon",
+        "default":"#59805B"
+      },
+      {
+        "type":"color",
+        "id":"color_icon",
+        "label":"Color icon",
+        "default":"#fff"
+      },
+      {
+        "type": "text",
+        "id": "name_icon",
+        "label": "t:sections.testimonial.blocks.quote.settings.name_icon.label",
+        "default": "Design Milk"
+      },
+      {
+        "type":"color",
+        "id":"color_name",
+        "label":"Color name",
+        "default":"#000"
+      },
+      {
+        "type": "text",
+        "id": "city_icon",
+        "label": "t:sections.testimonial.blocks.quote.settings.city_icon.label",
+        "default": "Danish Modern LA"
+      },
+      {
+        "type":"color",
+        "id":"color_address",
+        "label":"Color address",
+        "default":"#666666"
+      }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "t:sections.testimonial.presets.name",
+      "blocks": [
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

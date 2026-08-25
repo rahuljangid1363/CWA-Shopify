@@ -1,0 +1,246 @@
+<!-- header-1.liquid -->
+{{ 'header-1.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+
+<header class="header-1 {%- if section.settings.enable_transparent -%}{{ 'color-transparent' | prepend: ' ' }}{%- endif -%}">
+  {%- if section.settings.header_announcement_bar -%}
+    <div class="header-announcement-bar">
+      <div class="container">
+          <div class="row d-flex align-items-center ">
+            {%- style -%}
+            .header-1 .login-content,.header-1 .header-announcement-bar-left ul li{
+              color:{{ section.settings.color_text_topbar }}
+            }
+            .header-1 .login-topbar a,.header-1 .header-announcement-bar-left ul svg{
+              fill:currentColor;
+              margin:0px 5px;
+              color:{{ section.settings.color_link_topbar }};
+              
+            }
+            .header-1 .header-announcement-bar-left ul li:hover a,.header-1 .header-announcement-bar-left ul:hover svg{
+                color:var(--color-base-link-hover);
+               
+            }
+            {%- endstyle -%}
+              <div class=" {% if section.settings.login_topbar %}col-xl-6 d-none d-xl-block {% else %} col-12 text-cemter{% endif %} header-announcement-bar-left">
+                  <p>{{ section.settings.text_announcement_bar }}</p>
+              </div>
+              {%- if section.settings.login_topbar -%}
+                <div class="login-topbar col-xl-6 col-12 d-flex justify-content-center  justify-content-xl-end">
+                  {%- if section.settings.currencies_topbar -%}
+                    {%- render 'block-currencies' -%}
+                  {%- endif -%}
+                  <div class="login-content">
+                    {% if customer %}
+                    <p><a>Hello {{customer.first_name }}</a></p>
+                      
+                      <p><a href="/account/logout" title="{{'layout.customer.log_out' | t}}" class="site-header__link">
+                        Logout
+                      </a>
+                      </p>
+                    <p><a href="/account" title="My acount">My account</a></p>
+                    {%- else -%}
+                       Welcome Guess! 
+                      <p><a href="/account/login" class="site-header__link">Sign in</a></p>
+                      or
+                      <p><a href="/account/register" title="Register">Register</a></p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+          </div>
+      </div>
+    </div>
+  {%- endif -%}
+  <div class="header-center">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">     
+      <div class="row">
+        <div class="col-2 col-lg-3 head-seach">
+          {%- if section.settings.header_search_left -%}
+          <div class="header-search-left d-none d-lg-block">
+            {%- render 'search-header' -%}
+          </div>
+          {%- endif -%}
+          {%- if section.settings.phone_number != blank -%}
+            <div class="phone-number d-none d-lg-block">
+              <p>{{ section.settings.phone_number }}</p>
+            </div>
+          {%- endif -%}
+          {%- render 'icon-megamenu-mobile' -%}
+        </div>
+        
+        <div class="col-8 col-lg-6 header-center">
+          <div class="header-logo">
+            {%- render 'header-logo' -%}
+          </div>
+        </div>
+        
+        <div class="col-2 col-lg-3 header-icon">
+            {%- if section.settings.phone_right -%}
+              <div class="phone-right d-none d-lg-block">
+                {{ section.settings.phone_right }}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.header_seach -%}
+              <div class="header-search-right {% if section.settings.header_search_left %}d-none{% endif %}">
+                {%- render 'search-header' -%}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.header_wishlist -%}
+                {%- render 'wishlist-header' -%}
+            {%- endif -%}
+
+            {%- if section.settings.header_sign -%}
+                {%- render 'header-sign' -%}
+            {%- endif -%}
+
+            {%- if section.settings.currencies -%}
+              {%- render 'block-currencies' -%}
+            {%- endif -%}
+
+            {%- if section.settings.header_card -%}
+                {%- render 'header-cart' -%}
+            {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-bottom">
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">     
+      <div class="row">
+        <div class="col-12">
+          <div class="header-menubar">
+            {%- render 'block-menu' -%}
+          </div>
+        </div>
+      <div class="col-12">
+        <div class="header-menubar">
+            {%- render 'vertical-menu' -%}
+          </div>
+      </div>
+      </div>
+   </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "t:sections.header-1.name",
+  "class": "spaced-header",
+  "tag": "section",
+  "settings": [
+      {
+        "type": "checkbox",
+        "id": "fullwidth",
+        "label": "t:sections.header-1.settings.fullwidth.label",
+        "default": false
+      },
+      {
+        "id": "background-color",
+        "type": "color",
+        "label": "t:sections.header-1.settings.background-color.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "header_announcement_bar",
+        "label": "t:sections.header-1.settings.header_announcement_bar.label",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "text_announcement_bar",
+        "label": "t:sections.header-1.settings.text_announcement_bar.label",
+        "default": "Welcome to our store"
+      },
+      {
+        "type":"header",
+        "content":"Top bar"
+      },
+      {
+        "type": "color",
+        "id": "color_text_topbar",
+        "label": "Color text top bar",
+        "default": "#999999"
+      },
+      {
+        "type": "color",
+        "id": "color_link_topbar",
+        "label": "Color text link",
+        "default": "#E56D6D"
+      },
+      {
+        "type": "checkbox",
+        "id": "login_topbar",
+        "label": "Enable login top bar",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "currencies_topbar",
+        "label": "Enable currencies top bar",
+        "default": true
+      },
+      {
+        "type":"header",
+        "content":"Header center left"
+      },
+      {
+        "type": "checkbox",
+        "id": "header_search_left",
+        "label": "Enable search left",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "phone_number",
+        "label": "Phone number",
+        "default":"8 (844) 880 - 33388"
+      },
+      {
+        "type":"header",
+        "content":"Header center right"
+      },
+      {
+        "type": "textarea",
+        "id": "phone_right",
+        "label": "Phone number right",
+        "default":"24/7 Helpline <p>666 - 880 - 33388</p>"
+      },
+      {
+        "type": "checkbox",
+        "id": "header_seach",
+        "label": "t:sections.header-1.settings.header_seach.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "header_sign",
+        "label": "t:sections.header-1.settings.header_sign.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "header_wishlist",
+        "label": "t:sections.header-1.settings.header_wishlist.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "currencies",
+        "label": "t:sections.header-1.settings.currencies.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "header_card",
+        "label": "t:sections.header-1.settings.header_card.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_transparent",
+        "label": "t:sections.header-1.settings.enable_transparent.label"
+      }
+      ]
+}
+{% endschema %}

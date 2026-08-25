@@ -1,0 +1,336 @@
+<!-- service.liquid -->
+
+{{ 'service.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' %}
+{%- style -%}
+    .service-{{ section.id }} .sub-title{
+      color:{{section.settings.color_sub_title }};
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .service-{{ section.id }} .sub-title span{
+      border-top:1px solid {{section.settings.color_sub_title }};
+    }
+    .service-{{ section.id }} .section-header{
+      color:{{section.settings.color_section_header }};
+    }
+    .service-{{ section.id }} .section-text{
+      color:{{section.settings.color_section_text }};
+    }
+    .service-{{ section.id }} .description-content{
+      max-width: 270px;
+  }
+{%- endstyle -%}
+<div class="service-{{ section.id }}" {%- if section.settings.bg_image != blank -%} style="background-image: url({{ section.settings.bg_image | img_url:'master' }});background-size:cover;" {%- endif -%} >
+  <div class="service-box {% if section.settings.fullwidth %}container-fluid{% else %}container{% endif %}">
+    {%- if section.settings.image_title != blank or section.settings.sub_title != blank or section.settings.heading != blank or section.settings.text_decoration != blank -%}
+    <div class="title-box">
+      {%- if section.settings.image_title != blank -%}
+      <div class="image-title">
+        <img src="{{ section.settings.image_title | img_url: 'master' }}" alt="">
+      </div>
+      {%- endif -%}
+      <p class="sub-title">{{ section.settings.sub_title }}</p> 
+      <h2 class="section-header">{{ section.settings.heading  }}</h2>
+      <p class="section-text">{{ section.settings.text_decoration }}</p> 
+    </div>
+    {%- endif -%}
+    <div class="row">
+      {%- for block in section.blocks -%}
+      {%- case block.settings.width -%}
+            {%- when '25%' -%}
+            {%- assign block_width = 'col-lg-3 col-sm-6  col-12' -%}
+            {%- when '33%' -%}
+            {%- assign block_width = 'col-lg-4 col-md-4' -%}
+            {%- when '50%' -%}
+            {%- assign block_width = 'col-lg-6' -%}
+            {%- when '66%' -%}
+            {%- assign block_width = 'col-lg-8 col-md-12' -%}
+            {%- when '75%' -%}
+            {%- assign block_width = 'col-lg-9 col-md-9' -%}
+            {%- when '100%' -%}
+            {%- assign block_width = 'col-12' -%}
+            {%- endcase -%}
+      <div class="{{block_width}} list-icon" id="list-icon-{{ block.id }}">
+        {%- style -%}
+          .service #list-icon-{{ block.id }} .title-content{
+            color:{{ block.settings.color_title }};
+          }
+          .service #list-icon-{{ block.id }} .description-content{
+            color:{{ block.settings.color_description }};
+          }
+        {%- endstyle -%}
+        <div class="service-content
+        {% if section.settings.index_text == 'row' %} service-row flex-row {% elsif section.settings.index_text == 'column' %}flex-column service-column{% endif %}
+        icon-{%- if section.settings.icon-align == 'top' -%}top{% else %}left{% endif %}" style="background-color: {{ block.settings.bg_color }};">
+          {%- if block.settings.icon != blank -%}
+          <div class="service-icon">
+            <div class="service-icon-svg">
+              {{ block.settings.icon }}
+            </div>
+          </div>
+          {% endif %}
+          {%- if block.settings.icon_image != blank -%}
+          <div class="service-icon">
+            <img class="image-sevice"
+                srcset="{%- if block.settings.icon_image.width >= 165 -%}{{ block.settings.icon_image | img_url: '1920x' }} 1920w,{%- endif -%}"
+                src="{{ block.settings.icon_image | img_url: 'master' }}"
+                alt="{{ block.settings.icon_image.alt | escape }}"
+                loading="lazy"
+              >
+          </div>
+          {% endif %}
+          <div class="service-decoration">
+              <h3 class="title-content {% if block.settings.font_weight == 'bold' %}bold{% elsif block.settings.font_weight == 'normal' %}normal{% endif %}">
+                  {{ block.settings.header_service | escape }}
+              </h3>
+              <p class="description-content">
+                  {{ block.settings.text_service }}
+              </p>
+          </div>
+        </div>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.services.name",
+  "tag": "section",
+  "class": "spaced-section service",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "label": "t:sections.services.settings.fullwidth.label",
+      "default": false
+    },
+    {
+      "id": "background-color",
+      "type": "color",
+      "label": "t:sections.services.settings.background-color.label"
+    },
+    {
+      "id": "bg_image",
+      "type": "image_picker",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "t:sections.services.settings.margin_desktop.label",
+      "info": "t:sections.services.settings.margin_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "t:sections.services.settings.padding_desktop.label",
+      "info": "t:sections.services.settings.padding_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "t:sections.services.settings.margin_mobile.label",
+      "info": "t:sections.services.settings.margin_mobile.info"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "t:sections.services.settings.padding_mobile.label",
+      "info": "t:sections.services.settings.padding_mobile.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_title",
+      "label": "Image title"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub title",
+      "default": "Sub title"
+    },
+    {
+      "type": "color",
+      "id": "color_sub_title",
+      "label": "Color sub title",
+      "default": "#59805B"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.services.settings.heading.label",
+      "default": "Multimedia service"
+    },
+    {
+      "type": "color",
+      "id": "color_section_header",
+      "label": "Color title",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "text_decoration",
+      "label": "t:sections.services.settings.text_decoration.label",
+      "default": "Multimedia service"
+    },
+    {
+      "type": "color",
+      "id": "color_section_text",
+      "label": "Color decoration",
+      "default": "#666666"
+    },
+    {
+      "type": "select",
+      "id": "index_text",
+      "label": "Index text",
+      "default": "row",
+      "options": [
+        {
+          "value": "row",
+          "label": "Row"
+        },
+        {
+          "value": "column",
+          "label": "Column"
+        }
+      ]
+     },
+    {
+      "id": "icon-align",
+      "type": "select",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:sections.services.settings.icon-align.options__1.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.services.settings.icon-align.options__2.label"
+        }
+      ],
+      "default": "top",
+      "label": "t:sections.services.settings.icon-align.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "t:sections.services.blocks.service.name",
+      "settings": [
+      {
+        "type": "select",
+        "id": "width",
+        "label": "t:sections.banner-grid.blocks.image.settings.width.label",
+        "default": "33%",
+        "options": [
+          {
+            "value": "25%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__1.label"
+          },
+          {
+            "value": "33%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__2.label"
+          },
+          {
+            "value": "50%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__3.label"
+          },
+          {
+            "value": "66%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__4.label"
+          },
+          {
+            "value": "75%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__5.label"
+          },
+          {
+            "value": "100%",
+            "label": "t:sections.banner-grid.blocks.image.settings.width.options__6.label"
+          }
+        ]
+       },  
+       {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "transparent"
+      },
+       {
+          "type": "liquid",
+          "id": "icon",
+          "label": "t:sections.services.blocks.service.settings.icon.label",
+          "default": "[Icon]",
+          "info": "t:sections.services.blocks.service.settings.icon.info"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "t:sections.services.blocks.service.settings.icon_image.label",
+          "info": "t:sections.services.blocks.service.settings.icon_image.info"
+        },
+        {
+          "id": "header_service",
+          "type": "text",
+          "label": "t:sections.services.blocks.service.settings.header_service.label",
+          "default": "Secure payments"
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font weight title",
+          "default": "bold",
+          "options": [
+          {
+            "value": "bold",
+            "label": "Bold"
+          },
+          {
+            "value": "normal",
+            "label": "Normal"
+          }
+          ]
+        },
+        {
+          "id": "color_title",
+          "type": "color",
+          "label": "Title color",
+          "default": "#666666"
+        },
+         {
+          "type": "liquid",
+          "id": "text_service",
+          "label": "t:sections.services.blocks.service.settings.text_service.label",
+          "default": "See below for information about the delivery & returns options in your country."
+       },
+       {
+        "id": "color_description",
+        "type": "color",
+        "label": "Description color",
+        "default": "#666666"
+      }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "t:sections.services.presets.name",
+      "blocks": [
+        {
+          "type": "service"
+        },
+        {
+          "type": "service"
+        },
+        {
+          "type": "service"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

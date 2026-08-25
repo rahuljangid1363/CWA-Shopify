@@ -1,0 +1,41 @@
+<!-- menu-vertical-html.liquid -->
+
+{%- capture ap_html_title -%}vapmenuitem_thtml_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_html_eimg -%}vapmenuitem_eihtml_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_html_img -%}vapmenuitem_ihtml_{{ intVertical }}{%- endcapture -%}
+{%- capture ap_html_des -%}vapmenuitem_chtml_{{ intVertical }}{%- endcapture -%}
+
+<div class="block-html">
+    {%- if settings[ap_html_title] != blank -%}
+    <div class="menu-title">{{ settings[ap_html_title] }}</div>
+    {%- endif -%}
+    <div class="widget-inner">
+      {%- if settings[ap_html_eimg] -%}
+      <div class="box-image {% if settings[ap_html_img] != blank %}media{% else %}image-box--placeholder placeholder{% endif %}"
+      style="padding-bottom: {{ 1 | divided_by: settings[ap_html_img].aspect_ratio | times: 100 }}%;"
+      >
+      {% if settings[ap_html_img] != blank %}
+        <img
+        srcset="{%- if settings[ap_html_img].width >= 165 -%}{{ settings[ap_html_img] | img_url: '165x' }} 165w,{%- endif -%}
+          {%- if settings[ap_html_img].width >= 360 -%}{{ settings[ap_html_img] | img_url: '360x' }} 360w,{%- endif -%}
+          {%- if settings[ap_html_img].width >= 535 -%}{{ settings[ap_html_img] | img_url: '535x' }} 535w,{%- endif -%}
+          {%- if settings[ap_html_img].width >= 750 -%}{{ settings[ap_html_img] | img_url: '750x' }} 750w,{%- endif -%}
+          {%- if settings[ap_html_img].width >= 1170 -%}{{ settings[ap_html_img] | img_url: '1170x' }} 1170w,{%- endif -%}
+          {%- if settings[ap_html_img].width >= 1500 -%}{{ settings[ap_html_img] | img_url: '1500x' }} 1500w,{%- endif -%}"
+        src="{{ section.settings.image | img_url: '1170x' }}"
+        sizes="(min-width: {{ section.settings.page_width }}px) {{ section.settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+        alt="{{ settings[ap_html_img].alt | escape }}"
+        loading="lazy"
+        width="{{ settings[ap_html_img].width }}"
+        height="{{ settings[ap_html_img].height }}"
+        >
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      {%- endif -%}
+      {%- if settings[ap_html_des] != blank -%}
+      {{ settings[ap_html_des] }}
+      {%- endif -%}
+    </div>
+  </div>

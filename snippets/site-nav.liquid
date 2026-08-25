@@ -1,0 +1,62 @@
+<!-- site-nav.liquid -->
+<div class="verticalnav__list">
+    {%- for childlink in link.links -%}
+    <li class="site-nav__dropdown-container site-nav__dropdown-container--second-level">
+      {%- assign childlink_url = childlink.url -%}
+      {%- if childlink.links != blank -%}
+      <a href="{{ childlink_url }}" class="verticalnav__link verticalnav__link-toggle site-nav-ver__link-toggle verticalnav__link--has-list{% if childlink.active %} verticalnav__link--active{% endif %}" {% if childlink.active %} aria-current="page"{% endif %}>
+        {%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title -%}
+        {%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title -%}
+        {%- render 'icon-arrow-right' -%}
+      </a>
+      <div class="site-nav__dropdown site-nav__dropdown--third-level">
+        <ul class="verticalnav__list">
+          {%- for grandchildlink in childlink.links -%}
+          <li class="site-nav__dropdown-container site-nav-ver__dropdown-container--third-level">
+            <a href="{{ grandchildlink.url }}" class="verticalnav__link {% if grandchildlink.active %} verticalnav__link--active{% endif %}"{% if grandchildlink.active %} aria-current="page"{% endif %}>
+              {%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName: grandchildlink.title -%}
+              {%- render 'processMenuLabel' with itemName.grandchildlink.title, itemName: grandchildlink.title -%}
+            </a>
+          </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- else -%}
+      <a href="{{ childlink_url }}" class="verticalnav__link {% if childlink.active %} verticalnav__link--active{% endif %}"{% if childlink.active %} aria-current="page"{% endif %}>
+        {%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title -%}
+        {%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title -%}
+      </a>
+      {%- endif -%}
+    </li>
+    {%- endfor -%}
+  </div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'processMenuTitle' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 555..645
+- from: "{%- render 'processMenuLabel' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 655..745
+- from: "{%- render 'processMenuTitle' with itemName:grandchildlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.grandchildlink.title, itemName:
+    grandchildlink.title -%}"
+  position: 1288..1388
+- from: "{%- render 'processMenuLabel' with itemName:grandchildlink.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.grandchildlink.title, itemName:
+    grandchildlink.title -%}"
+  position: 1404..1504
+- from: "{%- render 'processMenuTitle' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuTitle' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 1807..1897
+- from: "{%- render 'processMenuLabel' with itemName:childlink.title -%}"
+  to: "{%- render 'processMenuLabel' with itemName.childlink.title, itemName: childlink.title
+    -%}"
+  position: 1907..1997
+{%- endcomment -%}

@@ -1,0 +1,15 @@
+<!-- mega-menu-footer.liquid -->
+{{ 'menu-footer.css' | asset_url | stylesheet_tag }}
+<nav class="footer-menu">
+    <ul class="list-megamenu" role="list">
+    {%- for link in section.settings.menu.links -%}
+        <li>
+            {%- if link != blank -%}
+            <a href="{{ link.url }}" class="footer-link"{% if link.current %} aria-current="page"{% endif %}>
+                <span {%- if link.current %} class="footer-active-menu"{% endif %}>{{ link.title | escape }}</span>
+            </a>
+            {%- endif -%}
+        </li>
+    {%- endfor -%}
+    </ul>
+</nav>

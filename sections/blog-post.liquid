@@ -1,0 +1,388 @@
+<!-- blog-carousel.liquid -->
+
+{%- case settings.bloggrid -%}
+  {%- when 'blog-1' -%} {%- render 'blog-template-1' -%}
+  {%- when 'blog-2' -%} {%- render 'blog-template-2' -%}
+  {%- when 'blog-3' -%} {%- render 'blog-template-3' -%}
+  {%- when 'blog-4' -%} {%- render 'blog-template-4' -%}
+  {%- when 'blog-5' -%} {%- render 'blog-template-5' -%}
+{%- else -%}
+  Missing liquid
+{%- endcase -%}
+
+{% schema %}
+{
+  "name": "t:sections.blog-carousel.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+  {
+    "type": "checkbox",
+    "id": "fullwidth",
+    "label": "t:sections.blog-carousel.settings.fullwidth.label",
+    "default": false
+  },
+  {
+    "id": "background-color",
+    "type": "color",
+    "label": "t:sections.blog-carousel.settings.background-color.label"
+  },
+  {
+    "type": "text",
+    "id": "margin_desktop",
+    "label": "t:sections.blog-carousel.settings.margin_desktop.label",
+    "info": "t:sections.blog-carousel.settings.margin_desktop.info"
+  },
+  {
+    "type": "text",
+    "id": "padding_desktop",
+    "label": "t:sections.blog-carousel.settings.padding_desktop.label",
+    "info": "t:sections.blog-carousel.settings.padding_desktop.info"
+  },
+  {
+    "type": "text",
+    "id": "margin_mobile",
+    "label": "t:sections.blog-carousel.settings.margin_mobile.label",
+    "info": "t:sections.blog-carousel.settings.margin_mobile.info"
+  },
+  {
+    "type": "text",
+    "id": "padding_mobile",
+    "label": "t:sections.blog-carousel.settings.padding_mobile.label",
+    "info": "t:sections.blog-carousel.settings.padding_mobile.info"
+  },
+  {
+    "type": "image_picker",
+    "id": "image_title",
+    "label": "Image title"
+  },
+  {
+    "type": "text",
+    "id": "sub_title",
+    "label": "Sub title",
+    "default": "Sub title"
+  },
+  {
+    "type": "color",
+    "id": "color_sub_title",
+    "label": "Color sub title",
+    "default": "#59805B"
+  },
+  {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.blog-carousel.settings.heading.label",
+      "default": "Multimedia blog-carousel"
+  },
+  {
+      "type": "text",
+      "id": "text_decoration",
+      "label": "t:sections.blog-carousel.settings.text_decoration.label"
+  },
+  {
+    "type": "text",
+    "id": "btn_text",
+    "label": "Button heading",
+    "default": "Show More"
+  },
+  {
+    "type": "url",
+    "id": "btn_link",
+    "label": "Link button"
+  },
+  {
+    "type": "blog",
+    "id": "blog",
+    "label": "t:sections.blog-carousel.settings.blog.label"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_view_all",
+    "label": "t:sections.blog-carousel.settings.show_view_all.label",
+    "default": false
+  },
+  {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:sections.blog-carousel.settings.show_date.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "t:sections.blog-carousel.settings.show_author.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "t:sections.blog-carousel.settings.show_description.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "tags_blog",
+      "label": "t:sections.blog-carousel.settings.tags_blog.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_link",
+      "label": "t:sections.blog-carousel.settings.show_link.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "text_link",
+      "label": "t:sections.blog-carousel.settings.text_link.label",
+      "default": "Read More"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.blog-carousel.settings.slidesToShow.label",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.blog-carousel.settings.slidesToScroll.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "t:sections.blog-carousel.settings.rows.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "t:sections.blog-carousel.settings.autoplay.label",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplaySpeed",
+      "min": 1000,
+      "max": 5000,
+      "step": 1000,
+      "label": "t:sections.blog-carousel.settings.autoplaySpeed.label",
+      "default": 2000
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 300,
+      "max": 1000,
+      "step": 100,
+      "label": "t:sections.blog-carousel.settings.speed.label",
+      "default": 500
+    },
+    {
+      "type": "checkbox",
+      "id": "pauseOnHover",
+      "label": "t:sections.blog-carousel.settings.pauseOnHover.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows",
+      "label": "t:sections.blog-carousel.settings.arrows.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "t:sections.blog-carousel.settings.dots.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "draggable",
+      "label": "t:sections.blog-carousel.settings.draggable.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "infinite",
+      "label": "t:sections.blog-carousel.settings.infinite.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.blog-carousel.settings.header.content"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow_992",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.blog-carousel.settings.slidesToShow_992.label",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll_992",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.blog-carousel.settings.slidesToScroll_992.label",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows_992",
+      "label": "t:sections.blog-carousel.settings.arrows_992.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_992",
+      "label": "t:sections.blog-carousel.settings.dots_992.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.blog-carousel.settings.header_1.content"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow_767",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.blog-carousel.settings.slidesToShow_767.label",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll_767",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.blog-carousel.settings.slidesToScroll_767.label",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows_767",
+      "label": "t:sections.blog-carousel.settings.arrows_767.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_767",
+      "label": "t:sections.blog-carousel.settings.dots_767.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.blog-carousel.settings.header_2.content"
+    },
+    {
+      "type": "range",
+      "id": "slidesToShow_450",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.blog-carousel.settings.slidesToShow_450.label",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slidesToScroll_450",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.blog-carousel.settings.slidesToScroll_450.label",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows_450",
+      "label": "t:sections.blog-carousel.settings.arrows_450.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_450",
+      "label": "t:sections.blog-carousel.settings.dots_450.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "btn_text2",
+      "label": "t:sections.banner-grid.blocks.image.settings.btn_text.label",
+      "default": "Readmore"
+    },
+    {
+      "type": "url",
+      "id": "btn_link2",
+      "label": "t:sections.banner-grid.blocks.image.settings.btn_link.label"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:sections.banner-grid.blocks.image.settings.text_align.label",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__3.label"
+        }
+      ]
+     },
+    {
+      "type": "color",
+      "id": "color_button",
+      "label": "Color button",
+      "default":"#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_button",
+      "label": "Background button",
+      "default":"#82D175"
+    },
+    {
+      "type": "color",
+      "id": "color_hover",
+      "label": "Color button hover",
+      "default":"#000"
+    },
+    {
+      "type": "color",
+      "id": "bg_hover",
+      "label": "Background button hover",
+      "default":"#fff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.blog-carousel.presets.name",
+      "settings": {
+        "blog": "Blog post"
+      }
+    }
+  ]
+}
+{% endschema %}

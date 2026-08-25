@@ -1,0 +1,21 @@
+<a href="javascript:void(0)" data-toggle="modal" data-target="#jsSizeGuide" class="open-sizeguide">
+  {%- render 'icon-size-guide' -%} <span>Size guide</span>
+</a>
+<div class="modal fade" id="jsSizeGuide" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog--sizeguide modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">{%- render 'icon-close' -%}</button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center js-sizeguide-content">
+          {%- if sizeguide -%}
+          	<img src="{{sizeguide | img_url: '720x'}}" alt="size guide">
+          {%- else -%}
+          	Don't have size guide
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

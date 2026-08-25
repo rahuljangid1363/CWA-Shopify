@@ -1,0 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "page-demoHTML": {
+      "type": "page-demoHTML",
+      "blocks": {
+        "b9882a59-57f8-411e-90b5-5503a276492d": {
+          "type": "block",
+          "settings": {
+            "title": "Rating",
+            "info": "",
+            "html": "<ul class=\"rating text-center\">\n      <li class=\"rated\">\n      </li>\n<li class=\"rated\">\n      </li>\n<li class=\"rated\">\n      </li>\n<li>\n      </li>\n<li>\n    </li>\n</ul>"
+          }
+        },
+        "a1e66bfd-074f-4477-96af-dadf006b6fe7": {
+          "type": "block",
+          "settings": {
+            "title": "Countdown 1",
+            "info": "",
+            "html": "<div class=\"js-countdown js-countdown--countdown--1\" data-time=\"2025-05-11T00:00:00\"></div>"
+          }
+        },
+        "10bd8868-9335-44b6-a10f-53a83e9ab057": {
+          "type": "block",
+          "settings": {
+            "title": "Countdown 2",
+            "info": "",
+            "html": "<div class=\"js-countdown js-countdown--countdown--2\" data-time=\"2025-05-11T00:00:00\"></div>"
+          }
+        },
+        "ddecad80-fca8-4117-9ebf-59dbb6604958": {
+          "type": "block",
+          "settings": {
+            "title": "Google maps",
+            "info": "<a href=\"https://www.embedgooglemap.net/\">👉 Get embled code \n here</a>",
+            "html": "<div class=\"gmap-iframe\"><div class=\"mapouter\">\n<div class=\"gmap_canvas\"><iframe src=\"https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3723.9762244610306!2d105.7655507!3d21.0336373!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1641182780752!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe></div>\n<style>.mapouter{position:relative;text-align:right;height:500px;width:1080px}.gmap_canvas{overflow:hidden;background:0 0!important;height:500px;width:1080px}.gmap-iframe .gmap_canvas,.gmap-iframe .mapouter,.gmap-iframe iframe{width:100%!important}@media (max-width:767px){.gmap-iframe .gmap_canvas,.gmap-iframe .mapouter,.gmap-iframe iframe{height:350px!important}}</div></div></style>\n</div></div>"
+          }
+        }
+      },
+      "block_order": [
+        "b9882a59-57f8-411e-90b5-5503a276492d",
+        "a1e66bfd-074f-4477-96af-dadf006b6fe7",
+        "10bd8868-9335-44b6-a10f-53a83e9ab057",
+        "ddecad80-fca8-4117-9ebf-59dbb6604958"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "page-demoHTML"
+  ]
+}

@@ -1,0 +1,88 @@
+<div class="main-product-image-template2">
+  <div class="product-full-image">
+    {%- for media in product.media -%}
+    {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+      {%- if media.media_type == 'image' -%}
+    <div>
+      <div class="zoom-item">
+    	<img id="product-full-image-zoom" class="product-full-image-zoom"
+         srcset="{% if media.preview_image.width >= 288 %}{{ media | img_url: '288x' }} 288w,{% endif %}
+                 {% if media.preview_image.width >= 576 %}{{ media | img_url: '576x' }} 576w,{% endif %}
+                 {% if media.preview_image.width >= 550 %}{{ media | img_url: '550x' }} 550w,{% endif %}
+                 {% if media.preview_image.width >= 1100 %}{{ media | img_url: '1100x' }} 1100w{% endif %}"
+         src="{{ media | img_url: '1100x' }}"
+         sizes="(min-width: 1200px) calc((1200px - 10rem)), (min-width: 750px) calc((100vw - 11.5rem)), calc(100vw - 4rem)"
+         loading="lazy"
+         alt="{{ media.preview_image.alt | escape }}"
+         data-zoom-image="{{ media | img_url: '2000x' }}"
+         >
+      </div>
+      </div>
+      {% break %}
+      {% endif %}
+
+ 	{%- endunless -%}
+    {%- endfor -%}
+    
+  </div>
+  
+  <div class="product-thumb-image popup-gallery">
+    {%- if thumb_position == 'left' or thumb_position == 'right' -%}
+    	<ul id="product-gallery-image-zoom" class="product-thumb-image-slick" data-setting='{"accessibility": false, "arrows": true,
+            "dots": false, "draggable": true,"centerMode": false,
+            "infinite": false, "autoplay": false,
+            "autoplaySpeed": 10000, "speed": 1000,
+            "slidesToShow": 4, "slidesToScroll": 1,
+            "vertical": true, "mobileFirst": false, "pauseOnHover": false,
+            "rows": 1, "slidesPerRow": 1, "rtl": 1,
+            "slidesToShow_992": 3, "slidesToScroll_992": 1,
+            "arrows_992": true, "dots_992": false,
+            "slidesToShow_767": 3, "slidesToScroll_767": 1,
+            "arrows_767": true, "dots_767": false,
+            "slidesToShow_450": 2, "slidesToScroll_450": 1,
+            "arrows_450": true, "dots_450": false}'>
+    {%- else -%}
+    	<ul id="product-gallery-image-zoom" class="product-thumb-image-slick" data-setting='{"accessibility": false, "arrows": true,
+            "dots": false, "draggable": true,"centerMode": false,
+            "infinite": false, "autoplay": false,
+            "autoplaySpeed": 10000, "speed": 1000,
+            "slidesToShow": 4, "slidesToScroll": 1,
+            "vertical": false, "mobileFirst": false, "pauseOnHover": false,
+            "rows": 1, "slidesPerRow": 1, "rtl": 1,
+            "slidesToShow_992": 3, "slidesToScroll_992": 1,
+            "arrows_992": true, "dots_992": false,
+            "slidesToShow_767": 3, "slidesToScroll_767": 1,
+            "arrows_767": true, "dots_767": false,
+            "slidesToShow_450": 2, "slidesToScroll_450": 1,
+            "arrows_450": true, "dots_450": false}'>
+    {%- endif -%}
+    
+      {%- for media in product.media -%}
+      {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+      	{%- if media.media_type == 'image' -%}
+          <li>
+        
+        	<img 
+               srcset="{{ media | img_url: '210x' }}"
+               src="{{ media | img_url: '210x' }}"
+               loading="lazy"
+               alt="{{ media.preview_image.alt | escape }}"
+               data-url="{{ media | img_url: '2000x' }}"
+               data-height="{{media.height}}"
+               data-width="{{media.width}}"
+               >
+        
+          
+      </li>
+          {%- endif -%}
+      {%- endunless -%}
+      {%- endfor -%}
+    </ul>
+    
+  </div>
+</div>
+
+
+
+
+

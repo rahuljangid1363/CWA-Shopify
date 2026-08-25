@@ -1,0 +1,120 @@
+.testimonial{
+    position: relative;
+}
+.testimonial .placeholder-svg{
+    position: absolute;
+}
+.testimonial-content{
+    padding: 6rem 0;
+    margin: 0 auto;
+}
+.testimonial-decoration{
+    display: inline-block;
+}
+.testimonial-author{
+    display: flex;
+}
+.testimonial-publisher{
+    flex: 1;
+}
+.testimonial-publisher {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.name-testimonial{
+    margin-bottom: 5px;
+}
+/* .testimonial_text{
+    padding: 25px 100px 53px;
+    font-size: 20px;
+    margin-bottom: 0;
+} */
+.testimonial .slick-dots{
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.img_testimonial .placeholder-svg{
+    width: 66px;
+}
+
+
+/* addd */
+.testimonial .title-content{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 25px;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+.testimonial-author{
+    justify-content: center;
+    margin-left: -15px;
+}
+
+.img_testimonial >img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.testimonial_text {
+    max-width: 640px;
+    font-family: 'El Messiri';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    
+    margin: auto;
+    line-height: 36px;
+    text-align: center;
+    text-transform: inherit;
+    margin-bottom: 50px;
+}
+.name-testimonial{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+.address-testimonial{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.testimonial .icon{
+    width: 60px;
+    display: flex;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    border-radius: 50%;
+}
+.testimonial .testimonial-info-box{
+    width: max-content;
+    margin: auto;
+}
+@media (min-width:1200px) {
+    .testimonial-content{
+        padding: 10rem 0px;
+    }
+}
+@media(max-width: 576px){
+
+    .testimonial .slick-dots{
+        padding-left: 30px;
+    }
+    .testimonial .title-content{
+        margin-bottom: 30px;
+    }
+    .testimonial .title-content{
+        font-size:  18px;
+        line-height: 1.8;
+    }
+}

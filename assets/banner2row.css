@@ -1,0 +1,234 @@
+.banner-grid .image-position{
+    width: max-content;
+    position: absolute;
+}
+.banner-grid .up,.banner-grid .down{
+    z-index: 1;
+}
+
+.banner-2-row{
+    padding: 40px 0px;
+}
+.banner-2-row .banner-2-row-content{
+    padding: 0px;
+}
+.banner-2-row .left{
+    margin-right: auto;
+    margin-left: 0;
+}
+.banner-2-row .right{
+    margin-right: 0;
+    margin-left: auto;
+}
+.banner-2-row .middle{
+    margin: auto;
+}
+.banner2row .banner-2-row-content .button-content span{
+    padding: 0px;
+}
+.banner-2-row .banner-2-row-content{
+    padding:0px 50px;
+}
+.banner-2-row .image .banner-2-row-content{
+    padding: 0;
+    padding-left: 100px;
+}
+.banner-2-row .image  h5{
+    font-style: normal;
+    font-weight: 600;
+    margin-bottom: 30px;
+    font-size: 12px;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+.banner-2-row .image p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 28px;
+}
+.banner-2-row .image h3{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+}
+.banner-2-row .banner2row h5{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+.banner-2-row .banner2row h3{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 28px;
+}
+.banner-2-row .banner2row h3 span{
+    font-weight: 600;
+}
+.banner-2-row .banner2row .button-content span{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    border: none;
+    line-height: 15px;
+}
+.banner-2-row .banner-grid-content{
+    border-radius: 5px;
+    overflow: hidden;
+}
+.banner-2-row .banner-grid-content img{
+    transition: all .3s ease;
+}
+.banner-2-row .banner-grid-content:hover img{
+    transform: scale(1.03);
+}
+.banner-2-row h5 span{
+    position: relative;
+}
+.banner-2-row h5 span::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: auto;
+    right: 0;
+    bottom: -2px;
+    transition: all 0.3s ease;
+}
+
+.banner-2-row .banner-grid-content:hover h5 span::before{
+    width: 100%;
+    left: 0;
+    right: auto;
+}
+.banner-content .banner-image{
+    margin: 0px;
+}
+@media (max-width:1500px) {
+    .banner-grid .image-top-right,.banner-grid .image-top-left,
+    .banner-grid .image-bottom-left,.banner-grid .image-bottom-right{
+        display: none;
+    }
+}
+@media (min-width:1200px) and (max-width:1500px) {
+    .banner-2-row .image h5{
+        margin-bottom: 10px;
+        font-size: 11px;
+        line-height: 1.2;
+    }
+    .banner-2-row .image p{
+        font-size: 15px;
+        line-height: 1.3;
+    }
+    .banner-2-row .image h3{
+        font-size: 26px;
+        line-height: 1.3;
+    }
+    .banner-2-row .banner2row h3{
+        font-size: 16px;
+        line-height: 1.3;
+    }
+    .banner-2-row .banner2row h5{
+        font-size: 10px;
+        line-height: 1.2;
+    }
+    .banner-grid .button-content{
+        margin-top: 10px;
+    }
+    .banner-2-row .banner-2-row-content{
+        padding-left: 35px;
+    }
+    .banner-2-row .image .banner-2-row-content{
+        padding: 0px 0px 0px 60px;
+    }
+}
+@media (min-width:992px) and (max-width:1200px) {
+    .banner-2-row .image h5{
+        margin-bottom: 10px;
+        font-size: 11px;
+        line-height: 1.2;
+    }
+    .banner-2-row .image p{
+        font-size: 15px;
+        line-height: 1.3;
+    }
+    .banner-2-row .image h3{
+        font-size: 26px;
+        line-height: 1.3;
+    }
+    .banner-2-row .banner2row h3{
+        font-size: 16px;
+        line-height: 1.3;
+    }
+    .banner-2-row .banner2row h5{
+        font-size: 8px;
+        line-height: 1.2;
+    }
+    .banner-grid .button-content{
+        margin-top: 5px;
+    }
+    .banner-2-row .banner-2-row-content{
+        padding-left: 35px;
+    }
+    .banner-2-row .image .banner-2-row-content{
+        padding: 0px 0px 0px 60px;
+    }
+    
+    .banner-2-row .banner2row .button-content span{
+        margin-top: 0px;
+    }
+}
+@media (max-width:992px) {
+    .banner-2-row .image h5{
+        margin-bottom: 10px;
+        font-size: 11px;
+        line-height: 1.2;
+    }
+    .banner-2-row .image h3{
+        font-size: 25px;
+        line-height: 1.3;
+    }
+    .banner-2-row .image p{
+        font-size: 12px;
+        line-height: 1.2;
+    }
+    .banner-2-row .image .banner-2-row-content{
+        padding: 15px 0 15px 35px;
+    }
+    .banner-2-row .banner2row h5{
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+    .banner-2-row .banner2row h3{
+        font-size: 24px;
+    }
+    .banner-grid .banner-grid-content{
+        margin: 0px;
+        margin-top: 30px;
+    }
+    .banner-content .banner-image{margin: 0;}
+}
+@media (max-width:567px) {
+    .banner-grid .banner-grid-content{
+        padding-bottom: 100% !important;
+    }
+    .banner-2-row .banner-2-row-content{
+        max-width: 100% !important;
+        padding: 15px;
+    }
+    
+    .banner-2-row{
+        padding: 0px;
+    }
+    .banner-content .banner-image{
+        margin: 0;
+    }
+    .banner-2-row .banner-grid-style-1{
+        right: unset;
+    }
+}

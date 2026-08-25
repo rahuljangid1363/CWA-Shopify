@@ -1,0 +1,121 @@
+.collection-1-content{
+    position: relative;
+    transition: all .3s ease;
+}
+
+.collection-content{
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+}
+.collection-text-content{
+    text-align: center;
+    padding-bottom: 30px;
+}
+.collection-text-content.top{
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    z-index: 1;
+    transform: translateX(-50%);
+}
+
+
+.collection-text-content .count{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #666666;
+    line-height: 26px;
+}
+.collection-1 .count span{
+    color: var(--color-base-link-hover);
+}
+.collection-text-content p{
+    color: #999999;
+}
+.title-collection-1{
+    line-height: 32px;
+    text-transform: capitalize;
+    color: #000;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+}
+.link-collection-1 .collection-image-hover{
+    border: 1px solid transparent;
+    transition: all 0.5s ease-in-out;
+}
+
+.link-collection-1:hover .collection-image-hover {
+    border: 1px solid #000;
+}
+
+.collection-image-hover{
+    position: relative;
+}
+
+.collection-image-hover img{
+    transition: all 0.5s ease-in-out;
+}
+.collection-image-hover:hover img{
+    transform: scale(1.1);
+}
+
+.collection-1 .image-collection__media--placeholder{
+    max-height: 297px;
+    width: 100%;
+}
+.collection-1 .count{
+    transition: all .3s ease;
+}
+.collection-1 .count i{
+    display: none;
+    transition: all .3s ease;
+    color: var(--color-base-link-hover);
+}
+.collection-1-content:hover{
+    box-shadow: 0 4px 30px 20px rgb(0 0 0 / 3%);
+}
+.collection-1-content:hover .count{
+    color: var(--color-base-link-hover);
+}
+.collection-1-content:hover .count i{
+   display: inline-block;
+   animation: dichuyen .3s forwards;
+}
+.collection-1 .heading-title .section-text{
+    margin-bottom: 0px;
+}
+.collection-1 .heading-title{
+    margin-bottom: 5rem;
+}
+@keyframes dichuyen {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+@media(max-width: 575px){
+    .collection-1-content{
+        margin-bottom: 15px;
+    }
+}
+
+@media(min-width: 576px){
+    .collection-1-content{
+        margin-bottom: 30px;
+    }
+}
+
+@media(min-width: 1200px){
+    .spaced-section.spaced-collection-1 {
+      margin-top: 7rem;
+    } 
+  }

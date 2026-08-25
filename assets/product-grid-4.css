@@ -1,0 +1,131 @@
+.product-grid-4 .card__badge span{
+    margin: 0;
+}
+
+.servicer-product.servicer-product-grid-4 .btn-product{
+    padding: 1rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.card-wrapper .servicer-product-grid-4 .button{
+    border-radius: 50%;
+    border:1px solid #e5e5e5;
+}
+
+.product-grid-4 .product-card__overlay{
+    flex-direction: column;
+}
+
+.product-grid-4 .product-form__buttons{
+    width: 4rem;
+    height: 4rem;
+  }
+
+.product-grid-4  button{
+    max-width: 4rem;
+    min-width: unset;
+}
+
+.product-grid-4 .btn-product:hover .name-btn-product, .card-wrapper.product-grid-4 .button:hover .name-btn-product{
+    transform: translate(0,50%);
+}
+
+.servicer-product.servicer-product-grid-4{
+    right: 15px;
+    left: unset;
+    top: 8%;
+    transform: translate(0, 0);
+}
+
+@media (min-width: 992px){
+    .card-wrapper.product-grid-4:hover .servicer-product {
+        right: 15px;
+        left: unset;
+    }
+
+    .servicer-product.servicer-product-grid-4{
+        top: 30px;
+        right: -15px;
+    }
+
+}
+
+
+product-grid-4 .servicer-product .btn-product{
+    margin: 0 0.2rem 1rem;
+    left: 110%;
+    bottom: 50%;
+    transform: translate(0, 50%);
+    left: unset;
+    top: unset;
+    margin: 0;
+}
+
+.product-grid-4 .btn-product .name-btn-product:before, .card-wrapper.product-grid-4 .button .name-btn-product:before{
+    top: 50%;
+    margin-left: 0;
+    left: 100%;
+    transform: rotate(-90deg) translate(50%, 0);
+}
+
+.product-grid-4 button.product-form__submit.button.button--full-width{
+    position: relative;
+}
+
+.card-wrapper .servicer-product-grid-4 .button:hover, .card-wrapper .servicer-product-grid-4 .btn-product:hover{
+    transform: unset;
+    color: #fff;
+    background: #000;
+
+}
+
+.card-wrapper .servicer-product-grid-4 .button .name-btn-product, .servicer-product-grid-4 .btn-product .name-btn-product{
+    right: 110%;
+    bottom: 50%;
+    transform: translate(0, 50%);
+    left: unset;
+    top: unset;
+    margin: 0;
+}
+/* add */
+.product-grid-4 .card-information__wrapper{
+    text-align: left;
+}
+.product-grid-4 .price{
+    justify-content: flex-start;
+}
+.card-wrapper.product-grid-4 .button{
+
+ 
+    background-color: #F6F6F6;
+    border-radius: 5px;
+    border: none;
+}
+.card-wrapper.product-grid-4 .button svg{
+    width: 24px;
+    height: 24px;
+    color: #999999;
+    fill: currentColor;
+}
+.card-wrapper.product-grid-4 .button span{
+    display: none;
+}
+.card-wrapper.product-grid-4:hover .button{
+    background-color: var(--g-main);
+}
+.card-wrapper.product-grid-4:hover .button svg{
+    color: #FFF;
+}
+@media (min-width:1200px) {
+    .card-wrapper.product-grid-4 .button{
+        width: 48px;
+        height: 48px;
+        max-width: unset;
+    }
+}
