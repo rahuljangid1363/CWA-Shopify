@@ -1,0 +1,131 @@
+{% doc %}
+  @prompt
+    Add custom CSS to make the header and hero/slideshow section together fill exactly 100vh (full viewport height). The hero section height should be calculated as 100vh minus the header height, so that both the header and the slideshow hero section together occupy the full screen without any scrolling needed to see them.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-fullscreen-hero-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-fullscreen-hero-{{ ai_gen_id }}__style-tag {
+    display: none;
+  }
+{% endstyle %}
+
+<fullscreen-hero-{{ ai_gen_id }} class="ai-fullscreen-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-fullscreen-hero-{{ ai_gen_id }}__style-tag" id="ai-fullscreen-hero-styles-{{ ai_gen_id }}"></div>
+</fullscreen-hero-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FullscreenHero{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.headerSelector = '{{ block.settings.header_selector }}';
+        this.heroSelector = '{{ block.settings.hero_selector }}';
+      }
+
+      connectedCallback() {
+        this.applyFullscreenStyles();
+        window.addEventListener('resize', this.applyFullscreenStyles.bind(this));
+        
+        const observer = new MutationObserver(() => {
+          this.applyFullscreenStyles();
+        });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      }
+
+      applyFullscreenStyles() {
+        const header = document.querySelector(this.headerSelector);
+        const hero = document.querySelector(this.heroSelector);
+        
+        if (!header || !hero) {
+          return;
+        }
+
+        const headerHeight = header.offsetHeight;
+        const heroHeight = `calc(100vh - ${headerHeight}px)`;
+        
+        const styleContainer = this.querySelector('#ai-fullscreen-hero-styles-{{ ai_gen_id }}');
+        
+        const css = `
+          ${this.heroSelector} {
+            height: ${heroHeight} !important;
+            min-height: ${heroHeight} !important;
+          }
+          
+          ${this.heroSelector} .slideshow__slide,
+          ${this.heroSelector} .banner,
+          ${this.heroSelector} .slideshow-item,
+          ${this.heroSelector} img {
+            height: 100% !important;
+            object-fit: cover !important;
+          }
+        `;
+        
+        if (styleContainer) {
+          styleContainer.innerHTML = `<style>${css}</style>`;
+        }
+      }
+    }
+
+    customElements.define('fullscreen-hero-{{ ai_gen_id }}', FullscreenHero{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Fullscreen hero CSS",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Instructions"
+    },
+    {
+      "type": "paragraph",
+      "content": "This block makes your header and hero section together fill exactly 100vh. Enter the CSS selectors for your header and hero section below."
+    },
+    {
+      "type": "header",
+      "content": "Selectors"
+    },
+    {
+      "type": "text",
+      "id": "header_selector",
+      "label": "Header CSS selector",
+      "default": ".shopify-section-header",
+      "info": "CSS selector for your header (e.g., .header, #header, .shopify-section-header)"
+    },
+    {
+      "type": "text",
+      "id": "hero_selector",
+      "label": "Hero section CSS selector",
+      "default": ".slideshow",
+      "info": "CSS selector for your hero/slideshow section (e.g., .slideshow, .hero, #hero-section)"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fullscreen hero CSS"
+    }
+  ]
+}
+{% endschema %}

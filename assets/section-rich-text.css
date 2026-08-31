@@ -65,3 +65,9 @@
 .rich-text__blocks > * + a {
   margin-top: 3rem;
 }
+
+.rich-text .button--primary {
+  background-color: #3075cc !important;
+  box-shadow: 0 0 0 0.1rem #3075cc !important;
+  color: #ffffff !important;
+}

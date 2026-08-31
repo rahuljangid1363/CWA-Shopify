@@ -29,7 +29,7 @@
             "btn_link": "",
             "box_align": "center",
             "translateX": "",
-            "text_align": "center",
+            "text_align": "left",
             "item_align": "center",
             "bg_button": "#94be90",
             "color_button": "#ffffff",
@@ -51,7 +51,7 @@
             "color_des": "#ffffff",
             "link": "Show More",
             "btn_link": "",
-            "box_align": "left",
+            "box_align": "center",
             "translateX": "",
             "text_align": "left",
             "item_align": "center",
@@ -63,18 +63,18 @@
         "d17110be-0c7a-4c5c-a648-a78b39ac790a": {
           "type": "slide",
           "settings": {
-            "image_slide": "shopify://shop_images/ChatGPT_Image_Aug_17_2026_05_41_12_PM.png",
+            "image_slide": "shopify://shop_images/homeHero.webp",
             "sub_title": "",
             "color_sub": "#ffffff",
-            "title": "Water & Wastewater Instrumentation Specialists",
+            "title": "Precision Instrumentation for Australia's Process Industry",
             "color_title": "#ffffff",
             "text_sale": "",
             "color_text_sale": "#5193e6",
-            "content": "Trusted in operating treatment plants across Australia",
+            "content": "Pressure transmitters, flow meters, analysers, and critical spares trusted across water, mining, energy, and food & beverage in Australia and the Pacific.",
             "color_des": "#ffffff",
             "link": "Explore Products",
             "btn_link": "shopify://collections/all",
-            "box_align": "left",
+            "box_align": "center",
             "translateX": "",
             "text_align": "left",
             "item_align": "center",
@@ -90,7 +90,6 @@
         "d17110be-0c7a-4c5c-a648-a78b39ac790a"
       ],
       "custom_css": [
-        ".title-slide {text-shadow: 5px 2px #17191a;}",
         ".list-text {width: 50%;}",
         ".description-slide {font-size: 24px !important;}"
       ],
@@ -150,7 +149,7 @@
             "bg_button": "#ffffff",
             "border_button": "rgba(0,0,0,0)",
             "text_align": "left",
-            "item_align": "bottom"
+            "item_align": "top"
           }
         },
         "0854e544-cd69-46db-82f3-15dd5c024062": {
@@ -188,7 +187,7 @@
             "bg_button2": "rgba(0,0,0,0)",
             "border_button2": "#ffffff",
             "text_align2": "left",
-            "item_align2": "bottom"
+            "item_align2": "top"
           }
         },
         "16490453142a9d24a3-1": {
@@ -686,6 +685,24 @@
         "subheading": "",
         "style_layout": "left"
       }
+    },
+    "1787654935c653e197": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a8d3d2b_XDegRt": {
+          "type": "ai_gen_block_a8d3d2b",
+          "settings": {
+            "header_selector": ".shopify-section-header",
+            "hero_selector": ".slideshow",
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a8d3d2b_XDegRt"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -698,6 +715,7 @@
     "1653039086fc46e456",
     "16530419117e4e348f",
     "1653097245516b6dce",
-    "1653097817727edcf5"
+    "1653097817727edcf5",
+    "1787654935c653e197"
   ]
 }
