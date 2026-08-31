@@ -149,35 +149,12 @@ product-grid-3 .servicer-product .btn-product{
     color: #fff;
     margin-right: 10px;
 }
-.product-grid-3 .card-hover{
-    opacity: 0;
-    visibility: hidden;
-    display: none;
-    position: absolute;
-    top: calc(100% - 10px );
-    left: 0;
-    padding: 0px 10px;
-    width: 100%;
-    transition: all .3s ease;
-}
 .product-grid-3:hover {
     z-index: 2;
-}
-.product-grid-3:hover .card-hover{
-    opacity: 1;
-    width: 100%;
-    visibility: visible;
-    display: block;
-    border-top: none;
-    animation: showcart .5s forwards;
 }
 .product-grid-3:hover::before{
 opacity: 1;
 visibility: visible;
-}
-.product-grid-3 .product-form__submit svg{
-    width: 24px;
-    height: 24px;
 }
 .product-grid-3 .price{
     margin-bottom: 0 !important;
@@ -186,12 +163,101 @@ visibility: visible;
 .product-grid-3 .card-information__wrapper{
     text-align: left;
 }
-@keyframes showcart{
-    0%{
-        
-        transform: translateY(-50%);
-    }
-    100%{
-        transform: translateY(0);
-    }
+
+/* category badge, top-left */
+.product-grid-3 .card__category-badge{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+}
+.product-grid-3 .card__category-badge span{
+    display: inline-block;
+    background-color: #EDF9FE;
+    color: #000;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.4;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-transform: capitalize;
+}
+
+/* hide quickview / wishlist / compare hover icons */
+.product-grid-3 .servicer-product-grid-3{
+    display: none !important;
+}
+
+/* persistent price + add-to-cart row (no hover reveal) */
+.product-grid-3 .card-footer-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+.product-grid-3 .card-footer-row .price{
+    margin-bottom: 0 !important;
+}
+.product-grid-3 .card-quick-add product-form,
+.product-grid-3 .card-quick-add .product-form__buttons{
+    width: auto;
+    height: auto;
+    max-width: unset;
+}
+.product-grid-3 .card-quick-add .product-form__submit{
+    min-width: unset;
+    min-height: unset;
+    width: 36px;
+    height: 36px;
+    max-width: unset;
+    padding: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid #cfe0f5;
+    color: #3075cc;
+    box-shadow: none;
+    transition: background-color .3s ease, border-color .3s ease, color .3s ease;
+}
+.product-grid-3 .card-quick-add .product-form__submit svg{
+    width: 16px;
+    height: 16px;
+    margin-right: 0;
+    color: inherit;
+}
+.product-grid-3 .card-quick-add .product-form__submit:hover{
+    transform: none;
+    background-color: #3075cc;
+    border-color: #3075cc;
+    color: #fff;
+}
+.product-grid-3 .card-quick-add .name-btn-product,
+.product-grid-3 .card-quick-add .text-btn-product{
+    display: none;
+}
+
+
+/* disable the legacy box-shadow reveal so hover never bleeds past the card's own border */
+.card-wrapper.product-grid-3:hover:before{
+    visibility: hidden;
+    opacity: 0;
+}
+.product-grid-3 .card-information{
+    padding: 12px 16px 16px;
+}
+.product-grid-3 .card-information__text{
+    color: #082549;
+    font-weight: 400;
+}
+.product-grid-3 .caption-with-letter-spacing{
+    color: #8a8a8a;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-top: 4px;
+}
+.product-grid-3 .price .price-item--regular,
+.product-grid-3 .price__regular{
+    color: #121212;
+    font-weight: 700;
 }

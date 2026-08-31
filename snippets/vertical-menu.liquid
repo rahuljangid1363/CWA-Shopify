@@ -8,68 +8,13 @@
       <button class="button-vertical-menu-close" type="button">{%- render 'icon-close' -%}</button>
     </div>
     <ul class="site-nav">
-      {%- for link in linklists[settings.vmain_linklist].links -%}
-      	
-      	{%- assign hasMega = false -%}
-        {%- assign titleCheckMega = link.title | escape | split: '[' | first | split: '}' | last | downcase -%}
-
-        {%- assign hasVertical = false -%}
-        {%- assign titleCheckVertical = link.title | escape | split: '[' | first | split: '}' | last | downcase -%}
-        {%- for i in (1..4) -%}
-          {%- capture vapvertical_title -%}vapmenuitem_title_{{ i }}{%- endcapture -%}
-          {%- assign vertical_title = settings[vapvertical_title] | escape | strip | downcase -%}
-          {%- if titleCheckVertical == vertical_title -%}
-            {%- assign hasVertical = true -%}
-            {%- assign intVertical = i -%}
-            {%- break -%}
-          {%- endif -%}
-        {%- endfor -%}
-        {%- if hasVertical -%}
-          {%- assign isFullwidth = true -%}
-          {%- assign settingWidth = 'vapmenuitem_width_' | append: intVertical -%}
-          {%- assign widthVertical = settings[settingWidth] -%}
-          {%- if widthVertical != 0 -%}
-          	{%- assign isFullwidth = false -%}
-          {%- endif -%}
-
-          <li class="site-nav__item site-nav__item-vertical {% unless isFullwidth %} site-nav__item-vertical--custom{% endunless %} {% if link.active %} site-nav--active{% endif %}" data-width="{{widthVertical}}">
-            <a href="{{ link.url }}" class="site-nav-ver__link dropdown-toggle" {% if link.active %} aria-current="page"{% endif %}>
-              <span>
-              {%- render 'processMenuTitle' with itemName.link.title, itemName: link.title -%}
-              {%- render 'processMenuLabel' with itemName.link.title, itemName: link.title -%}
-              </span>
-            </a>
-            <span class="drawer__ver-toggle--open">
-              <i class="fa fa-angle-down" aria-hidden="true"></i>
-            </span>
-            <div class="site__dropdown site-nav-ver__dropdown verticalnav verticalnav-{{intVertical}} " {%- if widthVertical != 0 -%}style="width: {{widthVertical}}px;"{%- endif -%}>
-              {%- render 'verticalmenu', intVertical:intVertical -%}
-            </div>
-          </li>
-        {%- elsif link.links != blank -%}
-          <li class="site-nav__item site-nav__item-normal {% if link.active %} site-nav--active{% endif %}">
-            <a href="{{ link.url }}" class="site-nav-ver__link dropdown-toggle" {% if link.active %} aria-current="page"{% endif %}>
-              <span>
-              {%- render 'processMenuTitle' with itemName.link.title, itemName: link.title -%}
-              {%- render 'processMenuLabel' with itemName.link.title, itemName: link.title -%}
-              </span>
-            </a>
-            <div class="site__dropdown site-nav-ver__dropdown verticalnav">
-              <ul class="verticalnav__nav">
-                {%- render 'site-nav', link: link -%}
-              </ul>
-            </div>
-          </li>
-          {%- else -%}
-          <li class="site-nav__item{% if link.active %} site-nav--active{% endif %}">
-            <a href="{{ link.url }}" class="site-nav-ver__link"{% if link.active %} aria-current="page"{% endif %}>
-              <span>
-              {%- render 'processMenuTitle' with itemName.link.title, itemName: link.title -%}
-              {%- render 'processMenuLabel' with itemName.link.title, itemName: link.title -%}
-              </span>
-            </a>
-          </li>
-        {%- endif -%}
+      {%- assign vertical_collections = collections | sort: 'title' -%}
+      {%- for collection in vertical_collections -%}
+        <li class="site-nav__item{% if collection.url == request.path %} site-nav--active{% endif %}">
+          <a href="{{ collection.url }}" class="site-nav-ver__link"{% if collection.url == request.path %} aria-current="page"{% endif %}>
+            <span>{{ collection.title }}</span>
+          </a>
+        </li>
       {%- endfor -%}
     </ul>
   </nav>{%- comment -%}

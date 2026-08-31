@@ -33,7 +33,8 @@
   }
 
 #pills-tabContent{
-  position: relative; 
+  position: relative;
+  transition: height .4s cubic-bezier(.4,0,.2,1);
  }
 
  .product-tab-placeholder .placeholder-svg{
@@ -47,52 +48,28 @@
 
 #pills-tabContent.active{
   overflow: hidden;
-  display: block!important;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+#pills-tabContent.active .tab-pane.active{
+  opacity: .4;
+  transform: scale(.99);
+  transition: opacity .3s cubic-bezier(.4,0,.2,1), transform .3s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
 }
 
- #pills-tabContent.active::after{
-    border: 3px solid transparent;
-    border-top: 3px solid black;
-    border-bottom: 3px solid black;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
-    text-align: center;
-    margin: 0 auto;
-    content: '';
-    z-index: 999;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
- }
+.tab-pane.fade{
+  transition: opacity .4s cubic-bezier(.4,0,.2,1), transform .4s cubic-bezier(.4,0,.2,1);
+  transform: translateY(10px);
+}
 
- #pills-tabContent.active:before{
-  content: '';
-   display: block;
-   width:100%;
-   height:100%;
-   background: #ccc;
-   position: absolute;
-   top: 0;
-   left: 0;
-   z-index: 99;
- }
+.tab-pane.fade.show{
+  transform: translateY(0);
+}
 
 .tab-content{
  overflow: hidden;
  overflow: unset;
  margin: 0 -10px;
-}
-
-.tab-content.active::before{
- background: #fff!important;
 }
 
 .tab-content .card-wrapper{
@@ -105,17 +82,23 @@
 
 .product-tab .nav-pills .nav-link{
   font-style: normal;
-  font-weight: 800;
-  font-size: 18px;
+  font-weight: 700;
+  font-size: 13px;
   line-height: 1.3;
   text-align: center;
-  padding: 10px 20px;
+  padding: 12px 28px;
   text-transform: uppercase;
   color: #999999;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+  transition: color .3s cubic-bezier(.4,0,.2,1), background-color .3s cubic-bezier(.4,0,.2,1), border-color .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1);
 }
 .product-tab .nav-pills .nav-link.active{
-  color: #000;
-  background-color: unset;
+  color: #fff;
+  background-color: #3075cc;
+  border-color: #3075cc;
+  box-shadow: 0 6px 14px rgba(48,117,204,.25);
 }
 .product-tab .section-header{
   margin-bottom: 10px;
@@ -123,51 +106,25 @@
 .product-tab .nav{
   align-items: center;
   margin-bottom: 40px;
+  flex-wrap: wrap;
+  row-gap: 10px;
 }
 .product-tab .nav .nav-item .nav-link{
   position: relative;
-  margin: 0px 15px;
+  margin: 0px 6px;
 }
-.product-tab .nav .nav-item .nav-link::before{
-  content: "";
-    position: absolute;
-    width: 100%;
-    height: 4px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0;
-    border-radius: 0;
-    border: none;
-    transition: all .3s ease;
-    background-color: #e5e5e5;
-}
+.product-tab .nav .nav-item .nav-link::before,
 .product-tab .nav .nav-item .nav-link::after{
-  content: "";
-    position: absolute;
-    width: 100%;
-    height: 4px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transform: scale(.5);
-    opacity: 0;
-    margin: 0;
-    border-radius: 0;
-    border: none;
-    transition: all .3s ease;
-    background-color: var(--g-main);
-}
-.product-tab .nav .nav-item .nav-link:hover::after{
-  transform: scale(1);
-    opacity: 1;
+  content: none;
+  display: none;
 }
 .product-tab .nav .nav-item .nav-link:hover {
-  color: #000;
+  color: #3075cc;
+  border-color: #3075cc;
 }
-.product-tab .nav-pills .nav-link.active::after{
-  transform: scale(1);
-  opacity: 1;
+.product-tab .nav-pills .nav-link.active:hover{
+  color: #fff;
+  border-color: #3075cc;
 }
 .product-tab .heading .link-base{
   padding: 15px 13px 5px 13px ;
@@ -187,7 +144,7 @@
 }
 @media (min-width: 1200px){
     .product-tab .card-information__wrapper ,.product-tab .product-grid-3 .card-hover{
-      padding: 0 30px 30px!important;
+      padding: 0 10px 10px!important;
     }
     .product-tab .product-grid-3 .card-hover{
       top: calc(100% - 30px );
@@ -219,5 +176,45 @@
 @media (max-width:567px) {
   .product-tab .heading .link-base{
     margin-top: 0;
+  }
+}
+
+/* smoother, premium card interactions (Our Products section only) */
+.product-tab .card-wrapper{
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+.product-tab .card-wrapper .card{
+  transition: border-color .3s ease;
+}
+.product-tab .card-wrapper .media img{
+  transition: transform .5s cubic-bezier(.25,.8,.25,1), opacity .4s cubic-bezier(.4,0,.2,1) !important;
+}
+.product-tab .card-wrapper .card-information__text,
+.product-tab .card-wrapper .price{
+  transition: color .3s ease;
+}
+.product-tab .btn-product,
+.product-tab .card-wrapper .button{
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), background-color .3s ease, color .3s ease, box-shadow .3s ease !important;
+}
+.product-tab .btn-product .name-btn-product,
+.product-tab .card-wrapper .button .name-btn-product{
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), opacity .3s ease, visibility .3s ease !important;
+}
+.product-tab .servicer-product{
+  transition: transform .4s cubic-bezier(.4,0,.2,1) !important;
+}
+.product-tab .product-card__overlay{
+  transition: opacity .4s ease, visibility .4s ease !important;
+}
+
+
+
+@media (hover: none){
+  .product-tab .card-wrapper{
+    transition: transform .2s ease;
+  }
+  .product-tab .card-wrapper:active{
+    transform: scale(.98);
   }
 }

@@ -76,6 +76,11 @@
           <div class="card__content"><h2 class="card__text h3">{{ product_card_product.title }}</h2></div>
         {%- endif -%}
 
+        {%- if product_card_product.type != blank -%}
+        <div class="card__category-badge">
+          <span>{{ product_card_product.type }}</span>
+        </div>
+        {%- endif -%}
         <div class="card__badge">
           {%- if product_card_product.available == false -%}
             <span class="badge badge--bottom-left" aria-hidden="true">{{ 'products.product.sold_out' | t }}</span>
@@ -87,8 +92,8 @@
         </div>
       </div>
       </a>
-      
-      
+
+
       <div class="servicer-product servicer-product-grid-3">
         <div class="product-card__overlay">
           {% render 'quickview-button', handle: product_card_product.handle %}
@@ -100,10 +105,6 @@
 	
     <div class="card-information">
       <div class="card-information__wrapper">
-        {%- if show_vendor -%}
-          <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-          <div class="caption-with-letter-spacing light">{{ product_card_product.vendor }}</div>
-        {%- endif -%}
 		<a href="{{ product_card_product.url | default: '#' }}" class="full-unstyled-link">
         {%- if product_card_product.featured_media -%}
           <span class="card-information__text">
@@ -111,6 +112,10 @@
           </span>
         {%- endif -%}
   		</a>
+        {%- if show_vendor -%}
+          <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+          <div class="caption-with-letter-spacing light">{{ product_card_product.vendor }}</div>
+        {%- endif -%}
 
         {% comment %} TODO: metafield {% endcomment %}
         <span class="caption-large light">{{ block.settings.description | escape }}</span>
@@ -156,30 +161,21 @@
 
         {% endif %}
         {%- endif -%}
-        <!-- price -->
-        {% render 'price', product: product_card_product, price_class: '' %}
         <!-- count down  -->
         {%- if section.settings.enable_countdown_card -%}
           {% render 'product-countdown', product_card_product: product_card_product %}
         {%- endif -%}
 
-
-        <div class="card-hover">
-          <div class="product-template__tags">
-            <!-- tag -->
-            {%- if product_card_product.tags_label -%}
-                <span>Unit: {{ product_card_product.tags_label | escape }}</span>
-            {%- endif -%}
-            {% for tag in product_card_product.tags %}
-              {% capture url %}/collections/all/{{ tag | handle }}{% endcapture %}
-                <a href="{{ url }}" class="link-product-tag">Unit: {{ tag }}</a>{% unless forloop.last %}, {% endunless %}
-            {% endfor %}
-          </div>
+        <div class="card-footer-row">
+          <!-- price -->
+          {% render 'price', product: product_card_product, price_class: '' %}
           <!-- add card -->
-          {% render 'addcart-button', product_card_product: product_card_product, product_form_id: product_form_id %}
+          <div class="card-quick-add">
+            {% render 'addcart-button', product_card_product: product_card_product, product_form_id: product_form_id %}
+          </div>
         </div>
-        
-       
+
+
       </div>
     </div>
 </div>

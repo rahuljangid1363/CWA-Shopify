@@ -625,17 +625,22 @@ function updateCurrencies(){
 
 function loaddingSlickProductTab(){
   $("ul#pills-tab button").click(function(){
-    $('#pills-tabContent').height($('#pills-tabContent').height());
-  	$("#pills-tabContent").addClass('active');
+    var $tabContent = $('#pills-tabContent');
+    $tabContent.height($tabContent.height());
+  	$tabContent.addClass('active');
     var current_tab_content = $(this).data('bs-target');
     setTimeout(
     function(){
-      $("#pills-tabContent").removeClass('active');
+      $tabContent.removeClass('active');
     	initSlick($(current_tab_content));
       	$(current_tab_content).slick('slickGoTo', 0);
+      	$tabContent.height($(current_tab_content).outerHeight());
+      	setTimeout(function(){
+      	  $tabContent.css('height', '');
+      	}, 400);
     }, 300);
-    
-  }); 
+
+  });
 }
 
 function actionMenuMobile(){
