@@ -34,6 +34,9 @@
   .header-4-bottom{
   background:white;
   }
+  #MainContent{
+    padding-top: var(--header-4-height, 190px);
+  }
 </style>
 <header class="header-4 {%- if section.settings.enable_transparent -%}{{ 'color-transparent' | prepend: ' ' }}{%- endif -%}">
   {%- if section.settings.header_announcement_bar -%}
@@ -149,6 +152,33 @@
     </div>
   </div>
 </header>
+
+<script>
+  (function () {
+    var header = document.querySelector('.header-4');
+    if (!header) return;
+    var main = document.getElementById('MainContent');
+    var scrollThreshold = 80;
+
+    function syncOffset() {
+      var h = header.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--header-4-height', h + 'px');
+      if (main) main.style.paddingTop = h + 'px';
+    }
+
+    function onScroll() {
+      var scrolled = window.scrollY > scrollThreshold;
+      header.classList.toggle('is-scrolled', scrolled);
+    }
+
+    onScroll();
+    syncOffset();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', syncOffset);
+    header.addEventListener('transitionend', syncOffset);
+  })();
+</script>
 
 {% schema %}
 {

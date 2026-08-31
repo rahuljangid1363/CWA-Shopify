@@ -56,8 +56,8 @@
               {%- endif -%}
             </div>
             <div class="box-content-slide">
-              <div class="container position-relative mt-4 h-100">
-                <div class="text-slider pt-5 mt-5 d-flex flex-column justify-content-{% if block.settings.item_align == 'top' %}start{% elsif block.settings.item_align == 'center' %}center{% elsif block.settings.item_align == 'bottom' %}end{% endif %} 
+              <div class="container position-relative h-75">
+                <div class="text-slider  d-flex flex-column justify-content-{% if block.settings.item_align == 'top' %}start{% elsif block.settings.item_align == 'center' %}center{% elsif block.settings.item_align == 'bottom' %}end{% endif %} 
                 {% if block.settings.box_align == 'left' %}left{% elsif block.settings.box_align == 'center' %}center{% elsif block.settings.box_align == 'right' %}right{% endif %}
                 text-{%- if block.settings.text_align == 'left' -%}start{%- elsif block.settings.text_align == 'center' -%}center{%- elsif block.settings.text_align == 'right' -%}end{%- endif -%}" style="transform: translateX({{ block.settings.translateX }});">
                     <ul class="list-text mt-5">

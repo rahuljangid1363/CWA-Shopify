@@ -299,3 +299,61 @@
         padding: 10px 0px;
     }
 }
+
+/* ============================================================
+   Scroll-merge header: two rows compact into one sticky bar,
+   matching the reference site's shrink/merge behaviour.
+   Desktop only — mobile already uses its own compact layout.
+   ============================================================ */
+@media (min-width: 992px){
+  #MainContent{
+    transition: padding-top .4s cubic-bezier(.4,0,.2,1);
+  }
+
+  .header-4{
+    transition: box-shadow .4s ease;
+  }
+  .header-4.is-scrolled{
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  }
+
+  .header-4-announcement-bar{
+    max-height: 80px;
+    overflow: hidden;
+    transition: max-height .4s cubic-bezier(.4,0,.2,1), padding .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+  }
+  .header-4.is-scrolled .header-4-announcement-bar{
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* header-4-center and header-4-bottom keep one constant, already-compact
+     height at all times (the height they used to only reach after scrolling),
+     so there is no height jump between the initial and scrolled states. */
+  .header-categories{
+    padding: 6px 15px;
+  }
+
+  .header__heading-logo{
+    transform-origin: left center;
+    transform: scale(.72);
+  }
+
+  .header-4 .vertical-bars{
+    padding: 4px 10px;
+  }
+
+  .header-4 .header-megamenu .site-nav__link{
+    padding: 0.7em 1.1em !important;
+  }
+
+  .header-4 .header-4-bottom::before{
+    transition: opacity .3s ease;
+  }
+  .header-4.is-scrolled .header-4-bottom::before{
+    opacity: 0;
+  }
+}
