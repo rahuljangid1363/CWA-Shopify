@@ -109,7 +109,8 @@
 
 @media(max-width: 576px){
     .slide-image.media{
-        padding-bottom: 80.520833%!important;
+        height: 100vh !important;
+        padding-bottom: 0 !important;
     }
 }
 
@@ -155,7 +156,8 @@
     width: max-content;
 }
 .slide-show .slide-image{
-    height: 620px;
+    height: 100vh !important;
+    padding-bottom: 0 !important;
 }
 
 .slide-show .box-content-slide{
