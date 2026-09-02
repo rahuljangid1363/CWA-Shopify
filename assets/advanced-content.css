@@ -159,6 +159,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 36px;
+    padding-bottom: 4px;
     text-transform: uppercase;
 }
 .advanced-content .text-list .text-list-note ul li svg{

@@ -9,6 +9,27 @@
 .product-carousel-slick{
     margin: 0 -15px
 }
+
+/* equal-height cards across a slide row: turn the slick track into a flex
+   row (stretches every slide to the tallest one) and let the card fill it */
+.product-carousel .product-carousel-slick.slick-initialized .slick-track{
+    display: flex;
+}
+.product-carousel .slick-slide{
+    height: auto;
+    display: flex;
+}
+.product-carousel .slick-slide > div{
+    display: flex;
+    width: 100%;
+}
+.product-carousel .items-product{
+    display: flex;
+    width: 100%;
+}
+.product-carousel .items-product .card-wrapper{
+    width: 100%;
+}
 .product-carousel .product-items{
     margin: 0 1.5rem;
 }

@@ -346,11 +346,11 @@
             "width": "25%",
             "bg_color": "rgba(0,0,0,0)",
             "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M1 3h13v13H1zM14 8h4l3 3v5h-7z\"/><circle cx=\"5.5\" cy=\"18.5\" r=\"1.5\"/><circle cx=\"17.5\" cy=\"18.5\" r=\"1.5\"/></svg>",
-            "header_service": "Ships Australia-wide and to the Pacific",
+            "header_service": "Australian Stock",
             "font_weight": "bold",
-            "color_title": "#121212",
-            "text_service": "",
-            "color_description": "#666666"
+            "color_title": "#0b1f3a",
+            "text_service": "Fast local dispatch",
+            "color_description": "#9a9a9a"
           }
         },
         "1653033212a1ab2224-1": {
@@ -358,12 +358,12 @@
           "settings": {
             "width": "25%",
             "bg_color": "rgba(0,0,0,0)",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M6 2h9l5 5v15H6z\"/><path d=\"M15 2v5h5M9 13h6M9 17h6\"/></svg>",
-            "header_service": "Data sheets on every product — PDF downloads, no sign-up",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M6 2h9l5 5v15H6z\"/><path d=\"M15 2v5h5\"/><path d=\"M9.5 14.5l2 2 3-4\"/></svg>",
+            "header_service": "Technical Data Sheets",
             "font_weight": "bold",
-            "color_title": "#121212",
-            "text_service": "",
-            "color_description": "#666666"
+            "color_title": "#0b1f3a",
+            "text_service": "Download before you buy",
+            "color_description": "#9a9a9a"
           }
         },
         "1653033212a1ab2224-2": {
@@ -371,12 +371,12 @@
           "settings": {
             "width": "25%",
             "bg_color": "rgba(0,0,0,0)",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z\"/><path d=\"M9 12l2 2 4-4\"/></svg>",
-            "header_service": "Secure online payment — checkout built for B2B",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/><path d=\"M8 12.5l2.5 2.5L16 9\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+            "header_service": "Secure Online Checkout",
             "font_weight": "bold",
-            "color_title": "#121212",
-            "text_service": "",
-            "color_description": "#666666"
+            "color_title": "#0b1f3a",
+            "text_service": "Simple, reliable ordering",
+            "color_description": "#9a9a9a"
           }
         },
         "c3d8f12d-b89c-434f-a59b-2889b4a5cd84": {
@@ -384,12 +384,12 @@
           "settings": {
             "width": "25%",
             "bg_color": "rgba(0,0,0,0)",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M3 7l5-3 5 3v6l-5 3-5-3z\"/><path d=\"M13 13l5-3 5 3v6l-5 3-5-3z\" transform=\"translate(-2,2)\"/><path d=\"M8 7v6M13 15v6\"/></svg>",
-            "header_service": "Bulk & multi-line orders — from one unit to a full plant",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M6 2h9l5 5v15H6z\"/><path d=\"M15 2v5h5\"/><path d=\"M12 19v-7\"/><path d=\"M9 15l3-3 3 3\"/></svg>",
+            "header_service": "Bulk & Multi-Line Orders",
             "font_weight": "bold",
-            "color_title": "#121212",
-            "text_service": "",
-            "color_description": "#666666"
+            "color_title": "#0b1f3a",
+            "text_service": "Built for project procurement",
+            "color_description": "#9a9a9a"
           }
         }
       },
@@ -413,7 +413,7 @@
         "text_decoration": "",
         "color_section_text": "#666666",
         "index_text": "row",
-        "icon-align": "top"
+        "icon-align": "left"
       }
     },
     "16530339040fc194f1": {

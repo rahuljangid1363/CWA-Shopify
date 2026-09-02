@@ -26,7 +26,7 @@
         {%- when '100%' -%}
         {%- assign block_width = 'col-12' -%}
         {%- endcase -%}
-        <div class="{{block_width}} advanced-item">
+        <div class="{{block_width}} advanced-item pl-0">
           {%- case block.type -%}
             {%- when 'product_singer' -%}
                 <div class="product-singer product-singer-{{block.id}}">
@@ -295,7 +295,7 @@
               </div>
 
               {%- when 'text_list'-%}
-              <div id="advanced-{{ block.id }}" class="h-100 d-flex align-items-center text-list">
+              <div id="advanced-{{ block.id }}" class="h-100 d-flex align-items-center text-list pe-0">
                 <div class="advanced-content_text text-{%- if block.settings.text_align == 'left' -%}start{%- elsif block.settings.text_align == 'center' -%}center{%- elsif block.settings.text_align == 'right' -%}end{%- endif -%}">
                   {%- style -%}
                     .advanced-content #advanced-{{ block.id }} .link-base{
