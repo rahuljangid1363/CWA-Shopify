@@ -2499,7 +2499,7 @@ details-disclosure > details {
 }
 
 .section-header{
-  font-family: 'Montserrat';
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-style: normal;
   font-weight: 800;
   font-size: 48px;
@@ -4305,7 +4305,7 @@ color: #000;
   text-align: center;
 }
 .title-content{
-  font-family: 'Jost';
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

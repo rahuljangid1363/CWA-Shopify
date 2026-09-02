@@ -35,6 +35,7 @@
       {% endif %}
     	{%- assign header-font = settings.name_font_header_user | replace: " ", "-" -%}
     {% elsif settings.font_header_google != blank and settings.font_google %}
+      {% render 'font-base.css', font_name: settings.font_header_google %}
       {%- assign header-font = settings.font_header_google -%}
    {%- else -%}
       {%- assign header-font = settings.type_header_font.family -%}
@@ -52,13 +53,13 @@
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
       :root {
-        --g-font-1: {{ body-font }}, Sans-serif;
-        --g-font-2: {{ header-font }}, serif;
-        --font-body-family: {{ body-font }};
+        --g-font-1: "{{ body-font }}", sans-serif;
+        --g-font-2: "{{ header-font }}", sans-serif;
+        --font-body-family: "{{ body-font }}", sans-serif;
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
 
-        --font-heading-family: {{ header-font }};
+        --font-heading-family: "{{ header-font }}", sans-serif;
         --font-heading-style: {{ settings.type_header_font.style }};
         --font-heading-weight: {{ settings.type_header_font.weight }};
 
@@ -119,7 +120,7 @@
         font-size: 1.4rem;
         letter-spacing: 0rem;
         line-height: 1.8;
-        font-family: {{ body-font }};
+        font-family: "{{ body-font }}", sans-serif;
         font-weight: 400;
       }
 
@@ -128,13 +129,14 @@
       h3,
       h4,
       h5,
+      h6,
       .h0,
       .h1,
       .h2,
       .h3,
       .h4,
       .h5 {
-        font-family: {{ header-font }};
+        font-family: "{{ header-font }}", sans-serif;
         font-weight: 400;
         letter-spacing: 0rem;
         color: var(--color-base-header);

@@ -187,7 +187,7 @@
     text-transform: uppercase;
 }
 .advanced-newsletter .advanced-content_text-title{
-    font-family: 'El Messiri';
+    font-family: "Plus Jakarta Sans", sans-serif;
     font-style: normal;
     font-weight: 400;
     margin-bottom: 30px;
@@ -216,7 +216,7 @@
 }
 /* banner niormal */
 .advanced-content .banner-normal .title-banner{
-    font-family: 'El Messiri';
+    font-family: "Plus Jakarta Sans", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 60px;
