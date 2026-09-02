@@ -1,10 +1,35 @@
 
 <!-- newlester.liquid -->
+{% comment %}
+  Accepts:
+  - email_placeholder: {String} optional override for the email field placeholder/label
+  - button_label: {String} optional override for the submit button text
+  - show_button_icon: {Boolean} show the trailing arrow icon on the button. Default: true
+  - show_email_icon: {Boolean} show a small mail icon inside the email field. Default: false
+{% endcomment %}
+{%- liquid
+  if email_placeholder
+    assign newsletter_placeholder_text = email_placeholder
+  else
+    assign newsletter_placeholder_text = 'newsletter.label' | t
+  endif
+  if button_label
+    assign newsletter_button_text = button_label
+  else
+    assign newsletter_button_text = 'newsletter.button_label' | t
+  endif
+  if show_button_icon == blank
+    assign show_button_icon = true
+  endif
+-%}
 <div class="footer-block__newsletter">
     {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
       <div class="newsletter-form__field-wrapper">
-        <div class="field">
+        <div class="field{% if show_email_icon %} field--with-icon{% endif %}">
+          {%- if show_email_icon -%}
+            <span class="field__icon">{%- render 'icon-email' -%}</span>
+          {%- endif -%}
           <input
             id="NewsletterForm--{{ section.id }}"
             type="email"
@@ -22,10 +47,10 @@
             {% elsif form.posted_successfully? %}
               aria-describedby="ContactFooter-success"
             {% endif %}
-            placeholder="{{ 'newsletter.label' | t }}"
+            placeholder="{{ newsletter_placeholder_text }}"
           >
           <label class="field__label" for="NewsletterForm--{{ section.id }}">
-            {{ 'newsletter.label' | t }}
+            {{ newsletter_placeholder_text }}
           </label>
         </div>
         {%- if form.errors -%}
@@ -33,7 +58,7 @@
         {%- endif -%}
       </div>
       <button type="submit" class="button button--secondary newsletter-form__button" name="commit">
-        {{ 'newsletter.button_label' | t }}<i class="leofar leofa-arrow-right"></i>
+        {{ newsletter_button_text }}{%- if show_button_icon -%}<i class="leofar leofa-arrow-right"></i>{%- endif -%}
       </button>
       {%- if form.posted_successfully? -%}
         <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>

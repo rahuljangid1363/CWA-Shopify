@@ -23,6 +23,9 @@
 .footer-1 .footer-block-logo{
     margin-bottom: 14px;
 }
+.footerDesc li{
+    line-height: 1.8 !important;
+}
 .footer-1 .footer-block-logo img{
     max-height: 42px;
     width: auto;
@@ -218,9 +221,9 @@
     padding: 0;
 }
 .list-content-footer li{
-    line-height: 1.2;
+    line-height: 1.5;
     padding: 5px;
-    color: #999999;
+    color: #fff;
 }
 .footer-1 .icon-phone{
     width: 50px;

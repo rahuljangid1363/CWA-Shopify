@@ -1,70 +1,116 @@
 <!-- newsletter.liquid -->
 <style>
 .newsletter{
-  padding: 40px 0px;
+  position: relative;
+  padding: 56px 0;
   background-image: none !important;
-  background-color: {{ section.settings.bg_color | default: '#f5f6f7' }} !important;
+  background-color: {{ section.settings.bg_color | default: '#0b0f14' }} !important;
+  overflow: hidden;
+}
+.newsletter.has-bg-image::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.75) 38%, rgba(0,0,0,.15) 75%, rgba(0,0,0,0) 100%);
+  z-index: 1;
+}
+.newsletter .container,
+.newsletter .container-fluid{
+  position: relative;
+  z-index: 2;
 }
 .newsletter h4,.newsletter p{
-  
   color:{{ section.settings.color_text }};
-  
 }
 .newsletter p{
   font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 24px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: .85;
 }
 .newsletter .sub-title{
-margin-bottom: 12px;
-font-style: normal;
-font-weight: 400;
-font-size: 36px;
-line-height: 44px;
-
+  margin-bottom: 12px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 44px;
 }
 
 .newsletter h4{
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 800;
-  font-size: 24px;
-  margin-bottom: 20px;
-  line-height: 1.2;
+  font-size: 36px;
+  margin-bottom: 14px;
+  line-height: 1.25;
   text-transform: uppercase;
 }
 .newsletter .field__label{
-  color: #666666;
+  color: #888888;
   font-size: 1.3rem;
   top: 1.3rem;
 }
 .newsletter .section-block__subtext{
-margin-bottom: 30px;
+  margin-bottom: 22px;
+  max-width: 620px;
+}
+.newsletter .field{
+  position: relative;
+}
+.newsletter .field--with-icon .field__input{
+  padding-left: 42px;
+}
+.newsletter .field--with-icon .field__label{
+  left: 42px;
+}
+.newsletter .field__icon{
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  color: #9a9a9a;
+  pointer-events: none;
+}
+.newsletter .field__icon svg{
+  width: 15px;
+  height: 12px;
+}
+.newsletter .field__icon svg path{
+  fill: currentColor;
 }
 .newsletter .field__input{
   margin-bottom: 0;
-  border-radius: 5px;
- background-color: #fff;
-  box-shadow:none;
+  height: 48px;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: none;
+  border: none;
+}
+.newsletter .footer-block__newsletter form{
+  display: flex;
+  max-width: 560px;
 }
 
 .newsletter .button{
   font-size: 14px;
-  box-shadow:none;
-  padding: 15px 20px;
-  border-radius: 5px;
-  background-color:  {{section.settings.bg_color_button}};
-  color: {{section.settings.color_button}};
+  font-weight: 600;
+  box-shadow: none;
+  padding: 0 22px;
+  height: 48px;
+  min-height: 48px;
+  min-width: unset;
+  border-radius: 6px;
+  background-color: {{ section.settings.bg_color_button }};
+  color: {{ section.settings.color_button }};
 }
 .newsletter .button i{
-  margin-left: 5px;
+  display: none;
 }
 .newsletter .button:hover{
   box-shadow: none;
-}
-.newsletter .footer-block__newsletter form{
-  display: flex;
+  opacity: .92;
 }
 .newsletter .grid__item{
   max-width: 100%;
@@ -72,12 +118,6 @@ margin-bottom: 30px;
 }
 .newsletter .section-block{
   max-width: 560px;
-  
-}
-@media (min-width:1200px) {
-  .newsletter{
-    padding: 40px 0px;
-  }
 }
 @media (min-width:567px) {
   .newsletter .newsletter-form__field-wrapper{
@@ -94,15 +134,12 @@ margin-bottom: 30px;
     width: 100%;
   }
  .newsletter .button{
-    margin-top: 20px;
-    padding: 13px 15px;
-    min-height: unset;
-    font-size: 12px;
-    min-width: unset;
+    margin-top: 12px;
+    width: 100%;
   }
 }
 </style>
-<div class="newsletter " {% if section.settings.bg_image != blank %} style="background-color: {{ section.settings.bg_color }}; background:url({{ section.settings.bg_image | img_url:'master' }}) center center no-repeat;background-size:cover;" {% endif %}>
+<div class="newsletter{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" {% if section.settings.bg_image != blank %} style="background-color: {{ section.settings.bg_color }}; background:url({{ section.settings.bg_image | img_url:'master' }}) center center no-repeat;background-size:cover;" {% endif %}>
   <div class="{% if section.settings.fullwidth %}container-fluid{% else %}container{% endif %}" >
     <div class="section-block section-block--padding {% if section.settings.style_layout == "left" %}me-auto{% elsif section.settings.style_layout == "center" %}mx-auto{% elsif section.settings.style_layout == "right" %}ms-auto{% endif %}">
       <div class="{% if section.settings.heading != blank or section.settings.subheading != blank %}section-block__header {% endif %} {% if section.settings.style_layout == "left" %}text-start{% elsif section.settings.style_layout == "center" %}text-center{% elsif section.settings.style_layout == "right" %}text-end{% endif %}">
@@ -119,7 +156,12 @@ margin-bottom: 30px;
       <div class="grid">
         <div class="grid__item medium-up--two-thirds medium-up--push-one-sixth">
           <div class="form-vertical">
-            {% render 'newlester' %}
+            {% render 'newlester',
+              email_placeholder: 'Work email address',
+              button_label: 'Get Technical Updates',
+              show_button_icon: false,
+              show_email_icon: true
+            %}
           </div>
         </div>
       </div>

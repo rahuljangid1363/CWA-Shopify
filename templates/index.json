@@ -675,14 +675,14 @@
       "custom_css": [],
       "settings": {
         "fullwidth": false,
-        "bg_color": "#f5f6f7",
+        "bg_color": "#0b0f14",
         "bg_image": "shopify://shop_images/ChatGPT_Image_Aug_17_2026_02_47_08_PM_3918aa68-8a66-46f9-8f57-3c5f80c039cd.png",
-        "color_text": "#121212",
+        "color_text": "#ffffff",
         "color_button": "#ffffff",
         "bg_color_button": "#3075cc",
         "sub_title": "",
-        "heading": "Get the latest product releases and special offers",
-        "subheading": "",
+        "heading": "Know what&#8217;s in stock. Keep your site moving.",
+        "subheading": "<p>Get Australian Stock Alerts, New Product Releases And Practical Technical Resources For Water, Wastewater And Remote-Site Applications.</p>",
         "style_layout": "left"
       }
     },
