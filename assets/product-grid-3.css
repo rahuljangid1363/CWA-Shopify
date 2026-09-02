@@ -188,51 +188,116 @@ visibility: visible;
     display: none !important;
 }
 
-/* persistent price + add-to-cart row (no hover reveal) */
+/* price row (rest state) / wishlist + add-to-cart row (hover state) —
+   both stacked in the same footer slot so the card's height never changes */
+.product-grid-3 .card-footer{
+    position: relative;
+    min-height: 34px;
+    margin-top: 8px;
+}
 .product-grid-3 .card-footer-row{
     display: flex;
     align-items: center;
+}
+.product-grid-3 .card-footer-row--default{
     justify-content: space-between;
-    margin-top: 8px;
+    transition: opacity .25s ease;
+}
+.product-grid-3 .card-footer-row--hover{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+}
+.product-grid-3:hover .card-footer-row--default{
+    opacity: 0;
+    pointer-events: none;
+}
+.product-grid-3:hover .card-footer-row--hover{
+    opacity: 1;
+    pointer-events: auto;
 }
 .product-grid-3 .card-footer-row .price{
     margin-bottom: 0 !important;
 }
-.product-grid-3 .card-quick-add product-form,
-.product-grid-3 .card-quick-add .product-form__buttons{
-    width: auto;
-    height: auto;
-    max-width: unset;
-}
-.product-grid-3 .card-quick-add .product-form__submit{
-    min-width: unset;
-    min-height: unset;
-    width: 36px;
-    height: 36px;
-    max-width: unset;
+
+/* wishlist heart, small outline circle */
+.product-grid-3 .card-footer-row--hover .js-btn-wishlist{
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
     padding: 0;
     border-radius: 50%;
-    background-color: transparent;
     border: 1px solid #cfe0f5;
     color: #3075cc;
-    box-shadow: none;
-    transition: background-color .3s ease, border-color .3s ease, color .3s ease;
+    background: transparent;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
-.product-grid-3 .card-quick-add .product-form__submit svg{
-    width: 16px;
-    height: 16px;
+.product-grid-3 .card-footer-row--hover .js-btn-wishlist svg{
+    width: 14px;
+    height: 14px;
     margin-right: 0;
-    color: inherit;
 }
-.product-grid-3 .card-quick-add .product-form__submit:hover{
-    transform: none;
+.product-grid-3 .card-footer-row--hover .js-btn-wishlist .span-wishlist,
+.product-grid-3 .card-footer-row--hover .js-btn-wishlist .name-btn-product{
+    display: none;
+}
+.product-grid-3 .card-footer-row--hover .js-btn-wishlist:hover{
     background-color: #3075cc;
     border-color: #3075cc;
     color: #fff;
 }
-.product-grid-3 .card-quick-add .name-btn-product,
-.product-grid-3 .card-quick-add .text-btn-product{
+
+/* full-width "Add to Cart" button */
+.product-grid-3 .card-footer-row--hover .card-quick-add{
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.product-grid-3 .card-footer-row--hover .card-quick-add product-form,
+.product-grid-3 .card-footer-row--hover .card-quick-add .product-form__buttons{
+    width: 100%;
+    height: auto;
+    max-width: unset;
+}
+.product-grid-3 .card-footer-row--hover .card-quick-add .product-form__submit{
+    width: 100%;
+    min-width: unset;
+    min-height: unset;
+    max-width: unset;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 6px;
+    background-color: #3075cc;
+    border: 1px solid #3075cc;
+    color: #fff;
+    box-shadow: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color .2s ease, border-color .2s ease;
+}
+.product-grid-3 .card-footer-row--hover .card-quick-add .product-form__submit:hover{
+    transform: none;
+    background-color: #225a9e;
+    border-color: #225a9e;
+}
+.product-grid-3 .card-footer-row--hover .card-quick-add .product-form__submit svg{
     display: none;
+}
+.product-grid-3 .card-footer-row--hover .card-quick-add .name-btn-product{
+    display: none;
+}
+.product-grid-3 .card-footer-row--hover .card-quick-add .text-btn-product{
+    display: block;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 
