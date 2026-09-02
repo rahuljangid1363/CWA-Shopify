@@ -93,12 +93,13 @@
 .header-4-bottom .nav-vertical{
     position: absolute;
     left: 0;
+    border-radius: 0px 0px 5px 5px;
     top: 100%;
     bottom: unset;
     right: unset;
     display: none!important;
     width: 100%;
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 75%);
+    box-shadow: 0 0px 5px 0 rgb(0 0 0 / 75%);
     background-color: #fff;
 }
 

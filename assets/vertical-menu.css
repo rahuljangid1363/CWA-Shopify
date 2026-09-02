@@ -157,6 +157,11 @@ li.site-nav__item.site-nav__item-vertical.site-nav__item-vertical--custom:first-
   border-bottom: none;
 }
 
+.nav-vertical .site-nav__item--view-all .site-nav-ver__link{
+  color: var(--g-main);
+  font-weight: 700;
+}
+
 .nav-vertical .widget-inner li{
   padding: 0 0 5px;
 }
