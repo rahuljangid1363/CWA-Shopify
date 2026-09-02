@@ -166,16 +166,12 @@
           {% render 'product-countdown', product_card_product: product_card_product %}
         {%- endif -%}
 
-        <div class="card-footer">
-          <div class="card-footer-row card-footer-row--default">
-            <!-- price -->
-            {% render 'price', product: product_card_product, price_class: '' %}
-          </div>
-          <div class="card-footer-row card-footer-row--hover">
-            {% render 'wishlist-button', handle: product_card_product.handle %}
-            <div class="card-quick-add">
-              {% render 'addcart-button', product_card_product: product_card_product, product_form_id: product_form_id %}
-            </div>
+        <div class="card-footer-row">
+          <!-- price -->
+          {% render 'price', product: product_card_product, price_class: '' %}
+          <!-- add card -->
+          <div class="card-quick-add">
+            {% render 'addcart-button', product_card_product: product_card_product, product_form_id: product_form_id %}
           </div>
         </div>
 
