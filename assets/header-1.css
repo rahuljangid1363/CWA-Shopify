@@ -125,3 +125,12 @@ line-height: 18px;
         margin:0px;
     }
 }
+
+@media (min-width: 992px) {
+  .header-1.is-scrolled .header-announcement-bar,
+  .header-1.is-scrolled .header-center,
+  .header-1.is-scrolled .header-bottom {
+    display: none !important;
+  }
+}
+

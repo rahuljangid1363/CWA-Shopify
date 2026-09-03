@@ -1,0 +1,177 @@
+<!-- snippets/scrolled-header.liquid -->
+{{ 'scrolled-header.css' | asset_url | stylesheet_tag }}
+
+{%- assign industryBlocks = section.blocks | where: 'type', 'industry_item' -%}
+{%- assign main_menu_handle = settings.main_linklist | default: 'main-menu' -%}
+
+<div class="scrolled-header-sticky">
+  <div class="scrolled-header__inner">
+    <!-- Left Section: Logo, Categories, Divider, Navigation -->
+    <div class="scrolled-header__left">
+      <!-- CWA Logo -->
+      <div class="scrolled-header__logo">
+        <a href="{{ routes.root_url }}" class="scrolled-header__logo-link" aria-label="{{ shop.name }}">
+          {%- if settings.logo != blank -%}
+            <img
+              src="{{ settings.logo | img_url: 'master' }}"
+              alt="{{ settings.logo.alt | default: shop.name | escape }}"
+              class="scrolled-header__logo-img"
+              loading="lazy"
+            >
+          {%- else -%}
+            <span class="scrolled-header__logo-text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      <!-- Shop by Categories Trigger & Dropdown -->
+      <div class="scrolled-header__categories">
+        <button type="button" class="scrolled-header__cat-btn vertical-bars" aria-label="Shop by Categories">
+          <svg class="scrolled-header__cat-icon" width="15" height="12" viewBox="0 0 16 12" fill="none">
+            <path d="M0 1C0 0.45 0.45 0 1 0H15C15.55 0 16 0.45 16 1C16 1.55 15.55 2 15 2H1C0.45 2 0 1.55 0 1Z" fill="#00B5E2"/>
+            <path d="M0 6C0 5.45 0.45 5 1 5H11C11.55 5 12 5.45 12 6C12 6.55 11.55 7 11 7H1C0.45 7 0 6.55 0 6Z" fill="#00B5E2"/>
+            <path d="M0 11C0 10.45 0.45 10 1 10H7C7.55 10 8 10.45 8 11C8 11.55 7.55 12 7 12H1C0.45 12 0 11.55 0 11Z" fill="#00B5E2"/>
+          </svg>
+          <span class="scrolled-header__cat-text">SHOP BY CATEGORIES</span>
+          <svg class="scrolled-header__cat-arrow" width="8" height="5" viewBox="0 0 8 5" fill="none">
+            <path d="M1 1L4 4L7 1" stroke="#00B5E2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        {%- render 'vertical-menu' -%}
+      </div>
+
+      <!-- Vertical Divider Line -->
+      <div class="scrolled-header__divider" aria-hidden="true"></div>
+
+      <!-- Main Navigation Menu -->
+      <nav class="scrolled-header__nav" role="navigation">
+        <ul class="scrolled-header__nav-list">
+          {%- for link in linklists[main_menu_handle].links -%}
+            {%- assign titleCheckMega = link.title | escape | split: '[' | first | split: '}' | last | downcase -%}
+            {%- assign hasMega = false -%}
+            {%- for i in (1..4) -%}
+              {%- capture apmegamenu_title -%}apmenuitem_title_{{ i }}{%- endcapture -%}
+              {%- assign megamenu_title = settings[apmegamenu_title] | escape | strip | downcase -%}
+              {%- if titleCheckMega == megamenu_title -%}
+                {%- assign hasMega = true -%}
+                {%- assign intMega = i -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if hasMega -%}
+              {%- assign isFullwidth = true -%}
+              {%- assign settingWidth = 'apmenuitem_width_' | append: intMega -%}
+              {%- assign widthMega = settings[settingWidth] -%}
+              {%- if widthMega != 0 -%}{%- assign isFullwidth = false -%}{%- endif -%}
+
+              <li class="scrolled-header__nav-item scrolled-header__nav-item--mega {% if link.active %}active{% endif %}">
+                <a href="{{ link.url }}" class="scrolled-header__nav-link" {% if link.active %}aria-current="page"{% endif %}>
+                  {{ link.title | split: '[' | first | split: '{' | first }}
+                </a>
+                <div class="scrolled-header__dropdown meganav meganav-{{ intMega }}" {%- if widthMega != 0 -%}style="width: {{ widthMega }}px;"{%- endif -%}>
+                  {%- render 'megamenu', intMega: intMega -%}
+                </div>
+              </li>
+            {%- elsif link.links != blank -%}
+              <li class="scrolled-header__nav-item scrolled-header__nav-item--dropdown {% if link.active %}active{% endif %}">
+                <a href="{{ link.url }}" class="scrolled-header__nav-link" {% if link.active %}aria-current="page"{% endif %}>
+                  {{ link.title | split: '[' | first | split: '{' | first }}
+                </a>
+                <div class="scrolled-header__dropdown meganav">
+                  {%- if titleCheckMega == 'industries' and industryBlocks.size > 0 -%}
+                    {%- render 'industries-preview-menu', blocks: industryBlocks -%}
+                  {%- else -%}
+                    <ul class="meganav__nav">
+                      {%- render 'site-nav', link: link -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- else -%}
+              <li class="scrolled-header__nav-item {% if link.active %}active{% endif %}">
+                <a href="{{ link.url }}" class="scrolled-header__nav-link" {% if link.active %}aria-current="page"{% endif %}>
+                  {{ link.title | split: '[' | first | split: '{' | first }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Right Section: Search Bar & Action Icons -->
+    <div class="scrolled-header__right">
+      <!-- Search Box -->
+      <div class="scrolled-header__search">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="scrolled-header__search-form">
+          <button type="submit" class="scrolled-header__search-btn" aria-label="Search">
+            <svg class="scrolled-header__search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#718096" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <input
+            type="search"
+            name="q"
+            class="scrolled-header__search-input"
+            placeholder="Search by product code, model or specification"
+            autocomplete="off"
+            value="{{ search.terms | escape }}"
+          >
+          <input type="hidden" name="options[prefix]" value="last">
+        </form>
+      </div>
+
+      <!-- Action Icons: Wishlist, Account, Cart -->
+      <div class="scrolled-header__actions">
+        <!-- Wishlist -->
+        <div class="scrolled-header__action-item">
+          <a href="/pages/{{ settings.page_wishlist | default: 'wishlist' }}" class="scrolled-header__action-btn" title="Wishlist" aria-label="Wishlist">
+            <svg class="scrolled-header__icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <span class="scrolled-header__count num-wishlisted" style="display:none;">0</span>
+          </a>
+        </div>
+
+        <!-- Account -->
+        <div class="scrolled-header__action-item header-sign">
+          <a href="/account" class="scrolled-header__action-btn" title="Account" aria-label="Account">
+            <svg class="scrolled-header__icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </a>
+          <div class="mini-acount">
+            {% if customer %}
+              <p><a>Hello {{ customer.first_name }}</a></p>
+              <p><a href="/account/logout" title="{{ 'layout.customer.log_out' | t }}" class="site-header__link">Logout</a></p>
+              <p><a href="/account" title="My account">My account</a></p>
+            {% else %}
+              <p><a href="/account/login" class="site-header__link">Sign in</a></p>
+              <p><a href="/account/register" title="Register">Register</a></p>
+            {% endif %}
+            <p><a href="/pages/wishlist" title="Wishlist">Wishlist (<span class="js-wishlist-count"></span>)</a></p>
+            <p><a href="/cart" title="Checkout">Checkout</a></p>
+          </div>
+        </div>
+
+        <!-- Cart -->
+        <div class="scrolled-header__action-item header-cart">
+          <a href="{{ routes.cart_url }}" class="scrolled-header__action-btn header__icon--cart" title="Cart" aria-label="Cart">
+            <svg class="scrolled-header__icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"/>
+              <circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            {%- if cart != empty and cart.item_count > 0 -%}
+              <span class="scrolled-header__count cart-count-bubble">{{ cart.item_count }}</span>
+            {%- endif -%}
+          </a>
+          {% render 'mini-cart' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

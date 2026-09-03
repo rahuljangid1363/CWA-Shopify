@@ -121,7 +121,26 @@
       </div>
    </div>
   </div>
+
+  {%- render 'scrolled-header' -%}
 </header>
+
+<script>
+  (function () {
+    var header = document.querySelector('.header-1');
+    if (!header) return;
+    var scrollThreshold = 60;
+
+    function onScroll() {
+      var scrolled = window.scrollY > scrollThreshold;
+      header.classList.toggle('is-scrolled', scrolled);
+      document.body.classList.toggle('header-is-scrolled', scrolled);
+    }
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
 
 {% schema %}
 {

@@ -151,6 +151,8 @@
       </div>
     </div>
   </div>
+
+  {%- render 'scrolled-header' -%}
 </header>
 
 <script>
@@ -158,17 +160,27 @@
     var header = document.querySelector('.header-4');
     if (!header) return;
     var main = document.getElementById('MainContent');
-    var scrollThreshold = 80;
+    var scrollThreshold = 60;
+    var initialHeight = 0;
 
     function syncOffset() {
-      var h = header.getBoundingClientRect().height;
-      document.documentElement.style.setProperty('--header-4-height', h + 'px');
-      if (main) main.style.paddingTop = h + 'px';
+      if (!header.classList.contains('is-scrolled')) {
+        var h = header.getBoundingClientRect().height;
+        if (h > 0) {
+          initialHeight = h;
+          document.documentElement.style.setProperty('--header-4-height', h + 'px');
+          if (main) main.style.paddingTop = h + 'px';
+        }
+      } else if (initialHeight > 0) {
+        document.documentElement.style.setProperty('--header-4-height', initialHeight + 'px');
+        if (main) main.style.paddingTop = initialHeight + 'px';
+      }
     }
 
     function onScroll() {
       var scrolled = window.scrollY > scrollThreshold;
       header.classList.toggle('is-scrolled', scrolled);
+      document.body.classList.toggle('header-is-scrolled', scrolled);
     }
 
     onScroll();
@@ -176,7 +188,6 @@
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', syncOffset);
-    header.addEventListener('transitionend', syncOffset);
   })();
 </script>
 

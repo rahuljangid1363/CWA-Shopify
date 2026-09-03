@@ -93,3 +93,10 @@
         right: -40px;
     }
 }
+
+@media (min-width: 992px) {
+  .header-5.is-scrolled .header-5-announcement-bar,
+  .header-5.is-scrolled .header-5-center {
+    display: none !important;
+  }
+}

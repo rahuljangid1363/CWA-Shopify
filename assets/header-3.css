@@ -139,3 +139,13 @@
         margin: auto 30px auto auto;
     }
 }
+
+@media (min-width: 992px) {
+  .header-3.is-scrolled .header-top,
+  .header-3.is-scrolled .head-logo,
+  .header-3.is-scrolled .header-announcement_bar,
+  .header-3.is-scrolled .header-center,
+  .header-3.is-scrolled .header-bottom {
+    display: none !important;
+  }
+}

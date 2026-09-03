@@ -1,42 +1,43 @@
 /* announcement-bar */
-.header-4-announcement-bar{
+.header-4-announcement-bar {
     width: 100%;
     padding: 10px 0;
     text-align: center;
 }
 
-.select-selected, .select-items.select-hide{
+.select-selected,
+.select-items.select-hide {
     display: none;
 }
 
-.color-transparent .header-4-announcement-bar{
+.color-transparent .header-4-announcement-bar {
     background-color: transparent;
 }
 
-.header-4-announcement-bar p{
+.header-4-announcement-bar p {
     margin: 0;
 }
 
-.header-categories{
-    padding: 15px 15px;
+.header-categories {
+    padding: 0px 15px;
 }
 
-.header-4 .search-media{
+.header-4 .search-media {
     display: none;
 }
 
-.header-4 .form-search{
+.header-4 .form-search {
     opacity: 1;
     visibility: visible;
     position: unset;
 }
 
-.header-search{
+.header-search {
     align-self: center;
 }
 
 
-.header-4 .icon-search .field__button{
+.header-4 .icon-search .field__button {
     border-radius: 30px;
     background-color: transparent;
     color: #000;
@@ -44,7 +45,7 @@
     left: unset;
 }
 
-.header-4 .field__label{
+.header-4 .field__label {
     left: 2.5rem;
     font-weight: 400;
     font-size: 13px;
@@ -52,35 +53,36 @@
     color: #666666;
 }
 
-.header-4 .icon-search .field__input:focus{
-    padding: 0 15px 0 45px;    
-}
-
-.header-4 .icon-search .field__input:not(:placeholder-shown){
+.header-4 .icon-search .field__input:focus {
     padding: 0 15px 0 45px;
 }
 
-.header-bottom{
+.header-4 .icon-search .field__input:not(:placeholder-shown) {
+    padding: 0 15px 0 45px;
+}
+
+.header-bottom {
     align-self: center;
 }
-.header-4 .header-vertical-menu{
+
+.header-4 .header-vertical-menu {
     position: relative;
 }
 
-.header-4 .icon-vertical-menu{
+.header-4 .icon-vertical-menu {
     border-radius: 30px;
 
 }
 
-.header-4 .vertical-bars{
+.header-4 .vertical-bars {
     width: 100%;
-    padding: 10px ;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     text-align: left;
 }
 
-.header-4 .vertical-bars span{
+.header-4 .vertical-bars span {
     padding-left: 10px;
     font-style: normal;
     font-weight: 700;
@@ -90,20 +92,20 @@
 }
 
 
-.header-4-bottom .nav-vertical{
+.header-4-bottom .nav-vertical {
     position: absolute;
     left: 0;
     border-radius: 0px 0px 5px 5px;
     top: 100%;
     bottom: unset;
     right: unset;
-    display: none!important;
+    display: none !important;
     width: 100%;
     box-shadow: 0 0px 5px 0 rgb(0 0 0 / 75%);
     background-color: #fff;
 }
 
-.header-4-bottom .nav-vertical::after{
+.header-4-bottom .nav-vertical::after {
     content: '';
     width: 0;
     height: 0;
@@ -116,62 +118,77 @@
     position: absolute;
     left: 30px;
 }
-.header-4-bottom .nav-vertical.show{
-    display: block!important;
+
+.header-4-bottom .nav-vertical.show {
+    display: block !important;
 }
 
-.header-4-bottom .vertical-bkg{
+.header-4-bottom .vertical-bkg {
     background-color: transparent;
 }
 
-.header-4-bottom .vertical-menu-close{
+.header-4-bottom .vertical-menu-close {
     display: none;
 }
+
 /* add */
-.header-4 .announcement-bar-box{
+.header-4 .announcement-bar-box {
     justify-content: space-between;
 }
-.header-4 .header-4-announcement-bar-right{
+
+.header-4 .header-4-announcement-bar-right {
     display: flex;
     align-items: center;
 }
-.header-4 .header-4-announcement-bar-right .signin-top{
+
+.header-4 .header-4-announcement-bar-right .signin-top {
     display: flex;
 }
-.header-4 .header-4-announcement-bar-right .block_currencies{
+
+.header-4 .header-4-announcement-bar-right .block_currencies {
     padding: 0px 10px;
 }
-.header-4 .announcement-bar-box ul{
+
+.header-4 .announcement-bar-box ul {
     display: flex;
 }
-.header-4 .announcement-bar-box ul li{
+
+.header-4 .announcement-bar-box ul li {
     margin: 0px 10px;
 }
-.header-4 .announcement-bar-box ul li svg{
+
+.header-4 .announcement-bar-box ul li svg {
     margin-right: 10px;
 }
-.header-4 .signin-top p a{
+
+.header-4 .signin-top p a {
     margin: 0px 5px;
     color: #82D175;
 }
-.header-4 .signin-top p a:hover{
+
+.header-4 .signin-top p a:hover {
     color: var(--color-base-link-hover);
 }
-.header-4 .dropdown-toggle::after{
-    margin:0;
+
+.header-4 .dropdown-toggle::after {
+    margin: 0;
 }
-.header-4 .form-search{
+
+.header-4 .form-search {
     border-radius: 5px;
     background-color: #fff;
 }
-.header-4 .icon-search .field__input{
+
+.header-4 .icon-search .field__input {
     border: none;
 }
-.header-4 .collection-select-search{
+
+.header-4 .collection-select-search {
     position: relative;
     padding: 0px 30px;
 }
-.header-4 .collection-select-search::before{
+
+.header-4 .collection-select-search::before {
     content: '';
     position: absolute;
     right: 0;
@@ -179,182 +196,161 @@
     height: 23px;
     border-right: 1px solid #aaa;
 }
-.header-4 .phone-number{
+
+.header-4 .phone-number {
     font-style: normal;
     font-size: 12px;
     font-weight: 400;
     line-height: 1.5;
 }
-.header-4 .phone-number span{
+
+.header-4 .phone-number span {
     color: var(--g-main);
     font-weight: 500;
     font-size: 14px;
 }
-.header-4 .header-4-bottom{
+
+.header-4 .header-4-bottom {
     position: relative;
 }
-.header-4 .header-4-bottom::before{
+
+.header-4 .header-4-bottom::before {
     content: '';
     width: 100%;
     position: absolute;
     top: 0;
     border-top: 1px solid #e5e5e5;
 }
-.header-4 .vertical-bars{
+
+.header-4 .vertical-bars {
     position: relative;
 }
-.header-4 .vertical-bars::before{
+
+.header-4 .vertical-bars::before {
     content: '';
-    position:absolute;
+    position: absolute;
     height: 23px;
-    top:10px;
+    top: 10px;
     right: 0;
     left: unset;
-    border-right: 1px solid #e5e5e5;
 }
 
-.header-4 .icon-down svg{
+.header-4 .icon-down svg {
     width: 8px;
 }
-.header-4 .text-menu{
+
+.header-4 .text-menu {
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
     justify-content: flex-end;
 }
-.header-4 .text-menu span{
+
+.header-4 .text-menu span {
     color: #E66D6D;
 }
-.header-4 .text-menu svg{
+
+.header-4 .text-menu svg {
     margin-right: 10px;
 }
 
-.header-4 .header-icon{
+.header-4 .header-icon {
     justify-content: space-between;
 }
-.header-4 .icon-search{
+
+.header-4 .icon-search {
     max-width: 95%;
 }
+
 @media (max-width:1500px) {
     .header-4 .announcement-bar-box .header-4-announcement-bar-right ul {
         display: none;
     }
 }
+
 @media (max-width:1200px) {
-    .header-4-center .head-logo{
+    .header-4-center .head-logo {
         order: 0;
         text-align: center;
         margin-bottom: 20px;
     }
-    .header-4-center .header-mobi-mobile{
+
+    .header-4-center .header-mobi-mobile {
         order: 1;
     }
 
-    .header-4-center .header-icon{
+    .header-4-center .header-icon {
         order: 2;
         justify-content: flex-end;
     }
 }
+
 @media (min-width:992px) and (max-width:1200px) {
-    .header-4 .icon-down{
+    .header-4 .icon-down {
         margin-right: 10px;
     }
 }
-@media(max-width: 991px){
-    .header-4 .form-search{
+
+@media(max-width: 991px) {
+    .header-4 .form-search {
         display: none;
     }
-    .header-4-center .head-logo{
+
+    .header-4-center .head-logo {
         order: 1;
         text-align: center;
         margin: 0;
     }
-    .header-4-center .header-mobi-mobile{
+
+    .header-4-center .header-mobi-mobile {
         order: 0;
     }
 
-    .header-4-center .header-icon{
+    .header-4-center .header-icon {
         order: 2;
     }
-    .header-4 .phone-number{
+
+    .header-4 .phone-number {
         display: none;
     }
-    .header-4 .icon-search{
+
+    .header-4 .icon-search {
         max-width: 100%;
     }
-    .header-4 .vertical-bars:before{
+
+    .header-4 .vertical-bars:before {
         display: none;
     }
 }
+
 @media (max-width:768px) {
-    .header-4 .announcement-bar-box ul{
+    .header-4 .announcement-bar-box ul {
         display: none;
     }
-    .header-4 .announcement-bar-box{
+
+    .header-4 .announcement-bar-box {
         justify-content: center;
     }
 }
+
 @media (min-width:1200px) {
-    .header-4 .vertical-bars{
+    .header-4 .vertical-bars {
         padding: 10px 0px;
     }
 }
 
 /* ============================================================
-   Scroll-merge header: two rows compact into one sticky bar,
-   matching the reference site's shrink/merge behaviour.
-   Desktop only — mobile already uses its own compact layout.
+   Scrolled Header transition for header-4
+   Initial appearance remains completely untouched.
+   On scroll (min-width: 992px), initial rows hide and the
+   pixel-perfect scrolled-header-sticky bar takes over.
    ============================================================ */
-@media (min-width: 992px){
-  #MainContent{
-    transition: padding-top .4s cubic-bezier(.4,0,.2,1);
-  }
+@media (min-width: 992px) {
 
-  .header-4{
-    transition: box-shadow .4s ease;
-  }
-  .header-4.is-scrolled{
-    box-shadow: 0 4px 16px rgba(0,0,0,.08);
-  }
-
-  .header-4-announcement-bar{
-    max-height: 80px;
-    overflow: hidden;
-    transition: max-height .4s cubic-bezier(.4,0,.2,1), padding .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
-  }
-  .header-4.is-scrolled .header-4-announcement-bar{
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  /* header-4-center and header-4-bottom keep one constant, already-compact
-     height at all times (the height they used to only reach after scrolling),
-     so there is no height jump between the initial and scrolled states. */
-  .header-categories{
-    padding: 6px 15px;
-  }
-
-  .header__heading-logo{
-    transform-origin: left center;
-    transform: scale(.72);
-  }
-
-  .header-4 .vertical-bars{
-    padding: 4px 10px;
-  }
-
-  .header-4 .header-megamenu .site-nav__link{
-    padding: 0.7em 1.1em !important;
-  }
-
-  .header-4 .header-4-bottom::before{
-    transition: opacity .3s ease;
-  }
-  .header-4.is-scrolled .header-4-bottom::before{
-    opacity: 0;
-  }
+    .header-4.is-scrolled .header-4-announcement-bar,
+    .header-4.is-scrolled .header-4-center,
+    .header-4.is-scrolled .header-4-bottom {
+        display: none !important;
+    }
 }
