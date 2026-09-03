@@ -419,8 +419,9 @@
     "16530339040fc194f1": {
       "type": "product-carousel",
       "settings": {
-        "fullwidth": true,
+        "fullwidth": false,
         "background-color": "#00142d",
+        "bg_image_content": "shopify://shop_images/Section.jpg",
         "background-color_content": "rgba(0,0,0,0)",
         "style_layout": "style2",
         "margin_desktop": "",

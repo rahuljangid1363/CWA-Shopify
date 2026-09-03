@@ -20,7 +20,7 @@
 
         <div class=" product-carousel-box {% if section.settings.style_layout == 'normal' %} normal {% elsif section.settings.style_layout == "style_1" %} layout-1 {% endif %}">
           <div class="row align-items-center">
-                <div class="{% if section.settings.style_layout == 'style2' %}col-lg-3 text-lg-start title-row{% else %} col-12{% endif %} title-box">
+                <div class="{% if section.settings.style_layout == 'style2' %}col-lg-3 text-start title-row{% else %} col-12{% endif %} title-box">
                       <p class="sub-title">{{ section.settings.sub_title }}</p> 
                       <h2 class="section-header" style="color: {{ section.settings.color_section_header }};">{{ section.settings.heading }}</h2>
                       <p class="section-text" style="color: {{ section.settings.color_section_text }};">{{ section.settings.text_decoration }}</p>

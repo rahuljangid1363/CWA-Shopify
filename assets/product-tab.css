@@ -218,3 +218,10 @@
     transform: scale(.98);
   }
 }
+
+/* "Our Products" title size on desktop/web view (mobile keeps its own size) */
+@media (min-width: 568px){
+  .product-tab .section-header{
+    font-size: 32px;
+  }
+}

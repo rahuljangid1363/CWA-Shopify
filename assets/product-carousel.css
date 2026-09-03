@@ -176,3 +176,10 @@
         justify-content: center;
     }
   }
+
+  /* "Most Searched Products" title size on desktop/web view (mobile keeps its own size) */
+  @media (min-width: 568px){
+    .product-carousel .section-header{
+      font-size: 32px;
+    }
+  }

@@ -468,3 +468,10 @@ line-height: 22px;
 
     }
 }
+
+/* "The Self-Serve Instrumentation Store" title size on desktop/web view (mobile keeps its own size) */
+@media (min-width: 568px){
+    .advanced-content .section-header{
+        font-size: 32px;
+    }
+}

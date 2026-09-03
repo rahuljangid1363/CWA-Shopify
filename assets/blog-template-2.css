@@ -43,6 +43,12 @@
     margin-bottom: 30px;
     text-align: center;
 }
+/* "Recent Blog" title size on desktop/web view (mobile keeps its own size) */
+@media (min-width: 568px){
+    .blog-post .section-header{
+        font-size: 32px;
+    }
+}
 .blog-post .blog-list{
     margin: 0 -15px;
 }
