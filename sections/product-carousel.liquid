@@ -15,8 +15,8 @@
     border-top:1px solid {{section.settings.color_sub_title }};
   }
 {%- endstyle -%}
-  <div class="product-carousel product-carousel-{{ section-id }}" {% if section.settings.bg_image_content != blank %} style="background: url( {{ section.settings.bg_image_content | img_url:'master' }} ) no-repeat;" {% endif %}>
-    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}" style="background-color: {{ section.settings.background-color_content }};">
+  <div class="product-carousel product-carousel-{{ section-id }}{% if section.settings.bg_image_content != blank %} has-split-bg{% endif %}" {% if section.settings.bg_image_content != blank %} style="background: url( {{ section.settings.bg_image_content | img_url:'master' }} ) no-repeat center center / cover;" {% endif %}>
+    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%} {%- endif -%}" style="background-color: {{ section.settings.background-color_content }};">
 
         <div class=" product-carousel-box {% if section.settings.style_layout == 'normal' %} normal {% elsif section.settings.style_layout == "style_1" %} layout-1 {% endif %}">
           <div class="row align-items-center">

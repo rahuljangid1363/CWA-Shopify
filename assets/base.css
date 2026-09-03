@@ -148,7 +148,8 @@
 }
 .product-carousel.product-carousel- {
   background-size: cover !important;
-  background-position: center !important;
+  background-position: left !important;
+  padding : 60px 20px !important;
 }
 
 @font-face {

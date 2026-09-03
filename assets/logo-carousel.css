@@ -51,6 +51,7 @@
 
 @media(min-width: 768px){
     .logo-carousel-content{
-        padding: 8rem 0;
+        padding-bottom: 8rem;
+        padding-top: 2rem;
     }
 }

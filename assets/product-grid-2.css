@@ -2,6 +2,15 @@
     margin: 0;
 }
 
+/* smooth hover image crossfade — the shared card CSS only toggles opacity on
+   :hover without ever declaring a transition on the images' resting state,
+   so the swap happens instantly; add it here scoped to this card only */
+@media screen and (min-width: 990px){
+    .product-grid-2 .media.media--hover-effect > img{
+        transition: opacity .5s ease, transform .5s ease !important;
+    }
+}
+
 .servicer-product.servicer-product-grid-2 .btn-product{
     padding: 1rem;
     display: flex;
@@ -71,16 +80,16 @@
 /* card shell — matches "Most Searched Products" reference design */
 .card-wrapper.product-grid-2{
     background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    border-radius: 6px;
     padding: 24px !important;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .product-grid-2 .servicer-product-grid-2{
     display: none !important;
 }
 @media (min-width:567px){
     .product-grid-2 .card--product{
-        max-width: 130px;
+        max-width: 170px;
         margin-right: 24px;
         flex-shrink: 0;
     }
