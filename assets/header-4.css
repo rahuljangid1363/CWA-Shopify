@@ -74,21 +74,42 @@
 
 }
 
-.header-4 .vertical-bars {
-    width: 100%;
-    padding: 10px;
+.header-4-bottom .vertical-bars {
+    padding: 10px 15px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     text-align: left;
 }
 
-.header-4 .vertical-bars span {
-    padding-left: 10px;
+.header-4-bottom .vertical-bars .left {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding-right: 10px;
+}
+
+.header-4-bottom .vertical-bars .left svg {
+    width: 16px;
+    height: 12px;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.header-4-bottom .vertical-bars .left svg path {
+    fill: #00B5E2 !important;
+}
+
+.header-4-bottom .vertical-bars span {
+    padding-left: 0;
     font-style: normal;
     font-weight: 700;
-    font-size: 12px;
-    line-height: 26px;
+    font-size: 13px;
+    line-height: 1;
     text-transform: uppercase;
+    color: #121212;
+    letter-spacing: 0.5px;
 }
 
 
@@ -231,12 +252,18 @@
     position: absolute;
     height: 23px;
     top: 10px;
-    right: 0;
+    right: -60px;
     left: unset;
+    border-right: 1px solid #e5e5e5;
+}
+
+.header-4.is-scrolled .vertical-bars::before {
+    top: 4px;
 }
 
 .header-4 .icon-down svg {
     width: 8px;
+    height: 5px;
 }
 
 .header-4 .text-menu {
@@ -342,15 +369,6 @@
 
 /* ============================================================
    Scrolled Header transition for header-4
-   Initial appearance remains completely untouched.
-   On scroll (min-width: 992px), initial rows hide and the
-   pixel-perfect scrolled-header-sticky bar takes over.
-   ============================================================ */
-@media (min-width: 992px) {
-
-    .header-4.is-scrolled .header-4-announcement-bar,
-    .header-4.is-scrolled .header-4-center,
-    .header-4.is-scrolled .header-4-bottom {
-        display: none !important;
-    }
-}
+   Initial header flows smoothly at top of page.
+   On scroll (min-width: 992px), scrolled-header-sticky glides in.
+   ============================================================ */

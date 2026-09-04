@@ -22,20 +22,19 @@
     }
     .shopify-section.spaced-header {
     position: relative;
-    z-index: 99999;
+    z-index: 999;
   }
 
   .header-4 {
-    position: fixed !important;
-    top: 0 !important;
-    z-index: 99999 !important;
+    position: relative;
     width: 100%;
+    z-index: 999;
   }
   .header-4-bottom{
-  background:white;
+    background: white;
   }
   #MainContent{
-    padding-top: var(--header-4-height, 190px);
+    padding-top: 0;
   }
 </style>
 <header class="header-4 {%- if section.settings.enable_transparent -%}{{ 'color-transparent' | prepend: ' ' }}{%- endif -%}">
@@ -154,42 +153,6 @@
 
   {%- render 'scrolled-header' -%}
 </header>
-
-<script>
-  (function () {
-    var header = document.querySelector('.header-4');
-    if (!header) return;
-    var main = document.getElementById('MainContent');
-    var scrollThreshold = 60;
-    var initialHeight = 0;
-
-    function syncOffset() {
-      if (!header.classList.contains('is-scrolled')) {
-        var h = header.getBoundingClientRect().height;
-        if (h > 0) {
-          initialHeight = h;
-          document.documentElement.style.setProperty('--header-4-height', h + 'px');
-          if (main) main.style.paddingTop = h + 'px';
-        }
-      } else if (initialHeight > 0) {
-        document.documentElement.style.setProperty('--header-4-height', initialHeight + 'px');
-        if (main) main.style.paddingTop = initialHeight + 'px';
-      }
-    }
-
-    function onScroll() {
-      var scrolled = window.scrollY > scrollThreshold;
-      header.classList.toggle('is-scrolled', scrolled);
-      document.body.classList.toggle('header-is-scrolled', scrolled);
-    }
-
-    onScroll();
-    syncOffset();
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', syncOffset);
-  })();
-</script>
 
 {% schema %}
 {

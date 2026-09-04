@@ -27,13 +27,13 @@
       <!-- Shop by Categories Trigger & Dropdown -->
       <div class="scrolled-header__categories">
         <button type="button" class="scrolled-header__cat-btn vertical-bars" aria-label="Shop by Categories">
-          <svg class="scrolled-header__cat-icon" width="15" height="12" viewBox="0 0 16 12" fill="none">
+          <svg class="scrolled-header__cat-icon" width="16" height="12" viewBox="0 0 16 12" fill="none">
             <path d="M0 1C0 0.45 0.45 0 1 0H15C15.55 0 16 0.45 16 1C16 1.55 15.55 2 15 2H1C0.45 2 0 1.55 0 1Z" fill="#00B5E2"/>
             <path d="M0 6C0 5.45 0.45 5 1 5H11C11.55 5 12 5.45 12 6C12 6.55 11.55 7 11 7H1C0.45 7 0 6.55 0 6Z" fill="#00B5E2"/>
             <path d="M0 11C0 10.45 0.45 10 1 10H7C7.55 10 8 10.45 8 11C8 11.55 7.55 12 7 12H1C0.45 12 0 11.55 0 11Z" fill="#00B5E2"/>
           </svg>
           <span class="scrolled-header__cat-text">SHOP BY CATEGORIES</span>
-          <svg class="scrolled-header__cat-arrow" width="5" height="3" viewBox="0 0 8 5" fill="none">
+          <svg class="scrolled-header__cat-arrow" width="8" height="5" viewBox="0 0 8 5" fill="none">
             <path d="M1 1L4 4L7 1" stroke="#23586C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
@@ -178,6 +178,7 @@
 
 <script>
   (function () {
+    // 1. Outside click handler to close category menu
     document.addEventListener('click', function (e) {
       var isCatBtn = e.target.closest('.vertical-bars');
       var isCatMenu = e.target.closest('.nav-vertical');
@@ -191,5 +192,44 @@
         }
       }
     });
+
+    // 2. Smooth Scroll state controller matching supmeaauto.com dual-threshold hysteresis
+    var enterScrollPoint = 120;
+    var leaveScrollPoint = 24;
+    var isScrolled = false;
+    var ticking = false;
+
+    function getHeaders() {
+      return document.querySelectorAll('.header-1, .header-2, .header-3, .header-4, .header-5, .header, .site-header, .header-section');
+    }
+
+    function updateNavbar() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      var headers = getHeaders();
+
+      if (!isScrolled && scrollTop >= enterScrollPoint) {
+        headers.forEach(function (h) { h.classList.add('is-scrolled'); });
+        document.body.classList.add('header-is-scrolled');
+        isScrolled = true;
+      } else if (isScrolled && scrollTop <= leaveScrollPoint) {
+        headers.forEach(function (h) { h.classList.remove('is-scrolled'); });
+        document.body.classList.remove('header-is-scrolled');
+        isScrolled = false;
+      }
+      ticking = false;
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateNavbar);
+    } else {
+      updateNavbar();
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateNavbar);
+        ticking = true;
+      }
+    }, { passive: true });
   })();
 </script>

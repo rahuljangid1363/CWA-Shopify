@@ -56,9 +56,3 @@
 	}
 }
 
-@media (min-width: 992px) {
-  .header-2.is-scrolled .header-bottom {
-    display: none !important;
-  }
-}
-
