@@ -2,99 +2,156 @@
 
 <link rel="stylesheet" href="{{ 'slide-show.css' | asset_url }}" media="print" onload="this.media='all'">
 {% render 'section-style' %}
-{%- style -%}
-.slide-show .slide-box{
-  min-height:630px;
-}
-@media (min-width:1200px){
-  .slide-show .slide-box{
-    min-height:750px;
-  }
-}
-{%- endstyle -%}
 
-<div class="slide-show" data-delay='{%- if section.settings.enberslidesDelay -%}{{ section.settings.slidesDelay }}{%- else -%}0{%- endif -%}'>
-  <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}larger-container{%- endif -%}">
+<div class="slide-show slideshow" data-delay='{%- if section.settings.enberslidesDelay -%}{{ section.settings.slidesDelay }}{%- else -%}0{%- endif -%}'>
+  <div class="container-fluid p-0">
       <div class="slide slide-slick ap-custom-slick"
-      data-setting='{"accessibility": false, "arrows": {{ section.settings.arrows }},
-      "dots": {{ section.settings.dots }}, "draggable": {{ section.settings.draggable }},
+      data-setting='{"accessibility": false, "arrows": false,
+      "dots": false, "draggable": {{ section.settings.draggable }},
       "infinite": {{ section.settings.infinite }}, "autoplay": {{ section.settings.autoplay }},
       "autoplaySpeed": {{ section.settings.autoplaySpeed }}, "speed": {{ section.settings.speed }},
       "slidesToShow": {{ section.settings.slidesToShow }}, "slidesToScroll": {{ section.settings.slidesToScroll }},
       "vertical": false, "mobileFirst": false, "pauseOnHover": {{ section.settings.pauseOnHover }},
       "rows": {{ section.settings.rows }}, "slidesPerRow": 1, "rtl": 1,
       "slidesToShow_992": {{ section.settings.slidesToShow_992 }}, "slidesToScroll_992": {{ section.settings.slidesToScroll_992 }},
-      "arrows_992": {{ section.settings.arrows_992 }}, "dots_992": {{ section.settings.dots_992 }},
+      "arrows_992": false, "dots_992": false,
       "slidesToShow_767": {{ section.settings.slidesToShow_767 }}, "slidesToScroll_767": {{ section.settings.slidesToScroll_767 }},
-      "arrows_767": {{ section.settings.arrows_767 }}, "dots_767": {{ section.settings.dots_767 }},
+      "arrows_767": false, "dots_767": false,
       "slidesToShow_450": {{ section.settings.slidesToShow_450 }}, "slidesToScroll_450": {{ section.settings.slidesToScroll_450 }},
-      "arrows_450": {{ section.settings.arrows_450 }}, "dots_450": {{ section.settings.dots_450 }}}'>
+      "arrows_450": false, "dots_450": false}'>
           {%- for block in section.blocks -%}
           <div class="slider-conten" id="ap-slick-content-{{block.id}}" {{ block.shopify_attributes }}>
-            <div class="slide-image {% if block.settings.image_slide != blank %}media{% else %}image-slide-show__media--placeholder placeholder{% endif %}" style="padding-bottom: {{ 1 | divided_by: block.settings.image_slide.aspect_ratio | times: 100 }}%;"
-            >
-            <style style="display: none;">
-              .slide-show #ap-slick-content-{{block.id}} .link-base{
-                background-color:{{ block.settings.bg_button }};
-                color:{{ block.settings.color_button }};
-                border: 1px solid {{ block.settings.border_button }};
-              }
-            </style>
-              {%- if block.settings.image_slide != blank -%}
-              <img
-                    srcset="{%- if block.settings.image_slide.width >= 165 -%}{{ block.settings.image_slide | img_url: '1920x' }} 1920w,{%- endif -%}"
-                    src="{{ block.settings.image_slide | img_url: '1920x' }}"
-                    sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
-                    alt="{{ block.settings.image_slide.alt | escape }}"
-                    loading="lazy"
-                    width="{{ block.settings.image_slide.width }}"
-                    height="{{ block.settings.image_slide.height }}"
-                  >
-              {%- else -%}
-              {%- capture current -%}{%- cycle 1, 2 -%}{%- endcapture -%}
+            
+            <!-- Right side angled image with bottom-right overlay -->
+            <div class="slide-image-wrapper">
+              <div class="slide-image {% if block.settings.image_slide != blank %}media{% else %}image-slide-show__media--placeholder placeholder{% endif %}">
+                {%- if block.settings.image_slide != blank -%}
+                <img
+                  srcset="{%- if block.settings.image_slide.width >= 165 -%}{{ block.settings.image_slide | img_url: '1920x' }} 1920w,{%- endif -%}"
+                  src="{{ block.settings.image_slide | img_url: '1920x' }}"
+                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                  alt="{{ block.settings.image_slide.alt | escape }}"
+                  loading="eager"
+                  width="{{ block.settings.image_slide.width }}"
+                  height="{{ block.settings.image_slide.height }}"
+                >
+                {%- else -%}
+                  {%- capture current -%}{%- cycle 1, 2 -%}{%- endcapture -%}
                   {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-              {%- endif -%}
-            </div>
-            <div class="box-content-slide">
-              <div class="container position-relative h-75">
-                <div class="text-slider  d-flex flex-column justify-content-{% if block.settings.item_align == 'top' %}start{% elsif block.settings.item_align == 'center' %}center{% elsif block.settings.item_align == 'bottom' %}end{% endif %} 
-                {% if block.settings.box_align == 'left' %}left{% elsif block.settings.box_align == 'center' %}center{% elsif block.settings.box_align == 'right' %}right{% endif %}
-                text-{%- if block.settings.text_align == 'left' -%}start{%- elsif block.settings.text_align == 'center' -%}center{%- elsif block.settings.text_align == 'right' -%}end{%- endif -%}" style="transform: translateX({{ block.settings.translateX }});">
-                    <ul class="list-text mt-5">
-                      <li>  
-                        <h4 class="sub-title-slide" style="color: {{ block.settings.color_sub }};">{{ block.settings.sub_title }}</h4>
-                      </li>
-                      <li>    
-                        <h2 class="title-slide" style="color: {{ block.settings.color_title }};">{{ block.settings.title }}</h2>
-                      </li>
-                      <li> 
-                        <div class="sale" style="color: {{ block.settings.color_text_sale }};">{{ block.settings.text_sale }}</div>
-                      </li>
-                      <li>  
-                        <p class="description-slide" style="color: {{ block.settings.color_des }};">{{ block.settings.content }}</p>
-                      </li>
-                      <li>
-                        {%- if block.settings.link != blank -%}
-                          <a class="link-base link-{%- if block.settings.text_align == 'left' -%}left{%- elsif block.settings.text_align == 'center' -%}center{%- elsif block.settings.text_align == 'right' -%}right{%- endif -%}" href="{{ block.settings.btn_link | default:'#' }}" title="{{ block.settings.link }}">
-                              {{ block.settings.link }}
-                              <i class="leofar leofa-arrow-right"></i>
-                          </a>
-                        {%- endif -%}
-                      </li>
-                    </ul>
-                  
-                 
-                    
-                  
-                   
-                </div> 
+                {%- endif -%}
+              </div>
+
+              <!-- Overlaid Info & Nav Controls -->
+              <div class="hero-image-overlay-bar">
+                <div class="hero-app-info">
+                  <span class="hero-app-label">{{ block.settings.app_subtitle | default: 'Application' }}</span>
+                  <span class="hero-app-title">{{ block.settings.app_title | default: 'Flow metering — regional treatment plant' }}</span>
+                </div>
+
+                <div class="hero-slide-nav-controls">
+                  <div class="hero-slide-counter">
+                    <span class="hero-current-slide">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                    <span class="hero-counter-dash">—</span>
+                    {%- assign total_count = section.blocks.size -%}
+                    {%- if total_count < 4 -%}{%- assign total_count = 4 -%}{%- endif -%}
+                    <span class="hero-total-slides">{{ total_count | prepend: '0' | slice: -2, 2 }}</span>
+                  </div>
+                  <div class="hero-nav-arrows">
+                    <button type="button" class="hero-nav-btn hero-nav-prev" aria-label="Previous slide">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button type="button" class="hero-nav-btn hero-nav-next" aria-label="Next slide">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <!-- Left side content area -->
+            <div class="box-content-slide">
+              <div class="hero-content-container">
+                <div class="text-slider">
+                  <div class="hero-text-inner">
+                    {%- if block.settings.sub_title != blank -%}
+                      <h4 class="sub-title-slide" style="color: {{ block.settings.color_sub }};">{{ block.settings.sub_title }}</h4>
+                    {%- endif -%}
+                    
+                    {%- if block.settings.title != blank -%}
+                      <h2 class="title-slide" style="color: {{ block.settings.color_title | default: '#000000' }};">{{ block.settings.title }}</h2>
+                    {%- endif -%}
+
+                    {%- if block.settings.text_sale != blank -%}
+                      <div class="sale" style="color: {{ block.settings.color_text_sale }};">{{ block.settings.text_sale }}</div>
+                    {%- endif -%}
+
+                    {%- if block.settings.content != blank -%}
+                      <p class="description-slide" style="color: {{ block.settings.color_des | default: '#475569' }};">{{ block.settings.content }}</p>
+                    {%- endif -%}
+
+                    <div class="slide-buttons-item">
+                      {%- if block.settings.link != blank -%}
+                        <a class="hero-btn-primary" href="{{ block.settings.btn_link | default:'#' }}" title="{{ block.settings.link }}">
+                          {{ block.settings.link }}
+                        </a>
+                      {%- endif -%}
+                      {%- if block.settings.link_2 != blank -%}
+                        <a class="hero-btn-secondary" href="{{ block.settings.btn_link_2 | default:'/pages/contact' }}" title="{{ block.settings.link_2 }}">
+                          <svg class="icon-phone" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                          </svg>
+                          <span>{{ block.settings.link_2 }}</span>
+                        </a>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
           {%- endfor -%}
       </div>
   </div>
 </div>
+
+<script>
+  (function() {
+    function bindHeroEvents() {
+      if (typeof jQuery === 'undefined') {
+        setTimeout(bindHeroEvents, 50);
+        return;
+      }
+      var $ = jQuery;
+      $(document).off('click.heroNav', '.hero-nav-prev').on('click.heroNav', '.hero-nav-prev', function(e) {
+        e.preventDefault();
+        var $slider = $(this).closest('.slide-show').find('.slide-slick');
+        if ($slider.hasClass('slick-initialized')) {
+          $slider.slick('slickPrev');
+        }
+      });
+
+      $(document).off('click.heroNav', '.hero-nav-next').on('click.heroNav', '.hero-nav-next', function(e) {
+        e.preventDefault();
+        var $slider = $(this).closest('.slide-show').find('.slide-slick');
+        if ($slider.hasClass('slick-initialized')) {
+          $slider.slick('slickNext');
+        }
+      });
+
+      $(document).off('afterChange.heroCounter', '.slide-show .slide-slick').on('afterChange.heroCounter', '.slide-show .slide-slick', function(event, slick, currentSlide) {
+        var currentFormatted = ('0' + (currentSlide + 1)).slice(-2);
+        $(this).closest('.slide-show').find('.hero-current-slide').text(currentFormatted);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bindHeroEvents);
+    } else {
+      bindHeroEvents();
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -490,11 +547,59 @@
              "default": "#fff"
            },
            {
-              "type": "color",
-              "id": "border_button",
-              "label": "Border button",
-              "default": "transparent"
-            }
+             "type": "color",
+             "id": "border_button",
+             "label": "Border button",
+             "default": "transparent"
+           },
+           {
+             "type":"header",
+             "content":"Slide button 2"
+           },
+           {
+             "id": "link_2",
+             "type": "text",
+             "label": "Button 2 label"
+           },
+           {
+             "id": "btn_link_2",
+             "type": "url",
+             "label": "Button 2 link"
+           },
+           {
+             "type": "color",
+             "id": "bg_button_2",
+             "label": "Background button 2",
+             "default": "transparent"
+           },
+           {
+             "type": "color",
+             "id": "color_button_2",
+             "label": "Color button 2",
+             "default": "#fff"
+           },
+           {
+             "type": "color",
+             "id": "border_button_2",
+             "label": "Border button 2",
+             "default": "#fff"
+           },
+           {
+             "type": "header",
+             "content": "Image Info Overlay"
+           },
+           {
+             "id": "app_subtitle",
+             "type": "text",
+             "label": "Application label",
+             "default": "Application"
+           },
+           {
+             "id": "app_title",
+             "type": "text",
+             "label": "Application description",
+             "default": "Flow metering — regional treatment plant"
+           }
       ]
     }
   ],

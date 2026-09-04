@@ -143,8 +143,10 @@
     "style_coundown": "countdown--2",
     "sold_out_background_scheme": "#ffffff",
     "sold_out_color_scheme": "#fe9931",
+    "new_label_enable": false,
     "new_label_bg": "#e56d6d",
     "new_label_cl": "#ffffff",
+    "sale_label_enable": false,
     "sale_label_layout": "text",
     "sale_label_bg": "#b0d3ff",
     "color_breadcrumbs": "#000000",
@@ -335,13 +337,13 @@
             "type": "text-content",
             "settings": {
               "width": "33%",
+              "block_image": "shopify://shop_images/CWA_Logo.png",
               "header_content_footer": "",
               "icon_phone": "",
               "text_content_footer": "<li>Controlled Water Analytics supplies water and wastewater instrumentation, analyzers, transmitters, valves and critical spares for industrial applications.</li>",
               "phone_number": "",
               "phone_text": "",
-              "text_align": "start me-auto",
-              "block_image": "shopify://shop_images/CWA_Logo.png"
+              "text_align": "start me-auto"
             }
           },
           "footer-products": {
@@ -401,12 +403,12 @@
           "footer-company"
         ],
         "custom_css": [
-          "li a{color:#BFC9D5}"
+          "li a {color: #bfc9d5;}"
         ],
         "settings": {
           "fullwidth": false,
           "style_footer": "style_footer-2",
-          "bg_footer_1": "shopify://shop_images/CTA_bg.png",
+          "bg_footer_1": "shopify://shop_images/footer_bg.webp",
           "show_logo": false,
           "color_text_footer": "#999999",
           "image": "shopify://shop_images/CWA_Logo.png",
@@ -609,6 +611,90 @@
       },
       "header-4": {
         "type": "header-4",
+        "blocks": {
+          "industry-1": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Water & Wastewater",
+              "link": "/pages/water-wastewater"
+            }
+          },
+          "industry-2": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Data Center",
+              "link": "/pages/data-center"
+            }
+          },
+          "industry-3": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Chemical",
+              "link": "/pages/chemical"
+            }
+          },
+          "industry-4": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Oil & Gas",
+              "link": "/pages/oil-gas"
+            }
+          },
+          "industry-5": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Energy Storage & Cooling",
+              "link": "/pages/energy-storage-cooling"
+            }
+          },
+          "industry-6": {
+            "type": "industry_item",
+            "settings": {
+              "title": "HVAC Industry",
+              "link": "/pages/hvac-industry"
+            }
+          },
+          "industry-7": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Mining & Others",
+              "link": "/pages/mining-others"
+            }
+          },
+          "industry-8": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Food & Baverage",
+              "link": "/pages/food-beverage"
+            }
+          },
+          "industry-9": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Textile & Dyeing",
+              "link": "/pages/textile-dyeing"
+            }
+          },
+          "industry-10": {
+            "type": "industry_item",
+            "settings": {
+              "title": "Pulp & Paper",
+              "link": "/pages/pulp-paper"
+            }
+          }
+        },
+        "block_order": [
+          "industry-1",
+          "industry-2",
+          "industry-3",
+          "industry-4",
+          "industry-5",
+          "industry-6",
+          "industry-7",
+          "industry-8",
+          "industry-9",
+          "industry-10"
+        ],
         "custom_css": [
           ".phoneText {color: #c8ecfb;}"
         ],
@@ -631,101 +717,7 @@
           "header_card": true,
           "enable_transparent": false,
           "text_block_menu": ""
-        },
-        "blocks": {
-          "industry-1": {
-            "type": "industry_item",
-            "settings": {
-              "title": "Water & Wastewater",
-              "image": "",
-              "link": "/pages/water-wastewater"
-            }
-          },
-          "industry-2": {
-            "type": "industry_item",
-            "settings": {
-              "title": "Data Center",
-              "image": "",
-              "link": "/pages/data-center"
-            }
-          },
-          "industry-3": {
-            "type": "industry_item",
-            "settings": {
-              "title": "Chemical",
-              "image": "",
-              "link": "/pages/chemical"
-            }
-          },
-          "industry-4": {
-            "type": "industry_item",
-            "settings": {
-              "title": "Oil & Gas",
-              "image": "",
-              "link": "/pages/oil-gas"
-            }
-          },
-          "industry-5": {
-            "type": "industry_item",
-            "settings": {
-              "title": "Energy Storage & Cooling",
-              "image": "",
-              "link": "/pages/energy-storage-cooling"
-            }
-          },
-          "industry-6": {
-            "type": "industry_item",
-            "settings": {
-              "title": "HVAC Industry",
-              "image": "",
-              "link": "/pages/hvac-industry"
-            }
-          },
-          "industry-7": {
-            "type": "industry_item",
-            "settings": {
-              "title": "Mining & Others",
-              "image": "",
-              "link": "/pages/mining-others"
-            }
-          },
-          "industry-8": {
-            "type": "industry_item",
-            "settings": {
-              "title": "Food & Baverage",
-              "image": "",
-              "link": "/pages/food-beverage"
-            }
-          },
-          "industry-9": {
-            "type": "industry_item",
-            "settings": {
-              "title": "Textile & Dyeing",
-              "image": "",
-              "link": "/pages/textile-dyeing"
-            }
-          },
-          "industry-10": {
-            "type": "industry_item",
-            "settings": {
-              "title": "Pulp & Paper",
-              "image": "",
-              "link": "/pages/pulp-paper"
-            }
-          }
-        },
-        "block_order": [
-          "industry-1",
-          "industry-2",
-          "industry-3",
-          "industry-4",
-          "industry-5",
-          "industry-6",
-          "industry-7",
-          "industry-8",
-          "industry-9",
-          "industry-10"
-        ]
+        }
       },
       "header-5": {
         "type": "header-5",
@@ -787,9 +779,7 @@
         }
       }
     },
-    "content_for_index": [],
-    "new_label_enable": false,
-    "sale_label_enable": false
+    "content_for_index": []
   },
   "presets": {
     "Default": {

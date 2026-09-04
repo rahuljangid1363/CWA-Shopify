@@ -63,24 +63,31 @@
         "d17110be-0c7a-4c5c-a648-a78b39ac790a": {
           "type": "slide",
           "settings": {
-            "image_slide": "shopify://shop_images/homeHero.webp",
+            "image_slide": "shopify://shop_images/slide1Banner.webp",
             "sub_title": "",
             "color_sub": "#ffffff",
-            "title": "Precision Instrumentation for Australia's Process Industry",
-            "color_title": "#ffffff",
+            "title": "Reliable Instrumentation for Australia's  Critical Water Industry",
+            "color_title": "#000000",
             "text_sale": "",
             "color_text_sale": "#5193e6",
-            "content": "Pressure transmitters, flow meters, analysers, and critical spares trusted across water, mining, energy, and food & beverage in Australia and the Pacific.",
-            "color_des": "#ffffff",
-            "link": "Explore Products",
+            "content": "Keep essential water and wastewater systems moving with dependable instrumentation, critical spares and responsive local supply",
+            "color_des": "#475569",
+            "link": "Browse Product Categories",
             "btn_link": "shopify://collections/all",
+            "link_2": "Talk To A Specialist",
+            "btn_link_2": "/pages/contact",
             "box_align": "center",
             "translateX": "",
             "text_align": "left",
             "item_align": "center",
-            "bg_button": "#3075cc",
+            "bg_button": "#2563eb",
             "color_button": "#ffffff",
-            "border_button": "rgba(0,0,0,0)"
+            "border_button": "rgba(0,0,0,0)",
+            "bg_button_2": "#ffffff",
+            "color_button_2": "#0f172a",
+            "border_button_2": "#e2e8f0",
+            "app_subtitle": "Application",
+            "app_title": "Flow metering — regional treatment plant"
           }
         }
       },
@@ -89,10 +96,7 @@
         "slide_abzWAa",
         "d17110be-0c7a-4c5c-a648-a78b39ac790a"
       ],
-      "custom_css": [
-        ".list-text {width: 50%;}",
-        ".description-slide {font-size: 24px !important;}"
-      ],
+      "custom_css": [],
       "settings": {
         "fullwidth": true,
         "margin_desktop": "",
@@ -476,7 +480,7 @@
           "type": "image",
           "settings": {
             "width": "50%",
-            "image": "shopify://shop_images/Image_25.png",
+            "image": "shopify://shop_images/Image.webp",
             "effects_image": false
           }
         },
@@ -677,12 +681,12 @@
       "settings": {
         "fullwidth": false,
         "bg_color": "#0b0f14",
-        "bg_image": "shopify://shop_images/ChatGPT_Image_Aug_17_2026_02_47_08_PM_3918aa68-8a66-46f9-8f57-3c5f80c039cd.png",
+        "bg_image": "shopify://shop_images/news_letter_bg.webp",
         "color_text": "#ffffff",
         "color_button": "#ffffff",
         "bg_color_button": "#3075cc",
         "sub_title": "",
-        "heading": "Know what&#8217;s in stock. Keep your site moving.",
+        "heading": "Know what’s in stock. Keep your site moving.",
         "subheading": "<p>Get Australian Stock Alerts, New Product Releases And Practical Technical Resources For Water, Wastewater And Remote-Site Applications.</p>",
         "style_layout": "left"
       }
@@ -708,10 +712,10 @@
   },
   "order": [
     "1648263537a3e0a84a",
+    "1653033212b709b17b",
     "1649045314cbc7bc5a",
     "1653033111explore",
     "165301935421bf9b4c",
-    "1653033212b709b17b",
     "16530339040fc194f1",
     "1653039086fc46e456",
     "16530419117e4e348f",
