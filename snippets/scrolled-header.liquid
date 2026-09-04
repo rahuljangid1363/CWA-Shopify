@@ -175,3 +175,21 @@
     </div>
   </div>
 </div>
+
+<script>
+  (function () {
+    document.addEventListener('click', function (e) {
+      var isCatBtn = e.target.closest('.vertical-bars');
+      var isCatMenu = e.target.closest('.nav-vertical');
+      if (!isCatBtn && !isCatMenu) {
+        var openMenus = document.querySelectorAll('.nav-vertical.show');
+        if (openMenus.length > 0) {
+          openMenus.forEach(function (m) {
+            m.classList.remove('show');
+          });
+          document.body.classList.remove('has-menu-vertical');
+        }
+      }
+    });
+  })();
+</script>

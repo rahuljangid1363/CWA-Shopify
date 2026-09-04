@@ -149,40 +149,99 @@
     transition: transform 0.2s ease;
   }
 
-  /* Vertical Menu Dropdown under Categories */
+  /* Vertical Menu Dropdown under Categories in Scrolled Header - Identical to Initial Screen */
   .scrolled-header__categories .nav-vertical {
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 260px;
+    width: 280px;
     background: #ffffff;
-    border-radius: 0 0 6px 6px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-    border: 1px solid #edf2f7;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: 0 0px 5px 0 rgb(0 0 0 / 75%);
+    border: none;
     margin-top: 0;
     display: none !important;
     z-index: 10000;
+    overflow-y: unset;
+    bottom: unset;
+    right: unset;
   }
 
-  .scrolled-header__categories:hover .nav-vertical,
   .scrolled-header__categories .nav-vertical.show {
     display: block !important;
   }
 
-  .scrolled-header__categories .nav-vertical .site-nav-ver__link {
-    color: #121212;
-    padding: 10px 18px;
-    font-size: 13px;
-    font-weight: 500;
+  .scrolled-header__categories .nav-vertical::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #fff;
     display: block;
+    top: -5px;
+    bottom: auto;
+    position: absolute;
+    left: 30px;
+  }
+
+  .scrolled-header__categories .vertical-menu-close {
+    display: none !important;
+  }
+
+  .scrolled-header__categories .vertical-bkg {
+    display: none !important;
+  }
+
+  .scrolled-header__categories .nav-vertical .site-nav {
+    padding: 10px 0 20px;
+    background: #ffffff;
+    margin: 0;
+    list-style: none;
+  }
+
+  .scrolled-header__categories .nav-vertical .site-nav__item {
+    border-bottom: 1px solid #ececec;
+    background-color: transparent !important;
+    margin: 0;
+  }
+
+  .scrolled-header__categories .nav-vertical .site-nav__item:hover {
+    background-color: transparent !important;
+  }
+
+  .scrolled-header__categories .nav-vertical li.site-nav__item:last-child {
+    border-bottom: none;
+  }
+
+  .scrolled-header__categories .nav-vertical .site-nav-ver__link {
+    color: #000000;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 400;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    border: none;
+    border-bottom: 1px solid #ffffff;
     text-decoration: none;
-    border-bottom: 1px solid #f1f5f9;
-    transition: background 0.15s ease, color 0.15s ease;
+    line-height: normal;
+    background: transparent;
+    transition: all 0.15s ease;
   }
 
   .scrolled-header__categories .nav-vertical .site-nav-ver__link:hover {
-    background: #f8fafc;
-    color: #00B5E2;
+    color: #000000;
+    background: transparent;
+  }
+
+  .scrolled-header__categories .nav-vertical .site-nav__item--view-all .site-nav-ver__link {
+    color: var(--g-main);
+    font-weight: 700;
+  }
+
+  .scrolled-header__categories .nav-vertical .site-nav__item--view-all .site-nav-ver__link:hover {
+    color: var(--g-main);
   }
 
   /* Divider */
