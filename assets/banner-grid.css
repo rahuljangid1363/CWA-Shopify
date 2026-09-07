@@ -4,7 +4,7 @@
 
 .cwa-category-section {
     width: 100%;
-    padding: 60px 0 40px;
+    padding: 60px 0 45px;
     background-color: #ffffff;
 }
 
@@ -76,31 +76,36 @@
     border-radius: 8px;
     text-decoration: none !important;
     overflow: hidden;
-    padding: 24px;
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+    background-color: #f8fafc;
 }
 
 .cwa-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
+/* Card Header & Content */
 .cwa-card-header {
+    position: relative;
+    z-index: 2;
+    padding: 24px 28px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    z-index: 2;
+    pointer-events: none;
 }
 
 .cwa-card-header.cwa-header-right {
     align-items: flex-end;
     text-align: right;
     margin-left: auto;
+    padding: 24px 28px;
 }
 
 .cwa-card-title {
     font-family: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif !important;
-    font-size: 17px !important;
+    font-size: 16px !important;
     font-weight: 800 !important;
     color: #000000 !important;
     text-transform: uppercase !important;
@@ -112,121 +117,83 @@
 .cwa-card-arrow {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     color: #3075cc;
     transition: transform 0.25s ease;
 }
 
 .cwa-card:hover .cwa-card-arrow {
-    transform: translateX(4px);
+    transform: translateX(5px);
 }
 
-/* Card Images */
+/* Card Images Background Fit */
 .cwa-card-image {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: auto;
+    height: 100%;
     z-index: 1;
+    overflow: hidden;
 }
 
 .cwa-card-image img {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    transition: transform 0.35s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .cwa-card:hover .cwa-card-image img {
-    transform: scale(1.02);
+    transform: scale(1.025);
 }
 
 /* Specific Card Customizations */
 
 /* 1. Flow Measurement (Tall Left Card) */
 .cwa-card-flow {
-    background: #e9f2fd;
-    min-height: 520px;
-    justify-content: space-between;
-}
-
-.cwa-image-flow {
-    padding-top: 20px;
+    background-color: #dceaf8;
     height: 100%;
-    display: flex;
-    align-items: flex-end;
+    min-height: 530px;
 }
 
 .cwa-image-flow img {
-    max-height: 380px;
+    object-fit: cover;
+    object-position: center bottom;
 }
 
 /* 2. Liquid Analysis (Top Middle Card) */
 .cwa-card-liquid {
-    background: #f4f6f9;
-    min-height: 250px;
-    justify-content: space-between;
-}
-
-.cwa-image-liquid {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 80%;
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: 15px;
-    pointer-events: none;
+    background-color: #f4f6fa;
+    height: 255px;
 }
 
 .cwa-image-liquid img {
-    max-height: 180px;
-    max-width: 100%;
+    object-fit: cover;
+    object-position: center left;
 }
 
 /* 3. Level Measurement (Top Right Card) */
 .cwa-card-level {
-    background: #e9f2fd;
-    min-height: 250px;
-    justify-content: space-between;
-}
-
-.cwa-image-level {
-    margin-top: 10px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    background-color: #e2eefb;
+    height: 255px;
 }
 
 .cwa-image-level img {
-    max-height: 175px;
+    object-fit: cover;
+    object-position: center right;
 }
 
 /* 4. Pressure Measurement (Bottom Wide Card) */
 .cwa-card-pressure {
-    background: #f2f5f9;
-    min-height: 250px;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: flex-start;
-}
-
-.cwa-image-pressure {
-    position: absolute;
-    bottom: 15px;
-    right: 20px;
-    width: 65%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    background-color: #f2f5f9;
+    height: 255px;
 }
 
 .cwa-image-pressure img {
-    max-height: 190px;
+    object-fit: cover;
+    object-position: center right;
 }
 
 /* Bottom Footer Button */
@@ -267,25 +234,23 @@
         gap: 16px;
     }
 
+    .cwa-grid-col-right {
+        gap: 16px;
+    }
+
+    .cwa-grid-row-top {
+        gap: 16px;
+    }
+
     .cwa-card-flow {
         min-height: 380px;
+        height: 380px;
     }
 
-    .cwa-image-flow img {
-        max-height: 280px;
-    }
-
+    .cwa-card-liquid,
+    .cwa-card-level,
     .cwa-card-pressure {
-        flex-direction: column;
-        min-height: 280px;
-    }
-
-    .cwa-image-pressure {
-        position: relative;
-        width: 100%;
-        bottom: 0;
-        right: 0;
-        margin-top: 15px;
+        height: 230px;
     }
 }
 
@@ -303,11 +268,23 @@
         font-size: 13px !important;
     }
 
-    .cwa-card {
-        padding: 18px;
+    .cwa-card-header {
+        padding: 18px 20px !important;
     }
 
     .cwa-card-title {
         font-size: 15px !important;
+    }
+
+    .cwa-card-flow {
+        min-height: 320px;
+        height: 320px;
+    }
+
+    .cwa-card-liquid,
+    .cwa-card-level,
+    .cwa-card-pressure {
+        min-height: 200px;
+        height: 200px;
     }
 }

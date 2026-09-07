@@ -33,7 +33,14 @@
             "item_align": "center",
             "bg_button": "#94be90",
             "color_button": "#ffffff",
-            "border_button": "rgba(0,0,0,0)"
+            "border_button": "rgba(0,0,0,0)",
+            "link_2": "",
+            "btn_link_2": "",
+            "bg_button_2": "rgba(0,0,0,0)",
+            "color_button_2": "#ffffff",
+            "border_button_2": "#ffffff",
+            "app_subtitle": "Application",
+            "app_title": "Flow metering — regional treatment plant"
           }
         },
         "slide_abzWAa": {
@@ -57,7 +64,14 @@
             "item_align": "center",
             "bg_button": "#3075cc",
             "color_button": "#ffffff",
-            "border_button": "rgba(0,0,0,0)"
+            "border_button": "rgba(0,0,0,0)",
+            "link_2": "",
+            "btn_link_2": "",
+            "bg_button_2": "rgba(0,0,0,0)",
+            "color_button_2": "#ffffff",
+            "border_button_2": "#ffffff",
+            "app_subtitle": "Application",
+            "app_title": "Flow metering — regional treatment plant"
           }
         },
         "d17110be-0c7a-4c5c-a648-a78b39ac790a": {
@@ -74,8 +88,6 @@
             "color_des": "#475569",
             "link": "Browse Product Categories",
             "btn_link": "shopify://collections/all",
-            "link_2": "Talk To A Specialist",
-            "btn_link_2": "/pages/contact",
             "box_align": "center",
             "translateX": "",
             "text_align": "left",
@@ -83,6 +95,8 @@
             "bg_button": "#2563eb",
             "color_button": "#ffffff",
             "border_button": "rgba(0,0,0,0)",
+            "link_2": "Talk To A Specialist",
+            "btn_link_2": "/pages/contact",
             "bg_button_2": "#ffffff",
             "color_button_2": "#0f172a",
             "border_button_2": "#e2e8f0",
@@ -131,89 +145,113 @@
         "show_inter": true
       }
     },
+    "1653033212b709b17b": {
+      "type": "service",
+      "blocks": {
+        "1653033212a1ab2224-0": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color": "rgba(0,0,0,0)",
+            "icon": "<svg width=\"43\" height=\"31\" viewBox=\"0 0 43 31\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M32.5833 27.7917C31.8208 27.7917 31.0896 27.4888 30.5504 26.9496C30.0112 26.4104 29.7083 25.6792 29.7083 24.9167C29.7083 24.1542 30.0112 23.4229 30.5504 22.8837C31.0896 22.3446 31.8208 22.0417 32.5833 22.0417C33.3458 22.0417 34.0771 22.3446 34.6163 22.8837C35.1554 23.4229 35.4583 24.1542 35.4583 24.9167C35.4583 25.6792 35.1554 26.4104 34.6163 26.9496C34.0771 27.4888 33.3458 27.7917 32.5833 27.7917ZM35.4583 10.5417L39.215 15.3333H30.6667V10.5417M9.58333 27.7917C8.82084 27.7917 8.08957 27.4888 7.5504 26.9496C7.01123 26.4104 6.70833 25.6792 6.70833 24.9167C6.70833 24.1542 7.01123 23.4229 7.5504 22.8837C8.08957 22.3446 8.82084 22.0417 9.58333 22.0417C10.3458 22.0417 11.0771 22.3446 11.6163 22.8837C12.1554 23.4229 12.4583 24.1542 12.4583 24.9167C12.4583 25.6792 12.1554 26.4104 11.6163 26.9496C11.0771 27.4888 10.3458 27.7917 9.58333 27.7917ZM36.4167 7.66667H30.6667V0H3.83333C1.70583 0 0 1.70583 0 3.83333V24.9167H3.83333C3.83333 26.4417 4.43914 27.9042 5.51747 28.9825C6.5958 30.0609 8.05834 30.6667 9.58333 30.6667C11.1083 30.6667 12.5709 30.0609 13.6492 28.9825C14.7275 27.9042 15.3333 26.4417 15.3333 24.9167H26.8333C26.8333 26.4417 27.4391 27.9042 28.5175 28.9825C29.5958 30.0609 31.0583 30.6667 32.5833 30.6667C34.1083 30.6667 35.5709 30.0609 36.6492 28.9825C37.7275 27.9042 38.3333 26.4417 38.3333 24.9167H42.1667V15.3333L36.4167 7.66667Z\" fill=\"#0071FF\"/>\n</svg>",
+            "header_service": "Australian Stock",
+            "font_weight": "bold",
+            "color_title": "#0b1f3a",
+            "text_service": "Fast local dispatch",
+            "color_description": "#9a9a9a"
+          }
+        },
+        "1653033212a1ab2224-1": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color": "rgba(0,0,0,0)",
+            "icon": "<svg width=\"28\" height=\"33\" viewBox=\"0 0 28 33\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M6.6464 31.9167H20.8247C22.3885 31.9167 23.8883 31.2954 24.9941 30.1897C26.0999 29.0839 26.7211 27.5841 26.7211 26.0203V16.704C26.7217 15.1403 26.1011 13.6405 24.996 12.5344L14.9401 2.4768C14.3925 1.92928 13.7425 1.49498 13.027 1.1987C12.3116 0.902412 11.5449 0.749944 10.7705 0.75H6.6464C5.08257 0.75 3.5828 1.37123 2.47701 2.47701C1.37123 3.5828 0.75 5.08257 0.75 6.6464V26.0203C0.75 27.5841 1.37123 29.0839 2.47701 30.1897C3.5828 31.2954 5.08257 31.9167 6.6464 31.9167Z\" stroke=\"#0071FF\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.1022 8.1466C10.6996 8.278 10.4418 8.54418 10.3677 8.839C10.2161 9.43201 10.3677 10.0688 10.7939 10.8657C11.0062 11.2599 11.2656 11.6592 11.552 12.0871L11.707 12.3179L11.9513 12.6801L11.9833 12.5655L12.1282 12.05C12.2944 11.4851 12.4236 10.9123 12.5157 10.3316C12.6656 9.25007 12.4971 8.61663 11.9951 8.20893C11.8603 8.09943 11.5267 8.00845 11.1022 8.1466ZM11.1949 15.1414L10.74 14.5316L10.6861 14.4507C10.4923 14.1306 10.2767 13.8105 10.0425 13.4651L9.87407 13.2141C9.56408 12.7634 9.27622 12.2979 9.01151 11.8192C8.48926 10.8455 8.07146 9.65271 8.4084 8.33697C8.69479 7.21834 9.5843 6.51582 10.4755 6.22437C11.3465 5.94135 12.4533 5.97672 13.2721 6.64049C14.6064 7.72543 14.7007 9.2905 14.5171 10.6113C14.4148 11.2796 14.2679 11.9404 14.0774 12.5891L13.9156 13.1619C13.7898 13.5909 13.673 14.0228 13.5652 14.4574L13.4523 14.7843L15.7974 17.9245C16.8925 17.7931 18.0953 17.7139 19.2173 17.7948C20.5129 17.8858 21.9044 18.2025 22.8529 19.1021C23.1581 19.4188 23.3789 19.8069 23.4952 20.2311C23.6114 20.6552 23.6194 21.1017 23.5183 21.5297C23.3212 22.3384 22.7535 23.0123 21.9701 23.4216C20.3107 24.2892 18.7658 23.5985 17.6186 22.7208C16.7206 22.0351 15.8581 21.0782 15.132 20.273L14.9568 20.0809C14.3334 20.1769 13.7438 20.2848 13.2653 20.3757C12.7515 20.4718 12.113 20.5914 11.4189 20.7464L11.1645 21.4927C11.0241 21.8161 10.8905 22.1418 10.7636 22.4698L10.5581 22.9802C10.3506 23.5058 10.1104 24.0179 9.83869 24.5133C9.28275 25.4871 8.39492 26.5215 6.90566 26.604C4.91099 26.7152 3.55987 24.9446 3.94735 23.0527L3.95746 23.0072C4.29439 21.6746 5.46357 20.8003 6.59399 20.2224C7.59975 19.7069 8.77397 19.3262 9.86396 19.0415L11.1949 15.1414ZM12.6605 17.1041L12.177 18.5243L12.8863 18.3895L12.893 18.3878L13.5332 18.2699L12.6605 17.1041ZM17.445 19.8063C17.9066 20.2949 18.3666 20.7497 18.845 21.1153C19.7716 21.8229 20.4286 21.9459 21.0334 21.6291C21.3704 21.4522 21.5119 21.2231 21.554 21.053C21.5744 20.9617 21.5728 20.8669 21.5494 20.7764C21.526 20.6859 21.4813 20.6023 21.4192 20.5324C20.9863 20.1483 20.2029 19.8922 19.0741 19.8114C18.5317 19.7768 17.9877 19.7751 17.445 19.8063ZM9.0132 21.4017C8.47747 21.5853 7.96869 21.7892 7.51383 22.0217C6.52492 22.5271 6.04815 23.0392 5.92349 23.4823C5.79208 24.1814 6.24694 24.6161 6.79278 24.5858C7.24765 24.5605 7.64523 24.2758 8.08325 23.5092C8.31237 23.0914 8.51341 22.6607 8.68637 22.2171L8.86663 21.769L9.0132 21.4017Z\" fill=\"#0071FF\"/>\n</svg>",
+            "header_service": "Technical Data Sheets",
+            "font_weight": "bold",
+            "color_title": "#0b1f3a",
+            "text_service": "Download before you buy",
+            "color_description": "#9a9a9a"
+          }
+        },
+        "1653033212a1ab2224-2": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color": "rgba(0,0,0,0)",
+            "icon": "<svg width=\"28\" height=\"32\" viewBox=\"0 0 28 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M28 4.84429L14 0L0 4.84429V16C0 21.7121 3.5476 25.7052 6.8544 28.1841C8.85091 29.6657 11.0407 30.8738 13.3644 31.7758C13.5231 31.8348 13.6827 31.8911 13.8432 31.9446L14 32L14.1596 31.9446C14.4657 31.8395 14.7691 31.7269 15.0696 31.6069C17.2336 30.7255 19.2754 29.5753 21.1456 28.1841C24.4538 25.7052 28 21.7121 28 16V4.84429ZM12.6014 20.7266L6.664 14.854L8.6436 12.8955L12.6028 16.8111L20.5226 8.98132L22.5036 10.9384L12.6014 20.7266Z\" fill=\"#0071FF\"/>\n</svg>",
+            "header_service": "Secure Online Checkout",
+            "font_weight": "bold",
+            "color_title": "#0b1f3a",
+            "text_service": "Simple, reliable ordering",
+            "color_description": "#9a9a9a"
+          }
+        },
+        "c3d8f12d-b89c-434f-a59b-2889b4a5cd84": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color": "rgba(0,0,0,0)",
+            "icon": "<svg width=\"36\" height=\"36\" viewBox=\"0 0 36 36\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g clip-path=\"url(#clip0_1468_85821)\">\n<path d=\"M9 33.75H27V36H6.75V31.5H2.25V0H17.3496L24.416 7.06641L31.5 14.1504V15.75H20.25V6.75H9V33.75ZM22.5 13.5H27.6504L22.5 8.34961V13.5ZM6.75 29.25V4.5H18.6504L16.4004 2.25H4.5V29.25H6.75ZM30.375 22.043L35.9473 27.6152L34.3652 29.1973L31.5 26.3496V36H29.25V26.3496L26.3848 29.1973L24.8027 27.6152L30.375 22.043ZM36 18V20.25H24.75V18H36Z\" fill=\"#0071FF\"/>\n</g>\n<defs>\n<clipPath id=\"clip0_1468_85821\">\n<rect width=\"36\" height=\"36\" fill=\"white\"/>\n</clipPath>\n</defs>\n</svg>",
+            "header_service": "Bulk & Multi-Line Orders",
+            "font_weight": "bold",
+            "color_title": "#0b1f3a",
+            "text_service": "Built for project procurement",
+            "color_description": "#9a9a9a"
+          }
+        }
+      },
+      "block_order": [
+        "1653033212a1ab2224-0",
+        "1653033212a1ab2224-1",
+        "1653033212a1ab2224-2",
+        "c3d8f12d-b89c-434f-a59b-2889b4a5cd84"
+      ],
+      "settings": {
+        "fullwidth": false,
+        "background-color": "",
+        "margin_desktop": "",
+        "padding_desktop": "",
+        "margin_mobile": "",
+        "padding_mobile": "",
+        "sub_title": "",
+        "color_sub_title": "#59805b",
+        "heading": "",
+        "color_section_header": "#000000",
+        "text_decoration": "",
+        "color_section_text": "#666666",
+        "index_text": "row",
+        "icon-align": "left"
+      }
+    },
     "1649045314cbc7bc5a": {
       "type": "banner-grid",
       "blocks": {
         "16490453142a9d24a3-0": {
           "type": "image",
           "settings": {
-            "width": "41%",
-            "image": "shopify://shop_images/Flow_Measurement.png",
-            "header_image": "",
-            "color_header": "#ffffff",
+            "image": "shopify://shop_images/one.png",
             "subheader_image": "Flow Measurement",
-            "color_sub": "#ffffff",
-            "text_sale": "",
-            "color_text_sale": "#3075cc",
-            "text_image": "",
-            "color_description": "#ffffff",
-            "btn_text": "",
-            "btn_link": "shopify://collections/flow-measurement",
-            "color_button": "#121212",
-            "bg_button": "#ffffff",
-            "border_button": "rgba(0,0,0,0)",
-            "text_align": "left",
-            "item_align": "top"
+            "btn_link": "shopify://collections/flow-measurement"
           }
         },
         "0854e544-cd69-46db-82f3-15dd5c024062": {
           "type": "image2row",
           "settings": {
-            "width": "33%",
-            "image": "shopify://shop_images/Liquid_Analysis.png",
-            "header_image": "",
-            "color_header": "#000000",
+            "image": "shopify://shop_images/two.png",
             "subheader_image": "Liquid Analysis",
-            "color_sub": "#000000",
-            "text_sale": "",
-            "color_text_sale": "#3075cc",
-            "text_image": "",
-            "color_description": "#ffffff",
-            "btn_text": "",
             "btn_link": "shopify://collections",
-            "color_button": "#ffffff",
-            "bg_button": "rgba(0,0,0,0)",
-            "border_button": "#ffffff",
-            "text_align": "right",
-            "item_align": "bottom",
-            "image2": "shopify://shop_images/Level_Measurement.png",
-            "header_image2": "",
-            "color_header2": "#ffffff",
+            "image2": "shopify://shop_images/three.png",
             "subheader_image2": "Level Measurement",
-            "color_sub2": "#ffffff",
-            "text_sale2": "",
-            "color_text_sale2": "#3075cc",
-            "text_image2": "",
-            "color_description2": "#ffffff",
-            "btn_text2": "",
-            "btn_link2": "shopify://collections",
-            "color_button2": "#ffffff",
-            "bg_button2": "rgba(0,0,0,0)",
-            "border_button2": "#ffffff",
-            "text_align2": "left",
-            "item_align2": "top"
+            "btn_link2": "shopify://collections"
           }
         },
         "16490453142a9d24a3-1": {
           "type": "image",
           "settings": {
-            "width": "25%",
-            "image": "shopify://shop_images/Pressure_Measurement.png",
-            "header_image": "",
-            "color_header": "#000000",
+            "image": "shopify://shop_images/four.png",
             "subheader_image": "Pressure Measurement",
-            "color_sub": "#000000",
-            "text_sale": "",
-            "color_text_sale": "#3075cc",
-            "text_image": "",
-            "color_description": "#ffffff",
-            "btn_text": "",
-            "btn_link": "shopify://collections",
-            "color_button": "#121212",
-            "bg_button": "#ffffff",
-            "border_button": "rgba(0,0,0,0)",
-            "text_align": "left",
-            "item_align": "top"
+            "btn_link": "shopify://collections"
           }
         }
       },
@@ -225,15 +263,14 @@
       "custom_css": [],
       "settings": {
         "fullwidth": false,
-        "background-color": "",
-        "margin_desktop": "60px 0px 0px 0px",
-        "padding_desktop": "",
-        "margin_mobile": "30px 0px 0px 0px",
-        "padding_mobile": "",
         "heading": "FIND THE RIGHT INSTRUMENTATION",
         "text_decoration": "Explore our range of precision instruments for every applications",
         "btn_text": "View All Categories",
-        "btn_link": "shopify://collections"
+        "btn_link": "shopify://collections",
+        "margin_desktop": "60px 0px 0px 0px",
+        "padding_desktop": "",
+        "margin_mobile": "30px 0px 0px 0px",
+        "padding_mobile": ""
       }
     },
     "165301935421bf9b4c": {
@@ -315,85 +352,6 @@
         "image_ratio": "adapt"
       }
     },
-    "1653033212b709b17b": {
-      "type": "service",
-      "blocks": {
-        "1653033212a1ab2224-0": {
-          "type": "service",
-          "settings": {
-            "width": "25%",
-            "bg_color": "rgba(0,0,0,0)",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M1 3h13v13H1zM14 8h4l3 3v5h-7z\"/><circle cx=\"5.5\" cy=\"18.5\" r=\"1.5\"/><circle cx=\"17.5\" cy=\"18.5\" r=\"1.5\"/></svg>",
-            "header_service": "Australian Stock",
-            "font_weight": "bold",
-            "color_title": "#0b1f3a",
-            "text_service": "Fast local dispatch",
-            "color_description": "#9a9a9a"
-          }
-        },
-        "1653033212a1ab2224-1": {
-          "type": "service",
-          "settings": {
-            "width": "25%",
-            "bg_color": "rgba(0,0,0,0)",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M6 2h9l5 5v15H6z\"/><path d=\"M15 2v5h5\"/><path d=\"M9.5 14.5l2 2 3-4\"/></svg>",
-            "header_service": "Technical Data Sheets",
-            "font_weight": "bold",
-            "color_title": "#0b1f3a",
-            "text_service": "Download before you buy",
-            "color_description": "#9a9a9a"
-          }
-        },
-        "1653033212a1ab2224-2": {
-          "type": "service",
-          "settings": {
-            "width": "25%",
-            "bg_color": "rgba(0,0,0,0)",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/><path d=\"M8 12.5l2.5 2.5L16 9\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-            "header_service": "Secure Online Checkout",
-            "font_weight": "bold",
-            "color_title": "#0b1f3a",
-            "text_service": "Simple, reliable ordering",
-            "color_description": "#9a9a9a"
-          }
-        },
-        "c3d8f12d-b89c-434f-a59b-2889b4a5cd84": {
-          "type": "service",
-          "settings": {
-            "width": "25%",
-            "bg_color": "rgba(0,0,0,0)",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M6 2h9l5 5v15H6z\"/><path d=\"M15 2v5h5\"/><path d=\"M12 19v-7\"/><path d=\"M9 15l3-3 3 3\"/></svg>",
-            "header_service": "Bulk & Multi-Line Orders",
-            "font_weight": "bold",
-            "color_title": "#0b1f3a",
-            "text_service": "Built for project procurement",
-            "color_description": "#9a9a9a"
-          }
-        }
-      },
-      "block_order": [
-        "1653033212a1ab2224-0",
-        "1653033212a1ab2224-1",
-        "1653033212a1ab2224-2",
-        "c3d8f12d-b89c-434f-a59b-2889b4a5cd84"
-      ],
-      "settings": {
-        "fullwidth": false,
-        "background-color": "",
-        "margin_desktop": "",
-        "padding_desktop": "",
-        "margin_mobile": "",
-        "padding_mobile": "",
-        "sub_title": "",
-        "color_sub_title": "#59805b",
-        "heading": "",
-        "color_section_header": "#000000",
-        "text_decoration": "",
-        "color_section_text": "#666666",
-        "index_text": "row",
-        "icon-align": "left"
-      }
-    },
     "16530339040fc194f1": {
       "type": "product-carousel",
       "settings": {
@@ -463,9 +421,9 @@
           "settings": {
             "width": "50%",
             "sub_title": "about cwa",
-            "header__text": "The Self-Serve<br>Instrumentation Store",
+            "header__text": "The Self-ServeInstrumentation Store",
             "text__content": "CWA is an Australian distributor of water and wastewater instrumentation and critical spares. Engineers arrive with a product code from an operations manual, verify the specification, download the data sheet and order online — no phone calls, no email chains.",
-            "text_list_note": "<li class=\"elementor-icon-list-item\"><span class=\"elementor-icon-list-icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#3075cc\"/><path d=\"M6 10.2L8.6 12.8L14.2 7.2\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span class=\"elementor-icon-list-text\">Australian-owned distributor</span></li><li class=\"elementor-icon-list-item\"><span class=\"elementor-icon-list-icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#3075cc\"/><path d=\"M6 10.2L8.6 12.8L14.2 7.2\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span class=\"elementor-icon-list-text\">AUD pricing on every product</span></li><li class=\"elementor-icon-list-item\"><span class=\"elementor-icon-list-icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#3075cc\"/><path d=\"M6 10.2L8.6 12.8L14.2 7.2\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span class=\"elementor-icon-list-text\">Find any product by CWA code</span></li><li class=\"elementor-icon-list-item\"><span class=\"elementor-icon-list-icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#3075cc\"/><path d=\"M6 10.2L8.6 12.8L14.2 7.2\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span class=\"elementor-icon-list-text\">Serving water, mining, energy & F&B</span></li>",
+            "text_list_note": "<li class=\"elementor-icon-list-item\">\n  <span class=\"elementor-icon-list-icon\">\n    <svg width=\"9\" height=\"7\" viewbox=\"0 0 9 7\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M0.5 3.5L3.125 6.125L8.375 0.5\" stroke=\"#0D99FF\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n    </svg>\n  </span>\n  <span class=\"elementor-icon-list-text\">Australian-owned distributor</span>\n</li>\n\n<li class=\"elementor-icon-list-item\">\n  <span class=\"elementor-icon-list-icon\">\n    <svg width=\"9\" height=\"7\" viewbox=\"0 0 9 7\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M0.5 3.5L3.125 6.125L8.375 0.5\" stroke=\"#0D99FF\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n    </svg>\n  </span>\n  <span class=\"elementor-icon-list-text\">AUD pricing on every product</span>\n</li>\n\n<li class=\"elementor-icon-list-item\">\n  <span class=\"elementor-icon-list-icon\">\n    <svg width=\"9\" height=\"7\" viewbox=\"0 0 9 7\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M0.5 3.5L3.125 6.125L8.375 0.5\" stroke=\"#0D99FF\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n    </svg>\n  </span>\n  <span class=\"elementor-icon-list-text\">Find any product by CWA code</span>\n</li>\n\n<li class=\"elementor-icon-list-item\">\n  <span class=\"elementor-icon-list-icon\">\n    <svg width=\"9\" height=\"7\" viewbox=\"0 0 9 7\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M0.5 3.5L3.125 6.125L8.375 0.5\" stroke=\"#0D99FF\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n    </svg>\n  </span>\n  <span class=\"elementor-icon-list-text\">Serving water, mining, energy & F&B</span>\n</li>",
             "color_text_note": "#666666",
             "btn_text": "Go To Shop",
             "btn_link": "",
