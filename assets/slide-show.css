@@ -113,7 +113,7 @@
     line-height: 1.16 !important;
     color: #000000 !important;
     letter-spacing: -0.025em !important;
-    margin: 0 0 20px 0 !important;
+    margin: 0 0 30px 0 !important;
     text-align: left !important;
 }
 
@@ -124,8 +124,8 @@
     font-weight: 400 !important;
     font-size: 16px !important;
     line-height: 1.55 !important;
-    color: #475569 !important;
-    margin: 0 0 28px 0 !important;
+    color: #000 !important;
+    margin: 0 0 40px 0 !important;
     max-width: 670px !important;
     text-align: left !important;
 }

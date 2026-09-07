@@ -74,7 +74,7 @@
     border-radius: 6px !important;
     background-color: #ffffff !important;
     padding: 3px 3px 3px 14px !important;
-    width: 450px !important;
+    width: 580px !important;
     max-width: 100% !important;
     height: 42px !important;
     box-sizing: border-box !important;
@@ -254,22 +254,30 @@
     height: 100% !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
   }
   .header-4-bottom .header-megamenu .nav-mega {
     height: 100% !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
     background: transparent !important;
+    width: 100% !important;
   }
   .header-4-bottom .header-megamenu .site-nav {
     display: flex !important;
     align-items: center !important;
-    gap: 36px !important;
+    justify-content: center !important;
+    gap: 60px !important;
     list-style: none !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     padding: 0 !important;
     height: 100% !important;
   }
+  .icon-vertical-menu {
+    display: flex;
+    align-items: center;
+}
   .header-4-bottom .header-megamenu .site-nav__item {
     display: flex !important;
     align-items: center !important;
@@ -316,6 +324,11 @@
   }
   #MainContent {
     padding-top: 0;
+  }
+  @media (max-width: 1200px) {
+    .header-4 .search-input-wrap {
+      width: 440px !important;
+    }
   }
   @media (max-width: 991px) {
     .header-4-bottom {
