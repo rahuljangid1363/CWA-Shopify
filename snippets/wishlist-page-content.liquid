@@ -1,19 +1,22 @@
+{{ 'wishlist.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 
 <style>
-/* Flip-kart style Wishlist Page - Pure Block View */
+/* Flipkart style Wishlist Page - Pure Vertical List Format */
 .fk-wishlist-page {
   background-color: #f1f3f6;
-  min-height: 80vh;
-  padding: 30px 0 60px;
+  min-height: auto;
+  padding: 30px 15px 50px;
   display: block;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .fk-wishlist-container {
   max-width: 980px;
   margin: 0 auto;
   display: block;
+  width: 100%;
 }
 
 /* Breadcrumb */
@@ -21,7 +24,7 @@
   display: block;
   font-size: 13px;
   color: #878787;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   padding: 0 4px;
 }
 
@@ -53,8 +56,8 @@
 .fk-wishlist-card {
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
   overflow: hidden;
   display: block;
   width: 100%;
@@ -62,30 +65,27 @@
 
 /* Card Header */
 .fk-wishlist-header {
-  padding: 18px 24px;
-  border-bottom: 1px solid #f0f0f0;
-  display: block;
-  position: relative;
-}
-
-.fk-wishlist-header::after {
-  content: "";
-  display: block;
-  clear: both;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
 }
 
 .fk-wishlist-header__title {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
   color: #212121;
   margin: 0;
-  display: inline-block;
-  float: left;
+  padding: 0;
+  letter-spacing: -0.2px;
+  font-family: inherit;
 }
 
 .fk-wishlist-header__actions {
-  display: inline-block;
-  float: right;
+  display: flex;
+  align-items: center;
 }
 
 .fk-wishlist-header__clear-btn {
@@ -95,16 +95,12 @@
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  display: inline-block;
-  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
   border-radius: 4px;
   transition: all 0.2s ease;
-}
-
-.fk-wishlist-header__clear-btn svg {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 4px;
 }
 
 .fk-wishlist-header__clear-btn:hover {
@@ -118,21 +114,18 @@
   width: 100%;
 }
 
-/* Single Item Row - Block View */
+/* Single Item Row - Stacked List View */
 .fk-wishlist-item {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   width: 100%;
   padding: 24px;
   border-bottom: 1px solid #f0f0f0;
   position: relative;
   box-sizing: border-box;
-  transition: background-color 0.2s ease, opacity 0.3s ease, transform 0.3s ease;
-}
-
-.fk-wishlist-item::after {
-  content: "";
-  display: block;
-  clear: both;
+  background-color: #ffffff;
+  transition: background-color 0.2s ease, opacity 0.25s ease, transform 0.25s ease;
 }
 
 .fk-wishlist-item:last-child {
@@ -140,19 +133,28 @@
 }
 
 .fk-wishlist-item:hover {
-  background-color: #fafafa;
+  background-color: #fcfcfc;
 }
 
 .fk-wishlist-item.removing {
   opacity: 0;
-  transform: translateX(-15px);
+  transform: translateX(-20px);
 }
 
-/* Left Image Box */
+.fk-wishlist-item__main {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Left Column: Product Image & Unavailable Status */
 .fk-wishlist-item__left {
   width: 100px;
-  display: block;
-  float: left;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-right: 24px;
   text-align: center;
 }
@@ -160,24 +162,25 @@
 .fk-wishlist-item__img-link {
   width: 100px;
   height: 100px;
-  display: block;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   text-decoration: none;
-  line-height: 100px;
 }
 
 .fk-wishlist-item__img-link img {
   max-width: 100%;
   max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  display: inline-block;
-  vertical-align: middle;
-  transition: transform 0.3s ease;
+  display: block;
+  transition: transform 0.25s ease;
 }
 
 .fk-wishlist-item:hover .fk-wishlist-item__img-link img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .fk-wishlist-item__status {
@@ -185,24 +188,24 @@
   font-weight: 600;
   color: #c2185b;
   text-align: center;
-  margin-top: 8px;
-  line-height: 1.3;
+  margin-top: 6px;
+  line-height: 1.25;
   display: block;
 }
 
-/* Middle Details Box */
+/* Middle Column: Title, Assured Badge, Price Row */
 .fk-wishlist-item__middle {
-  display: block;
-  margin-left: 124px;
-  padding-right: 40px;
+  flex: 1;
+  min-width: 0;
+  padding-right: 20px;
 }
 
 .fk-wishlist-item__title {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   color: #212121;
   line-height: 1.4;
-  margin-bottom: 6px;
+  margin: 0 0 6px 0;
   text-decoration: none !important;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -215,66 +218,68 @@
   color: #2874f0;
 }
 
+/* Assured Badge */
 .fk-wishlist-item__badge-row {
-  margin-bottom: 8px;
-  display: block;
+  margin: 4px 0 8px 0;
+  display: flex;
+  align-items: center;
 }
 
 .fk-wishlist-item__badge {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 700;
   color: #2874f0;
   font-style: italic;
+  letter-spacing: -0.2px;
 }
 
 .fk-wishlist-item__badge svg {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 3px;
 }
 
 /* Price Box */
 .fk-wishlist-item__price-box {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
   margin-top: 8px;
+  flex-wrap: wrap;
 }
 
 .fk-wishlist-item__price {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: #212121;
-  display: inline-block;
-  margin-right: 10px;
+  letter-spacing: -0.3px;
 }
 
 .fk-wishlist-item__compare-price {
   font-size: 14px;
   color: #878787;
   text-decoration: line-through;
-  display: inline-block;
-  margin-right: 10px;
 }
 
 .fk-wishlist-item__discount {
   font-size: 13px;
   font-weight: 600;
   color: #388e3c;
-  display: inline-block;
 }
 
 .fk-wishlist-item__no-price {
   font-size: 14px;
-  color: #878787;
-  display: block;
+  color: #212121;
+  font-weight: 400;
 }
 
-/* Right Delete Box */
+/* Right Column: Delete Trash Icon */
 .fk-wishlist-item__right {
-  display: block;
-  position: absolute;
-  top: 24px;
-  right: 24px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 2px;
 }
 
 .fk-wishlist-item__delete {
@@ -284,28 +289,36 @@
   cursor: pointer;
   padding: 6px;
   border-radius: 50%;
-  display: block;
-  transition: color 0.2s ease, background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.fk-wishlist-item__delete svg {
+  width: 18px;
+  height: 18px;
+  fill: #9e9e9e;
+  transition: fill 0.2s ease;
 }
 
 .fk-wishlist-item__delete:hover {
-  color: #e53935;
   background-color: #ffebee;
 }
 
-/* Skeleton Loading State in Block View */
+.fk-wishlist-item__delete:hover svg {
+  fill: #e53935;
+}
+
+/* Skeleton Loading State */
 .fk-wishlist-skeleton-item {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   padding: 24px;
   border-bottom: 1px solid #f0f0f0;
   position: relative;
   box-sizing: border-box;
-}
-
-.fk-wishlist-skeleton-item::after {
-  content: "";
-  display: block;
-  clear: both;
 }
 
 .fk-wishlist-skeleton-box {
@@ -336,6 +349,10 @@
   padding: 60px 24px;
   text-align: center;
   background-color: #ffffff;
+  display: none;
+}
+
+.fk-wishlist-empty.is-visible {
   display: block;
 }
 
@@ -346,13 +363,9 @@
   border-radius: 50%;
   background-color: #f1f3f6;
   color: #878787;
-  display: block;
-  line-height: 80px;
-}
-
-.fk-wishlist-empty__circle svg {
-  display: inline-block;
-  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fk-wishlist-empty__title {
@@ -388,6 +401,9 @@
 }
 
 @media (max-width: 600px) {
+  .fk-wishlist-page {
+    padding: 16px 10px 40px;
+  }
   .fk-wishlist-header {
     padding: 14px 16px;
   }
@@ -396,32 +412,27 @@
   }
   .fk-wishlist-item__left {
     width: 70px;
+    min-width: 70px;
     margin-right: 14px;
   }
   .fk-wishlist-item__img-link {
     width: 70px;
     height: 70px;
-    line-height: 70px;
   }
   .fk-wishlist-item__middle {
-    margin-left: 84px;
-    padding-right: 30px;
+    padding-right: 10px;
   }
   .fk-wishlist-item__title {
     font-size: 14px;
   }
   .fk-wishlist-item__price {
-    font-size: 16px;
-  }
-  .fk-wishlist-item__right {
-    top: 14px;
-    right: 14px;
+    font-size: 17px;
   }
 }
 </style>
 
 <div class="fk-wishlist-page">
-  <div class="container fk-wishlist-container">
+  <div class="fk-wishlist-container">
     <!-- Breadcrumb -->
     <nav class="fk-wishlist-breadcrumb" aria-label="breadcrumbs">
       <a href="/" title="Home">Home</a>
@@ -445,24 +456,26 @@
       </div>
 
       <product-wishlistpage>
-        <!-- Active Wishlist List (Block View) -->
+        <!-- Active Wishlist List (Vertical List View) -->
         <div class="fk-wishlist-list" id="fk-wishlist-list" style="display: none;">
-          <!-- Dynamically Rendered by wishlist.js in Block View -->
+          <!-- Dynamically Rendered by wishlist.js in Stacked Row View -->
         </div>
 
-        <!-- Skeleton Loading State (Block View) -->
+        <!-- Skeleton Loading State -->
         <div class="fk-wishlist-list" id="fk-wishlist-skeleton">
           {%- for i in (1..3) -%}
           <div class="fk-wishlist-skeleton-item">
-            <div class="fk-wishlist-item__left">
-              <div class="fk-wishlist-skeleton-box" style="width: 100px; height: 100px;"></div>
+            <div class="fk-wishlist-item__main">
+              <div class="fk-wishlist-item__left">
+                <div class="fk-wishlist-skeleton-box" style="width: 100px; height: 100px;"></div>
+              </div>
+              <div class="fk-wishlist-item__middle">
+                <div class="fk-wishlist-skeleton-box" style="width: 75%; height: 18px; margin-bottom: 10px;"></div>
+                <div class="fk-wishlist-skeleton-box" style="width: 25%; height: 14px; margin-bottom: 14px;"></div>
+                <div class="fk-wishlist-skeleton-box" style="width: 40%; height: 22px;"></div>
+              </div>
             </div>
-            <div class="fk-wishlist-item__middle">
-              <div class="fk-wishlist-skeleton-box" style="width: 75%; height: 18px; margin-bottom: 10px;"></div>
-              <div class="fk-wishlist-skeleton-box" style="width: 25%; height: 14px; margin-bottom: 14px;"></div>
-              <div class="fk-wishlist-skeleton-box" style="width: 40%; height: 22px;"></div>
-            </div>
-            <div class="fk-wishlist-skeleton-box" style="width: 24px; height: 24px; border-radius: 50%; position: absolute; top: 24px; right: 24px;"></div>
+            <div class="fk-wishlist-skeleton-box" style="width: 24px; height: 24px; border-radius: 50%;"></div>
           </div>
           {%- endfor -%}
         </div>
