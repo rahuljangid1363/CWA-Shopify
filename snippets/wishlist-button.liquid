@@ -1,6 +1,5 @@
-<product-wishlist class="btn-product js-btn-wishlist" title="Add to Wishlist" data-handle="{{ handle }}">
+<product-wishlist class="btn-product js-btn-wishlist" title="Add to Wishlist" data-handle="{{ handle | default: product.handle | default: product_card_product.handle }}">
   <span>
-    <!-- <i class="leofal leofa-heart"></i> -->
     {%- render 'icon-wishlist-2' -%}
     <span class="span-wishlist">Wishlist</span>
   </span>

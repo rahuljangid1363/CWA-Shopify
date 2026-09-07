@@ -177,7 +177,7 @@
   background: #ffffff;
   border: 1px solid #e5e5e5;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .product-tab .card--product {
@@ -213,14 +213,6 @@
   color: #0f172a;
 }
 
-.product-tab .card-footer-row {
-  margin-top: auto;
-  padding-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .product-tab .section-text {
   margin: 0 !important;
   line-height: 1;
@@ -235,12 +227,6 @@
 }
 
 @media (min-width: 1200px) {
-  .product-tab .card-information__wrapper, .product-tab .product-grid-3 .card-hover {
-    padding: 0 10px 10px !important;
-  }
-  .product-tab .product-grid-3 .card-hover {
-    top: calc(100% - 30px);
-  }
   .product-tab .section-header {
     order: 0;
   }
