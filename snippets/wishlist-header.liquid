@@ -1,10 +1,10 @@
-<div class="header-wishlist d-none d-lg-block">
-    <a class="btn-wishlist" href="/pages/{{ settings.page_wishlist }}">
-        {%- render 'icon-heart' -%}
-        <span class="d-none">icon-heart</span>
-    <div class="cart-count-bubble">
+<!-- snippets/wishlist-header.liquid -->
+<div class="header-wishlist">
+  <a class="btn-wishlist header-action-btn" href="/pages/{{ settings.page_wishlist | default: 'wishlist' }}" title="Wishlist" aria-label="Wishlist">
+    {%- render 'icon-heart' -%}
+    <span class="d-none">Wishlist</span>
+    <div class="cart-count-bubble" style="display: none;">
       <p class="num-wishlisted">0</p>
     </div>
-    </a>
-  
+  </a>
 </div>

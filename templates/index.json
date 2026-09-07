@@ -222,11 +222,7 @@
         "0854e544-cd69-46db-82f3-15dd5c024062",
         "16490453142a9d24a3-1"
       ],
-      "custom_css": [
-        ".banner-grid img {width: 100%;}",
-        ".banner-grid-style-1 {padding: 0 4rem; width: 50%;}",
-        ".banner-up .banner-grid-style-1 {width: 50%; left: 55%; right: 0 !important; text-align: right; align-items: end;}"
-      ],
+      "custom_css": [],
       "settings": {
         "fullwidth": false,
         "background-color": "",
@@ -234,32 +230,10 @@
         "padding_desktop": "",
         "margin_mobile": "30px 0px 0px 0px",
         "padding_mobile": "",
-        "heading": "",
-        "text_decoration": "",
-        "width_banner": "full box",
-        "style_banner": "style-1",
-        "effects_image": false,
-        "nopadding": false
-      }
-    },
-    "1653033111explore": {
-      "type": "rich-text",
-      "blocks": {
-        "explore-btn": {
-          "type": "button",
-          "settings": {
-            "button_label": "Explore More",
-            "button_link": "/collections",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "explore-btn"
-      ],
-      "settings": {
-        "color_scheme": "background-1",
-        "full_width": true
+        "heading": "FIND THE RIGHT INSTRUMENTATION",
+        "text_decoration": "Explore our range of precision instruments for every applications",
+        "btn_text": "View All Categories",
+        "btn_link": "shopify://collections"
       }
     },
     "165301935421bf9b4c": {
@@ -491,7 +465,7 @@
             "sub_title": "about cwa",
             "header__text": "The Self-Serve<br>Instrumentation Store",
             "text__content": "CWA is an Australian distributor of water and wastewater instrumentation and critical spares. Engineers arrive with a product code from an operations manual, verify the specification, download the data sheet and order online — no phone calls, no email chains.",
-            "text_list_note": "<li class=\"elementor-icon-list-item\"><a href=\"#\"><span class=\"elementor-icon-list-icon\"><i aria-hidden=\"true\" class=\"fas fa-check-circle\"></i></span><span class=\"elementor-icon-list-text\">Australian-owned distributor</span></a></li><li class=\"elementor-icon-list-item\"><a href=\"#\"><span class=\"elementor-icon-list-icon\"><i aria-hidden=\"true\" class=\"fas fa-check-circle\"></i></span><span class=\"elementor-icon-list-text\">AUD pricing on every product</span></a></li><li class=\"elementor-icon-list-item\"><a href=\"#\"><span class=\"elementor-icon-list-icon\"><i aria-hidden=\"true\" class=\"fas fa-check-circle\"></i></span><span class=\"elementor-icon-list-text\">Find any product by CWA code</span></a></li><li class=\"elementor-icon-list-item\"><a href=\"#\"><span class=\"elementor-icon-list-icon\"><i aria-hidden=\"true\" class=\"fas fa-check-circle\"></i></span><span class=\"elementor-icon-list-text\">Serving water, mining, energy & F&B</span></a></li>",
+            "text_list_note": "<li class=\"elementor-icon-list-item\"><span class=\"elementor-icon-list-icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#3075cc\"/><path d=\"M6 10.2L8.6 12.8L14.2 7.2\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span class=\"elementor-icon-list-text\">Australian-owned distributor</span></li><li class=\"elementor-icon-list-item\"><span class=\"elementor-icon-list-icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#3075cc\"/><path d=\"M6 10.2L8.6 12.8L14.2 7.2\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span class=\"elementor-icon-list-text\">AUD pricing on every product</span></li><li class=\"elementor-icon-list-item\"><span class=\"elementor-icon-list-icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#3075cc\"/><path d=\"M6 10.2L8.6 12.8L14.2 7.2\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span class=\"elementor-icon-list-text\">Find any product by CWA code</span></li><li class=\"elementor-icon-list-item\"><span class=\"elementor-icon-list-icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#3075cc\"/><path d=\"M6 10.2L8.6 12.8L14.2 7.2\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span class=\"elementor-icon-list-text\">Serving water, mining, energy & F&B</span></li>",
             "color_text_note": "#666666",
             "btn_text": "Go To Shop",
             "btn_link": "",
@@ -714,7 +688,6 @@
     "1648263537a3e0a84a",
     "1653033212b709b17b",
     "1649045314cbc7bc5a",
-    "1653033111explore",
     "165301935421bf9b4c",
     "16530339040fc194f1",
     "1653039086fc46e456",

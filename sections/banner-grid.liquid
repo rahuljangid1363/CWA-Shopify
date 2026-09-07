@@ -1,205 +1,151 @@
 <!-- banner-grid.liquid -->
 
 {{ 'banner-grid.css' | asset_url | stylesheet_tag }}
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
 {% render 'section-style' %}
 
-<div class="banner-grid">
-    <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
-      <h2 class="section-header">{{ section.settings.heading }}</h2>
-      <p class="section-text">{{ section.settings.text_decoration }}</p>
-      <div class="row {% if section.settings.width_banner == 'full box' %}full-box{% elsif section.settings.width_banner == '2 col' %}two-col{% endif %}">
-        <div class="col-xl-3 banner-left {% if section.settings.nopadding %}no-padding{% endif %}">
-          {%- for block in section.blocks -%}
-          {%- case block.type -%}
-              {%- when 'bannerleft' -%}
-              <div class="banner-image banner-main-content">
-                <div class="banner-grid-content{% if section.settings.effects_image %}{{ 'banner-image-hover' | prepend: ' ' }}{% endif %} "
-                >
-                  {%- if block.settings.image != blank -%}
-                  <img
-                    srcset="{%- if block.settings.image.width >= 165 -%}{{ block.settings.image | img_url: '165x' }} 165w,{%- endif -%}
-                      {%- if block.settings.image.width >= 360 -%}{{ block.settings.image | img_url: '360x' }} 360w,{%- endif -%}
-                      {%- if block.settings.image.width >= 535 -%}{{ block.settings.image | img_url: '535x' }} 535w,{%- endif -%}
-                      {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
-                      {%- if block.settings.image.width >= 1070 -%}{{ block.settings.image | img_url: '1070x' }} 1070w,{%- endif -%}
-                      {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}"
-                    src="{{ block.settings.image | img_url: 'master' }}"
-                    sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
-                    alt="{{ block.settings.image.alt  }}"
-                    loading="lazy"
-                    width="{{ block.settings.image.width }}"
-                    height="{{ block.settings.image.height }}"
-                  >
-                  {%- else -%}
-                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                  {%- endif -%}
-                    <div class="banner-grid-{% if section.settings.style_banner == 'style-1' %}style-1{% elsif section.settings.style_banner == 'style-2' %}style-2{% endif %} d-flex flex-column {%- if block.settings.item_align == 'top' -%}{{ 'justify-content-start' | prepend: ' ' }}{%- elsif block.settings.item_align == 'center' -%}{{ 'justify-content-center' | prepend: ' ' }}{%- elsif block.settings.item_align == 'bottom' -%}{{ 'justify-content-end' | prepend: ' ' }}{%- endif -%}
-                    {%- if block.settings.text_align == 'left' -%}{{ 'text-start' | prepend: ' ' }}{%- elsif block.settings.text_align == 'center' -%}{{ 'text-center' | prepend: ' ' }}{%- elsif block.settings.text_align == 'right' -%}{{ 'text-end' | prepend: ' ' }}{%- endif -%}">
-                        <h5 style="color:{{ block.settings.color_header }} ;">{{ block.settings.header_image }}</h5>
-                        <h3 style="color:{{ block.settings.color_sub }} ;">{{ block.settings.subheader_image  }}</h3>
-                        <p style="color:{{ block.settings.color_description }} ;">{{ block.settings.text_image  }}</p>
-                        {%- if block.settings.btn_text != blank -%}
-                        <a class="button-content" href="{{ block.settings.btn_link | default:'#' }}" title="{{ block.settings.btn_text }}">
-                          <span style="color: {{ block.settings.color_button }};background-color:{{ block.settings.bg_button }};border-color:{{ block.settings.border_button }};">{{ block.settings.btn_text }} <i class="leofar leofa-arrow-right"></i></span>
-                        </a>
-                        {%- endif -%}
-                    </div>
-                    </div>
-              </div>
-          {%- endcase -%}
-          {%- endfor -%}
+{%- assign flow_image = nil -%}
+{%- assign flow_title = 'Flow Measurement' -%}
+{%- assign flow_link = '/collections/flow-measurement' -%}
+
+{%- assign liquid_image = nil -%}
+{%- assign liquid_title = 'Liquid Analysis' -%}
+{%- assign liquid_link = '/collections' -%}
+
+{%- assign level_image = nil -%}
+{%- assign level_title = 'Level Measurement' -%}
+{%- assign level_link = '/collections' -%}
+
+{%- assign pressure_image = nil -%}
+{%- assign pressure_title = 'Pressure Measurement' -%}
+{%- assign pressure_link = '/collections' -%}
+
+{%- for block in section.blocks -%}
+  {%- if block.type == 'image2row' -%}
+    {%- if block.settings.image != blank -%}{%- assign liquid_image = block.settings.image -%}{%- endif -%}
+    {%- if block.settings.subheader_image != blank -%}{%- assign liquid_title = block.settings.subheader_image -%}{%- endif -%}
+    {%- if block.settings.btn_link != blank -%}{%- assign liquid_link = block.settings.btn_link -%}{%- endif -%}
+
+    {%- if block.settings.image2 != blank -%}{%- assign level_image = block.settings.image2 -%}{%- endif -%}
+    {%- if block.settings.subheader_image2 != blank -%}{%- assign level_title = block.settings.subheader_image2 -%}{%- endif -%}
+    {%- if block.settings.btn_link2 != blank -%}{%- assign level_link = block.settings.btn_link2 -%}{%- endif -%}
+  {%- else -%}
+    {%- assign block_title_lower = block.settings.subheader_image | downcase -%}
+    {%- if block_title_lower contains 'flow' or forloop.first -%}
+      {%- if block.settings.image != blank -%}{%- assign flow_image = block.settings.image -%}{%- endif -%}
+      {%- if block.settings.subheader_image != blank -%}{%- assign flow_title = block.settings.subheader_image -%}{%- endif -%}
+      {%- if block.settings.btn_link != blank -%}{%- assign flow_link = block.settings.btn_link -%}{%- endif -%}
+    {%- elsif block_title_lower contains 'pressure' -%}
+      {%- if block.settings.image != blank -%}{%- assign pressure_image = block.settings.image -%}{%- endif -%}
+      {%- if block.settings.subheader_image != blank -%}{%- assign pressure_title = block.settings.subheader_image -%}{%- endif -%}
+      {%- if block.settings.btn_link != blank -%}{%- assign pressure_link = block.settings.btn_link -%}{%- endif -%}
+    {%- elsif block_title_lower contains 'liquid' -%}
+      {%- if block.settings.image != blank -%}{%- assign liquid_image = block.settings.image -%}{%- endif -%}
+      {%- if block.settings.subheader_image != blank -%}{%- assign liquid_title = block.settings.subheader_image -%}{%- endif -%}
+      {%- if block.settings.btn_link != blank -%}{%- assign liquid_link = block.settings.btn_link -%}{%- endif -%}
+    {%- elsif block_title_lower contains 'level' -%}
+      {%- if block.settings.image != blank -%}{%- assign level_image = block.settings.image -%}{%- endif -%}
+      {%- if block.settings.subheader_image != blank -%}{%- assign level_title = block.settings.subheader_image -%}{%- endif -%}
+      {%- if block.settings.btn_link != blank -%}{%- assign level_link = block.settings.btn_link -%}{%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<div class="banner-grid cwa-category-section">
+  <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
+    <!-- Header -->
+    <div class="banner-grid-header">
+      <h2 class="banner-grid-title">{{ section.settings.heading | default: 'FIND THE RIGHT INSTRUMENTATION' }}</h2>
+      <p class="banner-grid-subtitle">{{ section.settings.text_decoration | default: section.settings.subheading | default: 'Explore our range of precision instruments for every applications' }}</p>
+    </div>
+
+    <!-- 4 Categories Grid -->
+    <div class="cwa-instrument-grid">
+      <!-- Left Tall Column: Flow Measurement -->
+      <div class="cwa-grid-col-left">
+        <a href="{{ flow_link }}" class="cwa-card cwa-card-flow">
+          <div class="cwa-card-header">
+            <h3 class="cwa-card-title">{{ flow_title | upcase }}</h3>
+            <span class="cwa-card-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+          <div class="cwa-card-image cwa-image-flow">
+            {%- if flow_image != blank -%}
+              <img src="{{ flow_image | img_url: 'master' }}" alt="{{ flow_title | escape }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ 'Flow_Measurement.png' | file_img_url: 'master' }}" alt="{{ flow_title | escape }}" loading="lazy">
+            {%- endif -%}
+          </div>
+        </a>
+      </div>
+
+      <!-- Right Column -->
+      <div class="cwa-grid-col-right">
+        <!-- Top Row: Liquid Analysis & Level Measurement -->
+        <div class="cwa-grid-row-top">
+          <!-- Liquid Analysis -->
+          <a href="{{ liquid_link }}" class="cwa-card cwa-card-liquid">
+            <div class="cwa-card-header cwa-header-right">
+              <h3 class="cwa-card-title">{{ liquid_title | upcase }}</h3>
+              <span class="cwa-card-arrow">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </span>
+            </div>
+            <div class="cwa-card-image cwa-image-liquid">
+              {%- if liquid_image != blank -%}
+                <img src="{{ liquid_image | img_url: 'master' }}" alt="{{ liquid_title | escape }}" loading="lazy">
+              {%- else -%}
+                <img src="{{ 'Liquid_Analysis.png' | file_img_url: 'master' }}" alt="{{ liquid_title | escape }}" loading="lazy">
+              {%- endif -%}
+            </div>
+          </a>
+
+          <!-- Level Measurement -->
+          <a href="{{ level_link }}" class="cwa-card cwa-card-level">
+            <div class="cwa-card-header">
+              <h3 class="cwa-card-title">{{ level_title | upcase }}</h3>
+              <span class="cwa-card-arrow">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </span>
+            </div>
+            <div class="cwa-card-image cwa-image-level">
+              {%- if level_image != blank -%}
+                <img src="{{ level_image | img_url: 'master' }}" alt="{{ level_title | escape }}" loading="lazy">
+              {%- else -%}
+                <img src="{{ 'Level_Measurement.png' | file_img_url: 'master' }}" alt="{{ level_title | escape }}" loading="lazy">
+              {%- endif -%}
+            </div>
+          </a>
         </div>
 
-        <div class="col-xl-9 banner-main {% if section.settings.nopadding %}no-padding{% endif %}">
-          <div class="row banner-content">
-            {%- for block in section.blocks -%}
-            {%- case block.settings.width -%}
-            {%- when '25%' -%}
-            {%- assign block_width = 'col-lg-3 col-md-6 ' -%}
-            {%- when '33%' -%}
-            {%- assign block_width = 'col-lg-4 col-md-6 col-12' -%}
-            {%- when '41%' -%}
-            {%- assign block_width = 'col-lg-5 col-12 big' -%}
-            {%- when '50%' -%}
-            {%- assign block_width = 'col-lg-6' -%}
-            {%- when '66%' -%}
-            {%- assign block_width = 'col-xl-8 col-md-12' -%}
-            {%- when '75%' -%}
-            {%- assign block_width = 'col-lg-9 col-md-9' -%}
-            {%- when '100%' -%}
-            {%- assign block_width = 'col-12' -%}
-            {%- endcase -%}
-            <div class="{{block_width}} banner-item {% if section.settings.nopadding %}no-padding{% endif %}" {{ block.shopify_attributes }}>
-              {%- case block.type -%}
-          
-              {%- when 'image' -%}
-                <div class="banner-image banner-main-content">
-                <div class="banner-grid-content{% if section.settings.effects_image %}{{ 'banner-image-hover' | prepend: ' ' }}{% endif %} "
-                >
-                  {%- if block.settings.image != blank -%}
-                    <a href="{{ block.settings.btn_link }}" class="banner-image-link">
-                  <img
-                    srcset="{%- if block.settings.image.width >= 165 -%}{{ block.settings.image | img_url: '165x' }} 165w,{%- endif -%}
-                      {%- if block.settings.image.width >= 360 -%}{{ block.settings.image | img_url: '360x' }} 360w,{%- endif -%}
-                      {%- if block.settings.image.width >= 535 -%}{{ block.settings.image | img_url: '535x' }} 535w,{%- endif -%}
-                      {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
-                      {%- if block.settings.image.width >= 1070 -%}{{ block.settings.image | img_url: '1070x' }} 1070w,{%- endif -%}
-                      {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}"
-                    src="{{ block.settings.image | img_url: 'master' }}"
-                    sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
-                    alt="{{ block.settings.image.alt  }}"
-                    loading="lazy"
-                    width="{{ block.settings.image.width }}"
-                    height="{{ block.settings.image.height }}"
-                  >
-                  </a>
-                  {%- else -%}
-                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                  {%- endif -%}
-                    <div class="banner-grid-{% if section.settings.style_banner == 'style-1' %}style-1{% elsif section.settings.style_banner == 'style-2' %}style-2{% endif %} d-flex flex-column {%- if block.settings.item_align == 'top' -%}{{ 'justify-content-start' | prepend: ' ' }}{%- elsif block.settings.item_align == 'center' -%}{{ 'justify-content-center' | prepend: ' ' }}{%- elsif block.settings.item_align == 'bottom' -%}{{ 'justify-content-end' | prepend: ' ' }}{%- endif -%}
-                    {%- if block.settings.text_align == 'left' -%}{{ 'text-start' | prepend: ' ' }}{%- elsif block.settings.text_align == 'center' -%}{{ 'text-center' | prepend: ' ' }}{%- elsif block.settings.text_align == 'right' -%}{{ 'text-end' | prepend: ' ' }}{%- endif -%}">
-                        <h5 style="color:{{ block.settings.color_header }} ;">{{ block.settings.header_image }}</h5>
-                        <h3 style="color:{{ block.settings.color_sub }} ;">{{ block.settings.subheader_image  }}</h3>
-                        <div class="text-sale" style="color:{{ block.settings.color_text_sale }}">{{ block.settings.text_sale }}</div>
-                        <p style="color:{{ block.settings.color_description }} ;">{{ block.settings.text_image  }}</p>
-                        {%- if block.settings.btn_text != blank -%}
-                        <a class="button-content" href="{{ block.settings.btn_link | default:'#' }}" title="{{ block.settings.btn_text }}">
-                          <span style="color: {{ block.settings.color_button }};background-color:{{ block.settings.bg_button }};border-color:{{ block.settings.border_button }};">{{ block.settings.btn_text }} <i class="leofar leofa-arrow-right"></i></span>
-                        </a>
-                        {%- endif -%}
-                    </div>
-                    </div>
-                </div>
-                <!-- 2row -->
-              {%- when 'image2row' -%}
-              <div class="banner-image banner-row">
-                 <!-- banner up -->
-                <div class="banner-up">
-                  <div class="banner-grid-content{% if section.settings.effects_image %}{{ 'banner-image-hover' | prepend: ' ' }}{% endif %} "
-                  >
-                    {%- if block.settings.image != blank -%}
-                      <a href="{{ block.settings.btn_link }}" class="banner-image-link">
-                    <img
-                      srcset="{%- if block.settings.image.width >= 165 -%}{{ block.settings.image | img_url: '165x' }} 165w,{%- endif -%}
-                        {%- if block.settings.image.width >= 360 -%}{{ block.settings.image | img_url: '360x' }} 360w,{%- endif -%}
-                        {%- if block.settings.image.width >= 535 -%}{{ block.settings.image | img_url: '535x' }} 535w,{%- endif -%}
-                        {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
-                        {%- if block.settings.image.width >= 1070 -%}{{ block.settings.image | img_url: '1070x' }} 1070w,{%- endif -%}
-                        {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}"
-                      src="{{ block.settings.image | img_url: 'master' }}"
-                      sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
-                      alt="{{ block.settings.image.alt  }}"
-                      loading="lazy"
-                      width="{{ block.settings.image.width }}"
-                      height="{{ block.settings.image.height }}"
-                    >
-                    </a>
-                    {%- else -%}
-                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
-                      <div class="banner-grid-{% if section.settings.style_banner == 'style-1' %}style-1{% elsif section.settings.style_banner == 'style-2' %}style-2{% endif %} d-flex flex-column {%- if block.settings.item_align == 'top' -%}{{ 'justify-content-start' | prepend: ' ' }}{%- elsif block.settings.item_align == 'center' -%}{{ 'justify-content-center' | prepend: ' ' }}{%- elsif block.settings.item_align == 'bottom' -%}{{ 'justify-content-end' | prepend: ' ' }}{%- endif -%}
-                      {%- if block.settings.text_align == 'left' -%}{{ 'text-start' | prepend: ' ' }}{%- elsif block.settings.text_align == 'center' -%}{{ 'text-center' | prepend: ' ' }}{%- elsif block.settings.text_align == 'right' -%}{{ 'text-end' | prepend: ' ' }}{%- endif -%}">
-                          <h5 style="color:{{ block.settings.color_header }} ;">{{ block.settings.header_image  }}</h5>
-                          <h3 style="color:{{ block.settings.color_sub }} ;">{{ block.settings.subheader_image  }}</h3>
-                          <div class="text-sale" style="color:{{ block.settings.color_text_sale }}">{{ block.settings.text_sale }}</div>
-                          <p style="color:{{ block.settings.color_description }} ;">{{ block.settings.text_image  }}</p>
-                          {%- if block.settings.btn_text != blank -%}
-                          <a class="button-content" href="{{ block.settings.btn_link | default:'#' }}" title="{{ block.settings.btn_text }}">
-                            <span style="color: {{ block.settings.color_button }};background-color:{{ block.settings.bg_button }};border-color:{{ block.settings.border_button }};">{{ block.settings.btn_text }} <i class="leofar leofa-arrow-right"></i></span>
-                          </a>
-                          {%- endif -%}
-                      </div>
-                  </div>
-                </div>
-                <!-- banner down -->
-                <div class="banner-down">
-                  <div class="banner-grid-content{% if section.settings.effects_image %}{{ 'banner-image-hover' | prepend: ' ' }}{% endif %}"
-                  >
-                    {%- if block.settings.image2 != blank -%}
-                      <a href="{{ block.settings.btn_link }}" class="banner-image-link">
-                    <img
-                      srcset="{%- if block.settings.image2.width >= 165 -%}{{ block.settings.image2 | img_url: '165x' }} 165w,{%- endif -%}
-                        {%- if block.settings.image2.width >= 360 -%}{{ block.settings.image2 | img_url: '360x' }} 360w,{%- endif -%}
-                        {%- if block.settings.image2.width >= 535 -%}{{ block.settings.image2 | img_url: '535x' }} 535w,{%- endif -%}
-                        {%- if block.settings.image2.width >= 750 -%}{{ block.settings.image2 | img_url: '750x' }} 750w,{%- endif -%}
-                        {%- if block.settings.image2.width >= 1070 -%}{{ block.settings.image2 | img_url: '1070x' }} 1070w,{%- endif -%}
-                        {%- if block.settings.image2.width >= 1500 -%}{{ block.settings.image2 | img_url: '1500x' }} 1500w,{%- endif -%}"
-                      src="{{ block.settings.image2 | img_url: 'master' }}"
-                      sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
-                      alt="{{ block.settings.image2.alt  }}"
-                      loading="lazy"
-                      width="{{ block.settings.image2.width }}"
-                      height="{{ block.settings.image2.height }}"
-                    >
-                    </a>
-                    {%- else -%}
-                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
-                      <div class="banner-grid-{% if section.settings.style_banner == 'style-1' %}style-1{% elsif section.settings.style_banner == 'style-2' %}style-2{% endif %} d-flex flex-column {%- if block.settings.item_align2 == 'top' -%}{{ 'justify-content-start' | prepend: ' ' }}{%- elsif block.settings.item_align2 == 'center' -%}{{ 'justify-content-center' | prepend: ' ' }}{%- elsif block.settings.item_align2 == 'bottom' -%}{{ 'justify-content-end' | prepend: ' ' }}{%- endif -%}
-                      {%- if block.settings.text_align2 == 'left' -%}{{ 'text-start' | prepend: ' ' }}{%- elsif block.settings.text_align2 == 'center' -%}{{ 'text-center' | prepend: ' ' }}{%- elsif block.settings.text_align2 == 'right' -%}{{ 'text-end' | prepend: ' ' }}{%- endif -%}">
-                          <h5 style="color:{{ block.settings.color_header2 }} ;">{{ block.settings.header_image2  }}</h5>
-                          <h3 style="color:{{ block.settings.color_sub2 }} ;">{{ block.settings.subheader_image2  }}</h3>
-                          <div class="text-sale" style="color:{{ block.settings.color_text_sale2 }}">{{ block.settings.text_sale2 }}</div>
-                          <p style="color:{{ block.settings.color_description2 }} ;">{{ block.settings.text_image2  }}</p>
-                          {%- if block.settings.btn_text2 != blank -%}
-                          <a class="button-content" href="{{ block.settings.btn_link2 | default:'#' }}" title="{{ block.settings.btn_text2 }}">
-                            <span style="color: {{ block.settings.color_button2 }};background-color:{{ block.settings.bg_button2 }};border-color:{{ block.settings.border_button2 }};">{{ block.settings.btn_text2 }} <i class="leofar leofa-arrow-right"></i></span>
-                          </a>
-                          {%- endif -%}
-                      </div>
-                  </div>
-                </div>
-              </div>
-              {%- endcase -%}
+        <!-- Bottom Row: Pressure Measurement -->
+        <div class="cwa-grid-row-bottom">
+          <a href="{{ pressure_link }}" class="cwa-card cwa-card-pressure">
+            <div class="cwa-card-header">
+              <h3 class="cwa-card-title">{{ pressure_title | upcase }}</h3>
+              <span class="cwa-card-arrow">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </span>
             </div>
-            {%- endfor -%}
-          </div>
+            <div class="cwa-card-image cwa-image-pressure">
+              {%- if pressure_image != blank -%}
+                <img src="{{ pressure_image | img_url: 'master' }}" alt="{{ pressure_title | escape }}" loading="lazy">
+              {%- else -%}
+                <img src="{{ 'Pressure_Measurement.png' | file_img_url: 'master' }}" alt="{{ pressure_title | escape }}" loading="lazy">
+              {%- endif -%}
+            </div>
+          </a>
         </div>
       </div>
-       
     </div>
+
+    <!-- Bottom CTA Button -->
+    <div class="banner-grid-footer">
+      <a href="{{ section.settings.btn_link | default: '/collections' }}" class="cwa-view-all-btn">
+        {{ section.settings.btn_text | default: 'View All Categories' }}
+      </a>
+    </div>
+  </div>
 </div>
 
 {% schema %}
@@ -211,714 +157,117 @@
     {
       "type": "checkbox",
       "id": "fullwidth",
-      "label": "t:sections.banner-grid.settings.fullwidth.label",
+      "label": "Full width",
       "default": false
-    },
-    {
-      "id": "background-color",
-      "type": "color",
-      "label": "t:sections.banner-grid.settings.background-color.label"
-    },
-    {
-      "type": "text",
-      "id": "margin_desktop",
-      "label": "t:sections.banner-grid.settings.margin_desktop.label",
-      "info": "t:sections.banner-grid.settings.margin_desktop.info"
-    },
-    {
-      "type": "text",
-      "id": "padding_desktop",
-      "label": "t:sections.banner-grid.settings.padding_desktop.label",
-      "info": "t:sections.banner-grid.settings.padding_desktop.info"
-    },
-    {
-      "type": "text",
-      "id": "margin_mobile",
-      "label": "t:sections.banner-grid.settings.margin_mobile.label",
-      "info": "t:sections.banner-grid.settings.margin_mobile.info"
-    },
-    {
-      "type": "text",
-      "id": "padding_mobile",
-      "label": "t:sections.banner-grid.settings.padding_mobile.label",
-      "info": "t:sections.banner-grid.settings.padding_mobile.info"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "t:sections.banner-grid.settings.heading.label",
-      "default": "Multimedia banner-grid"
+      "label": "Heading",
+      "default": "FIND THE RIGHT INSTRUMENTATION"
     },
     {
       "type": "text",
       "id": "text_decoration",
-      "label": "t:sections.banner-grid.settings.text_decoration.label",
-      "default": "Multimedia banner-grid"
+      "label": "Subtitle / Description",
+      "default": "Explore our range of precision instruments for every applications"
     },
     {
-      "id": "width_banner",
-      "type": "select",
-      "options": [
-        {
-          "value": "full box",
-          "label": "Full Box"
-        },
-        {
-          "value": "2 col",
-          "label": "2 column"
-        }
-      ],
-      "default": "full box",
-      "label": "Witdh banner"
+      "type": "text",
+      "id": "btn_text",
+      "label": "Bottom button text",
+      "default": "View All Categories"
     },
     {
-      "id": "style_banner",
-      "type": "select",
-      "options": [
-        {
-          "value": "style-1",
-          "label": "t:sections.banner-grid.settings.style_banner.options__1.label"
-        },
-        {
-          "value": "style-2",
-          "label": "t:sections.banner-grid.settings.style_banner.options__2.label"
-        }
-      ],
-      "default": "style-1",
-      "label": "t:sections.banner-grid.settings.style_banner.label"
+      "type": "url",
+      "id": "btn_link",
+      "label": "Bottom button link"
     },
     {
-      "type": "checkbox",
-      "id": "effects_image",
-      "label": "t:sections.banner-grid.settings.effects_image.label",
-      "default": false
-      },
-      {
-        "type": "checkbox",
-        "id": "nopadding",
-        "label": "No padding image",
-        "default": false
-        }
+      "type": "text",
+      "id": "margin_desktop",
+      "label": "Margin Desktop",
+      "default": "60px 0px 0px 0px"
+    },
+    {
+      "type": "text",
+      "id": "padding_desktop",
+      "label": "Padding Desktop"
+    },
+    {
+      "type": "text",
+      "id": "margin_mobile",
+      "label": "Margin Mobile",
+      "default": "30px 0px 0px 0px"
+    },
+    {
+      "type": "text",
+      "id": "padding_mobile",
+      "label": "Padding Mobile"
+    }
   ],
   "blocks": [
-  {
-    "type": "bannerleft",
-    "name": "Banner left",
-    "settings": [
-     {
-        "type": "image_picker",
-        "id": "image",
-        "label": "t:sections.banner-grid.blocks.image.settings.image.label"
-      },
-      {
-        "id": "header_image",
-        "type": "text",
-        "label": "t:sections.banner-grid.blocks.image.settings.header_image.label",
-        "default": "Title banner"
-      },
-      {
-        "id": "color_header",
-        "type": "color",
-        "label": "Color header",
-        "default": "#fff"
-      },
-      {
-          "type": "text",
-          "id": "subheader_image",
-          "label": "t:sections.banner-grid.blocks.image.settings.subheader_image.label",
-          "default": "sub-title banner"
-       },
-       {
-        "id": "color_sub",
-        "type": "color",
-        "label": "Color sub",
-        "default": "#fff"
-      },
-       {
-        "id": "text_image",
-        "type": "liquid",
-        "label": "t:sections.banner-grid.blocks.image.settings.text_image.label",
-        "default": "content banner"
-      },
-      {
-        "id": "color_description",
-        "type": "color",
-        "label": "Color description",
-        "default": "#fff"
-      },
-      {
-        "type": "text",
-        "id": "btn_text",
-        "label": "t:sections.banner-grid.blocks.image.settings.btn_text.label",
-        "default": "Show More"
-      },
-      {
-        "type": "url",
-        "id": "btn_link",
-        "label": "t:sections.banner-grid.blocks.image.settings.btn_link.label"
-      },
-      {
-        "id": "color_button",
-        "type": "color",
-        "label": "Color button",
-        "default": "#fff"
-      },
-      {
-        "id": "bg_button",
-        "type": "color",
-        "label": "Background button",
-        "default": "transparent"
-      },
-      {
-        "id": "border_button",
-        "type": "color",
-        "label": "Border button",
-        "default": "#fff"
-      },
-     {
-      "type": "select",
-      "id": "text_align",
-      "label": "t:sections.banner-grid.blocks.image.settings.text_align.label",
-      "default": "center",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__1.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__2.label"
-        },
-        {
-          "value": "right",
-          "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__3.label"
-        }
-      ]
-     },
-     {
-      "type": "select",
-      "id": "item_align",
-      "label": "t:sections.banner-grid.blocks.image.settings.item_align.label",
-      "default": "center",
-      "options": [
-        {
-          "value": "top",
-          "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__1.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__2.label"
-        },
-        {
-          "value": "bottom",
-          "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__3.label"
-        }
-      ]
-     }
-    ]
-  },
-
-
-
-
-
-
-
-
-
-
     {
       "type": "image",
-      "name": "t:sections.banner-grid.blocks.image.name",
+      "name": "Image Card",
       "settings": [
         {
-        "type": "select",
-        "id": "width",
-        "label": "t:sections.banner-grid.blocks.image.settings.width.label",
-        "default": "33%",
-        "options": [
-          {
-            "value": "25%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__1.label"
-          },
-          {
-            "value": "33%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__2.label"
-          },
-          {
-            "value": "41%",
-            "label": "41%"
-          },
-          {
-            "value": "50%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__3.label"
-          },
-          {
-            "value": "66%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__4.label"
-          },
-          {
-            "value": "75%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__5.label"
-          },
-          {
-            "value": "100%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__6.label"
-          }
-        ]
-       },  
-       {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.banner-grid.blocks.image.settings.image.label"
-        },
-        {
-          "id": "header_image",
-          "type": "text",
-          "label": "t:sections.banner-grid.blocks.image.settings.header_image.label",
-          "default": "Title banner"
-        },
-        {
-          "id": "color_header",
-          "type": "color",
-          "label": "Color header",
-          "default": "#fff"
-        },
-        {
-            "type": "text",
-            "id": "subheader_image",
-            "label": "t:sections.banner-grid.blocks.image.settings.subheader_image.label",
-            "default": "sub-title banner"
-         },
-         {
-          "id": "color_sub",
-          "type": "color",
-          "label": "Color sub",
-          "default": "#fff"
-        },
-         {
-          "type": "text",
-          "id": "text_sale",
-          "label": "Text sale"
-       },
-       {
-        "id": "color_text_sale",
-        "type": "color",
-        "label": "Color text sale",
-        "default": "#fff"
-      },
-   
-         {
-          "id": "text_image",
-          "type": "liquid",
-          "label": "t:sections.banner-grid.blocks.image.settings.text_image.label",
-          "default": "content banner"
-        },
-        {
-          "id": "color_description",
-          "type": "color",
-          "label": "Color description",
-          "default": "#fff"
+          "label": "Image"
         },
         {
           "type": "text",
-          "id": "btn_text",
-          "label": "t:sections.banner-grid.blocks.image.settings.btn_text.label",
-          "default": "Show More"
+          "id": "subheader_image",
+          "label": "Title"
         },
         {
           "type": "url",
           "id": "btn_link",
-          "label": "t:sections.banner-grid.blocks.image.settings.btn_link.label"
-        },
-        {
-          "id": "color_button",
-          "type": "color",
-          "label": "Color button",
-          "default": "#fff"
-        },
-        {
-          "id": "bg_button",
-          "type": "color",
-          "label": "Background button",
-          "default": "transparent"
-        },
-        {
-          "id": "border_button",
-          "type": "color",
-          "label": "Border button",
-          "default": "#fff"
-        },
-       {
-        "type": "select",
-        "id": "text_align",
-        "label": "t:sections.banner-grid.blocks.image.settings.text_align.label",
-        "default": "center",
-        "options": [
-          {
-            "value": "left",
-            "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__1.label"
-          },
-          {
-            "value": "center",
-            "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__2.label"
-          },
-          {
-            "value": "right",
-            "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__3.label"
-          }
-        ]
-       },
-       {
-        "type": "select",
-        "id": "item_align",
-        "label": "t:sections.banner-grid.blocks.image.settings.item_align.label",
-        "default": "center",
-        "options": [
-          {
-            "value": "top",
-            "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__1.label"
-          },
-          {
-            "value": "center",
-            "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__2.label"
-          },
-          {
-            "value": "bottom",
-            "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__3.label"
-          }
-        ]
-       }
+          "label": "Link"
+        }
       ]
     },
-
-
-
-
-
-
-
-
-
-
-
-
     {
       "type": "image2row",
-      "name": "Image 2 Row",
+      "name": "2 Image Row",
       "settings": [
         {
-        "type": "select",
-        "id": "width",
-        "label": "t:sections.banner-grid.blocks.image.settings.width.label",
-        "default": "33%",
-        "options": [
-          {
-            "value": "25%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__1.label"
-          },
-          {
-            "value": "33%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__2.label"
-          },
-          {
-            "value": "41%",
-            "label": "41%"
-          },
-          {
-            "value": "50%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__3.label"
-          },
-          {
-            "value": "66%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__4.label"
-          },
-          {
-            "value": "75%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__5.label"
-          },
-          {
-            "value": "100%",
-            "label": "t:sections.banner-grid.blocks.image.settings.width.options__6.label"
-          }
-        ]
-       },  
-       {
-         "type":"header",
-         "content":"Banner up"
-       },
-       {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.banner-grid.blocks.image.settings.image.label"
-        },
-        {
-          "id": "header_image",
-          "type": "text",
-          "label": "t:sections.banner-grid.blocks.image.settings.header_image.label",
-          "default": "Title banner"
-        },
-        {
-          "id": "color_header",
-          "type": "color",
-          "label": "Color header",
-          "default": "#fff"
-        },
-        {
-            "type": "text",
-            "id": "subheader_image",
-            "label": "t:sections.banner-grid.blocks.image.settings.subheader_image.label",
-            "default": "sub-title banner"
-         },
-         {
-          "id": "color_sub",
-          "type": "color",
-          "label": "Color sub",
-          "default": "#fff"
-        },
-         {
-          "type": "text",
-          "id": "text_sale",
-          "label": "Text sale"
-       },
-       {
-        "id": "color_text_sale",
-        "type": "color",
-        "label": "Color text sale",
-        "default": "#fff"
-      },
-        
-         {
-          "id": "text_image",
-          "type": "liquid",
-          "label": "t:sections.banner-grid.blocks.image.settings.text_image.label",
-          "default": "content banner"
-        },
-        {
-          "id": "color_description",
-          "type": "color",
-          "label": "Color description",
-          "default": "#fff"
+          "label": "Image 1"
         },
         {
           "type": "text",
-          "id": "btn_text",
-          "label": "t:sections.banner-grid.blocks.image.settings.btn_text.label",
-          "default": "Show More"
+          "id": "subheader_image",
+          "label": "Title 1"
         },
         {
           "type": "url",
           "id": "btn_link",
-          "label": "t:sections.banner-grid.blocks.image.settings.btn_link.label"
+          "label": "Link 1"
         },
         {
-          "id": "color_button",
-          "type": "color",
-          "label": "Color button",
-          "default": "#fff"
+          "type": "image_picker",
+          "id": "image2",
+          "label": "Image 2"
         },
         {
-          "id": "bg_button",
-          "type": "color",
-          "label": "Background button",
-          "default": "transparent"
-        },
-        {
-          "id": "border_button",
-          "type": "color",
-          "label": "Border button",
-          "default": "#fff"
-        },
-       {
-        "type": "select",
-        "id": "text_align",
-        "label": "t:sections.banner-grid.blocks.image.settings.text_align.label",
-        "default": "center",
-        "options": [
-          {
-            "value": "left",
-            "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__1.label"
-          },
-          {
-            "value": "center",
-            "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__2.label"
-          },
-          {
-            "value": "right",
-            "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__3.label"
-          }
-        ]
-       },
-       {
-        "type": "select",
-        "id": "item_align",
-        "label": "t:sections.banner-grid.blocks.image.settings.item_align.label",
-        "default": "center",
-        "options": [
-          {
-            "value": "top",
-            "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__1.label"
-          },
-          {
-            "value": "center",
-            "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__2.label"
-          },
-          {
-            "value": "bottom",
-            "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__3.label"
-          }
-        ]
-       },
-
-
-
-
-       {
-        "type":"header",
-        "content":"Banner down"
-      },
-      {
-         "type": "image_picker",
-         "id": "image2",
-         "label": "t:sections.banner-grid.blocks.image.settings.image.label"
-       },
-       {
-        "id": "header_image2",
-        "type": "text",
-        "label": "t:sections.banner-grid.blocks.image.settings.header_image.label",
-        "default": "Title banner"
-      },
-      {
-        "id": "color_header2",
-        "type": "color",
-        "label": "Color header",
-        "default": "#fff"
-      },
-      {
           "type": "text",
           "id": "subheader_image2",
-          "label": "t:sections.banner-grid.blocks.image.settings.subheader_image.label",
-          "default": "sub-title banner"
-       },
-       {
-        "id": "color_sub2",
-        "type": "color",
-        "label": "Color sub",
-        "default": "#fff"
-      },
-       {
-        "type": "text",
-        "id": "text_sale2",
-        "label": "Text sale"
-     },
-       {
-        "id": "color_text_sale2",
-        "type": "color",
-        "label": "Color text sale",
-        "default": "#fff"
-      },
-       {
-        "id": "text_image2",
-        "type": "liquid",
-        "label": "t:sections.banner-grid.blocks.image.settings.text_image.label",
-        "default": "content banner"
-      },
-      {
-        "id": "color_description2",
-        "type": "color",
-        "label": "Color description",
-        "default": "#fff"
-      },
-       {
-         "type": "text",
-         "id": "btn_text2",
-         "label": "t:sections.banner-grid.blocks.image.settings.btn_text.label",
-         "default": "Show More"
-       },
-       {
-         "type": "url",
-         "id": "btn_link2",
-         "label": "t:sections.banner-grid.blocks.image.settings.btn_link.label"
-       },
-       {
-        "id": "color_button2",
-        "type": "color",
-        "label": "Color button",
-        "default": "#fff"
-      },
-      {
-        "id": "bg_button2",
-        "type": "color",
-        "label": "Background button",
-        "default": "transparent"
-      },
-      {
-        "id": "border_button2",
-        "type": "color",
-        "label": "Border button",
-        "default": "#fff"
-      },
-      {
-       "type": "select",
-       "id": "text_align2",
-       "label": "t:sections.banner-grid.blocks.image.settings.text_align.label",
-       "default": "center",
-       "options": [
-         {
-           "value": "left",
-           "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__1.label"
-         },
-         {
-           "value": "center",
-           "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__2.label"
-         },
-         {
-           "value": "right",
-           "label": "t:sections.banner-grid.blocks.image.settings.text_align.options__3.label"
-         }
-       ]
-      },
-      {
-       "type": "select",
-       "id": "item_align2",
-       "label": "t:sections.banner-grid.blocks.image.settings.item_align.label",
-       "default": "center",
-       "options": [
-         {
-           "value": "top",
-           "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__1.label"
-         },
-         {
-           "value": "center",
-           "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__2.label"
-         },
-         {
-           "value": "bottom",
-           "label": "t:sections.banner-grid.blocks.image.settings.item_align.options__3.label"
-         }
-       ]
-      }
-
-
-
+          "label": "Title 2"
+        },
+        {
+          "type": "url",
+          "id": "btn_link2",
+          "label": "Link 2"
+        }
       ]
     }
   ],
-  "max_blocks": 20,
   "presets": [
     {
-      "name": "t:sections.banner-grid.presets.name",
-      "blocks": [
-        {
-          "type": "image"
-        },
-        {
-          "type": "image"
-        },
-        {
-          "type": "image"
-        }
-      ]
+      "name": "t:sections.banner-grid.name"
     }
   ]
 }

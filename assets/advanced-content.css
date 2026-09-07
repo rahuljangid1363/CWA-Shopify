@@ -154,16 +154,40 @@
     margin-bottom: 0px;
     line-height: 2;
 }
-.advanced-content .text-list .text-list-note ul li{
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 36px;
-    padding-bottom: 4px;
-    text-transform: uppercase;
+.advanced-content .text-list .text-list-note ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
 }
-.advanced-content .text-list .text-list-note ul li svg{
-    margin-right: 15px;
+.advanced-content .text-list .text-list-note ul li,
+.advanced-content .text-list .text-list-note .elementor-icon-list-item {
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 8px 0;
+    text-transform: none;
+}
+.advanced-content .text-list .text-list-note .elementor-icon-list-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+.advanced-content .text-list .text-list-note .elementor-icon-list-icon svg,
+.advanced-content .text-list .text-list-note ul li svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+.advanced-content .text-list .text-list-note ul li i,
+.advanced-content .text-list .text-list-note .elementor-icon-list-icon i {
+    color: #3075cc;
+    font-size: 18px;
+    width: 20px;
 }
 /* advanced newsleter */
 .advanced-newsletter-box{
@@ -318,18 +342,7 @@ line-height: 22px;
     line-height: 2;
     text-transform: uppercase;
 }
-.advanced-content .text-list .text-list-note ul li{
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 2.5;
-    text-transform: capitalize;
-}
-.advanced-content .text-list .text-list-note ul li i{
-   color: var(--g-main);
-    font-size: 16px;
-    width: 20px;
-}
+
 .advanced-content .text-list .text-left{
     flex: 1;
     padding-right: 30px;

@@ -1,37 +1,36 @@
+<!-- snippets/search-header.liquid -->
 <div class="icon-search">
-    <div class="search-media">
-        <button onclick="toggleClassSearch()" class="search-btn-media">
-            {%- render 'icon-search' -%}
+  <div class="search-media d-lg-none">
+    <button onclick="toggleClassSearch()" class="search-btn-media" type="button" aria-label="Open search">
+      {%- render 'icon-search' -%}
+    </button>
+  </div>
+
+  <div class="form-search" id="form-search-icon">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form search-form-cwa">
+      <div class="search-input-wrap">
+        <span class="search-icon-inline" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+        <input
+          class="search__input field__input search-field-cwa"
+          id="Search-In-Modal"
+          type="search"
+          name="q"
+          autocomplete="off"
+          value="{{ search.terms | escape }}"
+          placeholder="Search by CWA code, model or spec — e.g. SUP-P300"
+          aria-label="Search by CWA code, model or spec"
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="submit" class="search-submit-btn">
+          Find Product
         </button>
-    </div>
-
-    <div class="form-search" id="form-search-icon">
-        <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
-            {%- if settings.show_search_categories -%}
-            <div class="collection-select-search">
-                <select>
-                  <option value="">All</option>
-                  {% for collection in collections %}
-                  <option value="{{collection.handle}}">{{collection.title}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            {%- endif -%}
-            <div class="field">
-                <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" autocomplete="off" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}">
-                <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
-                <input type="hidden" name="options[prefix]" value="last">
-                <button class="search__button field__button focus-inset" aria-label="{{ 'general.search.search' | t }}">
-            
-                    <svg class="icon icon-search" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2ZM0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2929 13.2929C13.6834 12.9024 14.3166 12.9024 14.7071 13.2929L17.7071 16.2929C18.0976 16.6834 18.0976 17.3166 17.7071 17.7071C17.3166 18.0976 16.6834 18.0976 16.2929 17.7071L13.2929 14.7071C12.9024 14.3166 12.9024 13.6834 13.2929 13.2929Z" fill="black"/>
-                        
-                    </svg>
-                </button>
-            </div>
-        </form>
-        <div class="search-results"></div>
-    </div>
-
+      </div>
+    </form>
+    <div class="search-results"></div>
+  </div>
 </div>
