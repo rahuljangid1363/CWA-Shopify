@@ -624,22 +624,22 @@ function updateCurrencies(){
 }
 
 function loaddingSlickProductTab(){
-  $("ul#pills-tab button").click(function(){
-    var $tabContent = $('#pills-tabContent');
-    $tabContent.height($tabContent.height());
-  	$tabContent.addClass('active');
-    var current_tab_content = $(this).data('bs-target');
-    setTimeout(
-    function(){
-      $tabContent.removeClass('active');
-    	initSlick($(current_tab_content));
-      	$(current_tab_content).slick('slickGoTo', 0);
-      	$tabContent.height($(current_tab_content).outerHeight());
-      	setTimeout(function(){
-      	  $tabContent.css('height', '');
-      	}, 400);
-    }, 300);
-
+  $("ul#pills-tab button, ul#pills-tab a").on('click shown.bs.tab', function(){
+    var current_tab_content = $(this).data('bs-target') || $(this).attr('data-bs-target') || $(this).attr('href');
+    if (!current_tab_content) return;
+    var $tab = $(current_tab_content);
+    if ($tab.length) {
+      setTimeout(function(){
+        if (!$tab.hasClass('slick-initialized')) {
+          initSlick($tab);
+        } else {
+          $tab.slick('setPosition');
+        }
+        if ($tab.hasClass('slick-initialized')) {
+          $tab.slick('slickGoTo', 0, true);
+        }
+      }, 10);
+    }
   });
 }
 

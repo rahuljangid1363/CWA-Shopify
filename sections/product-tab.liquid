@@ -13,7 +13,7 @@
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
         {%- for block in section.blocks -%}
         <li class="nav-item" role="presentation">
-          <button class="nav-link {% if forloop.first %}active{% endif %}" id="pills-tab" data-bs-toggle="pill" data-bs-target="#pills-{{block.id}}" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+          <button class="nav-link {% if forloop.first %}active{% endif %}" id="pills-tab-{{block.id}}" data-bs-toggle="pill" data-bs-target="#pills-{{block.id}}" type="button" role="tab" aria-controls="pills-{{block.id}}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
             {{ block.settings.title }}
           </button>
         </li>
@@ -24,14 +24,14 @@
         
         {%- assign collection = collections[block.settings.collection]  -%}
         {%- assign limit = section.settings.limit -%}
-        <div class="tab-pane fade {% if forloop.first %}show active{% endif %} product-tab-slick {% if forloop.index ==  1 %}apslick{% endif %}" id="pills-{{block.id}}" role="tabpanel" aria-labelledby="pills-tab"
+        <div class="tab-pane {% if forloop.first %}show active{% endif %} product-tab-slick {% if forloop.index ==  1 %}apslick{% endif %}" id="pills-{{block.id}}" role="tabpanel" aria-labelledby="pills-tab-{{block.id}}"
             data-setting='{"accessibility": false, "arrows": {{ section.settings.arrows }},
             "dots": {{ section.settings.dots }}, "draggable": {{ section.settings.draggable }},
             "infinite": {{ section.settings.infinite }}, "autoplay": {{ section.settings.autoplay }},
             "autoplaySpeed": {{ section.settings.autoplaySpeed }}, "speed": {{ section.settings.speed }},
             "slidesToShow": {{ section.settings.slidesToShow }}, "slidesToScroll": {{ section.settings.slidesToScroll }},
             "vertical": false, "mobileFirst": false, "pauseOnHover": {{ section.settings.pauseOnHover }},
-            "rows": {{ section.settings.rows }}, "slidesPerRow": 1, "centerMode": false, "rtl": 1,
+            "rows": {{ section.settings.rows }}, "slidesPerRow": 1, "centerMode": false,
             "slidesToShow_992": {{ section.settings.slidesToShow_992 }}, "slidesToScroll_992": {{ section.settings.slidesToScroll_992 }},
             "arrows_992": {{ section.settings.arrows_992 }}, "dots_992": {{ section.settings.dots_992 }},
             "slidesToShow_767": {{ section.settings.slidesToShow_767 }}, "slidesToScroll_767": {{ section.settings.slidesToScroll_767 }},

@@ -101,8 +101,11 @@ product-grid-3 .servicer-product .btn-product{
     margin: 0;
 }
 /* add */
-.product-grid-3{
+.product-grid-3 {
     position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .product-grid-3:before {
     content: '';

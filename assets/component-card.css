@@ -208,7 +208,9 @@
 .card-wrapper {
   background-color: #fff;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border-radius: 5px;
   position: relative;
   text-decoration: none;
