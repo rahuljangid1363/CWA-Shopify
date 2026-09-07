@@ -85,21 +85,26 @@
       {%- endunless -%}
     {% endif %}
 
+    {%- assign req_path = request.path | downcase -%}
     <title>
-      {%- case template -%}
-		{%- when 'product' -%}
-      		{{ product.title | escape }}
-      	{%- when 'page' -%}
-			{{ page.title }}
-        {%- when 'collection' -%}
-			{{ collection.title }}
-        {%- when 'blog' -%}
-			{{ blog.title }}
-      	{%- when 'article' -%}
-			{{ article.title }}
-      	{%- else -%}
-			{{ shop.name }}
-	  {%- endcase -%}
+      {%- if req_path contains 'wishlist' or req_path contains 'wish-list' -%}
+        My Wishlist &ndash; {{ shop.name }}
+      {%- else -%}
+        {%- case template -%}
+          {%- when 'product' -%}
+            {{ product.title | escape }}
+          {%- when 'page' -%}
+            {{ page.title }}
+          {%- when 'collection' -%}
+            {{ collection.title }}
+          {%- when 'blog' -%}
+            {{ blog.title }}
+          {%- when 'article' -%}
+            {{ article.title }}
+          {%- else -%}
+            {{ shop.name }}
+        {%- endcase -%}
+      {%- endif -%}
     </title>
 
     {% if page_description %}
