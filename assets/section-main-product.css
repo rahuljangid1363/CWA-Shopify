@@ -1038,13 +1038,281 @@ button.add-group-cart {
   display: none;
 }
 
-.nav-tabs .nav-link{
-  color: #000;
-  font-size: 20px;
-  padding: 1rem 2rem;
-}
-
 .form-check-input{
   width: 2rem!important;
   height: 2rem;
+}
+
+/* ==========================================================================
+   Product Details Page - Theme-Aligned Buttons & Interactive Elements
+   ========================================================================== */
+
+/* 1. Add to Cart Button */
+.product-form__submit,
+button.product-form__submit,
+.product-form__buttons .product-form__submit,
+.product-form__buttons .button--primary,
+.product-form__buttons .button--secondary {
+  background-color: var(--g-main, #3075cc) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--g-main, #3075cc) !important;
+  border-radius: 4px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  min-height: 50px !important;
+  padding: 12px 28px !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 2px 6px rgba(48, 117, 204, 0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  margin-bottom: 12px !important;
+}
+
+.product-form__submit:hover,
+button.product-form__submit:hover,
+.product-form__buttons .product-form__submit:hover {
+  background-color: #205eb0 !important;
+  border-color: #205eb0 !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(48, 117, 204, 0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+.product-form__submit:active,
+button.product-form__submit:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 4px rgba(48, 117, 204, 0.2) !important;
+}
+
+.product-form__submit[disabled],
+button.product-form__submit[disabled],
+.product-form__submit:disabled {
+  background-color: #e2e8f0 !important;
+  border-color: #cbd5e1 !important;
+  color: #94a3b8 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* 2. Dynamic Checkout / Buy Now Button */
+.shopify-payment-button__button--unbranded,
+.shopify-payment-button__button {
+  border-radius: 4px !important;
+  min-height: 50px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  background-color: #121212 !important;
+  color: #ffffff !important;
+  border: 1px solid #121212 !important;
+  transition: all 0.25s ease !important;
+}
+
+.shopify-payment-button__button--unbranded:hover,
+.shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 3. Quantity Selector */
+.product-form__quantity .quantity,
+quantity-input.quantity {
+  border: 1px solid #dcdfe4 !important;
+  border-radius: 4px !important;
+  background: #ffffff !important;
+  min-height: 50px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+
+.quantity__button {
+  width: 44px !important;
+  height: 48px !important;
+  color: #555555 !important;
+  transition: all 0.2s ease !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.quantity__button:hover {
+  color: var(--g-main, #3075cc) !important;
+  background-color: #f0f6ff !important;
+}
+
+.quantity__input {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #1a1a1a !important;
+  text-align: center !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* 4. Wishlist & Compare Buttons */
+.wishlist-compare-detail {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 20px 0 !important;
+  flex-wrap: wrap !important;
+}
+
+.wishlist-compare-detail .btn-product {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 18px !important;
+  border: 1px solid #e0e6ed !important;
+  border-radius: 4px !important;
+  background: #ffffff !important;
+  color: #475569 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+.wishlist-compare-detail .btn-product:hover {
+  border-color: var(--g-main, #3075cc) !important;
+  color: var(--g-main, #3075cc) !important;
+  background-color: #f0f6ff !important;
+}
+
+.wishlist-compare-detail .btn-product svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: currentColor !important;
+  transition: transform 0.2s ease !important;
+}
+
+.wishlist-compare-detail .btn-product:hover svg {
+  transform: scale(1.1) !important;
+}
+
+.wishlist-compare-detail .btn-product.active,
+.wishlist-compare-detail .btn-product.active-wishlist {
+  color: #e53935 !important;
+  border-color: #ffcdd2 !important;
+  background-color: #ffebee !important;
+}
+
+/* 5. Variant Swatches / Radio Buttons */
+.product-form__input input[type='radio'] + label {
+  border: 1px solid #dcdfe4 !important;
+  border-radius: 4px !important;
+  padding: 8px 18px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #334155 !important;
+  background-color: #ffffff !important;
+  transition: all 0.2s ease !important;
+  margin: 4px 6px 4px 0 !important;
+  cursor: pointer !important;
+}
+
+.product-form__input input[type='radio'] + label:hover {
+  border-color: var(--g-main, #3075cc) !important;
+  color: var(--g-main, #3075cc) !important;
+}
+
+.product-form__input input[type='radio']:checked + label {
+  background-color: var(--g-main, #3075cc) !important;
+  color: #ffffff !important;
+  border-color: var(--g-main, #3075cc) !important;
+  box-shadow: 0 2px 8px rgba(48, 117, 204, 0.3) !important;
+}
+
+/* 6. Tabs (Description, Reviews, Specs) */
+.nav-tabs {
+  border-bottom: 2px solid #e2e8f0 !important;
+  gap: 4px !important;
+}
+
+.nav-tabs .nav-link {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+  border: none !important;
+  border-bottom: 3px solid transparent !important;
+  padding: 12px 22px !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--g-main, #3075cc) !important;
+  border-bottom-color: rgba(48, 117, 204, 0.3) !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--g-main, #3075cc) !important;
+  border-bottom: 3px solid var(--g-main, #3075cc) !important;
+  background: transparent !important;
+}
+
+/* 7. Group Product and Sticky Cart */
+button.add-group-cart {
+  background-color: var(--g-main, #3075cc) !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+  padding: 12px 28px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+button.add-group-cart:hover {
+  background-color: #205eb0 !important;
+}
+
+.cart-sticky button.product-form__submit {
+  background-color: var(--g-main, #3075cc) !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+}
+
+.cart-sticky button.product-form__submit:hover {
+  background-color: #205eb0 !important;
+}
+
+/* 8. Size Guide Button */
+.open-sizeguide {
+  color: #64748b !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: color 0.2s ease !important;
+}
+
+.open-sizeguide:hover {
+  color: var(--g-main, #3075cc) !important;
+}
+
+/* 9. Tags & Badges */
+.link-product-tag {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  border-radius: 4px !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.link-product-tag:hover {
+  background: var(--g-main, #3075cc) !important;
+  color: #ffffff !important;
 }

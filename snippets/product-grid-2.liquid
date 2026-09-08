@@ -1,160 +1,118 @@
 {% comment %}
-    Renders a product card
+    Renders a product card (Style 2 - Horizontal layout matching "Most Searched Products" reference design)
 
     Accepts:
     - product_card_product: {Object} Product Liquid object (optional)
-    - media_size: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
-    - show_secondary_image: {Boolean} Show the secondary image on hover. Default: false (optional)
-    - add_image_padding: {Boolean} Enables padding on the image to space out the grid
+    - media_size: {String} Size of the product image card.
+    - show_secondary_image: {Boolean} Show the secondary image on hover. Default: false
+    - add_image_padding: {Boolean} Enables padding on the image
     - show_vendor: {Boolean} Show the product vendor. Default: false
-    - show_image_outline: {Boolean} Show card outline. Default: true (optional)
     - show_rating: {Boolean} Show the product rating. Default: false
 
     Usage:
-    {% render 'product-card', show_vendor: section.settings.show_vendor %}
+    {% render 'product-grid-2', product_card_product: product %}
 {% endcomment %}
 
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'product-grid-2.css' | asset_url | stylesheet_tag }}
 
-<div class="card-wrapper product-grid-2">
-  
-    <span class="visually-hidden">{{ product_card_product.title | escape }}</span>
+<div class="card-wrapper product-grid-2" data-product-id="{{ product_card_product.id }}">
+  <span class="visually-hidden">{{ product_card_product.title | escape }}</span>
 
-    <div class="card card--product{% if product_card_product.featured_media == nil %} card--text-only card--soft{% endif %}{% if product_card_product.featured_media != nil and show_image_outline %} card--outline{% endif %}" tabindex="-1">
-      <a href="{{ product_card_product.url | default: '#' }}" class="full-unstyled-link">
-      <div class="card__inner">
-        {%- if product_card_product.featured_media -%}
-          {%- liquid
-            assign featured_media_aspect_ratio = product_card_product.featured_media.aspect_ratio
-
-            if product_card_product.featured_media.aspect_ratio == nil
-              assign featured_media_aspect_ratio = 1
-            endif
-          -%}
-
-          <div{% if add_image_padding %} class="card__media-full-spacer"{% endif %}>
-            <div class="media media--transparent media--{{ media_size }} media--hover-effect"
-              {% if media_size == 'adapt' and product_card_product.featured_media %} style="padding-bottom: {{ 1 | divided_by: featured_media_aspect_ratio | times: 100 }}%;"{% endif %}
-            >
-              <img
-                srcset="{%- if product_card_product.featured_media.width >= 165 -%}{{ product_card_product.featured_media | img_url: '165x' }} 165w,{%- endif -%}
-                  {%- if product_card_product.featured_media.width >= 360 -%}{{ product_card_product.featured_media | img_url: '360x' }} 360w,{%- endif -%}
-                  {%- if product_card_product.featured_media.width >= 533 -%}{{ product_card_product.featured_media | img_url: '533x' }} 533w,{%- endif -%}
-                  {%- if product_card_product.featured_media.width >= 720 -%}{{ product_card_product.featured_media | img_url: '720x' }} 720w,{%- endif -%}
-                  {%- if product_card_product.featured_media.width >= 940 -%}{{ product_card_product.featured_media | img_url: '940x' }} 940w,{%- endif -%}
-                  {%- if product_card_product.featured_media.width >= 1066 -%}{{ product_card_product.featured_media | img_url: '1066x' }} 1066w{%- endif -%}"
-                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-                alt="{{ product_card_product.featured_media.alt | escape }}"
-                loading="lazy"
-                class="motion-reduce"
-                width="{{ product_card_product.featured_media.width }}"
-                height="{{ product_card_product.featured_media.height }}"
-              >
-
-              {%- if product_card_product.media[1] != nil and show_secondary_image -%}
-                <img
-                  srcset="{%- if product_card_product.media[1].width >= 165 -%}{{ product_card_product.media[1] | img_url: '165x' }} 165w,{%- endif -%}
-                    {%- if product_card_product.media[1].width >= 360 -%}{{ product_card_product.media[1] | img_url: '360x' }} 360w,{%- endif -%}
-                    {%- if product_card_product.media[1].width >= 533 -%}{{ product_card_product.media[1] | img_url: '533x' }} 533w,{%- endif -%}
-                    {%- if product_card_product.media[1].width >= 720 -%}{{ product_card_product.media[1] | img_url: '720x' }} 720w,{%- endif -%}
-                    {%- if product_card_product.media[1].width >= 940 -%}{{ product_card_product.media[1] | img_url: '940x' }} 940w,{%- endif -%}
-                    {%- if product_card_product.media[1].width >= 1066 -%}{{ product_card_product.media[1] | img_url: '1066x' }} 1066w{%- endif -%}"
-                  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-                  alt="{{ product_card_product.media[1].alt | escape }}"
-                  loading="lazy"
-                  class="motion-reduce"
-                width="{{ product_card_product.media[1].width }}"
-                height="{{ product_card_product.media[1].height }}"
-                >
-              {%- endif -%}
-            </div>
-          </div>
-        {%- else -%}
-          <div class="card__content"><h2 class="card__text h3">{{ product_card_product.title }}</h2></div>
-        {%- endif -%}
-
-        <div class="card__badge">
-          {%- if product_card_product.available == false -%}
-            <span class="badge badge--bottom-left" aria-hidden="true">{{ 'products.product.sold_out' | t }}</span>
-          {%- endif -%}
-        </div>
-        <div class="card__labal">
-          {% render 'product-label-new', product: product_card_product %}
-          {% render 'product-label-sale', product: product_card_product %}
-        </div>
-      </div>
-      </a>
-      {%- if settings.enable_countdown_card -%}
-        {% render 'product-countdown', product_card_product: product_card_product %}
+  <!-- Left: Image Column -->
+  <div class="product-grid-2__image-col">
+    <a href="{{ product_card_product.url | default: '#' }}" class="product-grid-2__image-link" aria-label="{{ product_card_product.title | escape }}">
+      {%- if product_card_product.featured_media -%}
+        <img
+          srcset="{%- if product_card_product.featured_media.width >= 165 -%}{{ product_card_product.featured_media | img_url: '165x' }} 165w,{%- endif -%}
+            {%- if product_card_product.featured_media.width >= 360 -%}{{ product_card_product.featured_media | img_url: '360x' }} 360w,{%- endif -%}
+            {%- if product_card_product.featured_media.width >= 533 -%}{{ product_card_product.featured_media | img_url: '533x' }} 533w,{%- endif -%}
+            {{ product_card_product.featured_media | img_url: 'master' }} {{ product_card_product.featured_media.width }}w"
+          src="{{ product_card_product.featured_media | img_url: '360x' }}"
+          alt="{{ product_card_product.featured_media.alt | default: product_card_product.title | escape }}"
+          loading="lazy"
+          class="product-grid-2__image"
+          width="{{ product_card_product.featured_media.width }}"
+          height="{{ product_card_product.featured_media.height }}"
+        >
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-grid-2__image' }}
       {%- endif -%}
-      
-      <div class="servicer-product servicer-product-grid-2">
-        <div class="product-card__overlay">
-          {% render 'quickview-button', handle: product_card_product.handle %}
-          {% render 'wishlist-button', handle: product_card_product.handle %}
-          {% render 'compare-button', handle: product_card_product.handle %}
-          {% render 'addcart-button', product_card_product: product_card_product, product_form_id: product_form_id %}
-        </div>
-      </div>
-    </div>
-	
-    <div class="card-information">
-      <div class="card-information__wrapper">
+    </a>
+  </div>
+
+  <!-- Right: Content Column -->
+  <div class="product-grid-2__content-col">
+    <!-- Category Badge (Top) -->
+    <div class="product-grid-2__category-badge">
+      <span>
         {%- if product_card_product.type != blank -%}
-          <div class="card__category-badge">
-            <span>{{ product_card_product.type }}</span>
-          </div>
+          {{ product_card_product.type }}
+        {%- elsif product_card_product.collections.first.title != blank -%}
+          {{ product_card_product.collections.first.title }}
+        {%- else -%}
+          Industrial Equipment
         {%- endif -%}
+      </span>
+    </div>
 
-        {%- if show_vendor -%}
-          <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-          
-        {%- endif -%}
-		<a href="{{ product_card_product.url | default: '#' }}" class="full-unstyled-link">
-        {%- if product_card_product.featured_media -%}
-          <span class="card-information__text">
-            {{ product_card_product.title | escape }}
-          </span>
-        {%- endif -%}
-  		</a>
+    <!-- Product Title -->
+    <h3 class="product-grid-2__title">
+      <a href="{{ product_card_product.url | default: '#' }}">
+        {{ product_card_product.title | escape }}
+      </a>
+    </h3>
 
-        
-        {% render 'price', product: product_card_product, price_class: '' %}
+    <!-- Price -->
+    <div class="product-grid-2__price">
+      {%- if product_card_product.price_varies -%}
+        <span class="product-grid-2__price-regular">{{ product_card_product.price_min | money }}</span>
+      {%- else -%}
+        <span class="product-grid-2__price-regular">{{ product_card_product.price | money }}</span>
+      {%- endif -%}
+      {%- if product_card_product.compare_at_price > product_card_product.price -%}
+        <s class="product-grid-2__price-compare">{{ product_card_product.compare_at_price | money }}</s>
+      {%- endif -%}
+    </div>
 
-        <!-- spec row: reads from custom metafields (namespace "specs"), falls
-             back to representative placeholder values until those are set -->
-        <div class="card-specs-row">
-          <div class="card-spec">
-            <span class="card-spec__value">{{ product_card_product.metafields.specs.accuracy | default: '± 0.5%' }}</span>
-            <span class="card-spec__label">Accuracy</span>
-          </div>
-          <div class="card-spec">
-            <span class="card-spec__value">{{ product_card_product.metafields.specs.size_range | default: 'DN15 – DN2000' }}</span>
-            <span class="card-spec__label">Size Range</span>
-          </div>
-          <div class="card-spec">
-            <span class="card-spec__value">{{ product_card_product.metafields.specs.protection | default: 'IP67' }}</span>
-            <span class="card-spec__label">Protection</span>
-          </div>
-        </div>
-
-        <div class="card-footer-actions">
-          {%- if product_card_product.metafields.custom.data_sheet != blank -%}
-            <a class="card-datasheet-link" href="{{ product_card_product.metafields.custom.data_sheet | file_url }}" target="_blank" rel="noopener">
-              {%- render 'icon-download' -%}
-              <span>Download Data Sheet</span>
-            </a>
-          {%- else -%}
-            <a class="card-datasheet-link" href="#" aria-disabled="true">
-              {%- render 'icon-download' -%}
-              <span>Download Data Sheet</span>
-            </a>
-          {%- endif -%}
-          <a class="card-view-product-btn" href="{{ product_card_product.url | default: '#' }}">View Product</a>
-        </div>
+    <!-- Specifications Row (3 Columns) -->
+    <div class="product-grid-2__specs-row">
+      <div class="product-grid-2__spec">
+        <span class="product-grid-2__spec-val">{{ product_card_product.metafields.specs.accuracy | default: '± 0.5%' }}</span>
+        <span class="product-grid-2__spec-lbl">Accuracy</span>
+      </div>
+      <div class="product-grid-2__spec">
+        <span class="product-grid-2__spec-val">{{ product_card_product.metafields.specs.size_range | default: 'DN15 – DN2000' }}</span>
+        <span class="product-grid-2__spec-lbl">Size Range</span>
+      </div>
+      <div class="product-grid-2__spec">
+        <span class="product-grid-2__spec-val">{{ product_card_product.metafields.specs.protection | default: 'IP67' }}</span>
+        <span class="product-grid-2__spec-lbl">Protection</span>
       </div>
     </div>
+
+    <!-- Footer Actions (Download Data Sheet & View Product) -->
+    <div class="product-grid-2__actions">
+      {%- if product_card_product.metafields.custom.data_sheet != blank -%}
+        <a class="product-grid-2__datasheet" href="{{ product_card_product.metafields.custom.data_sheet | file_url }}" target="_blank" rel="noopener">
+          <svg class="product-grid-2__datasheet-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download Data Sheet</span>
+        </a>
+      {%- else -%}
+        <a class="product-grid-2__datasheet" href="{{ product_card_product.url | default: '#' }}">
+          <svg class="product-grid-2__datasheet-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download Data Sheet</span>
+        </a>
+      {%- endif -%}
+      <a class="product-grid-2__btn" href="{{ product_card_product.url | default: '#' }}">View Product</a>
+    </div>
+  </div>
 </div>

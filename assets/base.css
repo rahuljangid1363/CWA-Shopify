@@ -4268,6 +4268,7 @@ leofa-times:before {
 
 #product-gallery-image-zoom li {
   position: relative;
+  border: 1px solid #EEEEEE;
 }
 
 .js-compare-content img {
@@ -4527,374 +4528,374 @@ iframe#preview-bar-iframe {
 }
 
 .fa-angle-up:before {
-.vertical-bars svg {
-  width: 16px;
-  height: 12px;
-  display: inline-block;
-  vertical-align: middle;
-}
+  .vertical-bars svg {
+    width: 16px;
+    height: 12px;
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-.vertical-bars svg path {
-  fill: #00B5E2 !important;
-}
+  .vertical-bars svg path {
+    fill: #00B5E2 !important;
+  }
 
-.header-4 .icon-down svg,
-.scrolled-header__cat-arrow {
-  width: 8px;
-  height: 5px;
-  display: inline-block;
-  vertical-align: middle;
-}
+  .header-4 .icon-down svg,
+  .scrolled-header__cat-arrow {
+    width: 8px;
+    height: 5px;
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-.header-4 .icon-down svg path,
-.scrolled-header__cat-arrow path {
-  stroke: #23586C;
-  fill: none;
-}
+  .header-4 .icon-down svg path,
+  .scrolled-header__cat-arrow path {
+    stroke: #23586C;
+    fill: none;
+  }
 
-.menu-label.menu-label--new {
-  background-color: var(--color-label-new);
-}
+  .menu-label.menu-label--new {
+    background-color: var(--color-label-new);
+  }
 
-.menu-label.menu-label--hot {
-  background-color: var(--color-label-hot);
-}
+  .menu-label.menu-label--hot {
+    background-color: var(--color-label-hot);
+  }
 
-.menu-label.menu-label--feature {
-  background-color: var(--color-label-feature);
-}
+  .menu-label.menu-label--feature {
+    background-color: var(--color-label-feature);
+  }
 
-.menu-label.menu-label--sale {
-  background-color: var(--color-label-sale);
-}
+  .menu-label.menu-label--sale {
+    background-color: var(--color-label-sale);
+  }
 
-.menu-label.menu-label--other {
-  background-color: var(--color-label-other);
-}
+  .menu-label.menu-label--other {
+    background-color: var(--color-label-other);
+  }
 
-.modal-dialog--crosssell.modal-dialog {
-  position: unset;
-  top: unset;
-  left: unset;
-  transform: unset !important;
-}
+  .modal-dialog--crosssell.modal-dialog {
+    position: unset;
+    top: unset;
+    left: unset;
+    transform: unset !important;
+  }
 
-.button-no-border span {
-  border: none;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 18px;
-  padding: 17px 30px;
-  border-radius: 5px;
-}
+  .button-no-border span {
+    border: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 17px 30px;
+    border-radius: 5px;
+  }
 
-/* .index .js-countdown.js-countdown--countdown--1,
+  /* .index .js-countdown.js-countdown--countdown--1,
 .index .js-countdown.js-countdown--countdown--2,
 .index .js-countdown.js-countdown--countdown--3{
   display: none;
 } */
-.copyright__content {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-  color: #000;
-}
-
-.copyright__content span a,
-.designer span {
-  color: var(--g-main) !important;
-}
-
-.logo_media img {
-  max-width: 100%;
-  height: auto;
-}
-
-.left {
-  margin-left: 0;
-  margin-right: auto;
-}
-
-.center {
-  margin: auto;
-}
-
-.right {
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.no-padding {
-  padding: 0px;
-}
-
-.image-title {
-  text-align: center;
-}
-
-.title-content {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.4;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.description-content {
-  font-style: normal;
-  font-weight: 400;
-  margin-bottom: 0;
-  font-size: 14px;
-  line-height: 24px;
-  text-align: center;
-}
-
-.title-box {
-  max-width: 470px;
-  margin: auto;
-  text-align: center;
-}
-
-.rating-count span {
-  color: #999999;
-  font-size: 11px;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.normal {
-  font-weight: 400;
-}
-
-.list-verticalmenu li {
-  padding: 5px 0px;
-}
-
-.sub-title {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  margin-bottom: 15px;
-  line-height: 24px;
-  text-transform: uppercase;
-}
-
-.sub-title span {
-  width: 30px;
-  height: 1px;
-  display: inline-block;
-  margin: 0px 10px;
-}
-
-.heading {
-  margin-bottom: 20px;
-}
-
-.left {
-  margin-right: auto;
-  margin-left: 0;
-}
-
-.right {
-  margin-right: 0;
-  margin-left: auto;
-}
-
-.middle {
-  margin: auto;
-}
-
-.page-framework .html-title {
-  font-size: 3.4rem;
-  text-transform: capitalize;
-}
-
-.page-framework h5 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-}
-
-.page-framework .card-wrapper {
-  border: 0.5px solid #e5e5e5;
-}
-
-.page-width .wishlist-compare-detail .btn-product {
-  padding: 0px 5px;
-}
-
-.product-scroll-fixed-3-columns .wishlist-compare-detail .btn-product+.btn-product {
-  margin: 0px;
-}
-
-.product-scroll-fixed-3-columns .wishlist-compare-detail {
-  justify-content: space-between !important;
-}
-
-.group_products .js-btn-quickview {
-  padding: 5px 10px;
-}
-
-.group_products img {
-  margin-bottom: 20px;
-}
-
-@media (max-width: 991px) {
-  .modal-dialog--crosssell .cross-cart-items {
-    margin: 15px 0;
+  .copyright__content {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000;
   }
 
-  .site-nav-ver__dropdown {
-    box-shadow: none;
+  .copyright__content span a,
+  .designer span {
+    color: var(--g-main) !important;
   }
-}
 
-@media (max-width: 567px) {
+  .logo_media img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .left {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .center {
+    margin: auto;
+  }
+
+  .right {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .no-padding {
+    padding: 0px;
+  }
+
+  .image-title {
+    text-align: center;
+  }
+
+  .title-content {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .description-content {
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .title-box {
+    max-width: 470px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .rating-count span {
+    color: #999999;
+    font-size: 11px;
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  .normal {
+    font-weight: 400;
+  }
+
+  .list-verticalmenu li {
+    padding: 5px 0px;
+  }
+
+  .sub-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 15px;
+    line-height: 24px;
+    text-transform: uppercase;
+  }
+
+  .sub-title span {
+    width: 30px;
+    height: 1px;
+    display: inline-block;
+    margin: 0px 10px;
+  }
+
   .heading {
     margin-bottom: 20px;
-    flex-wrap: wrap;
   }
 
-  .section-header {
-    font-size: 25px;
-    padding-bottom: 0px;
+  .left {
+    margin-right: auto;
+    margin-left: 0;
   }
 
-  .section-text {
-    line-height: 1.5;
-    font-size: 13px;
+  .right {
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  .middle {
+    margin: auto;
+  }
+
+  .page-framework .html-title {
+    font-size: 3.4rem;
+    text-transform: capitalize;
+  }
+
+  .page-framework h5 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .page-framework .card-wrapper {
+    border: 0.5px solid #e5e5e5;
+  }
+
+  .page-width .wishlist-compare-detail .btn-product {
+    padding: 0px 5px;
+  }
+
+  .product-scroll-fixed-3-columns .wishlist-compare-detail .btn-product+.btn-product {
+    margin: 0px;
+  }
+
+  .product-scroll-fixed-3-columns .wishlist-compare-detail {
+    justify-content: space-between !important;
+  }
+
+  .group_products .js-btn-quickview {
+    padding: 5px 10px;
+  }
+
+  .group_products img {
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 991px) {
+    .modal-dialog--crosssell .cross-cart-items {
+      margin: 15px 0;
+    }
+
+    .site-nav-ver__dropdown {
+      box-shadow: none;
+    }
+  }
+
+  @media (max-width: 567px) {
+    .heading {
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-header {
+      font-size: 25px;
+      padding-bottom: 0px;
+    }
+
+    .section-text {
+      line-height: 1.5;
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+
+    .js-countdown.js-countdown--countdown--1>div {
+      padding: 6px 10px;
+    }
+
+    .link-base {
+      margin-top: 15px;
+      padding: 14px;
+      line-height: 1;
+      font-size: 12px;
+    }
+
+    .link-base i,
+    .button-content span i,
+    .count i,
+    .button-newsletter i,
+    .newsletter-form__button i {
+      font-size: 11px;
+    }
+  }
+
+  @font-face {
+    font-family: "El Messiri";
+    src:
+      url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/ElMessiri-Regular.woff?v=1647932638) format("woff"),
+      url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/ElMessiri-VariableFont_wght.woff2?v=1647932638) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Comforter Brush";
+    src:
+      url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/ComforterBrush-Regular.woff?v=1648265685) format("woff"),
+      url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/ComforterBrush-Regular.woff2?v=1648265685) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Jost";
+    src:
+      url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/Jost-Regular.woff?v=1649056168) format("woff"),
+      url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/Jost-Regular.woff2?v=1649056168) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Noto Serif";
+    src:
+      url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/NotoSerif.woff?v=1649152689) format("woff"),
+      url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/NotoSerif-Regular.woff2?v=1649152689) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src:
+      url(https://cdn.shopify.com/s/files/1/0582/4285/9061/files/Montserrat-Bold.woff?v=1653014218) format("woff"),
+      url(https://cdn.shopify.com/s/files/1/0582/4285/9061/files/Montserrat-Bold.woff2?v=1653014218) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .items-product,
+  .producttab-item {
+    width: 50%;
+    float: left;
+  }
+
+  #main-cart-footer {
+    margin-bottom: 50px;
+  }
+
+  .quick-view-body .price {
+    justify-content: flex-start !important;
+  }
+
+  .quick-view-body .price .price__regular .price-item--regular,
+  .quick-view-body .price__regular,
+  .product .price .price__regular .price-item--regular,
+  .product .price__regular {
+    font-size: 20px;
+    color: #000;
+  }
+
+  .container--wishlist {
+    margin-top: 40px;
+  }
+
+  .g-recaptcha {
     margin-bottom: 30px;
   }
 
-  .js-countdown.js-countdown--countdown--1>div {
-    padding: 6px 10px;
+  @media (max-width: 567px) {
+    .grid--2-col .grid__item {
+      width: calc(100% - 0.5rem / 2);
+    }
+
+    .grid__item {
+      max-width: 100%;
+    }
+
+    .modal-email .newsletter-form__field-wrapper .field {
+      width: 100%;
+    }
   }
 
-  .link-base {
-    margin-top: 15px;
-    padding: 14px;
+  .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
     line-height: 1;
-    font-size: 12px;
   }
 
-  .link-base i,
-  .button-content span i,
-  .count i,
-  .button-newsletter i,
-  .newsletter-form__button i {
-    font-size: 11px;
+  .fa-check-circle:before {
+    content: "\f058";
   }
-}
-
-@font-face {
-  font-family: "El Messiri";
-  src:
-    url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/ElMessiri-Regular.woff?v=1647932638) format("woff"),
-    url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/ElMessiri-VariableFont_wght.woff2?v=1647932638) format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Comforter Brush";
-  src:
-    url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/ComforterBrush-Regular.woff?v=1648265685) format("woff"),
-    url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/ComforterBrush-Regular.woff2?v=1648265685) format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Jost";
-  src:
-    url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/Jost-Regular.woff?v=1649056168) format("woff"),
-    url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/Jost-Regular.woff2?v=1649056168) format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Serif";
-  src:
-    url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/NotoSerif.woff?v=1649152689) format("woff"),
-    url(https://cdn.shopify.com/s/files/1/0611/9650/1168/files/NotoSerif-Regular.woff2?v=1649152689) format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  src:
-    url(https://cdn.shopify.com/s/files/1/0582/4285/9061/files/Montserrat-Bold.woff?v=1653014218) format("woff"),
-    url(https://cdn.shopify.com/s/files/1/0582/4285/9061/files/Montserrat-Bold.woff2?v=1653014218) format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-.items-product,
-.producttab-item {
-  width: 50%;
-  float: left;
-}
-
-#main-cart-footer {
-  margin-bottom: 50px;
-}
-
-.quick-view-body .price {
-  justify-content: flex-start !important;
-}
-
-.quick-view-body .price .price__regular .price-item--regular,
-.quick-view-body .price__regular,
-.product .price .price__regular .price-item--regular,
-.product .price__regular {
-  font-size: 20px;
-  color: #000;
-}
-
-.container--wishlist {
-  margin-top: 40px;
-}
-
-.g-recaptcha {
-  margin-bottom: 30px;
-}
-
-@media (max-width: 567px) {
-  .grid--2-col .grid__item {
-    width: calc(100% - 0.5rem / 2);
-  }
-
-  .grid__item {
-    max-width: 100%;
-  }
-
-  .modal-email .newsletter-form__field-wrapper .field {
-    width: 100%;
-  }
-}
-
-.fas {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  line-height: 1;
-}
-
-.fa-check-circle:before {
-  content: "\f058";
-}

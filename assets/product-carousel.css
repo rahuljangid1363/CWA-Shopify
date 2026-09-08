@@ -200,10 +200,6 @@
         margin-right: 0;
         align-self: flex-start;
     }
-    .product-carousel .slick-dots{
-        justify-content: flex-start;
-         margin-left: 25%;
-    }
   }
   @media (max-width:992px) {
     .product-carousel .js-countdown.js-countdown--countdown--1{
@@ -211,9 +207,55 @@
     }
   }
 
-  /* "Most Searched Products" title size on desktop/web view (mobile keeps its own size) */
+  /* "Most Searched Products" title styling */
+  .product-carousel .section-header{
+    font-size: 34px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    line-height: 1.15 !important;
+  }
+
   @media (min-width: 568px){
     .product-carousel .section-header{
-      font-size: 32px;
+      font-size: 38px !important;
     }
   }
+
+  /* Carousel Dots */
+  .product-carousel .slick-dots {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 28px auto 0 !important;
+  }
+
+  .product-carousel .slick-dots li {
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  .product-carousel .slick-dots li button {
+    font-size: 0 !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background-color: #ffffff !important;
+    opacity: 0.6 !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  .product-carousel .slick-dots li.slick-active button {
+    width: 24px !important;
+    height: 8px !important;
+    border-radius: 4px !important;
+    background-color: var(--g-main, #3075cc) !important;
+    opacity: 1 !important;
+  }
