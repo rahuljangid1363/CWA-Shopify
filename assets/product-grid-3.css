@@ -197,9 +197,9 @@
     height: 42px;
     min-width: 42px;
     min-height: 42px;
-    border: 1.5px solid #3075cc;
+    border: 1px solid #dcdfe4;
     border-radius: 6px;
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -207,25 +207,36 @@
     cursor: pointer;
     padding: 0;
     margin: 0;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    box-shadow: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist svg {
-    width: 16px;
-    height: 16px;
-    color: #3075cc;
-    fill: currentColor;
-    transition: color 0.2s ease;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #3075cc;
+    stroke-width: 2px;
+    transition: fill 0.25s ease, stroke 0.25s ease, transform 0.25s ease;
 }
 
+/* On Card Hover: Heart icon fills with theme color */
+.card-wrapper.product-grid-3:hover .card-wishlist-action .js-btn-wishlist svg {
+    fill: var(--g-main, #3075cc);
+    stroke: var(--g-main, #3075cc);
+}
+
+/* On Button Hover: Container stays clean white with highlighted border, icon scales */
 .product-grid-3 .card-wishlist-action .js-btn-wishlist:hover {
-    background-color: #edf5fd;
-    border-color: #225a9e;
-    color: #225a9e;
+    background-color: #ffffff !important;
+    border-color: #3075cc;
+    color: #3075cc;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist:hover svg {
-    color: #225a9e;
+    fill: #225a9e !important;
+    stroke: #225a9e !important;
+    transform: scale(1.15);
 }
 
 .fk-wishlist-list .fk-wishlist-item.wishlist-item {
@@ -234,19 +245,20 @@
 
 /* Active State (Item Added to Wishlist) */
 .product-grid-3 .card-wishlist-action .js-btn-wishlist.active {
-    background-color: #3075cc;
-    border-color: #3075cc;
-    color: #ffffff;
+    background-color: #ffffff !important;
+    border-color: #e53935 !important;
+    color: #e53935 !important;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist.active svg {
-    color: #ffffff;
-    fill: currentColor;
+    color: #e53935;
+    fill: #e53935 !important;
+    stroke: #e53935 !important;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist.active:hover {
-    background-color: #225a9e;
-    border-color: #225a9e;
+    background-color: #fff5f5 !important;
+    border-color: #e53935 !important;
 }
 
 .product-grid-3 .card-wishlist-action .span-wishlist,

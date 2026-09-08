@@ -31,12 +31,6 @@
           "type": "product_countdown",
           "settings": {}
         },
-        "ba9d02ac-858b-4a26-9a82-ee37a9958f5a": {
-          "type": "low_stock",
-          "settings": {
-            "low_stock_title": "Hurrify, only a few left:"
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -53,19 +47,6 @@
             "show_dynamic_checkout": true
           }
         },
-        "e8ecaeae-95c2-4218-a258-0132df2380b4": {
-          "type": "fake_viewer",
-          "settings": {
-            "fake_view_text_suffix": "Currently there are %c% peoples are currently looking at this product",
-            "fake_view_min": "10",
-            "fake_view_max": "25",
-            "fake_view_duration": "5"
-          }
-        },
-        "2bef7c12-0481-424f-b6d4-ecf5cf448d05": {
-          "type": "free_shipping",
-          "settings": {}
-        },
         "share": {
           "type": "share",
           "settings": {
@@ -81,7 +62,7 @@
           "settings": {
             "align_wishlist_compare": "left",
             "enable_wishlist": true,
-            "enable_compare": true,
+            "enable_compare": false,
             "enable_guide": true,
             "sizeguide_default": "shopify://shop_images/1756343e7ad3411bbdfe0babfaa5f9db.jpg",
             "sizeguide_collection_1": "",
@@ -94,12 +75,6 @@
             "sizeguide_collection_8": "",
             "sizeguide_collection_9": "",
             "sizeguide_collection_10": ""
-          }
-        },
-        "d004d14a-625e-4bd6-894a-b5f1d17285ca": {
-          "type": "tags",
-          "settings": {
-            "tags_label": "Tags:"
           }
         },
         "c49ccabb-9c39-4a9e-8ffd-37411ae2e7b7": {
@@ -130,15 +105,11 @@
         "title",
         "price",
         "32c3c92c-c33d-4967-9e95-559eeb881dcb",
-        "ba9d02ac-858b-4a26-9a82-ee37a9958f5a",
         "variant_picker",
         "d132b785-8916-4c74-8207-647c2039f305",
         "8aef8e72-5c2f-4745-9c87-6a84067ec861",
-        "e8ecaeae-95c2-4218-a258-0132df2380b4",
-        "2bef7c12-0481-424f-b6d4-ecf5cf448d05",
         "share",
         "9df41162-ee14-4b1a-961c-8a7155ea44ef",
-        "d004d14a-625e-4bd6-894a-b5f1d17285ca",
         "c49ccabb-9c39-4a9e-8ffd-37411ae2e7b7",
         "341b6e09-0464-4a4d-aef6-7d8e8fae2400"
       ],
