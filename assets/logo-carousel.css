@@ -1,57 +1,72 @@
-.logo-carousel{
+.logo-carousel {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.logo-carousel-content{
+.logo-carousel-content {
     width: 100%;
     margin: 0;
     padding: 5rem 0px;
 }
-.logo-image{
+
+.logo-image {
     margin: 0 1.5rem;
 }
-.logo-image.slick-slide.slick-active{
+
+.logo-image.slick-slide.slick-active {
     display: flex;
     justify-content: center;
 }
-.image-effect a img{
+
+.image-effect a img {
     opacity: 0.4;
     transition: all 0.5s ease-out 0s;
 }
 
-.image-effect a:hover img{
+.image-effect a:hover img {
     opacity: 1;
     transform: scale(1.1);
 }
-.logo-content{
+
+.logo-content {
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
 }
-.advanced__image{
+
+.advanced__image {
     margin: 0 auto;
 }
-.logo-description{
+
+.logo-description {
     font-size: 16px;
     line-height: 40px;
     padding-top: 20px;
 }
 
-.logo_media.media{
+.logo_media.media {
     background-color: transparent;
     text-align: center;
 }
-.logo-carousel .icon{
+
+.logo-carousel .icon {
     padding: 10px;
     overflow: hidden;
 }
 
-@media(min-width: 768px){
-    .logo-carousel-content{
-        padding-bottom: 8rem;
-        padding-top: 2rem;
+@media(min-width: 768px) {
+    .logo-carousel-content {
+        padding-bottom: 6rem;
+        padding-top: 0rem;
+    }
+
+    .blog-post .test {
+        padding: 0 40px;
+    }
+
+    #shopify-section-template--21718780707008__165301935421bf9b4c {
+        padding-bottom: 50px;
     }
 }

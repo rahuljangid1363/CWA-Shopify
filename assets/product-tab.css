@@ -1,5 +1,5 @@
 .product-tab {
-  padding: 50px 0px;
+  padding: 50px 0px 0px 0px;
   overflow: hidden;
 }
 
@@ -235,7 +235,7 @@
 }
 
 .product-tab {
-  margin-bottom: 3rem;
+  margin-bottom: 0 !important;
 }
 
 .product-tab .slick-list {
