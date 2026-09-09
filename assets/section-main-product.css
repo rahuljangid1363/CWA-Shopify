@@ -1,5 +1,6 @@
 .product {
   margin: 0;
+  align-items: flex-start !important;
 }
 
 .product--no-media {
@@ -9,11 +10,15 @@
 
 .product__media-wrapper {
   padding-left: 0;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  align-self: flex-start !important;
 }
 
 .product__info-wrapper {
   padding-left: 0;
   padding-bottom: 0;
+  align-self: flex-start !important;
 }
 
 .product__info-wrapper .btn-product:hover .name-btn-product {
@@ -1023,20 +1028,34 @@ button.add-group-cart {
 }
 
 .product-full-image {
-  position: relative;
-  max-width: 440px;
-  margin: 0 auto 16px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative !important;
+  max-width: 440px !important;
+  width: 100% !important;
+  margin: 0 auto 16px auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
 }
 
 .product-full-image .zoom-item,
 .product-full-image .zoom-item>div {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.product-full-image .zoomWrapper {
+  width: 100% !important;
+  max-width: 440px !important;
+  height: auto !important;
+  max-height: 400px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  position: relative !important;
+  margin: 0 auto !important;
 }
 
 .product-full-image img,
@@ -1053,8 +1072,33 @@ img.product-full-image-zoom,
 }
 
 .product-thumb-image {
-  max-width: 440px;
-  margin: 0 auto;
+  position: relative !important;
+  max-width: 440px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+}
+
+.product-thumb-image .product-thumb-image-slick {
+  position: relative !important;
+  margin: 0 !important;
+}
+
+.product-thumb-image .slick-arrow,
+.main-product-image-template2 .slick-arrow,
+#product-gallery-image-zoom .slick-arrow {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  font-size: 0 !important;
+}
+
+.product-media:empty {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .media-with-video .js-product-video {
@@ -1082,7 +1126,7 @@ cart-freeshipping,
 }
 
 .bottom-product-detail {
-  margin-top: 60px;
+  margin-top: 30px !important;
 }
 
 .product__info-wrapper.grid__item .btn-product .name-btn-product {

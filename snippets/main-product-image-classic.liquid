@@ -28,33 +28,33 @@
   
   <div class="product-thumb-image popup-gallery">
     {%- if thumb_position == 'left' or thumb_position == 'right' -%}
-    	<ul id="product-gallery-image-zoom" class="product-thumb-image-slick" data-setting='{"accessibility": false, "arrows": true,
+    	<ul id="product-gallery-image-zoom" class="product-thumb-image-slick" data-setting='{"accessibility": false, "arrows": false,
             "dots": false, "draggable": true,"centerMode": false,
             "infinite": false, "autoplay": false,
             "autoplaySpeed": 10000, "speed": 1000,
             "slidesToShow": 4, "slidesToScroll": 1,
             "vertical": true, "mobileFirst": false, "pauseOnHover": false,
             "rows": 1, "slidesPerRow": 1, "rtl": 1,
-            "slidesToShow_992": 3, "slidesToScroll_992": 1,
-            "arrows_992": true, "dots_992": false,
-            "slidesToShow_767": 3, "slidesToScroll_767": 1,
-            "arrows_767": true, "dots_767": false,
-            "slidesToShow_450": 2, "slidesToScroll_450": 1,
-            "arrows_450": true, "dots_450": false}'>
+            "slidesToShow_992": 4, "slidesToScroll_992": 1,
+            "arrows_992": false, "dots_992": false,
+            "slidesToShow_767": 4, "slidesToScroll_767": 1,
+            "arrows_767": false, "dots_767": false,
+            "slidesToShow_450": 3, "slidesToScroll_450": 1,
+            "arrows_450": false, "dots_450": false}'>
     {%- else -%}
-    	<ul id="product-gallery-image-zoom" class="product-thumb-image-slick" data-setting='{"accessibility": false, "arrows": true,
+    	<ul id="product-gallery-image-zoom" class="product-thumb-image-slick" data-setting='{"accessibility": false, "arrows": false,
             "dots": false, "draggable": true,"centerMode": false,
             "infinite": false, "autoplay": false,
             "autoplaySpeed": 10000, "speed": 1000,
             "slidesToShow": 4, "slidesToScroll": 1,
             "vertical": false, "mobileFirst": false, "pauseOnHover": false,
             "rows": 1, "slidesPerRow": 1, "rtl": 1,
-            "slidesToShow_992": 3, "slidesToScroll_992": 1,
-            "arrows_992": true, "dots_992": false,
-            "slidesToShow_767": 3, "slidesToScroll_767": 1,
-            "arrows_767": true, "dots_767": false,
-            "slidesToShow_450": 2, "slidesToScroll_450": 1,
-            "arrows_450": true, "dots_450": false}'>
+            "slidesToShow_992": 4, "slidesToScroll_992": 1,
+            "arrows_992": false, "dots_992": false,
+            "slidesToShow_767": 4, "slidesToScroll_767": 1,
+            "arrows_767": false, "dots_767": false,
+            "slidesToShow_450": 3, "slidesToScroll_450": 1,
+            "arrows_450": false, "dots_450": false}'>
     {%- endif -%}
     
       {%- for media in product.media -%}

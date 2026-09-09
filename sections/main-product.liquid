@@ -330,6 +330,14 @@
       {%- if section.settings.gallery_product_image == 'with_video' -%}
       	
       {%- else -%}
+        {%- assign has_extra_media = false -%}
+        {%- for media in product.media -%}
+          {%- if media.media_type == 'video' or media.media_type == 'external_video' or media.media_type == 'model' -%}
+            {%- assign has_extra_media = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if has_extra_media -%}
         <div class="product-media">
           {%- for media in product.media -%}
           {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
@@ -356,6 +364,7 @@
           {%- endunless -%}
           {%- endfor -%}
         </div>
+        {%- endif -%}
       {%- endif -%}
 
     </div>
