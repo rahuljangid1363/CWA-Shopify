@@ -291,25 +291,26 @@
 
 @media screen and (min-width: 990px) {
 
-  .card .media.media--hover-effect>img:only-child,
-  .card-wrapper .media.media--hover-effect>img:only-child,
+  .card .media.media--hover-effect>img,
+  .card-wrapper .media.media--hover-effect>img,
   .card--search img {
-    transition: transform var(--duration-long) ease;
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   }
 
   .card:hover .media.media--hover-effect>img:first-child:only-child,
   .card-wrapper:hover .media.media--hover-effect>img:first-child:only-child {
-    transform: scale(1.03);
+    transform: scale(1.04);
   }
 
   .card-wrapper:hover .media.media--hover-effect>img:first-child:not(:only-child) {
     opacity: 0;
+    transform: scale(1.04);
   }
 
   .card-wrapper:hover .media.media--hover-effect>img+img {
     opacity: 1;
-    transition: transform var(--duration-long) ease;
-    transform: scale(1.03);
+    transform: scale(1.04);
   }
 
   .card-wrapper:hover .card-information__text {

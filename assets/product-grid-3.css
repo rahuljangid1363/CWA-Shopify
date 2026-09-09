@@ -58,13 +58,22 @@
     text-transform: capitalize;
 }
 
-/* Image Hover Zoom */
+/* Image Smooth Crossfade & Hover Zoom */
 .product-grid-3 .media.media--hover-effect>img {
-    transition: opacity 0.4s ease, transform 0.4s ease !important;
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 }
 
 .product-grid-3:hover .media.media--hover-effect>img {
-    transform: scale(1.03);
+    transform: scale(1.04);
+}
+
+.product-grid-3:hover .media.media--hover-effect>img:first-child:not(:only-child) {
+    opacity: 0 !important;
+}
+
+.product-grid-3:hover .media.media--hover-effect>img+img {
+    opacity: 1 !important;
 }
 
 /* Card Information */
