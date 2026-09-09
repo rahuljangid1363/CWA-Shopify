@@ -19,6 +19,7 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "productgrid": "product-3",
         "products_per_page": 12,
         "products_per_row": 4,
         "products_per_row_tablet": 3,

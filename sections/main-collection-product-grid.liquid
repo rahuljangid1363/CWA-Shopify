@@ -3,6 +3,7 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+{{ 'product-grid-3.css' | asset_url | stylesheet_tag }}
 
 <link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
@@ -559,9 +560,7 @@
 
         <ul id="main-collection-product-grid" data-id="{{ section.id }}" class="
           grid grid--2-col negative-margin product-grid
-          {% if collection.products_count < section.settings.products_per_row %} grid--{{ collection.products_count }}-col-tablet
-          {% else %} grid--{{section.settings.products_per_row}}-col-desktop-collection grid--{{section.settings.products_per_row_tablet}}-col-tablet-collection grid--{{section.settings.products_per_row_mobile}}-col-mobile-collection grid--one-third-max grid--quarter-max
-          {% endif %}">
+          grid--{{section.settings.products_per_row}}-col-desktop-collection grid--{{section.settings.products_per_row_tablet}}-col-tablet-collection grid--{{section.settings.products_per_row_mobile}}-col-mobile-collection grid--one-third-max grid--quarter-max">
           {%- for product in collection.products -%}
             <li class="grid__item grid__item-{{section.settings.products_per_row}}">
               {% render 'product-card',
@@ -571,7 +570,8 @@
                 add_image_padding: section.settings.add_image_padding,
                 show_vendor: section.settings.show_vendor,
                 show_image_outline: section.settings.show_image_outline,
-                show_rating: section.settings.show_rating
+                show_rating: section.settings.show_rating,
+                productgrid: section.settings.productgrid
               %}
             </li>
           {%- endfor -%}
@@ -634,6 +634,34 @@
     {
       "type": "header",
       "content": "t:sections.main-collection-product-grid.settings.header__3.content"
+    },
+    {
+      "type": "select",
+      "id": "productgrid",
+      "options": [
+        {
+          "value": "product-1",
+          "label": "Product Grid 1"
+        },
+        {
+          "value": "product-2",
+          "label": "Product Grid 2"
+        },
+        {
+          "value": "product-3",
+          "label": "Product Grid 3"
+        },
+        {
+          "value": "product-4",
+          "label": "Product Grid 4"
+        },
+        {
+          "value": "product-5",
+          "label": "Product Grid 5"
+        }
+      ],
+      "default": "product-3",
+      "label": "Product Card Layout"
     },
     {
       "type": "select",
