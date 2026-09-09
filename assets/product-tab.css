@@ -117,6 +117,7 @@
   background-color: #3075cc;
   border-color: #3075cc;
   box-shadow: 0 6px 14px rgba(48, 117, 204, .25);
+  background: linear-gradient(110deg, #2766B6 0%, #2F73CA 45%, #3B85E4 100%) !important;
 }
 
 .product-tab .section-header {

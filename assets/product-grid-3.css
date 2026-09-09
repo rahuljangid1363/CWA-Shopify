@@ -187,78 +187,91 @@
     position: relative;
 }
 
-/* Wishlist Button Styling */
+/* Wishlist Button Styling (Bottom action row next to Add to Cart, Visible Initially) */
 .product-grid-3 .card-wishlist-action {
     flex-shrink: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-    min-height: 42px;
-    border: 1px solid #dcdfe4;
-    border-radius: 6px;
-    background-color: #ffffff !important;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    border: none !important;
+    border-radius: 0;
+    background-color: transparent !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #3075cc;
+    color: #0075FF;
     cursor: pointer;
     padding: 0;
     margin: 0;
-    box-shadow: none;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    box-shadow: none !important;
+    transition: transform 0.2s ease;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist svg {
-    width: 18px;
-    height: 18px;
-    fill: none;
-    stroke: #3075cc;
-    stroke-width: 2px;
-    transition: fill 0.25s ease, stroke 0.25s ease, transform 0.25s ease;
+    width: 22px;
+    height: 22px;
+    fill: none !important;
+    stroke: #0075FF !important;
+    stroke-width: 2.2px !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+    transition: transform 0.2s ease, stroke 0.2s ease;
 }
 
-/* On Card Hover: Heart icon fills with theme color */
-.card-wrapper.product-grid-3:hover .card-wishlist-action .js-btn-wishlist svg {
-    fill: var(--g-main, #3075cc);
-    stroke: var(--g-main, #3075cc);
+/* Non-active heart outline */
+.product-grid-3 .card-wishlist-action .js-btn-wishlist:not(.active) svg {
+    fill: none !important;
+    stroke: #0075FF !important;
 }
 
-/* On Button Hover: Container stays clean white with highlighted border, icon scales */
-.product-grid-3 .card-wishlist-action .js-btn-wishlist:hover {
-    background-color: #ffffff !important;
-    border-color: #3075cc;
-    color: #3075cc;
-}
-
-.product-grid-3 .card-wishlist-action .js-btn-wishlist:hover svg {
-    fill: #225a9e !important;
-    stroke: #225a9e !important;
+/* On Button Hover (non-active): Pure icon hover scale & color shift, no border box */
+.product-grid-3 .card-wishlist-action .js-btn-wishlist:not(.active):hover {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     transform: scale(1.15);
+}
+
+.product-grid-3 .card-wishlist-action .js-btn-wishlist:not(.active):hover svg {
+    fill: none !important;
+    stroke: #0056b3 !important;
 }
 
 .fk-wishlist-list .fk-wishlist-item.wishlist-item {
     display: flex !important;
 }
 
-/* Active State (Item Added to Wishlist) */
+/* Active State (Item Already Added to Wishlist) - Filled in theme blue color */
 .product-grid-3 .card-wishlist-action .js-btn-wishlist.active {
-    background-color: #ffffff !important;
-    border-color: #e53935 !important;
-    color: #e53935 !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #0075FF !important;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist.active svg {
-    color: #e53935;
-    fill: #e53935 !important;
-    stroke: #e53935 !important;
+    color: #0075FF !important;
+    fill: #0075FF !important;
+    stroke: #0075FF !important;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist.active:hover {
-    background-color: #fff5f5 !important;
-    border-color: #e53935 !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: scale(1.15);
+}
+
+.product-grid-3 .card-wishlist-action .js-btn-wishlist.active:hover svg {
+    fill: #0056b3 !important;
+    stroke: #0056b3 !important;
 }
 
 .product-grid-3 .card-wishlist-action .span-wishlist,
@@ -337,20 +350,21 @@
 }
 
 /* ==========================================================================
-   Desktop Hover Reveal Behavior (Reveals in Reserved Whitespace)
+   Desktop Hover Reveal Behavior: Add to Cart reveals on hover
+   Wishlist button remains visible initially at earlier position
    ========================================================================== */
 @media (hover: hover) and (min-width: 769px) {
-    .product-grid-3 .card-hover-actions {
+    .product-grid-3 .card-addtocart-action {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transform: translateY(6px);
+        transform: translateY(4px);
         transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
             transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
             visibility 0.25s;
     }
 
-    .card-wrapper.product-grid-3:hover .card-hover-actions {
+    .card-wrapper.product-grid-3:hover .card-addtocart-action {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
@@ -363,7 +377,7 @@
    ========================================================================== */
 @media (max-width: 768px),
 (hover: none) {
-    .product-grid-3 .card-hover-actions {
+    .product-grid-3 .card-addtocart-action {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;

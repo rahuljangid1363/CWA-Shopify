@@ -215,6 +215,7 @@
   text-decoration: none !important;
   transition: all 0.2s ease !important;
   box-shadow: 0 2px 6px rgba(48, 117, 204, 0.25) !important;
+  background: linear-gradient(110deg, #2766B6 0%, #2F73CA 45%, #3B85E4 100%) !important;
 }
 
 .product-grid-2__btn:hover {

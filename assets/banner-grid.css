@@ -239,6 +239,7 @@
     border-color: #3075cc;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(48, 117, 204, 0.25);
+    background: linear-gradient(110deg, #2766B6 0%, #2F73CA 45%, #3B85E4 100%) !important;
 }
 
 /* Responsive Styles */

@@ -89,20 +89,24 @@
 }
 .newsletter .footer-block__newsletter form{
   display: flex;
-  max-width: 560px;
+  max-width: 760px;
+  width: 100%;
 }
 
 .newsletter .button{
   font-size: 14px;
   font-weight: 600;
   box-shadow: none;
-  padding: 0 22px;
+  padding: 0 24px;
   height: 48px;
   min-height: 48px;
   min-width: unset;
   border-radius: 6px;
   background-color: {{ section.settings.bg_color_button }};
   color: {{ section.settings.color_button }};
+  background: linear-gradient(110deg, #2766B6 0%, #2F73CA 45%, #3B85E4 100%) !important;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .newsletter .button i{
   display: none;
@@ -121,7 +125,8 @@
 @media (min-width:567px) {
   .newsletter .newsletter-form__field-wrapper{
     flex: 1;
-    margin-right: 10px;
+    min-width: 360px;
+    margin-right: 12px;
   }
 }
 @media (max-width:567px) {

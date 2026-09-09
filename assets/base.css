@@ -1320,15 +1320,15 @@ deferred-media {
   padding: 0.9rem 3rem 1.1rem;
   text-decoration: none;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
   background-color: rgba(var(--color-button), var(--alpha-button-background));
-  box-shadow: 0 0 0 0.1rem rgba(var(--color-button), var(--alpha-button-border));
-  color: rgb(var(--color-button-text));
+  color: white;
   min-width: 12rem;
   min-height: 4.5rem;
   transition: box-shadow var(--duration-short) ease;
   -webkit-appearance: none;
   appearance: none;
+  background: linear-gradient(110deg, #2766B6 0%, #2F73CA 45%, #3B85E4 100%) !important;
 }
 
 .font-weight-bold {
@@ -1382,7 +1382,8 @@ deferred-media {
 .button:not([disabled]):hover,
 .shopify-challenge__button:hover,
 .customer button:hover {
-  box-shadow: 0 0 0 0.2rem rgba(var(--color-button), var(--alpha-button-border));
+  background: #0071FF !important;
+  color: white;
 }
 
 /* Button - other */
@@ -2804,7 +2805,7 @@ details-disclosure>details {
   margin-left: 0;
 }
 
-/ CSS COUNTDOWN / .js-countdown.js-countdown--countdown--3 span.label-dots {
+.js-countdown.js-countdown--countdown--3 span.label-dots {
   padding: 0 5px;
   align-self: center;
   font-size: 14px;
@@ -2894,7 +2895,10 @@ body:not(.index) .wp_countdown .deal-text-page {
   display: none;
 }
 
-/ END /
+.advanced-content #advanced-16530390864da72ca5-1 .link-base {
+  background: linear-gradient(110deg, #2766B6 0%, #2F73CA 45%, #3B85E4 100%) !important;
+}
+
 /* icon-footer */
 
 .list-social__item {
