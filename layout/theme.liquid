@@ -7,6 +7,10 @@
     <meta name="description" content="We supply a lot of Shopify Theme| Best Prestashop Framework | Shopify Theme Framework | Shopify Tutorial |Shopify Template Club">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
+    {%- if request.path == '/products' or request.path == '/products/' -%}
+      <script>window.location.replace('{{ routes.all_products_collection_url }}');</script>
+      <meta http-equiv="refresh" content="0;url={{ routes.all_products_collection_url }}">
+    {%- endif -%}
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

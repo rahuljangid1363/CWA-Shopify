@@ -43,8 +43,8 @@
           </a>
         </li>
       {%- endif -%}
-      <li class="site-nav__item site-nav__item--view-all">
-        <a href="/products" class="site-nav-ver__link">
+      <li class="site-nav__item site-nav__item--view-all{% if request.path == routes.all_products_collection_url or request.path == '/products' %} site-nav--active{% endif %}">
+        <a href="{{ routes.all_products_collection_url }}" class="site-nav-ver__link"{% if request.path == routes.all_products_collection_url or request.path == '/products' %} aria-current="page"{% endif %}>
           <span>View All Products</span>
         </a>
       </li>

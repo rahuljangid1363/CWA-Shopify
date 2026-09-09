@@ -1,3 +1,7 @@
+{%- if request.path == '/products' or request.path == '/products/' -%}
+  <script>window.location.replace('{{ routes.all_products_collection_url }}');</script>
+  <meta http-equiv="refresh" content="0;url={{ routes.all_products_collection_url }}">
+{%- endif -%}
 <style>
 .collections-hero{
   padding: 32px 0 8px;
