@@ -41,30 +41,204 @@
     <h2 class="visually-hidden">Product categories</h2>
 
     {%- liquid
-      assign category_order = 'Flow Measurement|Liquid Analysis|Level Measurement|Pressure Measurement|Temperature Measurement|Temprature Measurement|Data Acquisition & Control|Valve' | split: '|'
+      assign category_order = 'Flow Measurement|Liquid Analysis|Level Measurement|Pressure Measurement|Temperature Measurement|Data Acquisition & Control|Valve|Other Products' | split: '|'
       assign ordered_collections = ''
+      assign rendered_handles = ''
+
+      assign flow_subcategories = 'Electromagnetic Flowmeter|Vortex Flowmeter|Turbine Flowmeter|Ultrasonic Flowmeter|Coriolis Mass Flowmeters|Thermal Mass Flowmeter' | split: '|'
+      assign liquid_subcategories = 'pH Sensor And Transmitter|Conductivity Sensor And Transmitter|Dissolved Oxygen Sensor And Transmitter|Turbidity Sensor And Transmitter|TSS/SS Sensor And Transmitter|Multi-Parameter Analyzer|Laboratory Water Quality Analyzer|Chlorine Sensor And Transmitter' | split: '|'
+      assign level_subcategories = 'Ultrasonic Level Transmitter|Radar Level Transmitter|Hydrostatic Level Transmitter' | split: '|'
+      assign pressure_subcategories = 'Pressure Transmitter|Differential Pressure Transmitter' | split: '|'
+      assign temp_subcategories = 'Temperature Sensor|Temperature Transmitter' | split: '|'
+      assign data_subcategories = 'Recorder|Process Indicator|Signal Isolator|Signal Generator' | split: '|'
+      assign valve_subcategories = 'Metal Valves|Plastic Valves' | split: '|'
+      assign other_subcategories = 'Density Meter' | split: '|'
     -%}
 
-    <ul>
+    <ul class="collection-categories__list">
       {%- for wanted_title in category_order -%}
+        {%- assign found_collection = nil -%}
         {%- for collection_item in collections -%}
           {%- if collection_item.title == wanted_title -%}
-            <li>
-              <a href="{{ collection_item.url }}">{{ collection_item.title }}</a>
-            </li>
-            {%- assign ordered_collections = ordered_collections | append: collection_item.handle | append: ',' -%}
+            {%- assign found_collection = collection_item -%}
+            {%- break -%}
+          {%- elsif wanted_title contains 'Temperature' and collection_item.title contains 'Temprature' -%}
+            {%- assign found_collection = collection_item -%}
+            {%- break -%}
+          {%- elsif wanted_title contains 'Temprature' and collection_item.title contains 'Temperature' -%}
+            {%- assign found_collection = collection_item -%}
+            {%- break -%}
           {%- endif -%}
         {%- endfor -%}
+
+        {%- assign item_title = wanted_title -%}
+        {%- if found_collection != nil -%}
+          {%- assign item_url = found_collection.url -%}
+          {%- assign item_handle = found_collection.handle -%}
+          {%- assign item_title = found_collection.title -%}
+          {%- assign ordered_collections = ordered_collections | append: found_collection.handle | append: ',' -%}
+        {%- else -%}
+          {%- assign item_handle = wanted_title | handleize -%}
+          {%- assign item_url = '/collections/' | append: item_handle -%}
+          {%- assign ordered_collections = ordered_collections | append: item_handle | append: ',' -%}
+        {%- endif -%}
+
+        {%- if rendered_handles contains item_handle -%}
+          {%- continue -%}
+        {%- endif -%}
+        {%- assign rendered_handles = rendered_handles | append: item_handle | append: ',' -%}
+
+        {%- assign current_subcategories = nil -%}
+        {%- assign item_title_lower = item_title | downcase -%}
+        {%- assign item_handle_lower = item_handle | downcase -%}
+
+        {%- if item_title_lower contains 'flow' or item_handle_lower contains 'flow' -%}
+          {%- assign current_subcategories = flow_subcategories -%}
+        {%- elsif item_title_lower contains 'liquid' or item_handle_lower contains 'liquid' -%}
+          {%- assign current_subcategories = liquid_subcategories -%}
+        {%- elsif item_title_lower contains 'level' or item_handle_lower contains 'level' -%}
+          {%- assign current_subcategories = level_subcategories -%}
+        {%- elsif item_title_lower contains 'pressure' or item_handle_lower contains 'pressure' -%}
+          {%- assign current_subcategories = pressure_subcategories -%}
+        {%- elsif item_title_lower contains 'temp' or item_handle_lower contains 'temp' -%}
+          {%- assign current_subcategories = temp_subcategories -%}
+        {%- elsif item_title_lower contains 'data' or item_title_lower contains 'acquisition' or item_handle_lower contains 'data' or item_handle_lower contains 'acquisition' -%}
+          {%- assign current_subcategories = data_subcategories -%}
+        {%- elsif item_title_lower contains 'valve' or item_handle_lower contains 'valve' -%}
+          {%- assign current_subcategories = valve_subcategories -%}
+        {%- elsif item_title_lower contains 'other' or item_title_lower contains 'density' or item_handle_lower contains 'other' -%}
+          {%- assign current_subcategories = other_subcategories -%}
+        {%- endif -%}
+
+        {%- assign has_sub = false -%}
+        {%- if current_subcategories != blank and current_subcategories.size > 0 -%}
+          {%- assign has_sub = true -%}
+        {%- endif -%}
+
+        {%- assign is_current_page = false -%}
+        {%- if item_handle == collection.handle or item_title == collection.title -%}
+          {%- assign is_current_page = true -%}
+        {%- endif -%}
+
+        <li class="collection-categories__item{% if has_sub %} has-submenu{% if is_current_page %} is-open{% endif %}{% endif %}{% if is_current_page %} is-active{% endif %}">
+          {%- if has_sub -%}
+            <div class="collection-categories__parent-row">
+              <a href="{{ item_url }}" class="collection-categories__parent-link{% if is_current_page %} is-current{% endif %}">
+                <span>{{ item_title }}</span>
+              </a>
+              <button type="button" class="collection-categories__toggle-btn" aria-label="Toggle {{ item_title }} dropdown" aria-expanded="{% if is_current_page %}true{% else %}false{% endif %}">
+                <svg class="icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+            <ul class="collection-categories__submenu" {% unless is_current_page %}style="display: none;"{% endunless %}>
+              {%- for sub_title in current_subcategories -%}
+                {%- assign sub_url = item_url | append: '?filter.p.product_type=' | append: sub_title | replace: ' ', '+' -%}
+                <li class="collection-categories__subitem">
+                  <a href="{{ sub_url }}" class="collection-categories__sublink">
+                    <span>{{ sub_title }}</span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- else -%}
+            <a href="{{ item_url }}" class="collection-categories__link{% if is_current_page %} is-current{% endif %}">
+              <span>{{ item_title }}</span>
+            </a>
+          {%- endif -%}
+        </li>
       {%- endfor -%}
+
       {%- for collection_item in collections -%}
-        {%- unless collection_item.handle == 'all' or ordered_collections contains collection_item.handle -%}
-          <li>
-            <a href="{{ collection_item.url }}">{{ collection_item.title }}</a>
+        {%- unless collection_item.handle == 'all' or ordered_collections contains collection_item.handle or rendered_handles contains collection_item.handle -%}
+          {%- assign current_subcategories = nil -%}
+          {%- assign item_title_lower = collection_item.title | downcase -%}
+          {%- assign item_handle_lower = collection_item.handle | downcase -%}
+
+          {%- if item_title_lower contains 'flow' or item_handle_lower contains 'flow' -%}
+            {%- assign current_subcategories = flow_subcategories -%}
+          {%- elsif item_title_lower contains 'liquid' or item_handle_lower contains 'liquid' -%}
+            {%- assign current_subcategories = liquid_subcategories -%}
+          {%- elsif item_title_lower contains 'level' or item_handle_lower contains 'level' -%}
+            {%- assign current_subcategories = level_subcategories -%}
+          {%- elsif item_title_lower contains 'pressure' or item_handle_lower contains 'pressure' -%}
+            {%- assign current_subcategories = pressure_subcategories -%}
+          {%- elsif item_title_lower contains 'temp' or item_handle_lower contains 'temp' -%}
+            {%- assign current_subcategories = temp_subcategories -%}
+          {%- elsif item_title_lower contains 'data' or item_title_lower contains 'acquisition' or item_handle_lower contains 'data' or item_handle_lower contains 'acquisition' -%}
+            {%- assign current_subcategories = data_subcategories -%}
+          {%- elsif item_title_lower contains 'valve' or item_handle_lower contains 'valve' -%}
+            {%- assign current_subcategories = valve_subcategories -%}
+          {%- elsif item_title_lower contains 'other' or item_title_lower contains 'density' or item_handle_lower contains 'other' -%}
+            {%- assign current_subcategories = other_subcategories -%}
+          {%- endif -%}
+
+          {%- assign has_sub = false -%}
+          {%- if current_subcategories != blank and current_subcategories.size > 0 -%}
+            {%- assign has_sub = true -%}
+          {%- endif -%}
+
+          {%- assign is_current_page = false -%}
+          {%- if collection_item.handle == collection.handle or collection_item.title == collection.title -%}
+            {%- assign is_current_page = true -%}
+          {%- endif -%}
+
+          <li class="collection-categories__item{% if has_sub %} has-submenu{% if is_current_page %} is-open{% endif %}{% endif %}{% if is_current_page %} is-active{% endif %}">
+            {%- if has_sub -%}
+              <div class="collection-categories__parent-row">
+                <a href="{{ collection_item.url }}" class="collection-categories__parent-link{% if is_current_page %} is-current{% endif %}">
+                  <span>{{ collection_item.title }}</span>
+                </a>
+                <button type="button" class="collection-categories__toggle-btn" aria-label="Toggle {{ collection_item.title }} dropdown" aria-expanded="{% if is_current_page %}true{% else %}false{% endif %}">
+                  <svg class="icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <ul class="collection-categories__submenu" {% unless is_current_page %}style="display: none;"{% endunless %}>
+                {%- for sub_title in current_subcategories -%}
+                  {%- assign sub_url = collection_item.url | append: '?filter.p.product_type=' | append: sub_title | replace: ' ', '+' -%}
+                  <li class="collection-categories__subitem">
+                    <a href="{{ sub_url }}" class="collection-categories__sublink">
+                      <span>{{ sub_title }}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- else -%}
+              <a href="{{ collection_item.url }}" class="collection-categories__link{% if is_current_page %} is-current{% endif %}">
+                <span>{{ collection_item.title }}</span>
+              </a>
+            {%- endif -%}
           </li>
         {%- endunless -%}
       {%- endfor -%}
     </ul>
   </div>
+
+  <script>
+    document.addEventListener('click', function(e) {
+      var toggleBtn = e.target.closest('.collection-categories__toggle-btn');
+      if (toggleBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var item = toggleBtn.closest('.has-submenu');
+        if (!item) return;
+        var submenu = item.querySelector('.collection-categories__submenu');
+        var isOpen = item.classList.contains('is-open');
+        if (isOpen) {
+          item.classList.remove('is-open');
+          if (submenu) submenu.style.display = 'none';
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('is-open');
+          if (submenu) submenu.style.display = 'block';
+          toggleBtn.setAttribute('aria-expanded', 'true');
+        }
+      }
+    });
+  </script>
   <!-- END PRODUCT CATEGORIES -->
 {%- endif -%}
 
