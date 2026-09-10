@@ -2,77 +2,91 @@
 
 {% else %}
 <mini-cart>
-
   <div id="minicart" class="product-minincart">
-  	<div class="list-mimicart">
-      {%- for item in cart.items -%}
-        <div class="minicart-item" data-line="{{ forloop.index }}">
-          {% if item.image %}
-            <a class="image-product" href="{{ item.product.url }}">
-              <img class="mimicart-item__image"
-               src="{{ item.image | img_url: '100x' }}"
-               alt="{{ item.image.alt | escape }}"
-               >
-            </a>
-          {% endif %}
-          <div class="minicart-price">
-          <a href="{{ item.product.url }}" class="mimicart-item__name">{{ item.product.title | escape }}</a>
-          <span class="price price--end">
-            {{ item.original_price | money }}
-          </span>
-          <mini-cart-remove-button>
-            <span data-href="{{ item.url_to_remove }}" class="mimicart-item__remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
-              {% render 'icon-remove' %}
-            </span>
-          </mini-cart-remove-button>
-
-          <quantity-input class="quantity">
-            <button class="quantity__button no-js-hidden" name="minus" type="button">
-              <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
-              {% render 'icon-minus' %}
-            </button>
-            <input class="quantity__input"
-                   type="number"
-                   name="updates[]"
-                   value="{{ item.quantity }}"
-                   min="0"
-                   aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
-                   id="Quantity-{{ item.index | plus: 1 }}"
-                   data-index="{{ item.index | plus: 1 }}"
-                   >
-            <button class="quantity__button no-js-hidden" name="plus" type="button">
-              <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
-              {% render 'icon-plus' %}
-            </button>
-          </quantity-input>
-
-          <!-- <span class="price price--end">
-            {{ item.original_line_price | money }}
-          </span> -->
-        </div>
-          
-        </div>
-      {%- endfor -%}
-  	</div>
-    
-    {% render 'free-shipping' %}
-      
-    <div class="totals">
-      <label>{{ 'sections.cart.subtotal' | t }}</label>: <span class="total_price">{{ cart.total_price | money }}</span>
+    <!-- Header: Title, Count Badge, Close Button -->
+    <div class="minicart-header">
+      <div class="minicart-header__left">
+        <h3 class="minicart-header__title">Cart</h3>
+        <span class="minicart-header__badge" id="minicart-count-badge">
+          {{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %}
+        </span>
+      </div>
+      <button type="button" class="minicart-header__close" aria-label="Close cart">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2L14 14M2 14L14 2" stroke="#64748b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
-    
+
+    <!-- Items List -->
+    <div class="list-mimicart">
+      {%- if cart.items.size == 0 -%}
+        <div class="minicart-empty">
+          <p>Your cart is empty.</p>
+        </div>
+      {%- else -%}
+        {%- for item in cart.items -%}
+          <div class="minicart-item" data-line="{{ forloop.index }}">
+            {% if item.image %}
+              <a class="image-product" href="{{ item.product.url }}">
+                <img class="mimicart-item__image"
+                     src="{{ item.image | img_url: '140x' }}"
+                     alt="{{ item.image.alt | escape }}"
+                     loading="lazy"
+                >
+              </a>
+            {% endif %}
+            <div class="minicart-item__info">
+              <a href="{{ item.product.url }}" class="mimicart-item__name">{{ item.product.title | escape }}</a>
+              {% if item.sku != blank %}
+                <div class="minicart-item__sku">SKU : {{ item.sku }}</div>
+              {% elsif item.variant.sku != blank %}
+                <div class="minicart-item__sku">SKU : {{ item.variant.sku }}</div>
+              {% elsif item.variant.title != 'Default Title' and item.variant.title != blank %}
+                <div class="minicart-item__sku">{{ item.variant.title }}</div>
+              {% endif %}
+
+              <div class="minicart-item__bottom">
+                <span class="minicart-item__price">
+                  {{ item.original_price | money }}
+                </span>
+
+                <quantity-input class="quantity">
+                  <button class="quantity__button no-js-hidden" name="minus" type="button" aria-label="Decrease">
+                    &minus;
+                  </button>
+                  <input class="quantity__input"
+                         type="number"
+                         name="updates[]"
+                         value="{{ item.quantity }}"
+                         min="0"
+                         aria-label="Quantity"
+                         id="Quantity-{{ forloop.index }}"
+                         data-index="{{ forloop.index }}"
+                  >
+                  <button class="quantity__button no-js-hidden" name="plus" type="button" aria-label="Increase">
+                    &#43;
+                  </button>
+                </quantity-input>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <!-- Footer: Proceed to checkout & Edit Cart -->
     <div class="bottom-minicart">
-      <div class="goto-cart">
-        <a href="{{ routes.cart_url }}" >Go to Cart</a>
+      <div class="cart__ctas">
+        <a href="/checkout" class="cart__checkout-button button-checkout-cwa"{% if cart == empty %} style="pointer-events: none; opacity: 0.6;"{% endif %}>
+          Proceed to checkout
+        </a>
       </div>
 
-      <div class="cart__ctas">
-        <button type="submit" class="cart__checkout-button button" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
-          {{ 'sections.cart.checkout' | t }}
-        </button>
+      <div class="goto-cart">
+        <a href="{{ routes.cart_url }}" class="minicart-edit-link">Edit Cart</a>
       </div>
     </div>
-    
   </div>
 </mini-cart>
 <script src="{{ 'minicart.js' | asset_url }}" defer="defer"></script>
