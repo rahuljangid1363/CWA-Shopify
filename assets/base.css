@@ -2162,7 +2162,6 @@ input[type="checkbox"] {
 
 .header__icon--cart {
   position: relative;
-  margin-right: -1.2rem;
 }
 
 @media screen and (max-width: 989px) {
@@ -2494,7 +2493,7 @@ details-disclosure>details {
 .header-wishlist button {
   border: none;
   background: transparent;
-  padding: 1rem;
+  padding: 0;
 }
 
 .header__icon--cart {

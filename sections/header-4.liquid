@@ -141,29 +141,55 @@
   .header-4 .header-actions {
     display: flex !important;
     align-items: center !important;
-    gap: 20px !important;
+    gap: 22px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .header-4 .header-actions .header-wishlist,
+  .header-4 .header-actions .header-cart,
+  .header-4 .header-actions .header-sign {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
   .header-4 .header-actions .header-action-btn,
   .header-4 .header-actions .btn-wishlist,
   .header-4 .header-actions .show_login,
-  .header-4 .header-actions .header__icon--cart {
+  .header-4 .header-actions .header__icon--cart,
+  .header-4 .header-actions #cart-icon-bubble {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
     background: transparent !important;
     border: none !important;
-    padding: 4px !important;
+    padding: 0 !important;
+    margin: 0 !important;
     cursor: pointer !important;
     color: #1e293b !important;
     position: relative !important;
     text-decoration: none !important;
+    box-sizing: border-box !important;
+    transition: color 0.2s ease, opacity 0.2s ease !important;
   }
   .header-4 .header-actions svg {
     width: 22px !important;
     height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
     stroke: #1e293b !important;
     fill: none !important;
     display: block !important;
+    margin: 0 !important;
     padding: 0 !important;
     box-sizing: content-box !important;
     transition: stroke 0.2s ease;
@@ -178,6 +204,8 @@
     color: #3075cc !important;
     width: 22px !important;
     height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
     padding: 0 !important;
     margin: 0 !important;
     display: block !important;
@@ -188,6 +216,30 @@
   .header-4 .header-actions #cart-icon-bubble:hover svg {
     stroke: #021a36 !important;
     color: #021a36 !important;
+  }
+  .header-4 .header-actions .cart-count-bubble {
+    position: absolute !important;
+    top: -3px !important;
+    right: -3px !important;
+    background-color: #3075cc !important;
+    color: #ffffff !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    border: 1.5px solid #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
   }
   .header-4-bottom {
     background-color: #021a36 !important;

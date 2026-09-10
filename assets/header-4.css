@@ -192,47 +192,76 @@
   transform: scale(0.98) !important;
 }
 
-/* Action Icons (Wishlist, Cart, Account) */
+/* Action Icons (Wishlist, Cart, Account) - Equal Gaps and Sizing */
 .header-actions {
   display: flex !important;
   align-items: center !important;
-  gap: 20px !important;
+  gap: 22px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.header-actions .header-wishlist,
+.header-actions .header-cart,
+.header-actions .header-sign {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  width: 32px !important;
+  height: 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .header-actions .header-action-btn,
 .header-actions .btn-wishlist,
 .header-actions .header-sign .show_login,
-.header-actions .header-cart .header__icon--cart {
+.header-actions .header-cart .header__icon--cart,
+.header-actions #cart-icon-bubble {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
   background: transparent !important;
   border: none !important;
-  padding: 4px !important;
+  padding: 0 !important;
+  margin: 0 !important;
   cursor: pointer !important;
   color: #1e293b !important;
   position: relative !important;
   text-decoration: none !important;
+  box-sizing: border-box !important;
   transition: color 0.2s ease, opacity 0.2s ease !important;
 }
 
 .header-actions .header-action-btn:hover,
 .header-actions .btn-wishlist:hover,
-.header-actions .header-sign .show_login:hover,
-.header-actions .header-cart .header__icon--cart:hover {
+.header-actions .header-sign .show_login:hover {
   color: #3075cc !important;
-  opacity: 0.85 !important;
+}
+
+.header-actions .header-cart .header__icon--cart:hover,
+.header-actions #cart-icon-bubble:hover {
+  color: #021a36 !important;
 }
 
 .header-actions svg {
   width: 22px !important;
   height: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
   stroke: #1e293b !important;
   fill: none !important;
   display: block !important;
-  transition: stroke 0.2s ease !important;
+  margin: 0 !important;
   padding: 0 !important;
   box-sizing: content-box !important;
+  transition: stroke 0.2s ease !important;
 }
 
 .header-actions .header-action-btn:hover svg,
@@ -243,8 +272,8 @@
 
 /* Cart Icon - blue theme color initially */
 .header-actions .header-cart .header__icon--cart svg,
-.header-cart #cart-icon-bubble svg,
-.header-cart #cart-icon-bubble .icon {
+.header-actions .header-cart #cart-icon-bubble svg,
+.header-actions .header-cart #cart-icon-bubble .icon {
   width: 22px !important;
   height: 22px !important;
   min-width: 22px !important;
@@ -264,23 +293,41 @@
   color: #021a36 !important;
 }
 
-.header-cart .cart-count-bubble,
-.header-wishlist .cart-count-bubble {
+/* Count Badges (Wishlist & Cart) - positioned identically */
+.header-actions .header-cart .cart-count-bubble,
+.header-actions .header-wishlist .cart-count-bubble {
   position: absolute !important;
   top: -3px !important;
-  right: -5px !important;
+  right: -3px !important;
   background-color: #3075cc !important;
   color: #ffffff !important;
   font-size: 10px !important;
   font-weight: 700 !important;
   width: 16px !important;
   height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
   border-radius: 50% !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   line-height: 1 !important;
   border: 1.5px solid #ffffff !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+.header-actions .header-wishlist .cart-count-bubble .num-wishlisted,
+.header-actions .header-cart .cart-count-bubble span {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
 }
 
 .header-sign {

@@ -75,7 +75,7 @@
 .header-sign button{
   border: none;
   background: transparent;
-  padding: 1rem;
+  padding: 0;
 }
 @media(max-width: 374px){
     
