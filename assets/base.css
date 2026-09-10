@@ -2155,8 +2155,7 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
-.header__icon,
-.header__icon--cart .icon {
+.header__icon {
   height: 4.4rem;
   width: 4.4rem;
 }
@@ -2472,8 +2471,7 @@ details-disclosure>details {
 
 /* Header icons */
 
-.header__icon,
-.header__icon--cart .icon {
+.header__icon {
   padding: 1rem;
 }
 
