@@ -3,7 +3,7 @@
 {{ 'blog-template-3.css' | asset_url | stylesheet_tag }}
 {% render 'section-style' %}
 
-<div class="blog-post recent-blog">
+<div class="blog-post">
     <div class="{%- if section.settings.fullwidth -%}container-fluid{%- else -%}container{%- endif -%}">
         <h2 class="section-header">{{ section.settings.heading | escape }}</h2>
         <p class="section-text">{{ section.settings.text_decoration }}</p>

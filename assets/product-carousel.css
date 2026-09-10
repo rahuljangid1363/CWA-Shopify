@@ -5,6 +5,17 @@
   position: relative;
 }
 
+#shopify-section-template--21718780707008__1653039086fc46e456 {
+  padding-top: 40px;
+}
+
+#shopify-section-template--21718780707008__16530419117e4e348f {
+  background-color: #fff !important;
+}
+
+#shopify-section-template--21859292315840__16530419117e4e348f {
+  background-color: white !important;
+}
 
 /* split panel: dark photo on the left, flat light background on the right,
    matching the reference design's hard-edge divide */
@@ -234,16 +245,17 @@
 
 /* "Most Searched Products" title styling */
 .product-carousel .section-header {
-  font-size: 34px !important;
+  font-size: 32px !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.5px !important;
   line-height: 1.15 !important;
+  padding-left: 50px;
 }
 
 @media (min-width: 568px) {
   .product-carousel .section-header {
-    font-size: 38px !important;
+    font-size: 32px !important;
   }
 }
 

@@ -2935,12 +2935,10 @@ body:not(.index) .wp_countdown .deal-text-page {
   margin-left: 25px;
 }
 
-
 .progress.js-free-shipping .progress-bar {
   min-height: 35px;
   margin-top: -5px;
 }
-
 
 .free-progress-bar-100 {
   background-color: #000 !important;
