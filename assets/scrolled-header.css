@@ -483,8 +483,8 @@
   }
 
   /* Dropdown positioning under sticky bar */
-  .scrolled-header__action-item.header-sign:hover .mini-acount {
-    display: block;
+  .scrolled-header__action-item.header-sign .mini-acount {
+    display: none;
     position: absolute;
     top: 100%;
     right: 0;
@@ -495,6 +495,13 @@
     min-width: 180px;
     z-index: 10000;
     padding: 10px 14px;
+  }
+
+  .scrolled-header__action-item.header-sign.is-active .mini-acount,
+  .scrolled-header__action-item.header-sign.active .mini-acount,
+  .scrolled-header__action-item.header-sign .mini-acount.is-open,
+  .scrolled-header__action-item.header-sign .mini-acount.active {
+    display: block;
   }
 
 

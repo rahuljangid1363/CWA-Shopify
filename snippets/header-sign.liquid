@@ -21,3 +21,50 @@
     <p><a href="/cart" title="Checkout">Checkout</a></p>
   </div>
 </div>
+
+<script>
+  (function () {
+    if (window._headerSignInit) return;
+    window._headerSignInit = true;
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.header-sign .show_login');
+      if (btn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var parent = btn.closest('.header-sign');
+        var dropdown = parent ? parent.querySelector('.mini-acount') : null;
+        if (dropdown) {
+          var isShown = dropdown.classList.contains('is-open') || dropdown.classList.contains('active') || window.getComputedStyle(dropdown).display !== 'none';
+          
+          // Close all dropdowns
+          document.querySelectorAll('.mini-acount').forEach(function(el) {
+            el.classList.remove('is-open', 'active');
+            el.style.display = 'none';
+          });
+          document.querySelectorAll('.header-sign').forEach(function(el) {
+            el.classList.remove('is-active', 'active');
+          });
+
+          if (!isShown) {
+            dropdown.classList.add('is-open', 'active');
+            dropdown.style.display = 'block';
+            parent.classList.add('is-active', 'active');
+          }
+        }
+        return;
+      }
+
+      // Close if clicking outside
+      if (!e.target.closest('.header-sign')) {
+        document.querySelectorAll('.mini-acount').forEach(function(el) {
+          el.classList.remove('is-open', 'active');
+          el.style.display = 'none';
+        });
+        document.querySelectorAll('.header-sign').forEach(function(el) {
+          el.classList.remove('is-active', 'active');
+        });
+      }
+    });
+  })();
+</script>

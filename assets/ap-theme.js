@@ -6,7 +6,8 @@ setSelectBoxDropdown("collection-select-search");
 $(document).click(function(event) { 
 	var target = $(event.target);
 	if(typeof(target.closest('.header-sign').html()) == 'undefined') {
-        $('.mini-acount').hide();
+        $('.mini-acount').removeClass('is-open active').hide();
+        $('.header-sign').removeClass('is-active active');
     }
     if(typeof(target.closest('.icon-search').html()) == 'undefined') {
         $('.form-search').removeClass('active');
@@ -914,11 +915,22 @@ $( document ).ready(function() {
   actionMenuMobile();
   stickyDisplay();
   
-  	$(".show_login").click(function(){
-      if( $('.mini-acount').is(":visible")) {   
-        $('.mini-acount').slideUp('slow');
+  	$(".show_login").click(function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var $parentSign = $(this).closest('.header-sign');
+      var $miniAccount = $parentSign.find('.mini-acount');
+      var isVisible = $miniAccount.is(":visible") || $miniAccount.hasClass('is-open') || $miniAccount.hasClass('active');
+
+      $('.mini-acount').not($miniAccount).removeClass('is-open active').hide();
+      $('.header-sign').not($parentSign).removeClass('is-active active');
+
+      if(isVisible) {   
+        $miniAccount.removeClass('is-open active').hide();
+        $parentSign.removeClass('is-active active');
       } else{
-        $('.mini-acount').slideDown('slow');
+        $miniAccount.addClass('is-open active').show();
+        $parentSign.addClass('is-active active');
       }
     });
 	
