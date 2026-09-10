@@ -257,30 +257,38 @@
     display: flex !important;
 }
 
-/* Active State (Item Already Added to Wishlist) - Filled in theme blue color */
-.product-grid-3 .card-wishlist-action .js-btn-wishlist.active {
+/* Active State (Item Added to Wishlist) - Filled in vibrant red color */
+.product-grid-3 .card-wishlist-action .js-btn-wishlist.active,
+.js-btn-wishlist.active,
+product-wishlist.active {
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    color: #0075FF !important;
+    color: #e53935 !important;
 }
 
-.product-grid-3 .card-wishlist-action .js-btn-wishlist.active svg {
-    color: #0075FF !important;
-    fill: #0075FF !important;
-    stroke: #0075FF !important;
+.product-grid-3 .card-wishlist-action .js-btn-wishlist.active svg,
+.js-btn-wishlist.active svg,
+product-wishlist.active svg {
+    color: #e53935 !important;
+    fill: #e53935 !important;
+    stroke: #e53935 !important;
 }
 
-.product-grid-3 .card-wishlist-action .js-btn-wishlist.active:hover {
+.product-grid-3 .card-wishlist-action .js-btn-wishlist.active:hover,
+.js-btn-wishlist.active:hover,
+product-wishlist.active:hover {
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
     transform: scale(1.15);
 }
 
-.product-grid-3 .card-wishlist-action .js-btn-wishlist.active:hover svg {
-    fill: #0056b3 !important;
-    stroke: #0056b3 !important;
+.product-grid-3 .card-wishlist-action .js-btn-wishlist.active:hover svg,
+.js-btn-wishlist.active:hover svg,
+product-wishlist.active:hover svg {
+    fill: #d32f2f !important;
+    stroke: #d32f2f !important;
 }
 
 .product-grid-3 .card-wishlist-action .span-wishlist,

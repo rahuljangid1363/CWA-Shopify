@@ -3770,8 +3770,12 @@ leofa-times:before {
   cursor: pointer;
 }
 
-.js-btn-wishlist.active i {
-  color: #ff0000;
+.js-btn-wishlist.active i,
+.js-btn-wishlist.active svg,
+product-wishlist.active svg {
+  color: #e53935 !important;
+  fill: #e53935 !important;
+  stroke: #e53935 !important;
 }
 
 .js-btn-compare {

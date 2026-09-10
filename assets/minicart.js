@@ -115,13 +115,20 @@ if (!customElements.get('mini-cart')) {
     }
     
     display(){
-      $(document).off('click', '#cart-icon-bubble, .header__icon--cart').on('click', '#cart-icon-bubble, .header__icon--cart', function(e){
+      $(document).off('click', '#cart-icon-bubble, .header__icon--cart, .header-cart .header-action-btn, .header-cart .scrolled-header__action-btn').on('click', '#cart-icon-bubble, .header__icon--cart, .header-cart .header-action-btn, .header-cart .scrolled-header__action-btn', function(e){
         e.preventDefault();
         e.stopPropagation();
-        if ($("#minicart").hasClass('active')) {
-          $("#minicart").removeClass('active');
+        var $parentHeaderCart = $(this).closest('.header-cart');
+        var $targetMinicart = $parentHeaderCart.find('.product-minincart');
+        if (!$targetMinicart.length) {
+          $targetMinicart = $('.product-minincart').first();
+        }
+
+        if ($targetMinicart.hasClass('active')) {
+          $('.product-minincart').removeClass('active');
         } else {
-          $("#minicart").addClass('active');
+          $('.product-minincart').removeClass('active');
+          $targetMinicart.addClass('active');
         }
         return false;
       });
@@ -129,14 +136,20 @@ if (!customElements.get('mini-cart')) {
       $(document).off('click', '.minicart-header__close').on('click', '.minicart-header__close', function(e){
         e.preventDefault();
         e.stopPropagation();
-        $("#minicart").removeClass('active');
+        $('.product-minincart').removeClass('active');
       });
 
       $(document).off('click.minicartOutside').on('click.minicartOutside', function(event) { 
         var $target = $(event.target);
-        if(!$target.closest('#minicart').length && !$target.closest('#cart-icon-bubble, .header__icon--cart').length && $('#minicart').hasClass('active')) {
-          $("#minicart").removeClass('active');
+        if(!$target.closest('.product-minincart').length && !$target.closest('#cart-icon-bubble, .header__icon--cart, .header-cart').length && $('.product-minincart').hasClass('active')) {
+          $('.product-minincart').removeClass('active');
         }        
+      });
+
+      $(document).off('keydown.minicartEsc').on('keydown.minicartEsc', function(event) {
+        if (event.key === 'Escape' && $('.product-minincart').hasClass('active')) {
+          $('.product-minincart').removeClass('active');
+        }
       });
     }
   }
