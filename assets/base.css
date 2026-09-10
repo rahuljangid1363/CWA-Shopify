@@ -2935,22 +2935,12 @@ body:not(.index) .wp_countdown .deal-text-page {
   margin-left: 25px;
 }
 
-.recent-blog-section.blog-post-section {
-  background-color: white !important;
-}
 
 .progress.js-free-shipping .progress-bar {
   min-height: 35px;
   margin-top: -5px;
 }
 
-.product-tab .slick-list {
-  padding-bottom: 50px !important;
-}
-
-.advanced-content {
-  padding: 40px 0;
-}
 
 .free-progress-bar-100 {
   background-color: #000 !important;
