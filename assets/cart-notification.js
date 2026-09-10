@@ -3,43 +3,74 @@ class CartNotification extends HTMLElement {
     super();
 
     this.notification = document.getElementById('cart-notification');
-    this.header = document.querySelector('sticky-header');
     this.onBodyClick = this.handleBodyClick.bind(this);
+    this.autoCloseTimeout = null;
     
-    this.notification.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
-    this.querySelectorAll('button[type="button"]').forEach((closeButton) =>
-      closeButton.addEventListener('click', this.close.bind(this))
-    );
+    if (this.notification) {
+      this.notification.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
+      
+      this.querySelectorAll('button[type="button"], .cart-notification__close, .cart-notification__continue-btn, .link.button-label').forEach((closeButton) =>
+        closeButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.close();
+        })
+      );
+
+      // Pause auto-close on hover
+      this.notification.addEventListener('mouseenter', () => {
+        if (this.autoCloseTimeout) clearTimeout(this.autoCloseTimeout);
+      });
+      this.notification.addEventListener('mouseleave', () => {
+        if (this.notification.classList.contains('active')) {
+          this.startAutoClose(3500);
+        }
+      });
+    }
   }
 
   open() {
+    if (!this.notification) {
+      this.notification = document.getElementById('cart-notification');
+    }
+    if (!this.notification) return;
+
+    if (this.autoCloseTimeout) clearTimeout(this.autoCloseTimeout);
+
     this.notification.classList.add('animate', 'active');
 
-    this.notification.addEventListener('transitionend', () => {
-      this.notification.focus();
-      trapFocus(this.notification);
-    }, { once: true });
-
+    // Prevent any page scrolling: do not call focus or header.reveal
     document.body.addEventListener('click', this.onBodyClick);
+
+    // Auto close toast after 5 seconds
+    this.startAutoClose(5000);
+  }
+
+  startAutoClose(duration = 5000) {
+    if (this.autoCloseTimeout) clearTimeout(this.autoCloseTimeout);
+    this.autoCloseTimeout = setTimeout(() => {
+      this.close();
+    }, duration);
   }
 
   close() {
-    this.notification.classList.remove('active');
-
+    if (this.autoCloseTimeout) clearTimeout(this.autoCloseTimeout);
+    if (this.notification) {
+      this.notification.classList.remove('active');
+    }
     document.body.removeEventListener('click', this.onBodyClick);
-
-    removeTrapFocus(this.activeElement);
   }
 
   renderContents(parsedState) {
-      this.productId = parsedState.id;
-      this.getSectionsToRender().forEach((section => {
-        document.getElementById(section.id).innerHTML =
-          this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
-      }));
+    this.productId = parsedState.id;
+    this.getSectionsToRender().forEach((section => {
+      const el = document.getElementById(section.id);
+      if (el && parsedState.sections && parsedState.sections[section.id]) {
+        el.innerHTML = this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
+      }
+    }));
 
-      if (this.header) this.header.reveal();
-      this.open();
+    // NO scroll or header reveal
+    this.open();
   }
 
   getSectionsToRender() {
@@ -65,9 +96,7 @@ class CartNotification extends HTMLElement {
 
   handleBodyClick(evt) {
     const target = evt.target;
-    if (target !== this.notification && !target.closest('cart-notification')) {
-      const disclosure = target.closest('details-disclosure');
-      this.activeElement = disclosure ? disclosure.querySelector('summary') : null;
+    if (this.notification && target !== this.notification && !target.closest('cart-notification') && !target.closest('.product-form')) {
       this.close();
     }
   }
