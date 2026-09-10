@@ -253,8 +253,16 @@
       "newslester": {
         "type": "newslester",
         "settings": {
-          "heading": "Subscribe to our newsletter",
-          "subheading": "<p>Promotions, new products and sales. Directly to your inbox.</p>"
+          "fullwidth": false,
+          "bg_color": "#0b0f14",
+          "bg_image": "shopify://shop_images/news_letter_bg.webp",
+          "color_text": "#ffffff",
+          "color_button": "#ffffff",
+          "bg_color_button": "#3075cc",
+          "sub_title": "",
+          "heading": "Know what’s in stock. Keep your site moving.",
+          "subheading": "<p>Get Australian Stock Alerts, New Product Releases And Practical Technical Resources For Water, Wastewater And Remote-Site Applications.</p>",
+          "style_layout": "left"
         }
       },
       "product-suggest": {

@@ -244,6 +244,9 @@
       {%- render 'back-to-top' -%}
     </main>
     
+    {%- unless template == 'index' -%}
+      {% section 'newslester' %}
+    {%- endunless -%}
     {% render 'footer' %}
     
   

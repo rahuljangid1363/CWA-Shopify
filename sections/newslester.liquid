@@ -143,19 +143,36 @@
   }
 }
 </style>
-<div class="newsletter{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" {% if section.settings.bg_image != blank %} style="background-color: {{ section.settings.bg_color }}; background:url({{ section.settings.bg_image | img_url:'master' }}) center center no-repeat;background-size:cover;" {% endif %}>
+{%- liquid
+  if section.settings.bg_image != blank
+    assign bg_img_url = section.settings.bg_image | img_url: 'master'
+  else
+    assign bg_img_url = 'news_letter_bg.webp' | file_img_url: 'master'
+  endif
+
+  assign n_heading = section.settings.heading
+  if n_heading == blank or n_heading == 'Subscribe to our newsletter'
+    assign n_heading = "Know what’s in stock. Keep your site moving."
+  endif
+
+  assign n_subheading = section.settings.subheading
+  if n_subheading == blank or n_subheading contains 'Promotions, new products'
+    assign n_subheading = "<p>Get Australian Stock Alerts, New Product Releases And Practical Technical Resources For Water, Wastewater And Remote-Site Applications.</p>"
+  endif
+-%}
+<div class="newsletter has-bg-image" style="background-color: {{ section.settings.bg_color | default: '#0b0f14' }}; background:url({{ bg_img_url }}) center center no-repeat;background-size:cover;">
   <div class="{% if section.settings.fullwidth %}container-fluid{% else %}container{% endif %}" >
     <div class="section-block section-block--padding {% if section.settings.style_layout == "left" %}me-auto{% elsif section.settings.style_layout == "center" %}mx-auto{% elsif section.settings.style_layout == "right" %}ms-auto{% endif %}">
-      <div class="{% if section.settings.heading != blank or section.settings.subheading != blank %}section-block__header {% endif %} {% if section.settings.style_layout == "left" %}text-start{% elsif section.settings.style_layout == "center" %}text-center{% elsif section.settings.style_layout == "right" %}text-end{% endif %}">
+      <div class="{% if n_heading != blank or n_subheading != blank %}section-block__header {% endif %} {% if section.settings.style_layout == "left" %}text-start{% elsif section.settings.style_layout == "center" %}text-center{% elsif section.settings.style_layout == "right" %}text-end{% endif %}">
         {%- unless section.settings.sub_title == blank -%}
           <p class="sub-title">{{ section.settings.sub_title  }}</p>
         {%- endunless -%}
-        {%- unless section.settings.heading == blank -%}
-          <h4 class="h1--mini section-block__title">{{ section.settings.heading  }}</h4>
-        {%- endunless -%}
-        {%- unless section.settings.subheading == blank -%}
-          <div class="section-block__subtext">{{ section.settings.subheading }}</div>
-        {%- endunless -%}
+        {%- if n_heading != blank -%}
+          <h4 class="h1--mini section-block__title">{{ n_heading }}</h4>
+        {%- endif -%}
+        {%- if n_subheading != blank -%}
+          <div class="section-block__subtext">{{ n_subheading }}</div>
+        {%- endif -%}
       </div>
       <div class="grid">
         <div class="grid__item medium-up--two-thirds medium-up--push-one-sixth">
