@@ -316,6 +316,26 @@
     color: #ffffff;
   }
 
+  .scrolled-header__nav-link.dropdown-toggle::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .scrolled-header__nav-link .icon-dropdown-nav {
+    width: 8px !important;
+    height: 5px !important;
+    margin-left: 6px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    flex-shrink: 0 !important;
+    transition: transform 0.25s ease !important;
+    pointer-events: none !important;
+  }
+
+  .scrolled-header__nav-item:hover .scrolled-header__nav-link .icon-dropdown-nav {
+    transform: rotate(180deg) !important;
+  }
+
   /* Navigation Dropdowns */
   .scrolled-header__dropdown {
     position: absolute;

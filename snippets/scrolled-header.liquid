@@ -66,8 +66,11 @@
               {%- if widthMega != 0 -%}{%- assign isFullwidth = false -%}{%- endif -%}
 
               <li class="scrolled-header__nav-item scrolled-header__nav-item--mega {% if link.active %}active{% endif %}">
-                <a href="{{ link.url }}" class="scrolled-header__nav-link" {% if link.active %}aria-current="page"{% endif %}>
-                  {{ link.title | split: '[' | first | split: '{' | first }}
+                <a href="{{ link.url }}" class="scrolled-header__nav-link dropdown-toggle" {% if link.active %}aria-current="page"{% endif %}>
+                  <span>{{ link.title | split: '[' | first | split: '{' | first }}</span>
+                  <svg class="icon-dropdown-nav" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
                 </a>
                 <div class="scrolled-header__dropdown meganav meganav-{{ intMega }}" {%- if widthMega != 0 -%}style="width: {{ widthMega }}px;"{%- endif -%}>
                   {%- render 'megamenu', intMega: intMega -%}
@@ -75,8 +78,11 @@
               </li>
             {%- elsif link.links != blank -%}
               <li class="scrolled-header__nav-item scrolled-header__nav-item--dropdown {% if link.active %}active{% endif %}">
-                <a href="{{ link.url }}" class="scrolled-header__nav-link" {% if link.active %}aria-current="page"{% endif %}>
-                  {{ link.title | split: '[' | first | split: '{' | first }}
+                <a href="{{ link.url }}" class="scrolled-header__nav-link dropdown-toggle" {% if link.active %}aria-current="page"{% endif %}>
+                  <span>{{ link.title | split: '[' | first | split: '{' | first }}</span>
+                  <svg class="icon-dropdown-nav" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
                 </a>
                 <div class="scrolled-header__dropdown meganav">
                   {%- if titleCheckMega == 'industries' and industryBlocks.size > 0 -%}
