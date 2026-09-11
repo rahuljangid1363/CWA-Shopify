@@ -118,23 +118,3 @@
     </button>
   {%- endform -%}
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var form = document.querySelector('form[action*="/account"]');
-    if (form) {
-      form.addEventListener('submit', function() {
-        var firstInput = form.querySelector('input[name="customer[first_name]"]');
-        var lastInput = form.querySelector('input[name="customer[last_name]"]');
-        var first = firstInput ? firstInput.value.trim() : '';
-        var last = lastInput ? lastInput.value.trim() : '';
-        if (first) {
-          try {
-            localStorage.setItem('customer_first_name', first.charAt(0).toUpperCase() + first.slice(1));
-            localStorage.setItem('customer_name', (first + ' ' + last).trim());
-          } catch(e) {}
-        }
-      });
-    }
-  });
-</script>

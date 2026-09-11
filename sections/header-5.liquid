@@ -24,19 +24,7 @@
             {%- if section.settings.show_signin_top -%}
             <div class="signin-top">
               {% if customer %}
-                {%- assign customer_first_name = '' -%}
-                {%- if customer.first_name != blank -%}
-                  {%- assign customer_first_name = customer.first_name | strip | split: ' ' | first | capitalize -%}
-                {%- elsif customer.name != blank -%}
-                  {%- assign customer_first_name = customer.name | strip | split: ' ' | first | capitalize -%}
-                {%- elsif customer.default_address.first_name != blank -%}
-                  {%- assign customer_first_name = customer.default_address.first_name | strip | split: ' ' | first | capitalize -%}
-                {%- elsif customer.default_address.name != blank -%}
-                  {%- assign customer_first_name = customer.default_address.name | strip | split: ' ' | first | capitalize -%}
-                {%- elsif customer.last_name != blank -%}
-                  {%- assign customer_first_name = customer.last_name | strip | capitalize -%}
-                {%- endif -%}
-                <p><a class="js-customer-greeting" href="/account">Hello{% if customer_first_name != blank %} {{ customer_first_name }}{% endif %}</a></p>
+                <p><a>Hello {{customer.first_name }}</a></p>
                   
                   <p><a href="/account/logout" title="{{'layout.customer.log_out' | t}}" class="site-header__link">
                     Logout

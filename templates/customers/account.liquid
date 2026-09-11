@@ -1,26 +1,5 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 
-{%- assign customer_first_name = '' -%}
-{%- if customer.first_name != blank -%}
-  {%- assign customer_first_name = customer.first_name | strip | split: ' ' | first | capitalize -%}
-{%- elsif customer.name != blank -%}
-  {%- assign customer_first_name = customer.name | strip | split: ' ' | first | capitalize -%}
-{%- elsif customer.default_address.first_name != blank -%}
-  {%- assign customer_first_name = customer.default_address.first_name | strip | split: ' ' | first | capitalize -%}
-{%- elsif customer.default_address.name != blank -%}
-  {%- assign customer_first_name = customer.default_address.name | strip | split: ' ' | first | capitalize -%}
-{%- elsif customer.last_name != blank -%}
-  {%- assign customer_first_name = customer.last_name | strip | capitalize -%}
-{%- endif -%}
-{%- if customer_first_name != blank -%}
-  <script>
-    try {
-      localStorage.setItem('customer_first_name', {{ customer_first_name | json }});
-      localStorage.setItem('customer_name', {{ customer.name | default: customer_first_name | json }});
-    } catch(e) {}
-  </script>
-{%- endif -%}
-
 <div class="customer account">
   <div>
     <h1>{{ 'customer.account.title' | t }}</h1>
