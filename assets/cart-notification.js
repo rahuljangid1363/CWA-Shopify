@@ -69,6 +69,17 @@ class CartNotification extends HTMLElement {
       }
     }));
 
+    if (parsedState.sections && parsedState.sections['cart-icon-bubble']) {
+      try {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = parsedState.sections['cart-icon-bubble'];
+        const countMatch = tempDiv.textContent.trim().match(/\d+/);
+        if (countMatch && countMatch[0] && typeof window.updateScrolledHeaderCartCount === 'function') {
+          window.updateScrolledHeaderCartCount(countMatch[0]);
+        }
+      } catch (e) {}
+    }
+
     // NO scroll or header reveal
     this.open();
   }

@@ -68,11 +68,22 @@ if (!customElements.get('mini-cart')) {
           });
         }
 
-        $("#minicart .list-mimicart").html(minicart);
+        $(".product-minincart .list-mimicart, #minicart .list-mimicart").html(minicart);
         
         var count_text = cart.item_count + (cart.item_count === 1 ? ' item' : ' items');
-        $("#minicart-count-badge").text(count_text);
-        $(".cart-count-bubble span:first-child").html(cart.item_count);
+        $(".minicart-header__badge, #minicart-count-badge").text(count_text);
+        if (cart.item_count > 0) {
+          $(".cart-count-bubble").show();
+          $(".cart-count-bubble span:first-child").html(cart.item_count);
+          $(".scrolled-header__count.cart-count-bubble").css('display', 'inline-flex');
+          $(".scrolled-header__count.cart-count-bubble span").html(cart.item_count);
+        } else {
+          $(".cart-count-bubble").hide();
+          $(".scrolled-header__count.cart-count-bubble").hide();
+        }
+        if (typeof window.updateScrolledHeaderCartCount === 'function') {
+          window.updateScrolledHeaderCartCount(cart.item_count);
+        }
         if (typeof updateCurrencies === 'function') {
           updateCurrencies();
         }

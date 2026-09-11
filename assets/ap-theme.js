@@ -682,12 +682,25 @@ function actionMenuMobile(){
     }
   });
 
-  $(".vertical-bars").click(function(){
-    if($('.nav-vertical').hasClass('show')){
-      $('.nav-vertical').removeClass('show');
-      $('body').removeClass('has-menu-vertical');
-    }else{
-      $('.nav-vertical').addClass('show');
+  $(".vertical-bars").click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var $btn = $(this);
+    var $parent = $btn.closest('.scrolled-header__categories, .header-vertical-menu, .header-verticalmenu, .show-vertical-menu, .header-menubar');
+    var $targetMenu = $parent.length ? $parent.find('.nav-vertical') : $btn.siblings('.nav-vertical');
+    if (!$targetMenu || !$targetMenu.length) {
+      $targetMenu = $btn.parent().siblings('.nav-vertical');
+    }
+
+    var isShown = $targetMenu && $targetMenu.hasClass('show');
+
+    // Close all vertical menus first
+    $('.nav-vertical').removeClass('show');
+    $('body').removeClass('has-menu-vertical');
+
+    // If this specific menu was not open, open only this one
+    if (!isShown && $targetMenu && $targetMenu.length) {
+      $targetMenu.addClass('show');
       $('body').addClass('has-menu-vertical');
     }
   });

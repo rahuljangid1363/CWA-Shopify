@@ -456,6 +456,11 @@
   display: block !important;
 }
 
+body.header-is-scrolled .header-4-bottom .nav-vertical,
+.header-4.is-scrolled .header-4-bottom .nav-vertical {
+  display: none !important;
+}
+
 .header-4-bottom .nav-vertical .site-nav {
   list-style: none !important;
   padding: 8px 0 !important;

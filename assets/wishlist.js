@@ -231,7 +231,7 @@
       el.textContent = count;
     });
 
-    var bubbleEls = document.querySelectorAll('.cart-count-bubble, .scrolled-header__count.num-wishlisted');
+    var bubbleEls = document.querySelectorAll('.header-wishlist .cart-count-bubble, .btn-wishlist .cart-count-bubble, .scrolled-header__count.num-wishlisted');
     bubbleEls.forEach(function(bubble) {
       if (count > 0) {
         bubble.style.display = '';

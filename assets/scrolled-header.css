@@ -188,6 +188,21 @@
     display: block !important;
   }
 
+  /* Ensure non-scrolled header category dropdown is never visible when page is scrolled */
+  body.header-is-scrolled .header-4-bottom .nav-vertical,
+  body.header-is-scrolled .header-vertical-menu .nav-vertical,
+  body.header-is-scrolled .header-verticalmenu .nav-vertical,
+  .is-scrolled .header-4-bottom .nav-vertical,
+  .is-scrolled .header-vertical-menu .nav-vertical,
+  .is-scrolled .header-verticalmenu .nav-vertical {
+    display: none !important;
+  }
+
+  /* Ensure sticky header category dropdown is never visible when not scrolled */
+  body:not(.header-is-scrolled) .scrolled-header-sticky .nav-vertical {
+    display: none !important;
+  }
+
   .scrolled-header__categories .nav-vertical::after {
     content: '';
     width: 0;
@@ -466,20 +481,44 @@
   }
 
   .scrolled-header__count {
-    position: absolute;
-    top: -3px;
-    right: -5px;
-    background-color: #00B5E2;
-    color: #ffffff;
-    font-size: 9.5px;
-    font-weight: 700;
-    line-height: 14px;
-    min-width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    text-align: center;
-    padding: 0 3px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    position: absolute !important;
+    top: -3px !important;
+    right: -3px !important;
+    background-color: #3075cc !important;
+    color: #ffffff !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    border: 1.5px solid #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+
+  .scrolled-header__count span {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+  }
+
+  .scrolled-header__count:empty,
+  .scrolled-header__count[style*="display: none"],
+  .scrolled-header__count[style*="display:none"],
+  .scrolled-header__count.is-hidden {
+    display: none !important;
   }
 
   /* Dropdown positioning under sticky bar */
