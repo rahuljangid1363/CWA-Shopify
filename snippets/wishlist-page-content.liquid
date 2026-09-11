@@ -2,6 +2,16 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 
 <style>
+/* Ensure global breadcrumb bar is hidden on wishlist page */
+.g-breadcrumb,
+nav.g-breadcrumb,
+.breadcrumb.g-breadcrumb,
+nav.breadcrumb,
+.breadcrumbs-style_1,
+.breadcrumbs-style_2 {
+  display: none !important;
+}
+
 /* Flipkart style Wishlist Page - Pure Vertical List Format */
 .fk-wishlist-page {
   background-color: #f1f3f6;

@@ -15,10 +15,16 @@
 
   // Ensure CSS is always injected in head as a failsafe
   function injectWishlistStyles() {
+    var path = (window.location.pathname || '').toLowerCase();
+    var search = (window.location.search || '').toLowerCase();
+    if (path.indexOf('wishlist') !== -1 || path.indexOf('wish-list') !== -1 || search.indexOf('wishlist') !== -1) {
+      document.documentElement.classList.add('is-wishlist-page');
+    }
     if (document.getElementById('fk-wishlist-dynamic-styles')) return;
     var style = document.createElement('style');
     style.id = 'fk-wishlist-dynamic-styles';
     style.textContent = [
+      '.is-wishlist-page .g-breadcrumb, .is-wishlist-page nav.breadcrumb, .is-wishlist-page .breadcrumbs-style_1, .is-wishlist-page .breadcrumbs-style_2 { display: none !important; }',
       '.fk-wishlist-page { background-color: #f1f3f6 !important; min-height: auto; padding: 30px 15px 50px; display: block !important; width: 100% !important; box-sizing: border-box !important; }',
       '.fk-wishlist-container { max-width: 980px !important; margin: 0 auto !important; display: block !important; width: 100% !important; box-sizing: border-box !important; }',
       '.fk-wishlist-breadcrumb { display: block !important; font-size: 13px !important; color: #878787 !important; margin-bottom: 14px !important; padding: 0 4px !important; }',
@@ -732,6 +738,12 @@
     var path = window.location.pathname.toLowerCase();
     var isWishlistPage = path.indexOf('wishlist') !== -1 || path.indexOf('wish-list') !== -1 || window.location.search.indexOf('wishlist') !== -1;
     if (isWishlistPage) {
+      document.documentElement.classList.add('is-wishlist-page');
+      var breadcrumbs = document.querySelectorAll('.g-breadcrumb, nav.breadcrumb, .breadcrumbs-style_1, .breadcrumbs-style_2');
+      breadcrumbs.forEach(function(b) {
+        b.style.setProperty('display', 'none', 'important');
+        b.remove();
+      });
       injectWishlistStyles();
       var cardExists = document.querySelector('.fk-wishlist-card, product-wishlistpage');
       if (!cardExists) {

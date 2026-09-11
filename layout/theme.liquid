@@ -212,6 +212,23 @@
     couponAlert: {{ settings.coupon_copied | json }},
   };
 </script>
+<script>
+  (function() {
+    var p = (window.location.pathname || '').toLowerCase();
+    var s = (window.location.search || '').toLowerCase();
+    if (p.indexOf('wishlist') !== -1 || p.indexOf('wish-list') !== -1 || s.indexOf('wishlist') !== -1) {
+      document.documentElement.classList.add('is-wishlist-page');
+    }
+  })();
+</script>
+<style>
+  .is-wishlist-page .g-breadcrumb,
+  .is-wishlist-page nav.breadcrumb,
+  .is-wishlist-page .breadcrumbs-style_1,
+  .is-wishlist-page .breadcrumbs-style_2 {
+    display: none !important;
+  }
+</style>
   </head>
 
   <body class="gradient {{template | replace: ".", "-"}}">    
@@ -220,7 +237,10 @@
     </a>
 
     {% render 'header' %}
-	  {% render 'breadcrumb' %}
+    {%- assign req_path = request.path | downcase -%}
+    {%- unless req_path contains 'wishlist' or req_path contains 'wish-list' or template contains 'wishlist' or page.handle == 'wishlist' or page.handle == 'wish-list' -%}
+      {% render 'breadcrumb' %}
+    {%- endunless -%}
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {%- if settings.content_layout == 'full_width' or template != 'index' -%}
       {{ content_for_layout }}
