@@ -154,15 +154,19 @@
   }
 
   .scrolled-header__cat-arrow {
-    width: 8px;
-    height: 5px;
+    width: 12px !important;
+    height: 12px !important;
+    min-width: 12px !important;
+    min-height: 12px !important;
+    max-width: 12px !important;
+    max-height: 12px !important;
     flex-shrink: 0;
     display: block;
     transition: transform 0.2s ease;
   }
 
   .scrolled-header__cat-arrow path {
-    stroke: #00B5E2;
+    stroke: #00B5E2 !important;
     fill: none;
   }
 

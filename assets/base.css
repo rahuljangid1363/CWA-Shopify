@@ -4545,16 +4545,22 @@ iframe#preview-bar-iframe {
 }
 
 .header-4 .icon-down svg,
-.scrolled-header__cat-arrow {
-  width: 8px;
-  height: 5px;
-  display: inline-block;
-  vertical-align: middle;
+.scrolled-header__cat-arrow,
+.icon-cat-down {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+  max-width: 12px !important;
+  max-height: 12px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
 }
 
 .header-4 .icon-down svg path,
-.scrolled-header__cat-arrow path {
-  stroke: #23586C;
+.scrolled-header__cat-arrow path,
+.icon-cat-down path {
+  stroke: #00B5E2 !important;
   fill: none;
 }
 
