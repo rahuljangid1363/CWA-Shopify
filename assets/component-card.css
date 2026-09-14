@@ -4,6 +4,9 @@
   text-decoration: none;
   border: none;
 }
+.template-404{
+padding-bottom: 50px !important;
+}
 
 
 .card.card--soft {
@@ -167,12 +170,12 @@
   display: inline;
   padding-right: 1.2rem;
   color: #000;
-  background-image: linear-gradient(to right, var(--g-main) 0%, var(--g-main) 100%);
   background-position: 0 calc(100% - 0em);
   background-size: 0 1px;
   transition: background-size .25s cubic-bezier(.785, .135, .15, .86) 0s;
   background-repeat: no-repeat;
 }
+
 
 .card-information__text:hover {
   background-size: 100% 1px;
