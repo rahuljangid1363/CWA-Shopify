@@ -3,88 +3,19 @@
   {%- render 'wishlist-page-content' -%}
 {%- else -%}
   <style type="text/css">
-    .template-404 {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      padding-top: 80px !important;
-      padding-bottom: 100px !important;
-      min-height: 480px;
-      margin: 0 auto !important;
-      max-width: 900px !important;
+    .template-404 .title + * {
+      margin-top: 1rem;
     }
 
-    .template-404 .number-404,
-    .template-404 p {
-      font-size: clamp(84px, 13vw, 130px);
-      font-weight: 800;
-      color: var(--g-main, #3075cc);
-      letter-spacing: -2px;
-      line-height: 1;
-      margin: 0 0 14px 0;
-      font-family: var(--g-font-2, "Plus Jakarta Sans", sans-serif);
-      display: inline-block;
-      user-select: none;
-    }
-
-    .template-404 .title {
-      font-size: clamp(28px, 4vw, 32px);
-      font-weight: 700;
-      line-height: 1.25;
-      color: #021a36;
-      margin: 0 0 30px 0;
-      display: inline-block;
-      animation: titleFloat 3s ease-in-out infinite;
-      will-change: transform;
-    }
-
-    @keyframes titleFloat {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-8px);
-      }
-    }
-
-    .template-404 .button {
-      margin-top: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 13px 34px;
-      font-size: 15px;
-      font-weight: 600;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: all 0.25s ease;
-    }
-
-    @media screen and (max-width: 768px) {
-      .template-404 {
-        padding-top: 50px !important;
-        padding-bottom: 70px !important;
-        min-height: 380px;
-      }
-
-      .template-404 .number-404,
-      .template-404 p {
-        font-size: 76px;
-        letter-spacing: -1px;
-        margin-bottom: 10px;
-      }
-
-      .template-404 .title {
-        font-size: 26px;
-        margin-bottom: 22px;
+    @media screen and (min-width: 750px) {
+      .template-404 .title + * {
+        margin-top: 2rem;
       }
     }
   </style>
 
   <div class="template-404 page-width page-margin center">
-    <p class="number-404">
+    <p>
       {{ 'templates.404.subtext' | t }}
     </p>
     <h1 class="title">

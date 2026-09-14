@@ -225,11 +225,7 @@
   .is-wishlist-page .g-breadcrumb,
   .is-wishlist-page nav.breadcrumb,
   .is-wishlist-page .breadcrumbs-style_1,
-  .is-wishlist-page .breadcrumbs-style_2,
-  body[class*="404"] .g-breadcrumb,
-  body[class*="404"] nav.breadcrumb,
-  body[class*="404"] .breadcrumbs-style_1,
-  body[class*="404"] .breadcrumbs-style_2 {
+  .is-wishlist-page .breadcrumbs-style_2 {
     display: none !important;
   }
 </style>
@@ -242,7 +238,7 @@
 
     {% render 'header' %}
     {%- assign req_path = request.path | downcase -%}
-    {%- unless req_path contains 'wishlist' or req_path contains 'wish-list' or template contains 'wishlist' or page.handle == 'wishlist' or page.handle == 'wish-list' or template == '404' or template.name == '404' or template contains '404' or request.page_type == '404' -%}
+    {%- unless req_path contains 'wishlist' or req_path contains 'wish-list' or template contains 'wishlist' or page.handle == 'wishlist' or page.handle == 'wish-list' -%}
       {% render 'breadcrumb' %}
     {%- endunless -%}
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">

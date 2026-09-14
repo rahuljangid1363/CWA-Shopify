@@ -1,5 +1,5 @@
 {%- assign req_path = request.path | downcase -%}
-{%- unless template == 'index' or template == '404' or template.name == '404' or template contains '404' or request.page_type == '404' or req_path contains 'wishlist' or req_path contains 'wish-list' or template contains 'wishlist' or page.handle == 'wishlist' or page.handle == 'wish-list' -%}
+{%- unless template == 'index' or req_path contains 'wishlist' or req_path contains 'wish-list' or template contains 'wishlist' or page.handle == 'wishlist' or page.handle == 'wish-list' -%}
 <style>
   .g-breadcrumb{
     flex-direction: column;
