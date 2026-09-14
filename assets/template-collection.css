@@ -1225,11 +1225,17 @@ div#slider-range {
 @media(min-width: 750px) {
   .main-collection-filter-left .ap-left-filter {
     position: sticky;
-    top: 160px;
+    top: 140px;
     align-self: flex-start;
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .main-collection-filter-left .ap-left-filter::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   /* these were absolutely positioned against the full-width row; now that
