@@ -73,9 +73,11 @@
 }
 
 .collection-product-count__text {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   line-height: 1.5;
   margin: 0;
+  color: #64748b;
+  font-weight: 500;
 }
 
 .collection-product-count__text.loading {
@@ -113,9 +115,12 @@
 
 .collection-filters__label {
   display: block;
-  color: var(--color-foreground-85);
-  font-size: 1.4rem;
-  margin-right: 2rem;
+  color: #1e293b;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-right: 1.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .collection-filters__summary {
@@ -181,56 +186,71 @@
   text-decoration: none;
 }
 
-.collection-filters__sort {
-  font-size: 1.4rem;
-  height: auto;
-  line-height: 1.5;
-  margin: 0;
-  padding-left: 1rem;
-  padding-right: 3.75rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  outline: 0.1rem solid rgba(var(--color-foreground), 0.2);
-  /* outline-offset: 1rem; */
-  /* box-shadow: 0 0 0 1rem rgb(var(--color-background)),
-    0 0 0.2rem 1.2rem rgba(var(--color-foreground), 0.3); */
-}
-
 .collection-filters__sort,
-.collection-filters__sort:hover {
-  outline: 0.1rem solid rgba(var(--color-foreground), 0.2);
-  /* outline-offset: 1rem; */
-  /* box-shadow: 0 0 0 1rem rgb(var(--color-background)),
-    0 0 0.2rem 1.2rem rgba(var(--color-foreground), 0.3); */
+.collection-filters__field .select__select,
+.mobile-facets__sort .select__select {
+  font-size: 1.35rem !important;
+  font-weight: 500 !important;
+  color: #1e293b !important;
+  height: 42px !important;
+  line-height: 40px !important;
+  margin: 0 !important;
+  padding: 0 38px 0 14px !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  outline: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  cursor: pointer;
+  box-sizing: border-box !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
 }
 
+.collection-filters__sort:hover,
+.collection-filters__field .select__select:hover,
+.mobile-facets__sort .select__select:hover {
+  outline: none !important;
+  border-color: #cbd5e1 !important;
+  background-color: #f8fafc !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+}
+
+.collection-filters__sort:focus,
 .collection-filters__sort:focus-visible,
-.mobile-facets__sort .select__select:focus-visible {
-  outline: 0.1rem solid rgba(var(--color-foreground), 0.2);
-  /* outline-offset: 1rem; */
-  /* box-shadow: 0 0 0 1rem rgb(var(--color-background)),
-    0 0 0.2rem 1.2rem rgba(var(--color-foreground), 0.3); */
-}
-
 .collection-filters__sort.focused,
 .no-js .collection-filters__sort:focus,
+.collection-filters__field .select__select:focus,
+.collection-filters__field .select__select:focus-visible,
+.mobile-facets__sort .select__select:focus,
+.mobile-facets__sort .select__select:focus-visible,
 .mobile-facets__sort .select__select.focused,
 .no-js .mobile-facets__sort .select__select:focus {
-  outline: 0.1rem solid rgba(var(--color-foreground), 0.2);
-  /* outline-offset: 1rem; */
-  /* box-shadow: 0 0 0 1rem rgb(var(--color-background)),
-    0 0 0.2rem 1.2rem rgba(var(--color-foreground), 0.3); */
-
+  outline: none !important;
+  border-color: var(--g-main, #3075cc) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(48, 117, 204, 0.15), 0 4px 14px rgba(0, 0, 0, 0.1) !important;
 }
 
 .no-js .collection-filters__sort:focus:not(:focus-visible),
 .no-js .mobile-facets__sort .select__select:focus:not(:focus-visible) {
-  outline: 0;
-  box-shadow: none;
+  outline: none !important;
 }
 
-.collection-filters__sort+.icon-caret {
-  right: 1rem;
+.collection-filters__sort + .icon-caret,
+.collection-filters__field .select .icon-caret,
+.mobile-facets__sort .select .icon-caret {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #64748b;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.collection-filters__field .select:hover .icon-caret,
+.mobile-facets__sort .select:hover .icon-caret {
+  color: #1e293b;
 }
 
 .facets {
@@ -1037,7 +1057,7 @@ div#slider-range {
 }
 
 .main-collection-filter-left .ap-left-filter {
-  padding-right: 30px;
+  padding-right: 12px;
 }
 
 .collection-sidebar-filter-label {
@@ -1108,14 +1128,14 @@ div#slider-range {
   padding: 0;
 }
 
-.collection-categories .collection-categories__list > li {
+.collection-categories .collection-categories__list>li {
   border-bottom: 1px solid #e5e5e5;
   margin: 0;
   padding: 0;
   background: #ffffff;
 }
 
-.collection-categories .collection-categories__list > li:last-child {
+.collection-categories .collection-categories__list>li:last-child {
   border-bottom: none;
 }
 
@@ -1136,7 +1156,7 @@ div#slider-range {
   align-items: center;
   justify-content: space-between;
   padding: 15px 18px;
-  font-family: "Times New Roman", Times, Georgia, serif;
+  padding-left: 10px;
   font-size: 15.5px;
   font-weight: 400;
   color: #555555;
@@ -1181,7 +1201,7 @@ div#slider-range {
   transform: rotate(0deg);
 }
 
-.collection-categories .has-submenu.is-open > .collection-categories__parent-row .collection-categories__toggle-btn .icon-chevron {
+.collection-categories .has-submenu.is-open>.collection-categories__parent-row .collection-categories__toggle-btn .icon-chevron {
   transform: rotate(180deg);
 }
 
@@ -1203,8 +1223,7 @@ div#slider-range {
 
 .collection-categories .collection-categories__sublink {
   display: block;
-  padding: 14px 18px 14px 44px;
-  font-family: "Times New Roman", Times, Georgia, serif;
+  padding: 14px 18px 14px 30px;
   font-size: 13.5px;
   font-weight: 400;
   color: #555555;
@@ -1225,7 +1244,7 @@ div#slider-range {
 @media(min-width: 750px) {
   .main-collection-filter-left .ap-left-filter {
     position: sticky;
-    top: 140px;
+    top: 100px;
     align-self: flex-start;
     overflow: visible;
     scrollbar-width: none;
@@ -1238,22 +1257,6 @@ div#slider-range {
     height: 0 !important;
   }
 
-  /* these were absolutely positioned against the full-width row; now that
-     .ap-left-filter is a positioning context of its own, keep them in-flow
-     inside the sidebar instead of letting them mis-place against its narrower box */
-  .main-collection-filter-left .ap-left-filter .collection-filters__field {
-    position: static;
-    display: block;
-    margin-left: 1px;
-    margin-bottom: 10px;
-
-  }
-
-  .main-collection-filter-left .ap-left-filter .collection-product-count.light {
-    position: static;
-    margin-bottom: 10px;
-  }
-
   /* stack the sort control full-width instead of a cramped inline row so it
      never forces the sidebar to scroll horizontally */
   .main-collection-filter-left .ap-left-filter .collection-filters__item.sorting {
@@ -1262,26 +1265,52 @@ div#slider-range {
     width: 100%;
     padding-left: 0;
     max-width: 100%;
+    margin-top: 15px;
+    margin-bottom: 2px;
   }
 
   .main-collection-filter-left .ap-left-filter .collection-filters__label {
     margin-right: 0;
     width: 100%;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #1e293b;
+    letter-spacing: 0.02em;
   }
 
   .main-collection-filter-left .ap-left-filter .collection-filters__field {
+    position: static;
+    display: block;
     width: 100%;
+    margin-left: 0;
+    margin-bottom: 0;
     justify-content: flex-start;
   }
 
   .main-collection-filter-left .ap-left-filter .collection-filters__field .select {
     width: 100%;
+    position: relative;
   }
 
   .main-collection-filter-left .ap-left-filter .collection-filters__field .select__select {
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .main-collection-filter-left .ap-left-filter .collection-product-count.light {
+    position: static;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: right;
+  }
+
+  .main-collection-filter-left .ap-left-filter .collection-product-count__text {
+    font-size: 1.25rem;
+    color: #64748b;
+    font-weight: 500;
+    margin: 0;
   }
 }
 
