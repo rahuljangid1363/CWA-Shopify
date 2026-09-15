@@ -273,6 +273,32 @@
   }
 }
 
+@media (max-width: 767px) {
+  /* image_ratio: "adapt" sizes the image box from the product photo's
+     own aspect ratio via an inline padding-bottom:X% (set in
+     product-grid-3.liquid) - fine at 3-4 cards per row on desktop, but
+     at 1-2 cards per row on mobile that same ratio makes the box (and
+     the card) very tall relative to the screen. max-height alone can't
+     win here since the box's rendered height is driven by that
+     percentage padding, not a content/height value - so replace it with
+     a fixed height instead (!important to beat the inline style). */
+  .product-tab .producttab-item .media {
+    height: 220px !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* .media > img is object-fit: cover globally (base.css), which crops
+     product photos to fill the box - fine for lifestyle imagery, but it
+     was cutting off parts of the product itself once the box became a
+     fixed height instead of matching the photo's own ratio. Switch to
+     contain here so the whole product photo stays visible, letterboxed
+     on a light background instead of cropped. */
+  .product-tab .producttab-item .media > img {
+    object-fit: contain !important;
+    background-color: #fff;
+  }
+}
+
 @media (max-width:567px) {
   .product-tab .heading .link-base {
     margin-top: 0;

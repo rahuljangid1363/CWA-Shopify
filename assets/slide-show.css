@@ -402,6 +402,18 @@
         left: 20px;
         right: 20px;
         bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: end;
+    }
+.slide-show .hero-app-title{
+    padding-bottom: 10px;
+}
+    .slide-show .hero-app-info {
+
+        gap: 2px;
+        align-items: end;
     }
 
     .slide-show .text-slider {
