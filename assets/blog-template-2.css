@@ -175,3 +175,56 @@
     color: #ffffff;
     background: linear-gradient(110deg, #2766B6 0%, #2F73CA 45%, #3B85E4 100%) !important;
 }
+
+/* Mobile/tablet: move the prev/next arrows below the card row instead of
+   overlaying the card sides (the global .slick-arrow default in
+   base.css), so they read as a navigation control under the slider
+   rather than covering the cards. Scoped to this section only - the
+   global .slick-arrow rules used by other carousels are untouched. */
+@media (max-width: 991px) {
+    .blog-post .blog-list {
+        padding-bottom: 64px;
+    }
+
+    .blog-post .blog-list .slick-arrow {
+        top: auto;
+        bottom: 0;
+        left: 50%;
+        right: auto;
+        transform: none;
+        width: 44px;
+        height: 44px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #ffffff;
+        border: 1px solid #eaeaea;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: box-shadow .2s ease, transform .2s ease;
+    }
+
+    .blog-post .blog-list .slick-prev {
+        transform: translateX(calc(-100% - 8px));
+    }
+
+    .blog-post .blog-list .slick-next {
+        transform: translateX(8px);
+    }
+
+    .blog-post .blog-list .slick-prev:hover,
+    .blog-post .blog-list .slick-next:hover {
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .blog-post .blog-list .slick-prev::before,
+    .blog-post .blog-list .slick-next::before {
+        font-size: 16px;
+        color: #0b1f3a;
+    }
+
+    .blog-post .blog-list .slick-arrow.slick-disabled {
+        opacity: 0.35;
+        pointer-events: none;
+    }
+}

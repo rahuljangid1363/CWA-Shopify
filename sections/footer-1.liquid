@@ -98,7 +98,13 @@
                         <img src="{{ block.settings.block_image | img_url: '160x' }}" alt="{{ shop.name | escape }}" loading="lazy" width="{{ block.settings.block_image.width }}" height="{{ block.settings.block_image.height }}">
                     </div>
                     {%- endif -%}
-                    <h2 class="title-footer">{{ block.settings.header_content_footer }}</h2>
+                    <h2 class="title-footer">{{ block.settings.header_content_footer }}
+                        {%- if block.settings.block_image == blank -%}
+                        <span class="drawer__nav-toggle--open">
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                        {%- endif -%}
+                    </h2>
                     {%- if  block.settings.phone_text != blank or block.settings.phone_number != blank -%}
                     <div class="phone-number-box">
                         <p>{{ block.settings.phone_text }}</p>

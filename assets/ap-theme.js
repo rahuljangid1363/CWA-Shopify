@@ -107,7 +107,7 @@ function initSlick(object){
           slidesToShow: slidesToShow_767,
           slidesToScroll: slidesToScroll_767,
           dots: dots_767,
-          arrows: dots_767
+          arrows: arrows_767
         }
       },
       {
@@ -738,13 +738,20 @@ function actionMenuMobile(){
   });
 
   $('.title-footer').click(function(){
-    if($(this).parent().hasClass('menu-footer')){
-      if($(this).parent().hasClass('active')){
-        $(this).parent().removeClass('active');
+    var $parent = $(this).parent();
+    var isFooterAccordion = ($parent.hasClass('menu-footer') || $parent.hasClass('text-content')) && $(this).find('.drawer__nav-toggle--open').length > 0;
+    if(isFooterAccordion){
+      var isActive = $parent.hasClass('active');
+      $('.menu-footer.active, .text-content.active').not($parent).each(function(){
+        $(this).removeClass('active');
+        $(this).find('.title-footer i').addClass('fa-angle-down').removeClass('fa-angle-up');
+      });
+      if(isActive){
+        $parent.removeClass('active');
         $(this).find('i').addClass('fa-angle-down');
         $(this).find('i').removeClass('fa-angle-up');
       }else{
-        $(this).parent().addClass('active');
+        $parent.addClass('active');
         $(this).find('i').removeClass('fa-angle-down');
         $(this).find('i').addClass('fa-angle-up');
       }

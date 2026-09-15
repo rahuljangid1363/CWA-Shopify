@@ -169,23 +169,113 @@
 .footer-1  .designer .icon-card-footer{
     justify-content: flex-end;
 }
-@media(max-width: 575px){
+/* Footer menu blocks collapse into an accordion (tap the title to
+   expand/collapse) on mobile and tablet. Only blocks that actually carry
+   a .drawer__nav-toggle--open toggle get the treatment: the "menu" block
+   type always has one, and the "text-content" type only renders one when
+   it has no block_image (see footer-1.liquid) - the one text-content
+   block WITH a logo is the company description, which stays a plain,
+   always-visible block exactly as before.
+
+   .footer-blog-items is also forced to full width here, overriding
+   Bootstrap's col-lg-2/col-sm-3/col-md-4 grid classes (and this file's
+   own older >=577px two-up tablet rules further down) so every
+   accordion row spans edge-to-edge and every toggle icon lines up on
+   the same right edge instead of sitting wherever each block's grid
+   column happened to end. */
+@media(max-width: 991px){
     .footer-blog{
-        flex-direction: column;
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .footer-blog-items{
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+        order: unset !important;
+    }
+
+    /* .footer-1 .footer-blog-items:nth-child(2) sets display:flex
+       elsewhere in this file; combined with the Bootstrap "me-auto"
+       class every .text-content carries, that flex context makes
+       whichever block happens to land in that slot (here: the first
+       accordion item, "Products") shrink to its content width instead
+       of filling the row - the display:block !important above already
+       neutralizes it, this just documents why it was needed. */
+    .footer-blog-items .text-content{
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+
+    .menu-footer,
+    .text-content:has(.drawer__nav-toggle--open){
+        border-top: 1px solid rgba(153, 153, 153, 0.25);
+    }
+
+    .menu-footer:last-of-type,
+    .text-content:has(.drawer__nav-toggle--open):last-of-type{
+        border-bottom: 1px solid rgba(153, 153, 153, 0.25);
+    }
+
+    .menu-footer .title-footer,
+    .text-content:has(.drawer__nav-toggle--open) .title-footer{
+        cursor: pointer;
+        user-select: none;
+        margin-bottom: 0;
+        padding: 16px 0;
     }
 
     .footer-1 .drawer__nav-toggle--open{
         display: block;
     }
 
+    .footer-1 .drawer__nav-toggle--open .fa{
+        display: inline-block;
+        transition: transform 0.25s ease;
+    }
+
+    .menu-footer.active .drawer__nav-toggle--open .fa,
+    .text-content.active .drawer__nav-toggle--open .fa{
+        transform: rotate(180deg);
+    }
+
     .menu-footer .footer-menu{
+        display: grid !important;
+        grid-template-rows: 0fr;
         overflow: hidden;
-        display: none !important;
-        animation: all 0.5s ease-in;
+        transition: grid-template-rows 0.3s ease;
+    }
+
+    .menu-footer .footer-menu .list-verticalmenu{
+        min-height: 0;
+        overflow: hidden;
     }
 
     .menu-footer.active .footer-menu{
-        display: flex !important;
+        grid-template-rows: 1fr;
+        padding-bottom: 16px;
+    }
+
+    /* text-content blocks with a toggle (used for footer link columns
+       like "Products", "Industries" etc. on this site) render a plain
+       <ul> with a variable number of <li> items directly - not a single
+       wrapped element like .footer-menu above - so the 0fr/1fr grid-row
+       trick can't target it (each <li> would auto-place into its own
+       implicit row instead of all collapsing together). A capped
+       max-height transition handles an arbitrary number of items
+       correctly instead. */
+    .text-content:has(.drawer__nav-toggle--open) .list-content-footer{
+        max-height: 0;
+        margin: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+    }
+
+    .text-content.active .list-content-footer{
+        max-height: 2000px;
+        padding-bottom: 16px;
     }
 }
 
