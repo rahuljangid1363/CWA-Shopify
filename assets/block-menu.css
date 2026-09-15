@@ -1,3 +1,9 @@
+/* Hidden by default everywhere; individual headers opt into showing it
+   (e.g. inside the mobile drawer) via their own scoped CSS. */
+.nav-mega__mobile-search {
+  display: none;
+}
+
 .nav-mega .site-nav .site-nav__link{
 
   display: block;

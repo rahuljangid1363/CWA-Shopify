@@ -6,6 +6,22 @@
   <div class="menu-close">
     <button class="button-close" type="button">{%- render 'icon-close' -%}</button>
   </div>
+  <div class="nav-mega__mobile-search">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="nav-mega__mobile-search-form">
+      <input
+        type="search"
+        name="q"
+        class="nav-mega__mobile-search-input"
+        placeholder="Search by CWA code, model or spec"
+        autocomplete="off"
+        value="{{ search.terms | escape }}"
+      >
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" class="nav-mega__mobile-search-btn" aria-label="Search">
+        {%- render 'icon-search' -%}
+      </button>
+    </form>
+  </div>
   {%- assign industryBlocks = section.blocks | where: 'type', 'industry_item' -%}
   <ul class="site-nav d-flex">
     {%- for link in linklists[settings.main_linklist].links -%}

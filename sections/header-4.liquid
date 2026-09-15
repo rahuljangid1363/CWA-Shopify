@@ -406,17 +406,236 @@
     }
   }
   @media (max-width: 991px) {
-    .header-4-bottom {
+    /* Top bar: tighten spacing and let the logo shrink a little */
+    .header-4-center {
+      padding: 10px 0 !important;
+    }
+    .header-4-center__inner {
+      position: relative !important;
+      gap: 12px !important;
+    }
+    .header-4 .head-logo img {
+      height: 34px !important;
+      max-height: 34px !important;
+      max-width: 160px !important;
+    }
+    .header-4-center__right {
+      gap: 12px !important;
+    }
+    .header-4 .header-actions {
+      gap: 14px !important;
+    }
+
+    /* Search: collapse the inline bar to an icon trigger that opens a
+       full-width dropdown panel anchored under the header row.
+       #form-search-icon is targeted by id (not just .form-search)
+       because the always-on desktop rule above forces this exact id to
+       display:block !important - an id beats any number of classes, so
+       only an equally id-qualified selector can override it here. */
+    .header-4 .header-search .form-search,
+    .header-4 #form-search-icon {
       display: none !important;
     }
-    .header-4 .header-search .form-search {
-      display: none !important;
+    .header-4 .header-search .form-search.active,
+    .header-4 #form-search-icon.active {
+      display: block !important;
+      position: absolute !important;
+      top: calc(100% + 10px) !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: auto !important;
+      margin: 0 !important;
+      background: #ffffff !important;
+      border-radius: 10px !important;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.18) !important;
+      padding: 14px !important;
+      z-index: 1001 !important;
+    }
+    .header-4 .header-search .form-search.active .search-input-wrap {
+      width: 100% !important;
     }
     .header-4 .header-search .search-media {
       display: block !important;
     }
     .header-4 .icon-menu-mobile {
       display: block !important;
+    }
+
+    /* Search box shown inside the mobile nav drawer (.nav-mega), above
+       the Home / Industries / News / About / Contact links */
+    .header-4 .nav-mega__mobile-search {
+      display: block !important;
+      padding: 16px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .header-4 .nav-mega__mobile-search-form {
+      display: flex;
+      align-items: center;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .header-4 .nav-mega__mobile-search-input {
+      flex: 1 1 auto;
+      min-width: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 10px 12px;
+      font-size: 13.5px;
+      color: #1e293b;
+      font-family: inherit;
+    }
+    .header-4 .nav-mega__mobile-search-input::placeholder {
+      color: #94a3b8;
+    }
+    .header-4 .nav-mega__mobile-search-btn {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: #3075cc;
+      color: #ffffff;
+      cursor: pointer;
+    }
+    .header-4 .nav-mega__mobile-search-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+    .header-4 .nav-mega__mobile-search-btn svg path {
+      fill: #ffffff !important;
+    }
+
+    /* .nav-mega and its contents are forced into a centered, horizontal
+       flex row with white text by the (unscoped) desktop rules above -
+       header-4.css additionally forces position:static !important -
+       together that makes the drawer render as an invisible/zero-size
+       box instead of a working off-canvas panel. Restore it as a fixed,
+       top-to-bottom, dark-on-white panel. */
+    .header-4-bottom .header-megamenu .nav-mega {
+      position: fixed !important;
+      display: block !important;
+      width: 280px !important;
+      max-width: 85vw !important;
+      height: 100% !important;
+      overflow-y: auto !important;
+      background: #ffffff !important;
+    }
+    .header-4-bottom .header-megamenu .site-nav {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      justify-content: flex-start !important;
+      gap: 0 !important;
+      height: auto !important;
+    }
+    .header-4-bottom .header-megamenu .site-nav__item {
+      display: block !important;
+      height: auto !important;
+      width: 100% !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+    }
+    .header-4-bottom .header-megamenu .site-nav__link {
+      color: #1e293b !important;
+      width: 100% !important;
+      height: auto !important;
+      padding: 14px 18px !important;
+      justify-content: space-between !important;
+    }
+    .header-4-bottom .header-megamenu .site-nav__link:hover {
+      color: #3075cc !important;
+    }
+
+    /* Bottom bar: keep only the "Shop by Categories" trigger visible as a
+       full-width row. The main nav (.header-megamenu > .nav-mega) is not
+       display:none'd here - it's an off-canvas drawer (position: fixed,
+       see block-menu.css) opened by the hamburger icon, so hiding this
+       ancestor would have made it impossible to ever show. Instead its
+       box is collapsed to 0x0 so it takes no visual space while staying
+       in the render tree. */
+    .header-4-bottom {
+      display: block !important;
+      height: auto !important;
+      min-height: 46px !important;
+      padding: 0 !important;
+    }
+    .header-4-bottom__inner {
+      height: auto !important;
+      align-items: stretch !important;
+    }
+    .header-4-bottom .header-vertical-menu {
+      flex: 1 1 100% !important;
+      width: 100% !important;
+      height: auto !important;
+    }
+    .header-4-bottom .icon-vertical-menu {
+      width: 100% !important;
+    }
+    .header-4-bottom .vertical-bars {
+      width: 100% !important;
+      height: auto !important;
+      justify-content: space-between !important;
+      padding: 13px 16px !important;
+    }
+    .header-4-bottom .header-nav-divider {
+      display: none !important;
+    }
+    .header-4-bottom .header-megamenu {
+      flex: 0 0 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      min-width: 0 !important;
+      overflow: visible !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .header-4-bottom .nav-vertical {
+      width: min(300px, calc(100vw - 32px)) !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-4-center__inner {
+      gap: 8px !important;
+    }
+    .header-4 .head-logo img {
+      max-width: 110px !important;
+    }
+    .header-4-center__right {
+      gap: 8px !important;
+    }
+    .header-4 .header-actions {
+      gap: 10px !important;
+    }
+    .header-4 .header-actions .header-wishlist,
+    .header-4 .header-actions .header-cart,
+    .header-4 .header-actions .header-sign,
+    .header-4 .header-actions .header-action-btn,
+    .header-4 .header-actions .btn-wishlist,
+    .header-4 .header-actions .show_login,
+    .header-4 .header-actions .header__icon--cart,
+    .header-4 .header-actions #cart-icon-bubble {
+      width: 28px !important;
+      height: 28px !important;
+      min-width: 28px !important;
+      min-height: 28px !important;
+    }
+    .header-4 .header-actions svg,
+    .header-4 .header-actions .header__icon--cart svg,
+    .header-4 .header-actions #cart-icon-bubble svg {
+      width: 20px !important;
+      height: 20px !important;
+      min-width: 20px !important;
+      min-height: 20px !important;
+    }
+    .header-4 .header-search .form-search.active {
+      padding: 12px !important;
+    }
+    .header-4-bottom .vertical-bars span {
+      font-size: 12px !important;
     }
   }
 </style>
