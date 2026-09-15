@@ -173,7 +173,7 @@
 .blog-items.blog-layout-items-2:hover .blog-read-more {
     background-color: var(--g-main);
     color: #ffffff;
-    background: linear-gradient(110deg, #2766B6 0%, #2F73CA 45%, #3B85E4 100%) !important;
+    background: linear-gradient(110deg, #3C88E9 0%, #2564B4 100%) !important;
 }
 
 /* Mobile/tablet: move the prev/next arrows below the card row instead of

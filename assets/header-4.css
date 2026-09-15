@@ -162,10 +162,7 @@
 }
 
 .header-4 .search-submit-btn {
-  background: linear-gradient(110deg,
-      #2766B6 0%,
-      #2F73CA 45%,
-      #3B85E4 100%) !important;
+  background: linear-gradient(110deg, #3C88E9 0%, #2564B4 100%) !important;
   color: #ffffff !important;
   font-size: 13.5px !important;
   font-weight: 600 !important;
