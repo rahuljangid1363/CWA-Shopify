@@ -1194,7 +1194,6 @@ div#slider-range {
 .collection-categories {
   margin-bottom: 25px;
   background: #ffffff;
-  border: 1px solid #e5e5e5;
   border-radius: 0;
   box-sizing: border-box;
 }
@@ -1211,7 +1210,6 @@ div#slider-range {
 }
 
 .collection-categories .collection-categories__list>li {
-  border-bottom: 1px solid #e5e5e5;
   margin: 0;
   padding: 0;
   background: #ffffff;
@@ -1296,7 +1294,6 @@ div#slider-range {
 }
 
 .collection-categories .collection-categories__subitem {
-  border-top: 1px solid #e5e5e5;
   border-bottom: none !important;
   margin: 0;
   padding: 0;
