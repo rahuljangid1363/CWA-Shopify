@@ -406,6 +406,31 @@
     }
   }
   @media (max-width: 991px) {
+    /* Stick the whole header to the top of the viewport while scrolling.
+       body renders as a CSS grid (one row per section) and sticky only
+       takes effect when applied to the grid item itself - putting it on
+       .header-4 (a descendant of the grid item, not the item) has no
+       visible effect since the item's own row is exactly as tall as the
+       header, leaving no room for it to "stick" within. The static id
+       is stable for a section rendered via {% section '...' %} in the
+       layout, so #shopify-section-header-4 is safe to target directly.
+       .header-4.is-scrolled is already toggled by the existing scroll
+       listener in scrolled-header.liquid (it runs at every width, it
+       just used to only matter for the >=992px floating header) - reuse
+       it here to trim the announcement bar and add a shadow once
+       scrolled. */
+    #shopify-section-header-4 {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 999 !important;
+    }
+    .header-4.is-scrolled {
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12) !important;
+    }
+    .header-4.is-scrolled .header-4-announcement-bar {
+      display: none !important;
+    }
+
     /* Top bar: tighten spacing and let the logo shrink a little */
     .header-4-center {
       padding: 10px 0 !important;

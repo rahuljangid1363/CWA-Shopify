@@ -4773,8 +4773,27 @@ display: none;
   }
 
   .section-header {
-    font-size: 25px;
+    font-size: 18px;
     padding-bottom: 0px;
+  }
+
+  .product-carousel .section-header {
+    font-size: 18px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .tab-content .card-wrapper {
+    margin: 0 0px !important;
+  }
+
+  .newsletter h4 {
+    font-size: 18px !important;
+  }
+
+  .product-tab .nav-pills .nav-link {
+    font-weight: 500 !important;
+    font-size: 10px !important;
+    padding: 6px 20px !important;
   }
 
   .section-text {

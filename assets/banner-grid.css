@@ -276,7 +276,7 @@
     }
 
     .banner-grid-title {
-        font-size: 22px !important;
+        font-size: 18px !important;
     }
 
     .banner-grid-subtitle {
@@ -292,8 +292,8 @@
     }
 
     .cwa-card-flow {
-        min-height: 320px;
-        height: 320px;
+        min-height: 200px;
+        height: 200px;
     }
 
     .cwa-card-liquid,
