@@ -7,41 +7,55 @@
   
     <ul class="site-nav">
       {%- liquid
-        assign vertical_collections = collections | sort: 'title'
-        assign last_title = 'Data Acquisition & Control'
-        assign second_last_title = 'Valve'
-        assign last_collection = null
-        assign second_last_collection = null
-        for c in vertical_collections
-          if c.title == last_title
-            assign last_collection = c
-          elsif c.title == second_last_title
-            assign second_last_collection = c
-          endif
-        endfor
+        assign categories_menu = linklists['shop-by-categories']
       -%}
-      {%- for collection in vertical_collections -%}
-        {%- unless collection.title == last_title or collection.title == second_last_title -%}
-          <li class="site-nav__item{% if collection.url == request.path %} site-nav--active{% endif %}">
-            <a href="{{ collection.url }}" class="site-nav-ver__link"{% if collection.url == request.path %} aria-current="page"{% endif %}>
-              <span>{{ collection.title }}</span>
+      {%- if categories_menu != blank and categories_menu.links.size > 0 -%}
+        {%- comment -%}Only top-level (parent) links are shown here; nested child links are intentionally skipped.{%- endcomment -%}
+        {%- for link in categories_menu.links -%}
+          <li class="site-nav__item{% if link.active or link.url == request.path %} site-nav--active{% endif %}">
+            <a href="{{ link.url }}" class="site-nav-ver__link"{% if link.active or link.url == request.path %} aria-current="page"{% endif %}>
+              <span>{{ link.title }}</span>
             </a>
           </li>
-        {%- endunless -%}
-      {%- endfor -%}
-      {%- if second_last_collection -%}
-        <li class="site-nav__item{% if second_last_collection.url == request.path %} site-nav--active{% endif %}">
-          <a href="{{ second_last_collection.url }}" class="site-nav-ver__link"{% if second_last_collection.url == request.path %} aria-current="page"{% endif %}>
-            <span>{{ second_last_collection.title }}</span>
-          </a>
-        </li>
-      {%- endif -%}
-      {%- if last_collection -%}
-        <li class="site-nav__item{% if last_collection.url == request.path %} site-nav--active{% endif %}">
-          <a href="{{ last_collection.url }}" class="site-nav-ver__link"{% if last_collection.url == request.path %} aria-current="page"{% endif %}>
-            <span>{{ last_collection.title }}</span>
-          </a>
-        </li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- liquid
+          assign vertical_collections = collections | sort: 'title'
+          assign last_title = 'Data Acquisition & Control'
+          assign second_last_title = 'Valve'
+          assign last_collection = null
+          assign second_last_collection = null
+          for c in vertical_collections
+            if c.title == last_title
+              assign last_collection = c
+            elsif c.title == second_last_title
+              assign second_last_collection = c
+            endif
+          endfor
+        -%}
+        {%- for collection in vertical_collections -%}
+          {%- unless collection.title == last_title or collection.title == second_last_title -%}
+            <li class="site-nav__item{% if collection.url == request.path %} site-nav--active{% endif %}">
+              <a href="{{ collection.url }}" class="site-nav-ver__link"{% if collection.url == request.path %} aria-current="page"{% endif %}>
+                <span>{{ collection.title }}</span>
+              </a>
+            </li>
+          {%- endunless -%}
+        {%- endfor -%}
+        {%- if second_last_collection -%}
+          <li class="site-nav__item{% if second_last_collection.url == request.path %} site-nav--active{% endif %}">
+            <a href="{{ second_last_collection.url }}" class="site-nav-ver__link"{% if second_last_collection.url == request.path %} aria-current="page"{% endif %}>
+              <span>{{ second_last_collection.title }}</span>
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if last_collection -%}
+          <li class="site-nav__item{% if last_collection.url == request.path %} site-nav--active{% endif %}">
+            <a href="{{ last_collection.url }}" class="site-nav-ver__link"{% if last_collection.url == request.path %} aria-current="page"{% endif %}>
+              <span>{{ last_collection.title }}</span>
+            </a>
+          </li>
+        {%- endif -%}
       {%- endif -%}
       <li class="site-nav__item site-nav__item--view-all{% if request.path == routes.all_products_collection_url or request.path == '/products' %} site-nav--active{% endif %}">
         <a href="{{ routes.all_products_collection_url }}" class="site-nav-ver__link"{% if request.path == routes.all_products_collection_url or request.path == '/products' %} aria-current="page"{% endif %}>
