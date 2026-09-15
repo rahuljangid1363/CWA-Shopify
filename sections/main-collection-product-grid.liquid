@@ -101,7 +101,7 @@
                     </svg>
                   </button>
                 </div>
-                <ul class="collection-categories__submenu" {% unless is_current_page %}style="display: none;"{% endunless %}>
+                <ul class="collection-categories__submenu">
                   {%- for child in sub_menu.links -%}
                     {%- assign is_child_active = false -%}
                     {%- if child.active or request.path == child.url -%}
@@ -171,7 +171,7 @@
                   </svg>
                 </button>
               </div>
-              <ul class="collection-categories__submenu" {% unless is_current_page %}style="display: none;"{% endunless %}>
+              <ul class="collection-categories__submenu">
                 {%- for child in link.links -%}
                   {%- assign is_child_active = false -%}
                   {%- if child.active or request.path == child.url -%}
@@ -219,13 +219,11 @@
         e.stopPropagation();
         var item = toggleBtn.closest('.has-submenu');
         if (!item) return;
-        var submenu = item.querySelector('.collection-categories__submenu');
         var isOpen = item.classList.contains('is-open');
         var container = item.closest('.collection-categories') || document;
 
         if (isOpen) {
           item.classList.remove('is-open');
-          if (submenu) submenu.style.display = 'none';
           toggleBtn.setAttribute('aria-expanded', 'false');
         } else {
           // Close all other open category accordions
@@ -233,15 +231,12 @@
           openItems.forEach(function(otherItem) {
             if (otherItem !== item) {
               otherItem.classList.remove('is-open');
-              var otherSubmenu = otherItem.querySelector('.collection-categories__submenu');
-              if (otherSubmenu) otherSubmenu.style.display = 'none';
               var otherBtn = otherItem.querySelector('.collection-categories__toggle-btn');
               if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
             }
           });
 
           item.classList.add('is-open');
-          if (submenu) submenu.style.display = 'block';
           toggleBtn.setAttribute('aria-expanded', 'true');
         }
       }

@@ -1285,12 +1285,27 @@ div#slider-range {
   transform: rotate(180deg);
 }
 
-/* Submenu */
+/* Submenu - smooth expand/collapse instead of the old display:none/block
+   snap (that previously came from an inline style set by JS, which can't
+   be transitioned). The JS now only toggles the .is-open class; this
+   max-height transition drives the actual open/close animation. The cap
+   (600px) is kept close to a realistic max submenu length on purpose -
+   too generous a value (e.g. 2000px) makes a short list's real height
+   pass the cap almost immediately, so most of the transition plays out
+   as a no-op and the open/close reads as an abrupt snap instead of a
+   smooth reveal. */
 .collection-categories .collection-categories__submenu {
   list-style: none;
   margin: 0;
   padding: 0;
   background-color: #ffffff;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.collection-categories .has-submenu.is-open > .collection-categories__submenu {
+  max-height: 600px;
 }
 
 .collection-categories .collection-categories__subitem {
