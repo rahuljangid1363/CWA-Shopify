@@ -239,6 +239,7 @@
                 {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                 >
           {%- if product.selected_or_first_available_variant.available -%}
+          {%- render 'icon-addcard' -%}
           {{ 'products.product.add_to_cart' | t }}
           {%- else -%}
           {{ 'products.product.sold_out' | t }}
@@ -575,6 +576,7 @@
                   {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                   >
                       {%- if product.selected_or_first_available_variant.available -%}
+                        {%- render 'icon-addcard' -%}
                         {{ 'products.product.add_to_cart' | t }}
                       {%- else -%}
                         {{ 'products.product.sold_out' | t }}
@@ -784,6 +786,7 @@
               {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
               >
                   {%- if product.selected_or_first_available_variant.available -%}
+                    {%- render 'icon-addcard' -%}
                     {{ 'products.product.add_to_cart' | t }}
                   {%- else -%}
                     {{ 'products.product.sold_out' | t }}
