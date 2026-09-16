@@ -17,8 +17,8 @@
         <span class="name-btn-product">Add to Cart</span>
         <span class="text-btn-product">Add to Cart</span>
         {%- else -%}
-        <span class="name-btn-product">Login to Add to Cart</span>
-        <span class="text-btn-product">Login to Add to Cart</span>
+        <span class="name-btn-product js-guest-cta-text" data-hover-text="Add to Cart">Add to Cart</span>
+        <span class="text-btn-product js-guest-cta-text" data-hover-text="Add to Cart">Add to Cart</span>
         {%- endif -%}
         {%- else -%}
         {{ 'products.product.sold_out' | t }}
