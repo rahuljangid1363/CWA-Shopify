@@ -13,11 +13,16 @@
               >
         {%- if product_card_product.selected_or_first_available_variant.available -%}
         {%- render 'icon-addcard' -%}
+        {%- if customer -%}
+        <span class="name-btn-product">Add to Cart</span>
+        <span class="text-btn-product">Add to Cart</span>
+        {%- else -%}
+        <span class="name-btn-product">Login to Add to Cart</span>
+        <span class="text-btn-product">Login to Add to Cart</span>
+        {%- endif -%}
         {%- else -%}
         {{ 'products.product.sold_out' | t }}
         {%- endif -%}
-        <span class="name-btn-product">Add to Cart</span>
-        <span class="text-btn-product">Add to Cart</span>
       </button>
       
     </div>

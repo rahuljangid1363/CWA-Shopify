@@ -516,6 +516,11 @@ function displayProductMedia(){
 
 function addGroupProductCart() {
   $(".add-group-cart").click(function(){
+    if (!window.customerLoggedIn) {
+      var loginUrl = (window.routes && window.routes.account_login_url) || '/account/login';
+      window.location.href = loginUrl + '?return_url=' + encodeURIComponent(window.location.pathname + window.location.search);
+      return;
+    }
     var id_products = [];
     $(".group_products input.group_product-item").each(function(){
       if($(this).is(':checked')) {

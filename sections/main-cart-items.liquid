@@ -5,6 +5,18 @@
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 
+{%- unless customer -%}
+  {%- comment -%} Guests can't view the cart page - decided server-side via
+  the customer object; the redirect itself has to run client-side since
+  Liquid has no server redirect tag. {%- endcomment -%}
+  <script>
+    window.location.replace('{{ routes.account_login_url }}?return_url=' + encodeURIComponent(window.location.pathname + window.location.search));
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url={{ routes.account_login_url }}">
+  </noscript>
+{%- endunless -%}
+
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 
 <cart-items class="page-width{% if cart == empty %} is-empty{% endif %}">

@@ -495,6 +495,13 @@
     e.preventDefault();
     e.stopPropagation();
 
+    // Require a logged-in customer before wishlisting.
+    if (!window.customerLoggedIn) {
+      var loginUrl = (window.routes && window.routes.account_login_url) || '/account/login';
+      window.location.href = loginUrl + '?return_url=' + encodeURIComponent(window.location.pathname + window.location.search);
+      return;
+    }
+
     var handle = btn.getAttribute('data-handle') || btn.getAttribute('data-wishlist-handle');
     if (!handle) {
       var card = btn.closest('.card-wrapper, .product-grid-3, .card, .producttab-item');

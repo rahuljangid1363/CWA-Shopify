@@ -244,12 +244,16 @@
                         {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                         >
                             {%- if product.selected_or_first_available_variant.available -%}
+                              {%- if customer -%}
                               {{ 'products.product.add_to_cart' | t }}
+                              {%- else -%}
+                              Login to Add to Cart
+                              {%- endif -%}
                             {%- else -%}
                               {{ 'products.product.sold_out' | t }}
                             {%- endif -%}
                         </button>
-                        {%- if block.settings.show_dynamic_checkout -%}
+                        {%- if block.settings.show_dynamic_checkout and customer -%}
                           {{ form | payment_button }}
                         {%- endif -%}
                       </div>

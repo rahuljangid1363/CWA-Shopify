@@ -55,7 +55,11 @@
                     <input type="hidden" name="utf8" value="✓">
                     <div class="product-form__buttons">
                       <button type="submit" name="add" class="product-form__submit button button--full-width">
+                        {%- if customer -%}
                         Add to cart
+                        {%- else -%}
+                        Login to Add to Cart
+                        {%- endif -%}
                       </button>
                     </div>
                   </form>

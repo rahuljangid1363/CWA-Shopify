@@ -10,6 +10,17 @@ if (!customElements.get('product-form')) {
 
     onSubmitHandler(evt) {
       evt.preventDefault();
+
+      // Require a logged-in customer before adding to cart. This is the
+      // single choke point every <product-form> (product page, product
+      // cards, quickview, featured product) submits through, so gating it
+      // here covers all add-to-cart entry points at once.
+      if (!window.customerLoggedIn) {
+        var loginUrl = (window.routes && window.routes.account_login_url) || '/account/login';
+        window.location.href = loginUrl + '?return_url=' + encodeURIComponent(window.location.pathname + window.location.search);
+        return;
+      }
+
       this.cartNotification.setActiveElement(document.activeElement);
 
       const submitButton = this.querySelector('[type="submit"]');

@@ -39,7 +39,7 @@
       {% render 'group-product-template', product: product_1 %}
     {%- endif -%}
   </div>
-  <div class="group-cart-products"><button class="add-group-cart">{{ 'products.product.add_to_cart' | t }}</button></div>
+  <div class="group-cart-products"><button class="add-group-cart">{%- if customer -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}Login to Add to Cart{%- endif -%}</button></div>
 </div>
 {%- endif -%}
 {%- endif -%}
