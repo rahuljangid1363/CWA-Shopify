@@ -297,18 +297,8 @@
                 transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   }
 
-  .card:hover .media.media--hover-effect>img:first-child:only-child,
-  .card-wrapper:hover .media.media--hover-effect>img:first-child:only-child {
-    transform: scale(1.04);
-  }
-
-  .card-wrapper:hover .media.media--hover-effect>img:first-child:not(:only-child) {
-    opacity: 0;
-    transform: scale(1.04);
-  }
-
-  .card-wrapper:hover .media.media--hover-effect>img+img {
-    opacity: 1;
+  .card:hover .media.media--hover-effect>img:first-child,
+  .card-wrapper:hover .media.media--hover-effect>img:first-child {
     transform: scale(1.04);
   }
 

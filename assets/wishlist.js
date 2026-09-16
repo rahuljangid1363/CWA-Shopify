@@ -1,10 +1,8 @@
 /**
- * Wishlist functionality matching reference image UI:
- * - Flipkart-style vertical list layout
- * - Left: 100x100 square image + pink "Currently unavailable" status if out of stock
- * - Middle: Product title + Assured badge + bold Price + strike-through compare price + green discount %
- * - Right: Trash can delete icon with immediate removal
- * - Header and Footer fully preserved and visible
+ * Wishlist functionality:
+ * - Grid of product cards: image, title, SKU, price, divider, "Move to Bag"
+ * - Top-right (x) button removes the item from the wishlist
+ * - "Move to Bag" adds the item to the cart, then removes it from the wishlist
  * - Multi-tier storage (JSON localStorage, cookies, legacy) & instant caching
  */
 (function() {
@@ -25,44 +23,34 @@
     style.id = 'fk-wishlist-dynamic-styles';
     style.textContent = [
       '.is-wishlist-page .g-breadcrumb, .is-wishlist-page nav.breadcrumb, .is-wishlist-page .breadcrumbs-style_1, .is-wishlist-page .breadcrumbs-style_2 { display: none !important; }',
-      '.fk-wishlist-page { background-color: #f1f3f6 !important; min-height: auto; padding: 30px 15px 50px; display: block !important; width: 100% !important; box-sizing: border-box !important; }',
-      '.fk-wishlist-container { max-width: 980px !important; margin: 0 auto !important; display: block !important; width: 100% !important; box-sizing: border-box !important; }',
-      '.fk-wishlist-breadcrumb { display: block !important; font-size: 13px !important; color: #878787 !important; margin-bottom: 14px !important; padding: 0 4px !important; }',
-      '.fk-wishlist-breadcrumb a { color: #878787 !important; text-decoration: none !important; }',
+      '.fk-wishlist-page { background-color: #ffffff !important; min-height: auto; padding: 0 0 60px; display: block !important; width: 100% !important; box-sizing: border-box !important; }',
+      '.fk-wishlist-container { width: 100% !important; box-sizing: border-box !important; }',
+      '.fk-wishlist-breadcrumb { display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; width: 100% !important; box-sizing: border-box !important; background-color: #eaf5ff !important; padding: 26px 15px !important; margin: 0 0 30px 0 !important; font-size: 14px !important; color: #5c6b7a !important; }',
+      '.fk-wishlist-breadcrumb a { display: inline-flex !important; align-items: center !important; gap: 6px !important; color: #5c6b7a !important; text-decoration: none !important; }',
       '.fk-wishlist-breadcrumb a:hover { color: #2874f0 !important; }',
-      '.fk-wishlist-breadcrumb__separator { display: inline-block !important; vertical-align: middle !important; margin: 0 4px !important; color: #878787 !important; }',
-      '.fk-wishlist-breadcrumb__current { color: #212121 !important; font-weight: 500 !important; }',
-      '.fk-wishlist-card { background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 2px !important; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06) !important; overflow: hidden !important; display: block !important; width: 100% !important; box-sizing: border-box !important; }',
-      '.fk-wishlist-header { padding: 20px 24px !important; border-bottom: 1px solid #e0e0e0 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; background: #ffffff !important; box-sizing: border-box !important; }',
-      '.fk-wishlist-header__title { font-size: 18px !important; font-weight: 700 !important; color: #212121 !important; margin: 0 !important; padding: 0 !important; letter-spacing: -0.2px !important; }',
-      '.fk-wishlist-header__actions { display: flex !important; align-items: center !important; }',
-      '.fk-wishlist-header__clear-btn { background: none !important; border: none !important; color: #878787 !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; display: inline-flex !important; align-items: center !gap: 5px !important; padding: 6px 12px !important; border-radius: 4px !important; }',
-      '.fk-wishlist-header__clear-btn:hover { color: #e53935 !important; background-color: #ffebee !important; }',
-      '.fk-wishlist-list { display: block; width: 100% !important; background: #ffffff !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; }',
-      '.fk-wishlist-item { display: flex !important; flex-direction: row !important; align-items: flex-start !important; justify-content: space-between !important; width: 100% !important; padding: 24px !important; border-bottom: 1px solid #f0f0f0 !important; position: relative !important; box-sizing: border-box !important; background-color: #ffffff !important; transition: background-color 0.2s ease, opacity 0.25s ease, transform 0.25s ease !important; }',
-      '.fk-wishlist-item:last-child { border-bottom: none !important; }',
-      '.fk-wishlist-item:hover { background-color: #fcfcfc !important; }',
-      '.fk-wishlist-item.removing { opacity: 0 !important; transform: translateX(-20px) !important; }',
-      '.fk-wishlist-item__main { display: flex !important; flex-direction: row !important; align-items: flex-start !important; flex: 1 !important; min-width: 0 !important; }',
-      '.fk-wishlist-item__left { width: 100px !important; min-width: 100px !important; max-width: 100px !important; flex-shrink: 0 !important; display: flex !important; flex-direction: column !important; align-items: center !important; margin-right: 24px !important; text-align: center !important; box-sizing: border-box !important; }',
-      '.fk-wishlist-item__img-link { width: 100px !important; height: 100px !important; max-width: 100px !important; max-height: 100px !important; display: flex !important; align-items: center !important; justify-content: center !important; overflow: hidden !important; text-decoration: none !important; }',
-      '.fk-wishlist-item__img-link img { max-width: 100px !important; max-height: 100px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; }',
-      '.fk-wishlist-item__status { font-size: 11px !important; font-weight: 600 !important; color: #c2185b !important; text-align: center !important; margin-top: 6px !important; line-height: 1.25 !important; display: block !important; width: 100% !important; }',
-      '.fk-wishlist-item__middle { flex: 1 !important; min-width: 0 !important; padding-right: 20px !important; box-sizing: border-box !important; }',
-      '.fk-wishlist-item__title { font-size: 15px !important; font-weight: 400 !important; color: #212121 !important; line-height: 1.4 !important; margin: 0 0 6px 0 !important; text-decoration: none !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }',
+      '.fk-wishlist-breadcrumb svg { width: 15px !important; height: 15px !important; flex-shrink: 0 !important; }',
+      '.fk-wishlist-breadcrumb__separator { color: #8a97a6 !important; display: inline-block !important; }',
+      '.fk-wishlist-breadcrumb__current { color: #1c2b3f !important; font-weight: 600 !important; }',
+      '.fk-wishlist-list { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; gap: 20px !important; width: 100% !important; }',
+      '.fk-wishlist-item { position: relative !important; display: flex !important; flex-direction: column !important; background-color: #ffffff !important; border: 1px solid #e5e8eb !important; border-radius: 6px !important; padding: 20px 18px 18px !important; box-sizing: border-box !important; transition: box-shadow 0.2s ease, opacity 0.25s ease, transform 0.25s ease !important; }',
+      '.fk-wishlist-item:hover { box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.06) !important; }',
+      '.fk-wishlist-item.removing { opacity: 0 !important; transform: scale(0.96) !important; }',
+      '.fk-wishlist-item__remove { position: absolute !important; top: 10px !important; right: 10px !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 4px !important; color: #8a97a6 !important; cursor: pointer !important; padding: 0 !important; z-index: 2 !important; }',
+      '.fk-wishlist-item__remove svg { width: 12px !important; height: 12px !important; }',
+      '.fk-wishlist-item__remove:hover { border-color: #e53935 !important; color: #e53935 !important; background-color: #fff5f5 !important; }',
+      '.fk-wishlist-item__image { display: flex !important; align-items: center !important; justify-content: center !important; height: 180px !important; margin-bottom: 16px !important; text-decoration: none !important; overflow: hidden !important; }',
+      '.fk-wishlist-item__image img { max-width: 100% !important; max-height: 100% !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; transition: transform 0.3s ease !important; }',
+      '.fk-wishlist-item:hover .fk-wishlist-item__image img { transform: scale(1.03) !important; }',
+      '.fk-wishlist-item__body { flex: 1 !important; }',
+      '.fk-wishlist-item__title { display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; font-size: 15px !important; font-weight: 600 !important; color: #1c2b3f !important; line-height: 1.4 !important; margin: 0 0 6px 0 !important; text-decoration: none !important; }',
       '.fk-wishlist-item__title:hover { color: #2874f0 !important; }',
-      '.fk-wishlist-item__badge-row { margin: 4px 0 8px 0 !important; display: flex !important; align-items: center !important; }',
-      '.fk-wishlist-item__badge { display: inline-flex !important; align-items: center !gap: 3px !important; font-size: 12px !important; font-weight: 700 !important; color: #2874f0 !important; font-style: italic !important; }',
-      '.fk-wishlist-item__price-box { display: flex !important; align-items: baseline !gap: 10px !important; margin-top: 8px !important; flex-wrap: wrap !important; }',
-      '.fk-wishlist-item__price { font-size: 20px !important; font-weight: 700 !important; color: #212121 !important; }',
-      '.fk-wishlist-item__compare-price { font-size: 14px !important; color: #878787 !important; text-decoration: line-through !important; }',
-      '.fk-wishlist-item__discount { font-size: 13px !important; font-weight: 600 !important; color: #388e3c !important; }',
-      '.fk-wishlist-item__no-price { font-size: 14px !important; color: #212121 !important; font-weight: 400 !important; }',
-      '.fk-wishlist-item__right { display: flex !important; align-items: flex-start !important; padding-top: 2px !important; flex-shrink: 0 !important; }',
-      '.fk-wishlist-item__delete { background: none !important; border: none !important; color: #878787 !important; cursor: pointer !important; padding: 6px !important; border-radius: 50% !important; display: flex !important; align-items: center !justify-content: center !important; }',
-      '.fk-wishlist-item__delete svg { width: 18px !important; height: 18px !important; fill: #9e9e9e !important; }',
-      '.fk-wishlist-item__delete:hover { background-color: #ffebee !important; }',
-      '.fk-wishlist-item__delete:hover svg { fill: #e53935 !important; }',
+      '.fk-wishlist-item__sku { font-size: 12.5px !important; color: #8a97a6 !important; margin-bottom: 10px !important; }',
+      '.fk-wishlist-item__price { font-size: 16px !important; font-weight: 700 !important; color: #1c2b3f !important; margin-bottom: 14px !important; }',
+      '.fk-wishlist-item__status { font-size: 12px !important; font-weight: 600 !important; color: #c2185b !important; margin-bottom: 10px !important; }',
+      '.fk-wishlist-item__divider { height: 1px !important; background-color: #eef0f2 !important; margin: 0 -18px 12px !important; }',
+      '.fk-wishlist-item__move { display: block !important; width: 100% !important; background: none !important; border: none !important; color: #2874f0 !important; font-size: 13px !important; font-weight: 700 !important; letter-spacing: 0.4px !important; text-transform: uppercase !important; text-align: center !important; cursor: pointer !important; padding: 4px 0 2px !important; }',
+      '.fk-wishlist-item__move:hover { color: #1259cb !important; text-decoration: underline !important; }',
+      '.fk-wishlist-item__move[disabled] { color: #c6ccd2 !important; cursor: not-allowed !important; text-decoration: none !important; }',
       '.fk-wishlist-empty { padding: 60px 24px !important; text-align: center !important; background-color: #ffffff !important; display: none; }',
       '.fk-wishlist-empty.is-visible { display: block !important; }',
       '.fk-wishlist-empty__circle { width: 80px !important; height: 80px !important; margin: 0 auto 16px !important; border-radius: 50% !important; background-color: #f1f3f6 !important; color: #878787 !important; display: flex !align-items: center !justify-content: center !important; }',
@@ -290,119 +278,59 @@
     }, 2800);
   }
 
-  function formatIndianCurrency(amount) {
-    if (amount === undefined || amount === null || amount === '') return '';
-    var num = 0;
-    if (typeof amount === 'number') {
-      num = amount;
-    } else if (typeof amount === 'string') {
-      var cleaned = amount.trim();
-      if (cleaned.startsWith('₹') || cleaned.startsWith('Rs') || cleaned.startsWith('$')) {
-        return cleaned;
-      }
-      num = parseFloat(cleaned.replace(/[^0-9.]/g, ''));
-    }
-    if (isNaN(num) || num <= 0) return '';
-    return '₹' + (num % 1 === 0 ? num.toLocaleString('en-IN') : num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
-  }
-
-  // Render a Single Wishlist Row (matching reference image) with bulletproof inline styles
+  // Render a Single Wishlist Card (image, title, sku, price, Move to Bag)
   function renderWishlistItem(product) {
     var priceVal = 0;
-    var comparePriceVal = 0;
-
     if (typeof product.price === 'number') {
-      priceVal = product.price > 1000 ? (product.price / 100) : product.price;
+      priceVal = product.price;
     } else if (product.price) {
-      priceVal = parseFloat(String(product.price).replace(/[^0-9.]/g, '')) || 0;
-    }
-
-    if (typeof product.compare_at_price === 'number') {
-      comparePriceVal = product.compare_at_price > 1000 ? (product.compare_at_price / 100) : product.compare_at_price;
-    } else if (product.compare_at_price) {
-      comparePriceVal = parseFloat(String(product.compare_at_price).replace(/[^0-9.]/g, '')) || 0;
+      priceVal = Math.round((parseFloat(String(product.price).replace(/[^0-9.]/g, '')) || 0) * 100);
     }
 
     var priceFormatted = '';
-    if (priceVal > 0) {
-      priceFormatted = formatIndianCurrency(priceVal);
+    if (priceVal > 0 && typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
+      priceFormatted = Shopify.formatMoney(priceVal, (typeof theme !== 'undefined' && theme.moneyFormat) || '${{amount}}');
     } else if (product.price_formatted) {
       priceFormatted = product.price_formatted;
-    }
-
-    var comparePriceFormatted = '';
-    var discountPercentage = '';
-    if (comparePriceVal > priceVal && priceVal > 0) {
-      comparePriceFormatted = formatIndianCurrency(comparePriceVal);
-      var disc = Math.round(((comparePriceVal - priceVal) / comparePriceVal) * 100);
-      if (disc > 0) {
-        discountPercentage = disc + '% off';
-      }
     }
 
     var imageSrc = product.featured_image || (product.images && product.images[0]) || product.image || '';
     var url = product.url || ('/products/' + product.handle);
     var title = product.title || formatHandleToTitle(product.handle);
     var available = (product.available !== undefined) ? product.available : true;
+    var variant = (product.variants && product.variants[0]) || null;
+    var variantId = variant ? variant.id : '';
+    var sku = variant ? variant.sku : '';
 
     var statusHtml = '';
     if (available === false) {
-      statusHtml = '<div class="fk-wishlist-item__status" style="font-size:11px;font-weight:600;color:#c2185b;text-align:center;margin-top:6px;line-height:1.25;display:block;width:100%;">Currently unavailable</div>';
+      statusHtml = '<div class="fk-wishlist-item__status">Currently unavailable</div>';
     }
+
+    var skuHtml = sku ? '<div class="fk-wishlist-item__sku">' + escapeHtml(sku) + '</div>' : '';
+    var priceHtml = priceFormatted ? '<div class="fk-wishlist-item__price">' + escapeHtml(priceFormatted) + '</div>' : '';
 
     var imageTag = imageSrc ?
-      '<img src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(title) + '" loading="lazy" style="max-width:100px;max-height:100px;width:auto;height:auto;object-fit:contain;display:block;">' :
+      '<img src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(title) + '" loading="lazy">' :
       '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#878787;font-size:12px;background:#f1f3f6;">No Image</div>';
 
-    var badgeHtml = '';
-    // Show Flipkart Assured badge by default
-    if (product.type !== 'no-badge') {
-      badgeHtml = 
-        '<div class="fk-wishlist-item__badge-row" style="margin:4px 0 8px 0;display:flex;align-items:center;">' +
-          '<span class="fk-wishlist-item__badge" style="display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:700;color:#2874f0;font-style:italic;letter-spacing:-0.2px;">' +
-            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><path d="M12 2L4 5.5v5.5c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V5.5L12 2z" fill="#2874f0"/><path d="M10 15.5l-3.5-3.5 1.41-1.41L10 12.67l6.09-6.09L17.5 8l-7.5 7.5z" fill="#ffd700"/></svg>' +
-            '<span>Assured</span>' +
-          '</span>' +
-        '</div>';
-    }
-
-    var priceBoxHtml = '';
-    if (priceFormatted) {
-      priceBoxHtml = 
-        '<div class="fk-wishlist-item__price-box" style="display:flex;align-items:baseline;gap:10px;margin-top:8px;flex-wrap:wrap;">' +
-          '<span class="fk-wishlist-item__price" style="font-size:20px;font-weight:700;color:#212121;letter-spacing:-0.3px;">' + escapeHtml(priceFormatted) + '</span>' +
-          (comparePriceFormatted ? '<span class="fk-wishlist-item__compare-price" style="font-size:14px;color:#878787;text-decoration:line-through;">' + escapeHtml(comparePriceFormatted) + '</span>' : '') +
-          (discountPercentage ? '<span class="fk-wishlist-item__discount" style="font-size:13px;font-weight:600;color:#388e3c;">' + escapeHtml(discountPercentage) + '</span>' : '') +
-        '</div>';
-    } else {
-      priceBoxHtml = 
-        '<div class="fk-wishlist-item__price-box" style="display:flex;align-items:baseline;gap:10px;margin-top:8px;flex-wrap:wrap;">' +
-          '<span class="fk-wishlist-item__no-price" style="font-size:14px;color:#212121;font-weight:400;">Price: Not Available</span>' +
-        '</div>';
-    }
+    var moveDisabled = (!available || !variantId);
+    var moveLabel = available ? 'Move to Bag' : 'Out of Stock';
 
     return (
-      '<div class="fk-wishlist-item wishlist-item" data-handle="' + escapeHtml(product.handle) + '" style="display:flex;flex-direction:row;align-items:flex-start;justify-content:space-between;width:100%;padding:24px;border-bottom:1px solid #f0f0f0;box-sizing:border-box;background:#ffffff;">' +
-        '<div class="fk-wishlist-item__main" style="display:flex;flex-direction:row;align-items:flex-start;flex:1;min-width:0;">' +
-          '<div class="fk-wishlist-item__left" style="width:100px;min-width:100px;max-width:100px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;margin-right:24px;text-align:center;box-sizing:border-box;">' +
-            '<a href="' + escapeHtml(url) + '" class="fk-wishlist-item__img-link" style="width:100px;height:100px;max-width:100px;max-height:100px;display:flex;align-items:center;justify-content:center;overflow:hidden;text-decoration:none;">' +
-              imageTag +
-            '</a>' +
-            statusHtml +
-          '</div>' +
-          '<div class="fk-wishlist-item__middle" style="flex:1;min-width:0;padding-right:20px;box-sizing:border-box;">' +
-            '<a href="' + escapeHtml(url) + '" class="fk-wishlist-item__title" title="' + escapeHtml(title) + '" style="font-size:15px;font-weight:400;color:#212121;line-height:1.4;margin:0 0 6px 0;text-decoration:none;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + escapeHtml(title) + '</a>' +
-            badgeHtml +
-            priceBoxHtml +
-          '</div>' +
+      '<div class="fk-wishlist-item" data-handle="' + escapeHtml(product.handle) + '">' +
+        '<button type="button" class="fk-wishlist-item__remove js-remove-wishlist" data-handle="' + escapeHtml(product.handle) + '" title="Remove from Wishlist" aria-label="Remove">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>' +
+        '</button>' +
+        '<a href="' + escapeHtml(url) + '" class="fk-wishlist-item__image">' + imageTag + '</a>' +
+        '<div class="fk-wishlist-item__body">' +
+          '<a href="' + escapeHtml(url) + '" class="fk-wishlist-item__title" title="' + escapeHtml(title) + '">' + escapeHtml(title) + '</a>' +
+          skuHtml +
+          priceHtml +
+          statusHtml +
         '</div>' +
-        '<div class="fk-wishlist-item__right" style="display:flex;align-items:flex-start;padding-top:2px;flex-shrink:0;">' +
-          '<button type="button" class="fk-wishlist-item__delete js-remove-wishlist" data-handle="' + escapeHtml(product.handle) + '" title="Remove from Wishlist" aria-label="Remove" style="background:none;border:none;color:#878787;cursor:pointer;padding:6px;border-radius:50%;display:flex;align-items:center;justify-content:center;">' +
-            '<svg width="18" height="18" viewBox="0 0 24 24" style="fill:#9e9e9e;">' +
-              '<path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>' +
-            '</svg>' +
-          '</button>' +
-        '</div>' +
+        '<div class="fk-wishlist-item__divider"></div>' +
+        '<button type="button" class="fk-wishlist-item__move js-move-to-bag" data-handle="' + escapeHtml(product.handle) + '" data-variant-id="' + escapeHtml(String(variantId)) + '"' + (moveDisabled ? ' disabled' : '') + '>' + moveLabel + '</button>' +
       '</div>'
     );
   }
@@ -574,6 +502,20 @@
         });
       }
 
+      function removeItemFromGrid(container, handleToRemove, curList) {
+        var itemEl = container.querySelector('.fk-wishlist-item[data-handle="' + handleToRemove + '"]');
+        if (itemEl) {
+          itemEl.classList.add('removing');
+          setTimeout(function() {
+            itemEl.remove();
+            if (curList.length === 0) {
+              listEls.forEach(function(l) { l.style.setProperty('display', 'none', 'important'); });
+              showEmptyState();
+            }
+          }, 250);
+        }
+      }
+
       function bindListEvents(container) {
         if (!container) return;
 
@@ -594,19 +536,61 @@
               showWishlistToast('Item removed from wishlist');
             }
 
-            var itemEl = container.querySelector('.fk-wishlist-item[data-handle="' + handleToRemove + '"]');
-            if (itemEl) {
-              itemEl.classList.add('removing');
-              itemEl.style.opacity = '0';
-              itemEl.style.transform = 'translateX(-20px)';
-              setTimeout(function() {
-                itemEl.remove();
-                if (curList.length === 0) {
-                  listEls.forEach(function(l) { l.style.setProperty('display', 'none', 'important'); });
-                  showEmptyState();
+            removeItemFromGrid(container, handleToRemove, curList);
+          };
+        });
+
+        // Move to Bag: add to cart, then drop it from the wishlist
+        container.querySelectorAll('.js-move-to-bag').forEach(function(btn) {
+          btn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (this.hasAttribute('disabled')) return;
+
+            var handle = this.getAttribute('data-handle');
+            var variantId = this.getAttribute('data-variant-id');
+            if (!variantId) return;
+
+            var moveBtn = this;
+            var originalLabel = moveBtn.textContent;
+            moveBtn.setAttribute('disabled', 'disabled');
+            moveBtn.textContent = 'Adding...';
+
+            fetch((window.routes && window.routes.cart_add_url) || '/cart/add.js', Object.assign(
+              { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } },
+              { body: JSON.stringify({ items: [{ id: Number(variantId), quantity: 1 }] }) }
+            ))
+              .then(function(response) { return response.json(); })
+              .then(function(data) {
+                if (data.status) {
+                  showWishlistToast(data.message || data.description || 'Could not add to bag', true);
+                  moveBtn.removeAttribute('disabled');
+                  moveBtn.textContent = originalLabel;
+                  return;
                 }
-              }, 250);
-            }
+
+                var curList = getWishlist();
+                var idx = curList.indexOf(handle);
+                if (idx >= 0) {
+                  curList.splice(idx, 1);
+                  removeProductCache(handle);
+                  setWishlist(curList);
+                }
+
+                showWishlistToast('Moved to bag');
+                removeItemFromGrid(container, handle, curList);
+
+                var miniCartEl = document.querySelector('mini-cart');
+                if (miniCartEl && typeof miniCartEl.update === 'function') {
+                  miniCartEl.update();
+                }
+              })
+              .catch(function() {
+                showWishlistToast('Could not add to bag', true);
+                moveBtn.removeAttribute('disabled');
+                moveBtn.textContent = originalLabel;
+              });
           };
         });
       }
@@ -637,7 +621,7 @@
       var renderedHtml = initialProducts.map(renderWishlistItem).join('');
       listEls.forEach(function(listEl) {
         listEl.innerHTML = renderedHtml;
-        listEl.style.setProperty('display', 'block', 'important');
+        listEl.style.setProperty('display', 'grid', 'important');
         bindListEvents(listEl);
       });
       hideSkeletons();
@@ -682,7 +666,7 @@
         var liveHtml = liveProducts.map(renderWishlistItem).join('');
         listEls.forEach(function(listEl) {
           listEl.innerHTML = liveHtml;
-          listEl.style.setProperty('display', 'block', 'important');
+          listEl.style.setProperty('display', 'grid', 'important');
           bindListEvents(listEl);
         });
         hideEmptyState();
