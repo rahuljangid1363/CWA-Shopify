@@ -3,7 +3,7 @@
 }
 
 #CollectionProductGrid {
-  margin-top: 30px;
+  margin-top: 0px;
 }
 
 .collection {
@@ -153,11 +153,12 @@
   line-height: 1.5;
   margin: 0;
   padding: 0.6rem 1.4rem;
-  color: #334155;
-  font-weight: 600;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  color: #000;
+  font-weight: 500;
+  /* background: #f1f5f9;
+  border: 1px solid #e2e8f0; */
   border-radius: 999px;
+  padding-top: 10px;
 }
 
 .collection-product-count__text.loading {
@@ -197,7 +198,7 @@
   display: block;
   color: #1e293b;
   font-size: 1.35rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.02em;
   margin-right: 1.5rem;
   margin-bottom: 0.4rem;
@@ -277,10 +278,9 @@
   margin: 0 !important;
   padding: 0 38px 0 14px !important;
   background-color: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid #EBEEF2 !important;
   border-radius: 8px !important;
   outline: none !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
   cursor: pointer;
   box-sizing: border-box !important;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
@@ -292,7 +292,6 @@
   outline: none !important;
   border-color: #cbd5e1 !important;
   background-color: #f8fafc !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06) !important;
 }
 
 .collection-filters__sort:focus,
@@ -340,6 +339,8 @@
 
 .facets__form {
   margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: end;
 }
 
 .facets__wrapper {
@@ -1105,9 +1106,32 @@ input.mobile-facets__checkbox {
   grid-column: unset;
 }
 
+/* The filters block is relocated to the top of .ap-right-filter (see
+   main-collection-product-grid.liquid) when position_left_filtering is on.
+   The absolute-position rules above position it for the narrow .ap-left-filter
+   sidebar card; restore normal in-flow layout here so it's actually visible
+   above the product grid instead of jumping out of flow to a fixed spot. */
+.main-collection-filter-left .ap-right-filter #main-collection-filters {
+  margin-bottom: 24px;
+}
+
+.main-collection-filter-left .ap-right-filter .collection-filters__field {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.main-collection-filter-left .ap-right-filter .collection-product-count.light {
+  position: static;
+}
+
+.main-collection-filter-left .ap-right-filter p.facets__heading.caption-large {
+  position: static;
+}
+
 .main-collection-filter-left .ap-right-filter {
   flex: 1;
-  padding-top: 4.5rem;
   min-width: 0;
 }
 
@@ -1164,6 +1188,11 @@ div#slider-range {
   color: rgb(var(--color-foreground));
   font-size: 1.2rem;
   padding: 8px 36px 8px 12px;
+  border-radius: 4px;
+}
+
+.collection-categories__subitem:has(.collection-categories__sublink.is-current) {
+  background-color: #f3faff;
 }
 
 .collection-product-code-search__input::placeholder {
@@ -1332,7 +1361,7 @@ div#slider-range {
 }
 
 .collection-categories .is-current {
-  color: #222222 !important;
+  color: #0d6efd !important;
 }
 
 @media(min-width: 750px) {
@@ -1442,6 +1471,7 @@ div#slider-range {
 @media(min-width: 992px) {
   .main-collection-filter-left .ap-left-filter {
     width: 300px;
+    padding-top: 40px;
   }
 
   .main-collection-filter-left .facets__disclosure {

@@ -103,8 +103,9 @@
           </span>
         {%- endif -%}
   		</a>
-        {%- if show_vendor and product_card_product.vendor != blank -%}
-          <div class="card-vendor">{{ product_card_product.vendor }}</div>
+        {%- assign product_code = product_card_product.metafields.custom.product_code | default: product_card_product.selected_or_first_available_variant.sku -%}
+        {%- if show_vendor and product_code != blank -%}
+          <div class="card-vendor">{{ product_code }}</div>
         {%- endif -%}
 
         {% comment %} TODO: metafield {% endcomment %}

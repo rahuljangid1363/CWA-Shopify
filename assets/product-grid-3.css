@@ -86,9 +86,9 @@
 
 /* Product Title */
 .product-grid-3 .card-information__text {
-    font-size: 15px;
-    font-weight: 600;
-    color: #0b1f3a;
+    font-size: 16px;
+    font-weight: 400;
+    color: #082549;
     line-height: 1.35;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -96,7 +96,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     min-height: 42px;
-    margin-bottom: 6px;
+    margin-bottom: 12px;
     transition: color 0.2s ease;
 }
 
@@ -106,10 +106,10 @@
 
 /* Product Vendor / Model */
 .product-grid-3 .card-vendor {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
-    color: #222222;
-    margin-bottom: 12px;
+    color: #000;
+    margin-bottom: 18px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -131,6 +131,8 @@
     justify-content: space-between;
     gap: 8px;
     margin-top: auto;
+    border-top: 1.5px solid #dddddd;
+    padding-top: 14px;
 }
 
 .product-grid-3 .price {

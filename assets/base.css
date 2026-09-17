@@ -1560,7 +1560,6 @@ details[open]>.share-button__fallback {
   color: rgb(var(--color-foreground));
   font-size: 1.6rem;
   width: 100%;
-  box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.55);
   height: 4.5rem;
   box-sizing: border-box;
   transition: box-shadow var(--duration-short) ease;
@@ -1575,7 +1574,6 @@ details[open]>.share-button__fallback {
 }
 
 .field__input:hover,
-.select__select:hover,
 .customer .field input:hover,
 .customer select:hover,
 .localization-form__select:hover {

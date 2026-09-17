@@ -257,6 +257,12 @@
   <!-- END PRODUCT CATEGORIES -->
 {%- endif -%}
 
+{%- comment -%}
+  Captured instead of printed in place so it can be moved to the top of
+  .ap-right-filter below when position_left_filtering is on, instead of
+  sitting inside the .ap-left-filter sidebar with the category links.
+{%- endcomment -%}
+{%- capture collection_filters_html -%}
 <div class="collection-filters {%- if section.settings.position_left_filtering != true -%}{{ 'container' | prepend: ' ' }}{%- endif -%}" id="main-collection-filters" data-id="{{ section.id }}">
   {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
     {%- assign total_active_values = 0 -%}
@@ -716,10 +722,14 @@
     </div>
   {%- endif -%}
 </div>
+{%- endcapture -%}
 
 {%- if section.settings.position_left_filtering -%}
 </div>
 <div class="ap-right-filter">
+{{ collection_filters_html }}
+{%- else -%}
+{{ collection_filters_html }}
 {%- endif -%}
 
 <div id="CollectionProductGrid">
