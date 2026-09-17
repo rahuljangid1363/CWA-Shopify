@@ -11,54 +11,15 @@
   var STORAGE_KEY = 'theme_wishlist';
   var CACHE_KEY = 'theme_wishlist_cache';
 
-  // Ensure CSS is always injected in head as a failsafe
+  // wishlist.css is linked sitewide in layout/theme.liquid, so it's always
+  // present by the time this runs. Just mark <html> so theme.liquid's
+  // global breadcrumb-hiding rule for .is-wishlist-page applies.
   function injectWishlistStyles() {
     var path = (window.location.pathname || '').toLowerCase();
     var search = (window.location.search || '').toLowerCase();
     if (path.indexOf('wishlist') !== -1 || path.indexOf('wish-list') !== -1 || search.indexOf('wishlist') !== -1) {
       document.documentElement.classList.add('is-wishlist-page');
     }
-    if (document.getElementById('fk-wishlist-dynamic-styles')) return;
-    var style = document.createElement('style');
-    style.id = 'fk-wishlist-dynamic-styles';
-    style.textContent = [
-      '.is-wishlist-page .g-breadcrumb, .is-wishlist-page nav.breadcrumb, .is-wishlist-page .breadcrumbs-style_1, .is-wishlist-page .breadcrumbs-style_2 { display: none !important; }',
-      '.fk-wishlist-page { background-color: #ffffff !important; min-height: auto; padding: 0 0 60px; display: block !important; width: 100% !important; box-sizing: border-box !important; }',
-      '.fk-wishlist-container { width: 100% !important; box-sizing: border-box !important; }',
-      '.fk-wishlist-breadcrumb { display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; width: 100% !important; box-sizing: border-box !important; background-color: #eaf5ff !important; padding: 26px 15px !important; margin: 0 0 30px 0 !important; font-size: 14px !important; color: #5c6b7a !important; }',
-      '.fk-wishlist-breadcrumb a { display: inline-flex !important; align-items: center !important; gap: 6px !important; color: #5c6b7a !important; text-decoration: none !important; }',
-      '.fk-wishlist-breadcrumb a:hover { color: #2874f0 !important; }',
-      '.fk-wishlist-breadcrumb svg { width: 15px !important; height: 15px !important; flex-shrink: 0 !important; }',
-      '.fk-wishlist-breadcrumb__separator { color: #8a97a6 !important; display: inline-block !important; }',
-      '.fk-wishlist-breadcrumb__current { color: #1c2b3f !important; font-weight: 600 !important; }',
-      '.fk-wishlist-list { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; gap: 20px !important; width: 100% !important; }',
-      '.fk-wishlist-item { position: relative !important; display: flex !important; flex-direction: column !important; background-color: #ffffff !important; border: 1px solid #e5e8eb !important; border-radius: 6px !important; padding: 20px 18px 18px !important; box-sizing: border-box !important; transition: box-shadow 0.2s ease, opacity 0.25s ease, transform 0.25s ease !important; }',
-      '.fk-wishlist-item:hover { box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.06) !important; }',
-      '.fk-wishlist-item.removing { opacity: 0 !important; transform: scale(0.96) !important; }',
-      '.fk-wishlist-item__remove { position: absolute !important; top: 10px !important; right: 10px !important; width: 24px !important; height: 24px !important; display: flex !important; align-items: center !important; justify-content: center !important; background-color: #ffffff !important; border: 1px solid #e0e0e0 !important; border-radius: 4px !important; color: #8a97a6 !important; cursor: pointer !important; padding: 0 !important; z-index: 2 !important; }',
-      '.fk-wishlist-item__remove svg { width: 12px !important; height: 12px !important; }',
-      '.fk-wishlist-item__remove:hover { border-color: #e53935 !important; color: #e53935 !important; background-color: #fff5f5 !important; }',
-      '.fk-wishlist-item__image { display: flex !important; align-items: center !important; justify-content: center !important; height: 180px !important; margin-bottom: 16px !important; text-decoration: none !important; overflow: hidden !important; }',
-      '.fk-wishlist-item__image img { max-width: 100% !important; max-height: 100% !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; transition: transform 0.3s ease !important; }',
-      '.fk-wishlist-item:hover .fk-wishlist-item__image img { transform: scale(1.03) !important; }',
-      '.fk-wishlist-item__body { flex: 1 !important; }',
-      '.fk-wishlist-item__title { display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; font-size: 15px !important; font-weight: 600 !important; color: #1c2b3f !important; line-height: 1.4 !important; margin: 0 0 6px 0 !important; text-decoration: none !important; }',
-      '.fk-wishlist-item__title:hover { color: #2874f0 !important; }',
-      '.fk-wishlist-item__sku { font-size: 12.5px !important; color: #8a97a6 !important; margin-bottom: 10px !important; }',
-      '.fk-wishlist-item__price { font-size: 16px !important; font-weight: 700 !important; color: #1c2b3f !important; margin-bottom: 14px !important; }',
-      '.fk-wishlist-item__status { font-size: 12px !important; font-weight: 600 !important; color: #c2185b !important; margin-bottom: 10px !important; }',
-      '.fk-wishlist-item__divider { height: 1px !important; background-color: #eef0f2 !important; margin: 0 -18px 12px !important; }',
-      '.fk-wishlist-item__move { display: block !important; width: 100% !important; background: none !important; border: none !important; color: #2874f0 !important; font-size: 13px !important; font-weight: 700 !important; letter-spacing: 0.4px !important; text-transform: uppercase !important; text-align: center !important; cursor: pointer !important; padding: 4px 0 2px !important; }',
-      '.fk-wishlist-item__move:hover { color: #1259cb !important; text-decoration: underline !important; }',
-      '.fk-wishlist-item__move[disabled] { color: #c6ccd2 !important; cursor: not-allowed !important; text-decoration: none !important; }',
-      '.fk-wishlist-empty { padding: 60px 24px !important; text-align: center !important; background-color: #ffffff !important; display: none; }',
-      '.fk-wishlist-empty.is-visible { display: block !important; }',
-      '.fk-wishlist-empty__circle { width: 80px !important; height: 80px !important; margin: 0 auto 16px !important; border-radius: 50% !important; background-color: #f1f3f6 !important; color: #878787 !important; display: flex !align-items: center !justify-content: center !important; }',
-      '.fk-wishlist-empty__title { font-size: 20px !important; font-weight: 600 !important; color: #212121 !important; margin-bottom: 8px !important; display: block !important; }',
-      '.fk-wishlist-empty__text { font-size: 14px !important; color: #878787 !important; margin-bottom: 24px !important; display: block !important; }',
-      '.fk-wishlist-empty__btn { display: inline-block !important; background-color: #2874f0 !important; color: #ffffff !important; font-size: 14px !important; font-weight: 600 !important; padding: 12px 32px !important; border-radius: 2px !important; text-decoration: none !important; }'
-    ].join('\n');
-    document.head.appendChild(style);
   }
 
   injectWishlistStyles();
@@ -736,36 +697,46 @@
         b.remove();
       });
       injectWishlistStyles();
-      var cardExists = document.querySelector('.fk-wishlist-card, product-wishlistpage');
+      // Same DOM shape as snippets/wishlist-page-content.liquid, so the
+      // page looks identical whether the server-rendered snippet or this
+      // client-side failsafe ends up mounting it.
+      var cardExists = document.querySelector('product-wishlistpage');
       if (!cardExists) {
         var target = document.querySelector('.main-page .rte, .main-page, #MainContent, main');
         if (target) {
           var el = document.createElement('div');
           el.className = 'fk-wishlist-page';
           el.innerHTML = [
-            '<div class="fk-wishlist-container">',
-              '<div class="fk-wishlist-card">',
-                '<div class="fk-wishlist-header">',
-                  '<h1 class="fk-wishlist-header__title">My Wishlist (<span class="js-wishlist-count">0</span>)</h1>',
-                  '<div class="fk-wishlist-header__actions" id="fk-wishlist-header-actions" style="display:none;">',
-                    '<button type="button" class="fk-wishlist-header__clear-btn" id="js-wishlist-clear-all" title="Clear all items">',
-                      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
-                      '<span>Clear Wishlist</span>',
-                    '</button>',
-                  '</div>',
+            '<nav class="fk-wishlist-breadcrumb" aria-label="breadcrumbs">',
+              '<a href="/" title="Home">',
+                '<svg aria-hidden="true" focusable="false" viewBox="0 0 576 512"><path fill="currentColor" d="M541 229.16l-61-49.83v-77.4a6 6 0 0 0-6-6h-20a6 6 0 0 0-6 6v51.33L308.19 39.14a32.16 32.16 0 0 0-40.38 0L35 229.16a8 8 0 0 0-1.16 11.24l10.1 12.41a8 8 0 0 0 11.2 1.19L96 220.62v243a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-128l64 .3V464a16 16 0 0 0 16 16l128-.33a16 16 0 0 0 16-16V220.62L520.86 254a8 8 0 0 0 11.25-1.16l10.1-12.41a8 8 0 0 0-1.21-11.27zm-93.11 218.59h.1l-96 .3V319.88a16.05 16.05 0 0 0-15.95-16l-96-.27a16 16 0 0 0-16.05 16v128.14H128V194.51L288 63.94l160 130.57z"></path></svg>',
+                'Home',
+              '</a>',
+              '<span class="fk-wishlist-breadcrumb__separator" aria-hidden="true">&rsaquo;</span>',
+              '<span class="fk-wishlist-breadcrumb__current">Wishlist</span>',
+            '</nav>',
+            '<div class="fk-wishlist-container page-width">',
+              '<product-wishlistpage>',
+                '<div class="fk-wishlist-list" id="fk-wishlist-list" style="display: none;"></div>',
+                '<div class="fk-wishlist-list" id="fk-wishlist-skeleton">',
+                  Array(4).fill(
+                    '<div class="fk-wishlist-skeleton-item">' +
+                      '<div class="fk-wishlist-skeleton-box" style="width: 100%; height: 180px; margin-bottom: 16px;"></div>' +
+                      '<div class="fk-wishlist-skeleton-box" style="width: 85%; height: 16px; margin-bottom: 10px;"></div>' +
+                      '<div class="fk-wishlist-skeleton-box" style="width: 40%; height: 20px; margin-bottom: 14px;"></div>' +
+                      '<div class="fk-wishlist-skeleton-box" style="width: 100%; height: 14px;"></div>' +
+                    '</div>'
+                  ).join(''),
                 '</div>',
-                '<product-wishlistpage>',
-                  '<div class="fk-wishlist-list" id="fk-wishlist-list" style="display:none;"></div>',
-                  '<div class="fk-wishlist-empty" id="fk-wishlist-empty" style="display:none;">',
-                    '<div class="fk-wishlist-empty__circle">',
-                      '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>',
-                    '</div>',
-                    '<h2 class="fk-wishlist-empty__title">Empty Wishlist</h2>',
-                    '<p class="fk-wishlist-empty__text">You have no items in your wishlist. Start adding!</p>',
-                    '<a href="/collections/all" class="fk-wishlist-empty__btn">Continue Shopping</a>',
+                '<div class="fk-wishlist-empty" id="fk-wishlist-empty" style="display: none;">',
+                  '<div class="fk-wishlist-empty__circle">',
+                    '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>',
                   '</div>',
-                '</product-wishlistpage>',
-              '</div>',
+                  '<h2 class="fk-wishlist-empty__title">Empty Wishlist</h2>',
+                  '<p class="fk-wishlist-empty__text">You have no items in your wishlist. Start adding!</p>',
+                  '<a href="/collections/all" class="fk-wishlist-empty__btn">Continue Shopping</a>',
+                '</div>',
+              '</product-wishlistpage>',
             '</div>'
           ].join('');
           target.innerHTML = '';
@@ -775,6 +746,10 @@
       initHeaderEvents();
       renderWishlistPages();
     }
+    // Reveal the page now that the real wishlist content (or the
+    // already-correct server-rendered content) is in place — this pairs
+    // with the inline hide in layout/theme.liquid that prevents a 404 flash.
+    document.documentElement.removeAttribute('data-wishlist-boot');
   }
 
   // Initialize UI on load

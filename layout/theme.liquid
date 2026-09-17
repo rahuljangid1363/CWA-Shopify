@@ -6,6 +6,47 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="We supply a lot of Shopify Theme| Best Prestashop Framework | Shopify Theme Framework | Shopify Tutorial |Shopify Template Club">
     <meta name="theme-color" content="">
+    {%- comment -%}
+      For an unresolved route like /pages/wishlist, Shopify serves the 404
+      template — but request.path/canonical_url get normalized to "/404" in
+      that response, so sections/main-404.liquid's Liquid-side "does the URL
+      contain wishlist" check never actually matches (Liquid never sees the
+      real requested path). The genuine "Oops, page not found" markup renders
+      first; only the client-side failsafe in wishlist.js (which reads
+      window.location.pathname — always accurate in the browser) later
+      replaces it. That gap between first paint and that JS running is the
+      404 flash. Hide the page instantly here (inline, before anything
+      paints) whenever the *actual* browser URL is a wishlist route, and
+      reveal it once wishlist.js has mounted the real content.
+
+      Because that same 404 fallback bypasses snippets/wishlist-page-content.liquid
+      entirely (its own guest-redirect never gets a chance to run), the
+      logged-out gate is enforced here too — the one place every path
+      through this route passes through, regardless of which template ends
+      up rendering.
+    {%- endcomment -%}
+    <script>
+      (function () {
+        var p = (window.location.pathname || '').toLowerCase();
+        var isWishlistPath = p.indexOf('wishlist') !== -1 || p.indexOf('wish-list') !== -1;
+        if (!isWishlistPath) return;
+        {%- if customer -%}
+        document.documentElement.setAttribute('data-wishlist-boot', '');
+        // Safety net: if wishlist.js fails to load/execute for any reason,
+        // never leave the page permanently hidden.
+        setTimeout(function () {
+          document.documentElement.removeAttribute('data-wishlist-boot');
+        }, 3000);
+        {%- else -%}
+        window.location.replace('{{ routes.account_login_url }}{% if routes.account_login_url contains "?" %}&{% else %}?{% endif %}return_url=' + encodeURIComponent(window.location.pathname + window.location.search));
+        {%- endif -%}
+      })();
+    </script>
+    <style>
+      html[data-wishlist-boot] body {
+        visibility: hidden !important;
+      }
+    </style>
     <link rel="canonical" href="{{ canonical_url }}">
     {%- if request.path == '/products' or request.path == '/products/' -%}
       <script>window.location.replace('{{ routes.all_products_collection_url }}');</script>
