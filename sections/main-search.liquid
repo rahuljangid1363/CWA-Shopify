@@ -43,7 +43,54 @@
   }
 </style>
 
-<div class="template-search spaced-section{% unless search.performed and search.results.size > 0 %} template-search--empty{% endunless %}">
+{%- liquid
+  assign search_terms = search.terms | strip | downcase
+  assign search_terms_clean = search_terms | replace: '-', '' | replace: ' ', ''
+  assign rendered_search_ids = ''
+  for item in search.results
+    assign item_id_str = item.id | append: ''
+    assign rendered_search_ids = rendered_search_ids | append: item_id_str | append: ','
+  endfor
+  assign extra_product_count = 0
+-%}
+{%- capture extra_search_products_html -%}
+  {%- if search.performed and search_terms != blank -%}
+    {%- for prod in collections['all'].products -%}
+      {%- assign prod_id_str = prod.id | append: '' -%}
+      {%- assign rendered_id_check = ',' | append: prod_id_str | append: ',' -%}
+      {%- assign current_rendered = ',' | append: rendered_search_ids -%}
+      {%- unless current_rendered contains rendered_id_check -%}
+        {%- assign p_code = prod.metafields.custom.product_code | default: prod.selected_or_first_available_variant.sku -%}
+        {%- assign p_match = false -%}
+        {%- if p_code != blank -%}
+          {%- assign p_code_down = p_code | strip | downcase -%}
+          {%- assign p_code_clean = p_code_down | replace: '-', '' | replace: ' ', '' -%}
+          {%- if p_code_down contains search_terms or search_terms contains p_code_down or p_code_clean contains search_terms_clean or search_terms_clean contains p_code_clean -%}
+            {%- assign p_match = true -%}
+          {%- endif -%}
+        {%- endif -%}
+        {%- if p_match -%}
+          {%- assign rendered_search_ids = rendered_search_ids | append: prod_id_str | append: ',' -%}
+          {%- assign extra_product_count = extra_product_count | plus: 1 -%}
+          <li class="grid__item" data-product-id="{{ prod.id }}">
+            {% render 'product-card',
+              product_card_product: prod,
+              media_size: section.settings.image_ratio,
+              show_secondary_image: section.settings.show_secondary_image,
+              add_image_padding: section.settings.add_image_padding,
+              show_vendor: section.settings.show_vendor,
+              show_image_outline: section.settings.show_image_outline,
+              show_rating: section.settings.show_rating
+            %}
+          </li>
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign total_search_results_count = search.results_count | plus: extra_product_count -%}
+
+<div class="template-search spaced-section{% unless search.performed and total_search_results_count > 0 %} template-search--empty{% endunless %}" data-search-page-wrapper>
   <div class="page-width center">
     {%- if search.performed -%}
       <h1 class="h2">{{ 'templates.search.title' | t }}</h1>
@@ -112,94 +159,198 @@
 
     </div>
     {%- if search.performed -%}
-      <p class="element-margin" role="status">
-        {%- if search.results_count == 0 -%}
+      <p class="element-margin search-results-count-status" role="status" data-search-count="{{ total_search_results_count }}" data-search-terms="{{ search.terms | escape }}">
+        {%- if total_search_results_count == 0 -%}
           {{ 'templates.search.no_results' | t: terms: search.terms }}
         {%- else -%}
-          {{ 'templates.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+          {{ 'templates.search.results_with_count' | t: terms: search.terms, count: total_search_results_count }}
         {%- endif -%}
       </p>
     {%- endif -%}
   </div>
-  {%- if search.performed and search.results.size > 0 -%}
-    {% paginate search.results by 24 %}
+  {%- if search.performed and total_search_results_count > 0 -%}
+    {%- if search.results.size > 0 -%}
+      {% paginate search.results by 24 %}
+        <div class="template-search__results page-width">
+          <ul class="grid grid--4-col-desktop grid--3-col-tablet grid--2-col grid--one-third-max grid--quarter-max negative-margin product-grid" role="list">
+            {%- for item in search.results -%}
+              <li class="grid__item{% unless item.object_type == 'product' %} grid__item--small{% endunless %}" data-product-id="{{ item.id }}">
+                {%- case item.object_type -%}
+                  {%- when 'product' -%}
+                    {%- capture product_settings -%}{%- if section.settings.product_show_vendor -%}vendor,{%- endif -%}title,price{%- endcapture -%}
+                    {% render 'product-card',
+                      product_card_product: item,
+                      media_size: section.settings.image_ratio,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      add_image_padding: section.settings.add_image_padding,
+                      show_vendor: section.settings.show_vendor,
+                      show_image_outline: section.settings.show_image_outline,
+                      show_rating: section.settings.show_rating
+                    %}
+                  {%- when 'article' -%}
+                    <a href="{{ item.url }}" class="card-wrapper">
+                      <div class="card card--search card--soft{% unless item.image %} card--text-only{% endunless %}">
+                        <div class="card__inner">
+                          {%- if item.image -%}
+                            <div class="media media--cropped">
+                              <img
+                                srcset="{%- if item.image.src.width >= 165 -%}{{ item.image.src | img_url: '165x' }} 165w,{%- endif -%}
+                                  {%- if item.image.src.width >= 360 -%}{{ item.image.src | img_url: '360x' }} 360w,{%- endif -%}
+                                  {%- if item.image.src.width >= 533 -%}{{ item.image.src | img_url: '533x' }} 533w,{%- endif -%}
+                                  {%- if item.image.src.width >= 720 -%}{{ item.image.src | img_url: '720x' }} 720w,{%- endif -%}
+                                  {%- if item.image.src.width >= 940 -%}{{ item.image.src | img_url: '940x' }} 940w,{%- endif -%}
+                                  {%- if item.image.src.width >= 1065 -%}{{ item.image.src | img_url: '1065x' }} 1065w{%- endif -%}"
+                                src="{{ item.image.src | img_url: '940x' }}"
+                                loading="lazy"
+                                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+                                width="{{ item.image.src.width }}"
+                                height="{{ item.image.src.height }}"
+                                alt="{{ item.image.src.alt | escape }}"
+                            >
+                            </div>
+                          {%- endif -%}
+                          <div class="card__content">
+                            <h2 class="card__text h3">{{ item.title | truncate: 50 | escape }}</h2>
+                            <div class="card-article-info caption-with-letter-spacing h5">
+                              {%- if section.settings.article_show_date -%}
+                                <span class="circle-divider">{{ item.published_at | time_tag: format: 'month_year' }}</span>
+                              {%- endif -%}
+                              {%- if section.settings.article_show_author -%}
+                                <span>{{ item.author }}</span>
+                              {%- endif -%}
+                            </div>
+                          </div>
+                          <div class="card__badge">
+                            <span class="badge color-background-1">{{ 'blogs.article.blog' | t }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  {%- when 'page' -%}
+                    <a href="{{ item.url }}" class="card-wrapper">
+                      <div class="card card--search card--soft card--text-only">
+                        <div class="card__inner">
+                          <div class="card__content"><h2 class="card__text h3">{{ item.title | truncate: 50 | escape }}</h2></div>
+                          <div class="card__badge">
+                            <span class="badge color-background-1">{{ 'templates.search.page' | t }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                {%- endcase -%}
+              </li>
+            {%- endfor -%}
+            {{ extra_search_products_html }}
+          </ul>
+          {%- if paginate.pages > 1 -%}
+            {% render 'pagination', paginate: paginate %}
+          {%- endif -%}
+        </div>
+      {% endpaginate %}
+    {%- else -%}
       <div class="template-search__results page-width">
         <ul class="grid grid--4-col-desktop grid--3-col-tablet grid--2-col grid--one-third-max grid--quarter-max negative-margin product-grid" role="list">
-          {%- for item in search.results -%}
-            <li class="grid__item{% unless item.object_type == 'product' %} grid__item--small{% endunless %}">
-              {%- case item.object_type -%}
-                {%- when 'product' -%}
-                  {%- capture product_settings -%}{%- if section.settings.product_show_vendor -%}vendor,{%- endif -%}title,price{%- endcapture -%}
-                  {% render 'product-card',
-                    product_card_product: item,
-                    media_size: section.settings.image_ratio,
-                    show_secondary_image: section.settings.show_secondary_image,
-                    add_image_padding: section.settings.add_image_padding,
-                    show_vendor: section.settings.show_vendor,
-                    show_image_outline: section.settings.show_image_outline,
-                    show_rating: section.settings.show_rating
-                  %}
-                {%- when 'article' -%}
-                  <a href="{{ item.url }}" class="card-wrapper">
-                    <div class="card card--search card--soft{% unless item.image %} card--text-only{% endunless %}">
-                      <div class="card__inner">
-                        {%- if item.image -%}
-                          <div class="media media--cropped">
-                            <img
-                              srcset="{%- if item.image.src.width >= 165 -%}{{ item.image.src | img_url: '165x' }} 165w,{%- endif -%}
-                                {%- if item.image.src.width >= 360 -%}{{ item.image.src | img_url: '360x' }} 360w,{%- endif -%}
-                                {%- if item.image.src.width >= 533 -%}{{ item.image.src | img_url: '533x' }} 533w,{%- endif -%}
-                                {%- if item.image.src.width >= 720 -%}{{ item.image.src | img_url: '720x' }} 720w,{%- endif -%}
-                                {%- if item.image.src.width >= 940 -%}{{ item.image.src | img_url: '940x' }} 940w,{%- endif -%}
-                                {%- if item.image.src.width >= 1065 -%}{{ item.image.src | img_url: '1065x' }} 1065w{%- endif -%}"
-                              src="{{ item.image.src | img_url: '940x' }}"
-                              loading="lazy"
-                              sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-                              width="{{ item.image.src.width }}"
-                              height="{{ item.image.src.height }}"
-                              alt="{{ item.image.src.alt | escape }}"
-                          >
-                          </div>
-                        {%- endif -%}
-                        <div class="card__content">
-                          <h2 class="card__text h3">{{ item.title | truncate: 50 | escape }}</h2>
-                          <div class="card-article-info caption-with-letter-spacing h5">
-                            {%- if section.settings.article_show_date -%}
-                              <span class="circle-divider">{{ item.published_at | time_tag: format: 'month_year' }}</span>
-                            {%- endif -%}
-                            {%- if section.settings.article_show_author -%}
-                              <span>{{ item.author }}</span>
-                            {%- endif -%}
-                          </div>
-                        </div>
-                        <div class="card__badge">
-                          <span class="badge color-background-1">{{ 'blogs.article.blog' | t }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                {%- when 'page' -%}
-                  <a href="{{ item.url }}" class="card-wrapper">
-                    <div class="card card--search card--soft card--text-only">
-                      <div class="card__inner">
-                        <div class="card__content"><h2 class="card__text h3">{{ item.title | truncate: 50 | escape }}</h2></div>
-                        <div class="card__badge">
-                          <span class="badge color-background-1">{{ 'templates.search.page' | t }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-              {%- endcase -%}
-            </li>
-          {%- endfor -%}
+          {{ extra_search_products_html }}
         </ul>
-        {%- if paginate.pages > 1 -%}
-          {% render 'pagination', paginate: paginate %}
-        {%- endif -%}
       </div>
-    {% endpaginate %}
+    {%- endif -%}
+  {%- else -%}
+    <div class="template-search__results page-width" style="display: none;">
+      <ul class="grid grid--4-col-desktop grid--3-col-tablet grid--2-col grid--one-third-max grid--quarter-max negative-margin product-grid" role="list"></ul>
+    </div>
   {%- endif -%}
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var terms = {{ search.terms | default: '' | json }};
+    if (!terms || !terms.trim()) return;
+
+    var cleanTerms = terms.trim().toLowerCase();
+    var strippedTerms = cleanTerms.replace(/[-_\\s]/g, '');
+    var wrapper = document.querySelector('[data-search-page-wrapper]');
+    var statusEl = document.querySelector('.search-results-count-status');
+    var resultsContainer = document.querySelector('.template-search__results');
+    var grid = resultsContainer ? resultsContainer.querySelector('.product-grid') : null;
+
+    function getCatalogIndex() {
+      var cached = null;
+      try {
+        cached = sessionStorage.getItem('cwa_search_index_v1');
+        if (cached) {
+          var parsed = JSON.parse(cached);
+          if (parsed && parsed.timestamp && (Date.now() - parsed.timestamp < 3600000)) {
+            return Promise.resolve(parsed.products);
+          }
+        }
+      } catch (e) {}
+
+      return fetch('/collections/all?view=search-index')
+        .then(function(res) {
+          if (!res.ok) throw new Error(res.status);
+          return res.json();
+        })
+        .then(function(data) {
+          var products = data.products || [];
+          try {
+            sessionStorage.setItem('cwa_search_index_v1', JSON.stringify({
+              timestamp: Date.now(),
+              products: products
+            }));
+          } catch (e) {}
+          return products;
+        })
+        .catch(function(err) {
+          return [];
+        });
+    }
+
+    getCatalogIndex().then(function(products) {
+      if (!products || !products.length) return;
+
+      var addedCount = 0;
+      products.forEach(function(prod) {
+        var code = (prod.product_code || '').toLowerCase().trim();
+        var codeStripped = code.replace(/[-_\\s]/g, '');
+        var title = (prod.title || '').toLowerCase();
+        var vendor = (prod.vendor || '').toLowerCase();
+        var specAcc = (prod.specs && prod.specs.accuracy || '').toLowerCase();
+        var specSize = (prod.specs && prod.specs.size_range || '').toLowerCase();
+        var specProt = (prod.specs && prod.specs.protection || '').toLowerCase();
+
+        var isCodeMatch = code && (code.indexOf(cleanTerms) !== -1 || cleanTerms.indexOf(code) !== -1 || (codeStripped && (codeStripped.indexOf(strippedTerms) !== -1 || strippedTerms.indexOf(codeStripped) !== -1)));
+        var isTitleMatch = title.indexOf(cleanTerms) !== -1;
+        var isSpecMatch = specAcc.indexOf(cleanTerms) !== -1 || specSize.indexOf(cleanTerms) !== -1 || specProt.indexOf(cleanTerms) !== -1;
+
+        if (isCodeMatch || isTitleMatch || isSpecMatch) {
+          if (grid && !grid.querySelector('[data-product-id="' + prod.id + '"]')) {
+            if (prod.card_html) {
+              var temp = document.createElement('div');
+              temp.innerHTML = prod.card_html.trim();
+              if (temp.firstElementChild) {
+                grid.appendChild(temp.firstElementChild);
+                addedCount++;
+              }
+            }
+          }
+        }
+      });
+
+      if (addedCount > 0 && grid) {
+        if (resultsContainer) resultsContainer.style.display = '';
+        if (wrapper) wrapper.classList.remove('template-search--empty');
+        var total = grid.querySelectorAll('.grid__item').length;
+        if (statusEl) {
+          var countText = total === 1 ? '1 result' : total + ' results';
+          statusEl.textContent = countText + ' found for “' + terms + '”';
+        }
+        if (typeof updateCurrencies === 'function') {
+          try { updateCurrencies(); } catch(e) {}
+        }
+      }
+    });
+  });
+</script>
 
 {% schema %}
 {

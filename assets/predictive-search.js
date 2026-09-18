@@ -128,6 +128,38 @@ class PredictiveSearch extends HTMLElement {
       return;
     }
 
+    const cleanTerms = searchTerm.trim().toLowerCase();
+    const strippedTerms = cleanTerms.replace(/[-_\s]/g, '');
+
+    function getCatalog() {
+      try {
+        const cached = sessionStorage.getItem('cwa_search_index_v1');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed && parsed.timestamp && (Date.now() - parsed.timestamp < 3600000)) {
+            return Promise.resolve(parsed.products);
+          }
+        }
+      } catch (e) {}
+
+      return fetch('/collections/all?view=search-index')
+        .then((res) => {
+          if (!res.ok) throw new Error(res.status);
+          return res.json();
+        })
+        .then((data) => {
+          const products = (data && data.products) || [];
+          try {
+            sessionStorage.setItem('cwa_search_index_v1', JSON.stringify({
+              timestamp: Date.now(),
+              products: products
+            }));
+          } catch (e) {}
+          return products;
+        })
+        .catch(() => []);
+    }
+
     fetch(`${routes.predictive_search_url}?q=${encodeURIComponent(searchTerm)}&${encodeURIComponent('resources[type]')}=product&${encodeURIComponent('resources[limit]')}=4&section_id=predictive-search`)
       .then((response) => { 
         if (!response.ok) {
@@ -139,9 +171,66 @@ class PredictiveSearch extends HTMLElement {
         return response.text();
       })
       .then((text) => {
-        const resultsMarkup = new DOMParser().parseFromString(text, 'text/html').querySelector('#shopify-section-predictive-search').innerHTML;
-        this.cachedResults[queryKey] = resultsMarkup;
-        this.renderSearchResults(resultsMarkup);
+        const doc = new DOMParser().parseFromString(text, 'text/html');
+        const section = doc.querySelector('#shopify-section-predictive-search');
+        if (!section) {
+          this.close();
+          return;
+        }
+
+        getCatalog().then((catalogProducts) => {
+          if (catalogProducts && catalogProducts.length) {
+            const resultsList = section.querySelector('#predictive-search-results-list');
+            const keywordItem = section.querySelector('#predictive-search-option-search-keywords');
+
+            if (resultsList) {
+              catalogProducts.forEach((prod) => {
+                const code = (prod.product_code || '').toLowerCase().trim();
+                const codeStripped = code.replace(/[-_\s]/g, '');
+                const title = (prod.title || '').toLowerCase();
+                const vendor = (prod.vendor || '').toLowerCase();
+
+                const isCodeMatch = code && (code.indexOf(cleanTerms) !== -1 || cleanTerms.indexOf(code) !== -1 || (codeStripped && (codeStripped.indexOf(strippedTerms) !== -1 || strippedTerms.indexOf(codeStripped) !== -1)));
+                const isTitleMatch = title.indexOf(cleanTerms) !== -1;
+
+                if (isCodeMatch || isTitleMatch) {
+                  // Check if already in resultsList
+                  const alreadyPresent = Array.from(resultsList.querySelectorAll('a')).some((a) => a.href.indexOf(prod.handle || prod.url) !== -1);
+                  if (!alreadyPresent) {
+                    const li = document.createElement('li');
+                    li.className = 'predictive-search__list-item';
+                    li.setAttribute('role', 'option');
+                    li.setAttribute('aria-selected', 'false');
+
+                    const pPrice = typeof Shopify !== 'undefined' && Shopify.formatMoney ? Shopify.formatMoney(prod.price, window.theme && theme.moneyFormat) : '';
+                    const codeDisplay = prod.product_code ? `<div class="card-vendor" style="font-size: 1.2rem; color: #64748b; font-weight: 500;">${prod.product_code}</div>` : '';
+
+                    li.innerHTML = `
+                      <a href="${prod.url}" class="predictive-search__item predictive-search__item--link link link--text" tabindex="-1">
+                        ${prod.thumbnail ? `<img class="predictive-search__image" src="${prod.thumbnail}" alt="${prod.title}" width="50" height="50">` : ''}
+                        <div class="predictive-search__item-content">
+                          ${codeDisplay}
+                          <h3 class="predictive-search__item-heading h5">${prod.title}</h3>
+                          ${pPrice ? `<span class="price"><span class="price-item price-item--regular">${pPrice}</span></span>` : ''}
+                        </div>
+                      </a>
+                    `;
+
+                    if (keywordItem) {
+                      resultsList.insertBefore(li, keywordItem);
+                    } else {
+                      resultsList.appendChild(li);
+                    }
+                  }
+                }
+              });
+            }
+          }
+
+          const resultsMarkup = section.innerHTML;
+          this.cachedResults[queryKey] = resultsMarkup;
+          this.renderSearchResults(resultsMarkup);
+        });
       })
       .catch((error) => {
         this.close();

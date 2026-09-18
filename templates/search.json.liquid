@@ -1,27 +1,82 @@
 {% layout none %}
+{%- liquid
+  assign search_terms = search.terms | strip | downcase
+  assign search_terms_clean = search_terms | replace: '-', '' | replace: ' ', ''
+-%}
 {% capture results %}
+  {% assign rendered_ids = '' %}
   {% for item in search.results %}
     {% assign product = item %}
-	{% assign arr_collection = '' %}
-	{% for collection in product.collections %}
-		{% if arr_collection == '' %}
-			{% assign arr_collection = arr_collection | append: collection.handle %}
-		{% else %}
-			{% assign arr_collection = arr_collection | append: ',' | append: collection.handle %}
-		{% endif %}
+    {% assign pid_str = product.id | append: '' %}
+    {% assign rendered_ids = rendered_ids | append: pid_str | append: ',' %}
+    {% assign product_code = product.metafields.custom.product_code | default: product.selected_or_first_available_variant.sku %}
+    {% assign arr_collection = '' %}
+    {% for collection in product.collections %}
+      {% if arr_collection == '' %}
+        {% assign arr_collection = arr_collection | append: collection.handle %}
+      {% else %}
+        {% assign arr_collection = arr_collection | append: ',' | append: collection.handle %}
+      {% endif %}
     {% endfor %}
 
     { 
-      "title"    : {{ product.title | json }},
-      "url"      : {{ product.url | within: product.collections.last | json }},
-	  "price"    : {{ product.price | json }},
-      "thumbnail": {{ product.featured_image.src | product_img_url: 'compact' | json }},
-	  "collections": {{arr_collection | split: "," | json }}
-    }
-    {% unless forloop.last %},{% endunless %}
+      "id"          : {{ product.id | json }},
+      "title"       : {{ product.title | json }},
+      "product_code": {{ product_code | default: '' | json }},
+      "url"         : {{ product.url | within: product.collections.last | json }},
+      "price"       : {{ product.price | json }},
+      "thumbnail"   : {{ product.featured_image.src | product_img_url: 'compact' | json }},
+      "collections" : {{ arr_collection | split: "," | json }}
+    }{% unless forloop.last %},{% endunless %}
   {% endfor %}
+
+  {%- if search_terms != blank -%}
+    {%- for prod in collections['all'].products -%}
+      {%- assign prod_id_str = prod.id | append: '' -%}
+      {%- assign rendered_id_check = ',' | append: prod_id_str | append: ',' -%}
+      {%- assign current_rendered = ',' | append: rendered_ids -%}
+      {%- unless current_rendered contains rendered_id_check -%}
+        {%- assign p_code = prod.metafields.custom.product_code | default: prod.selected_or_first_available_variant.sku -%}
+        {%- assign p_match = false -%}
+        {%- if p_code != blank -%}
+          {%- assign p_code_down = p_code | strip | downcase -%}
+          {%- assign p_code_clean = p_code_down | replace: '-', '' | replace: ' ', '' -%}
+          {%- if p_code_down contains search_terms or search_terms contains p_code_down or p_code_clean contains search_terms_clean or search_terms_clean contains p_code_clean -%}
+            {%- assign p_match = true -%}
+          {%- endif -%}
+        {%- endif -%}
+        {%- if p_match -%}
+          {%- assign rendered_ids = rendered_ids | append: prod_id_str | append: ',' -%}
+          {%- assign arr_collection = '' -%}
+          {%- for collection in prod.collections -%}
+            {%- if arr_collection == '' -%}
+              {%- assign arr_collection = arr_collection | append: collection.handle -%}
+            {%- else -%}
+              {%- assign arr_collection = arr_collection | append: ',' | append: collection.handle -%}
+            {%- endif -%}
+          {%- endfor -%}
+          ,
+          { 
+            "id"          : {{ prod.id | json }},
+            "title"       : {{ prod.title | json }},
+            "product_code": {{ p_code | json }},
+            "url"         : {{ prod.url | within: prod.collections.last | json }},
+            "price"       : {{ prod.price | json }},
+            "thumbnail"   : {{ prod.featured_image.src | product_img_url: 'compact' | json }},
+            "collections" : {{ arr_collection | split: "," | json }}
+          }
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
 {% endcapture %}
+{%- assign results_clean = results | strip -%}
+{%- assign final_count = 0 -%}
+{%- if results_clean != blank -%}
+  {%- assign split_items = results_clean | split: '"id"' -%}
+  {%- assign final_count = split_items.size | minus: 1 -%}
+{%- endif -%}
 {
-  "results_count": {{ search.results_count }},
-  "results": [{{ results }}]
+  "results_count": {{ final_count }},
+  "results": [{{ results_clean | remove_first: ',' }}]
 }

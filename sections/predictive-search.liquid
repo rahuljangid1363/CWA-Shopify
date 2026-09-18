@@ -1,6 +1,66 @@
 {%- if predictive_search.performed -%}
+  {%- liquid
+    assign predictive_terms = predictive_search.terms | strip | downcase
+    assign predictive_terms_clean = predictive_terms | replace: '-', '' | replace: ' ', ''
+    assign rendered_ids = ''
+    for p in predictive_search.resources.products
+      assign pid_str = p.id | append: ''
+      assign rendered_ids = rendered_ids | append: pid_str | append: ','
+    endfor
+    assign extra_products_count = 0
+  -%}
+  {%- capture extra_products_html -%}
+    {%- if predictive_terms != blank -%}
+      {%- for prod in collections['all'].products -%}
+        {%- assign prod_id_str = prod.id | append: '' -%}
+        {%- assign rendered_id_check = ',' | append: prod_id_str | append: ',' -%}
+        {%- assign current_rendered = ',' | append: rendered_ids -%}
+        {%- unless current_rendered contains rendered_id_check -%}
+          {%- assign p_code = prod.metafields.custom.product_code | default: prod.selected_or_first_available_variant.sku -%}
+          {%- assign p_match = false -%}
+          {%- if p_code != blank -%}
+            {%- assign p_code_down = p_code | strip | downcase -%}
+            {%- assign p_code_clean = p_code_down | replace: '-', '' | replace: ' ', '' -%}
+            {%- if p_code_down contains predictive_terms or predictive_terms contains p_code_down or p_code_clean contains predictive_terms_clean or predictive_terms_clean contains p_code_clean -%}
+              {%- assign p_match = true -%}
+            {%- endif -%}
+          {%- endif -%}
+          {%- if p_match -%}
+            {%- assign rendered_ids = rendered_ids | append: prod_id_str | append: ',' -%}
+            {%- assign extra_products_count = extra_products_count | plus: 1 -%}
+            <li id="predictive-search-option-extra-{{ prod.id }}" class="predictive-search__list-item" role="option" aria-selected="false">
+              <a href="{{ prod.url }}" class="predictive-search__item predictive-search__item--link link link--text" tabindex="-1">
+                {%- if prod.featured_media != blank -%}
+                  <img class="predictive-search__image"
+                    src="{{ prod.featured_media | img_url: '150x' }}"
+                    alt="{{ prod.featured_media.alt }}"
+                    width="50"
+                    height="{{ 50 | divided_by: prod.featured_media.preview_image.aspect_ratio }}"
+                  >
+                {%- endif -%}
+                <div class="predictive-search__item-content{% unless settings.predictive_search_show_vendor or settings.predictive_search_show_price %} predictive-search__item-content--centered{% endunless %}">
+                  {%- if settings.predictive_search_show_vendor -%} 
+                    <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span><div class="predictive-search__item-vendor caption-with-letter-spacing">{{ prod.vendor }}</div>
+                  {%- endif -%}
+                  {%- if p_code != blank -%}
+                    <div class="card-vendor" style="font-size: 1.2rem; color: #64748b; font-weight: 500;">{{ p_code }}</div>
+                  {%- endif -%}
+                  <h3 class="predictive-search__item-heading h5">{{ prod.title }}</h3> 
+                  {%- if settings.predictive_search_show_price -%}
+                    {% render 'price', product: prod, use_variant: true, show_badges: false %} 
+                  {%- endif -%}
+                </div>
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endcapture -%}
+  {%- assign total_product_count = predictive_search.resources.products.size | plus: extra_products_count -%}
+
   <div id="predictive-search-results">
-    {%- if predictive_search.resources.products.size > 0 -%} 
+    {%- if total_product_count > 0 -%} 
       <h2 id="predictive-search-products" class="predictive-search__heading">
         {{ 'templates.search.products' | t }}
 
@@ -11,6 +71,7 @@
     {%- endif -%}
     <ul id="predictive-search-results-list" class="predictive-search__results-list list-unstyled" role="listbox" aria-labelledby="predictive-search-products">
       {%- for product in predictive_search.resources.products -%}
+        {%- assign p_code = product.metafields.custom.product_code | default: product.selected_or_first_available_variant.sku -%}
         <li id="predictive-search-option-{{ forloop.index }}" class="predictive-search__list-item" role="option" aria-selected="false">
           <a href="{{ product.url }}" class="predictive-search__item predictive-search__item--link link link--text" tabindex="-1">
             {%- if product.featured_media != blank -%}
@@ -25,6 +86,9 @@
               {%- if settings.predictive_search_show_vendor -%} 
                 <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span><div class="predictive-search__item-vendor caption-with-letter-spacing">{{ product.vendor }}</div>
               {%- endif -%}
+              {%- if p_code != blank -%}
+                <div class="card-vendor" style="font-size: 1.2rem; color: #64748b; font-weight: 500;">{{ p_code }}</div>
+              {%- endif -%}
               <h3 class="predictive-search__item-heading h5">{{ product.title }}</h3> 
               {%- if settings.predictive_search_show_price -%}
                 {% render 'price', product: product, use_variant: true, show_badges: false %} 
@@ -33,6 +97,7 @@
           </a>
         </li>
       {%- endfor -%}
+      {{ extra_products_html }}
       <li id="predictive-search-option-search-keywords" class="predictive-search__list-item" role="option">
         <button class="predictive-search__item predictive-search__item--term link link--text h5 animate-arrow" tabindex="-1">
           {{ 'templates.search.search_for' | t: terms: predictive_search.terms }}
@@ -49,10 +114,10 @@
   </div>
 
   <span class="hidden" data-predictive-search-live-region-count-value>
-    {%- if search.results_count == 0 -%}
+    {%- if total_product_count == 0 -%}
       {{ 'templates.search.no_results' | t: terms: predictive_search.terms }}
     {%- else -%}
-      {{ 'templates.search.results_with_count' | t: terms: predictive_search.terms, count: predictive_search.resources.products.size }}
+      {{ 'templates.search.results_with_count' | t: terms: predictive_search.terms, count: total_product_count }}
     {%- endif -%}
   </span>
 {%- endif -%}
