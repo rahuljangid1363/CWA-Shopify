@@ -389,7 +389,7 @@
             <h1 class="product__title">
               {{ product.title | escape }}
             </h1>
-            {%- assign product_code = product.metafields.custom.product_code | default: product.selected_or_first_available_variant.sku -%}
+            {%- assign product_code = product.metafields.custom.product_code.value | default: product.selected_or_first_available_variant.sku -%}
             {%- if product_code != blank -%}
               <div class="product__code">{{ product_code }}</div>
             {%- endif -%}

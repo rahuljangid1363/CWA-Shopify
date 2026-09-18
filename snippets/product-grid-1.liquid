@@ -102,7 +102,7 @@
 	
     <div class="card-information">
       <div class="card-information__wrapper">
-        {%- assign product_code = product_card_product.metafields.custom.product_code | default: product_card_product.selected_or_first_available_variant.sku -%}
+        {%- assign product_code = product_card_product.metafields.custom.product_code.value | default: product_card_product.selected_or_first_available_variant.sku -%}
         {%- if product_code != blank -%}
           <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
           <div class="caption-with-letter-spacing light">{{ product_code }}</div>

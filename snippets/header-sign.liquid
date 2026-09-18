@@ -10,7 +10,6 @@
   <div class="mini-acount">
     {% if customer %}
       <p><a>Hello {{ customer.first_name }}</a></p>
-      <p><a href="{{ routes.account_logout_url }}" title="{{ 'layout.customer.log_out' | t }}" class="site-header__link">Logout</a></p>
       <p><a href="{{ routes.account_url }}" title="My account">My account</a></p>
     {% else %}
       <p><a href="{{ routes.account_login_url }}" class="site-header__link">Sign in</a></p>
@@ -19,6 +18,9 @@
     <p><a href="/pages/wishlist" title="Wishlist">Wishlist (<span class="js-wishlist-count"></span>)</a></p>
     <p><a href="/pages/compare" class="site-header__compare" title="Compare">Compare (<span class="js-compare-count text-center"></span>)</a></p>
     <p><a href="/cart" title="Checkout">Checkout</a></p>
+    {% if customer %}
+      <p><a href="{{ routes.account_logout_url }}" title="{{ 'layout.customer.log_out' | t }}" class="site-header__link">Logout</a></p>
+    {% endif %}
   </div>
 </div>
 

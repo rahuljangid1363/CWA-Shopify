@@ -6,7 +6,7 @@
   "items": {{ paginate.items }},
   "products": [
     {% for product in collection.products %}
-      {%- assign product_code = product.metafields.custom.product_code | default: product.selected_or_first_available_variant.sku -%}
+      {%- assign product_code = product.metafields.custom.product_code.value | default: product.selected_or_first_available_variant.sku -%}
       {%- capture card_html -%}<li class="grid__item" data-product-id="{{ product.id }}">{% render 'product-card', product_card_product: product %}</li>{%- endcapture -%}
       {
         "id": {{ product.id | json }},

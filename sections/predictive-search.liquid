@@ -16,7 +16,7 @@
         {%- assign rendered_id_check = ',' | append: prod_id_str | append: ',' -%}
         {%- assign current_rendered = ',' | append: rendered_ids -%}
         {%- unless current_rendered contains rendered_id_check -%}
-          {%- assign p_code = prod.metafields.custom.product_code | default: prod.selected_or_first_available_variant.sku -%}
+          {%- assign p_code = prod.metafields.custom.product_code.value | default: prod.selected_or_first_available_variant.sku -%}
           {%- assign p_match = false -%}
           {%- if p_code != blank -%}
             {%- assign p_code_down = p_code | strip | downcase -%}
@@ -71,7 +71,7 @@
     {%- endif -%}
     <ul id="predictive-search-results-list" class="predictive-search__results-list list-unstyled" role="listbox" aria-labelledby="predictive-search-products">
       {%- for product in predictive_search.resources.products -%}
-        {%- assign p_code = product.metafields.custom.product_code | default: product.selected_or_first_available_variant.sku -%}
+        {%- assign p_code = product.metafields.custom.product_code.value | default: product.selected_or_first_available_variant.sku -%}
         <li id="predictive-search-option-{{ forloop.index }}" class="predictive-search__list-item" role="option" aria-selected="false">
           <a href="{{ product.url }}" class="predictive-search__item predictive-search__item--link link link--text" tabindex="-1">
             {%- if product.featured_media != blank -%}
