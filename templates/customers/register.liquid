@@ -13,6 +13,7 @@
     {{ 'customer.register.title' | t }}
   </h1>
   {%- form 'create_customer', novalidate: 'novalidate' -%}
+    <input type="hidden" name="return_to" value="{{ routes.root_url }}">
     {%- if form.errors -%}
       <h2 class="form__message" tabindex="-1" autofocus>
         <svg aria-hidden="true" focusable="false" role="presentation">
@@ -118,3 +119,16 @@
     </button>
   {%- endform -%}
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('#create_customer');
+    if (form) {
+      form.addEventListener('submit', function() {
+        try {
+          sessionStorage.setItem('cwa_redirect_to_home', 'true');
+        } catch(e) {}
+      });
+    }
+  });
+</script>

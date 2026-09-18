@@ -4927,3 +4927,35 @@ display: none;
 .fa-check-circle:before {
   content: "\f058";
 }
+/* Logged-in customer initial icon */
+.header-customer-initial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  min-height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid #1e293b;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #1e293b;
+  user-select: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.menu-drawer__account .header-customer-initial {
+  margin-right: 1rem;
+}
+
+.header__icon--account:hover .header-customer-initial,
+.show_login:hover .header-customer-initial,
+.menu-drawer__account:hover .header-customer-initial {
+  color: #3075cc;
+  border-color: #3075cc;
+}

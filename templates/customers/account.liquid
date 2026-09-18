@@ -1,5 +1,26 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 
+<script>
+  (function() {
+    var shouldRedirect = false;
+    try {
+      if (sessionStorage.getItem('cwa_redirect_to_home') === 'true') {
+        shouldRedirect = true;
+        sessionStorage.removeItem('cwa_redirect_to_home');
+      }
+    } catch(e) {}
+
+    var ref = document.referrer || '';
+    if (ref.indexOf('/account/login') !== -1 || ref.indexOf('/account/register') !== -1) {
+      shouldRedirect = true;
+    }
+
+    if (shouldRedirect) {
+      window.location.replace('{{ routes.root_url }}');
+    }
+  })();
+</script>
+
 <div class="customer account">
   <div>
     <h1>{{ 'customer.account.title' | t }}</h1>

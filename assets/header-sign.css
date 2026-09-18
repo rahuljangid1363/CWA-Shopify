@@ -94,4 +94,51 @@
 .header-sign.is-active > .mini-acount,
 .header-sign.active > .mini-acount {
   display: block;
-}
+}
+
+/* User name first letter initial with outlined circular border */
+.header-customer-initial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  min-height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid #1e293b;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #1e293b;
+  user-select: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.show_login:hover .header-customer-initial,
+.header-action-btn:hover .header-customer-initial,
+.header__icon--account:hover .header-customer-initial {
+  color: #3075cc;
+  border-color: #3075cc;
+}
+
+.scrolled-header__action-btn .header-customer-initial,
+.header-customer-initial--scrolled {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  font-size: 12px;
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.scrolled-header__action-btn:hover .header-customer-initial,
+.scrolled-header__action-btn:hover .header-customer-initial--scrolled {
+  border-color: #93c5fd;
+  color: #93c5fd;
+}
+

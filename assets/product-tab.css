@@ -156,7 +156,7 @@
   padding: 15px 13px 5px 13px;
 }
 
-/* Equal Height Product Cards */
+/* Equal Height Product Cards in Our Products Section */
 .product-tab .product-tab-slick.slick-initialized .slick-track,
 .product-tab .slick-track {
   display: flex !important;
@@ -167,23 +167,27 @@
   height: auto !important;
   display: flex !important;
   flex-direction: column !important;
-  justify-content: space-between;
+  justify-content: stretch !important;
 }
 
-.product-tab .slick-slide>div {
+.product-tab .slick-slide > div {
   width: 100%;
   display: flex !important;
   flex-direction: column !important;
-  flex: 1 1 auto;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
 }
 
 .product-tab .producttab-item {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 20px) !important;
   display: flex !important;
   flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
   padding: 0 10px;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .product-tab .card-wrapper {
@@ -191,27 +195,53 @@
   height: 100% !important;
   display: flex !important;
   flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
   background: #ffffff;
   border: 1px solid #e5e5e5;
   border-radius: 8px;
-  overflow: visible;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .product-tab .card--product {
   flex-shrink: 0;
+  width: 100%;
+}
+
+/* Uniform image container height across all cards */
+.product-tab .producttab-item .media {
+  height: 220px !important;
+  padding-bottom: 0 !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+.product-tab .producttab-item .media > img {
+  object-fit: contain !important;
+  background-color: #ffffff;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 480px) {
+  .product-tab .producttab-item .media {
+    height: 190px !important;
+  }
 }
 
 .product-tab .card-information {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
   padding: 14px 16px 16px;
+  box-sizing: border-box;
 }
 
 .product-tab .card-information__wrapper {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
   height: 100%;
   padding: 0;
   text-align: left;
@@ -224,10 +254,32 @@
   overflow: hidden;
   text-overflow: ellipsis;
   min-height: 44px;
+  max-height: 44px;
   line-height: 22px;
   font-size: 15px;
   font-weight: 600;
   color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.product-tab .card-vendor {
+  min-height: 20px;
+  line-height: 20px;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-tab .card-price-datasheet-row {
+  margin-top: auto !important;
+}
+
+.product-tab .card-hover-actions {
+  margin-top: 14px;
+  flex-shrink: 0;
 }
 
 .product-tab .section-text {
@@ -273,31 +325,6 @@
   }
 }
 
-@media (max-width: 767px) {
-  /* image_ratio: "adapt" sizes the image box from the product photo's
-     own aspect ratio via an inline padding-bottom:X% (set in
-     product-grid-3.liquid) - fine at 3-4 cards per row on desktop, but
-     at 1-2 cards per row on mobile that same ratio makes the box (and
-     the card) very tall relative to the screen. max-height alone can't
-     win here since the box's rendered height is driven by that
-     percentage padding, not a content/height value - so replace it with
-     a fixed height instead (!important to beat the inline style). */
-  .product-tab .producttab-item .media {
-    height: 220px !important;
-    padding-bottom: 0 !important;
-  }
-
-  /* .media > img is object-fit: cover globally (base.css), which crops
-     product photos to fill the box - fine for lifestyle imagery, but it
-     was cutting off parts of the product itself once the box became a
-     fixed height instead of matching the photo's own ratio. Switch to
-     contain here so the whole product photo stays visible, letterboxed
-     on a light background instead of cropped. */
-  .product-tab .producttab-item .media > img {
-    object-fit: contain !important;
-    background-color: #fff;
-  }
-}
 
 @media (max-width:567px) {
   .product-tab .heading .link-base {

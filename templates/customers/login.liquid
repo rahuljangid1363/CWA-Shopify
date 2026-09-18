@@ -67,6 +67,7 @@
       </h3>
     {%- endif -%}
     {%- form 'customer_login', novalidate: 'novalidate' -%}
+      <input type="hidden" name="return_to" value="{{ routes.root_url }}">
       {%- if form.errors -%}
         <h2 class="form__message" tabindex="-1" autofocus>
           <span class="visually-hidden">{{ 'accessibility.error' | t }} </span>
@@ -146,3 +147,16 @@
     </div>
   {%- endif -%}
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('#customer_login');
+    if (form) {
+      form.addEventListener('submit', function() {
+        try {
+          sessionStorage.setItem('cwa_redirect_to_home', 'true');
+        } catch(e) {}
+      });
+    }
+  });
+</script>
