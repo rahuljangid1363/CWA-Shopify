@@ -160,7 +160,7 @@
                 </nav>
                 <div class="menu-drawer__utility-links">
                   {%- if shop.customer_accounts_enabled -%}
-                    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link link--text focus-inset h5">
+                    <a href="{%- if customer -%}https://shopify.com/77655081152/account/profile{%- else -%}/customer_authentication/login?return_to={{ routes.root_url | url_encode }}{%- endif -%}" class="menu-drawer__account link link--text focus-inset h5">
                       {%- if customer -%}
                         {%- assign customer_initial = customer.first_name | default: customer.name | default: customer.email | slice: 0, 1 | upcase -%}
                         <span class="header-customer-initial">{{ customer_initial }}</span>
@@ -474,7 +474,7 @@
       </details-modal>
 
       {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link link--text focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
+        <a href="{%- if customer -%}https://shopify.com/77655081152/account/profile{%- else -%}/customer_authentication/login?return_to={{ routes.root_url | url_encode }}{%- endif -%}" class="header__icon header__icon--account link link--text focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
           {%- if customer -%}
             {%- assign customer_initial = customer.first_name | default: customer.name | default: customer.email | slice: 0, 1 | upcase -%}
             <span class="header-customer-initial">{{ customer_initial }}</span>

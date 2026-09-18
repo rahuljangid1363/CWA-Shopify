@@ -6,10 +6,10 @@
   is made server-side here (via the customer object), the redirect itself
   just has to run in the browser since Liquid has no server redirect tag. {%- endcomment -%}
   <script>
-    window.location.replace('{{ routes.account_login_url }}{% if routes.account_login_url contains "?" %}&{% else %}?{% endif %}return_url=' + encodeURIComponent(window.location.pathname + window.location.search));
+    window.location.replace('/customer_authentication/login?return_to=' + encodeURIComponent(window.location.pathname + window.location.search));
   </script>
   <noscript>
-    <meta http-equiv="refresh" content="0; url={{ routes.account_login_url }}">
+    <meta http-equiv="refresh" content="0; url=/customer_authentication/login?return_to={{ routes.root_url | url_encode }}">
   </noscript>
 {%- endunless -%}
 

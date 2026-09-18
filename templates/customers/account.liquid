@@ -11,7 +11,7 @@
     } catch(e) {}
 
     var ref = document.referrer || '';
-    if (ref.indexOf('/account/login') !== -1 || ref.indexOf('/account/register') !== -1) {
+    if (ref.indexOf('/account/login') !== -1 || ref.indexOf('/account/register') !== -1 || ref.indexOf('shopify.com') !== -1 || ref.indexOf('customer_authentication') !== -1) {
       shouldRedirect = true;
     }
 
