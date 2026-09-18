@@ -389,6 +389,10 @@
             <h1 class="product__title">
               {{ product.title | escape }}
             </h1>
+            {%- assign product_code = product.metafields.custom.product_code | default: product.selected_or_first_available_variant.sku -%}
+            {%- if product_code != blank -%}
+              <div class="product__code">{{ product_code }}</div>
+            {%- endif -%}
           {%- when 'price' -%}
             <div class="no-js-hidden" id="price-{{ section.id }}">
               {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
@@ -717,10 +721,29 @@
 		    {%- endif -%}
         {%- endcase -%}
         {%- endfor -%}
+
+        {%- comment -%}
+          Moves the wishlist heart button (rendered separately by the
+          wishlist_compare block) to sit inline with the Add to Cart button,
+          instead of its own row below — matches the reference product-page
+          design. Moved (not cloned) so the custom <product-wishlist> element
+          keeps its bound state/listeners.
+        {%- endcomment -%}
+        <script>
+          (function () {
+            var info = document.getElementById('ProductInfo-{{ section.id }}');
+            if (!info) return;
+            var buttons = info.querySelector('.product-form__buttons');
+            var wishlistDetail = info.querySelector('.wishlist-compare-detail');
+            if (!buttons || !wishlistDetail) return;
+            buttons.insertBefore(wishlistDetail, buttons.firstChild);
+            buttons.classList.add('product-form__buttons--with-wishlist');
+          })();
+        </script>
       </div>
     </div>
   </div>
-  
+
   <div class="bottom-product-detail">
     {%- for block in section.blocks -%}
         {%- case block.type -%}
