@@ -217,6 +217,34 @@
     width: 20px;
 }
 
+/* Small badge image that can be configured above the sub-title (block.settings.image_title).
+   Previously had no sizing rules at all, so an editor-uploaded image rendered at its native
+   pixel size and could float over/behind the heading text at narrower viewports. */
+.advanced-content .text-list .image-title-text-list {
+    max-width: 80px;
+    margin-bottom: 16px;
+}
+
+.advanced-content .text-list .image-title-text-list img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+/* `.text-list-note` was relying on a "w-lg-50" utility class that doesn't exist in this
+   theme's Bootstrap build, so it never actually got a defined width once
+   `.d-flex.flex-column.flex-lg-row` switches to a row at >=992px — it just shrank to fit
+   its content next to `.text-left` (flex: 1), squeezing/cutting the checklist off. Give it
+   a real 50/50 split at that same breakpoint. */
+@media (min-width: 992px) {
+    .advanced-content .text-list .text-list-note {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
 /* advanced newsleter */
 .advanced-newsletter-box {
     width: 100%;
