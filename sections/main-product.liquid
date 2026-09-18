@@ -393,6 +393,139 @@
             {%- if product_code != blank -%}
               <div class="product__code">{{ product_code }}</div>
             {%- endif -%}
+
+            {%- comment -%}
+              Nominal Diameter / Lining Material: prefer the real
+              "custom.nominal_diameter" / "custom.lining_material" list
+              metafields (one pill per value, e.g. DN18 / DN25 / DN50) when a
+              product has them configured. Products that don't have a
+              metafield set up yet fall back to whatever single value is
+              already in the description's spec table, so nothing regresses.
+            {%- endcomment -%}
+            {%- assign nominal_diameter_values = product.metafields.custom.nominal_diameter.value -%}
+            {%- assign nominal_diameter_fallback = '' -%}
+            {%- unless nominal_diameter_values.size > 0 -%}
+              {%- assign nd_labels = 'Nominal diameter,Nominal Diameter,Diameter nominal,Diameter Nominal' | split: ',' -%}
+              {%- for label in nd_labels -%}
+                {%- if nominal_diameter_fallback == blank -%}
+                  {%- assign desc_parts = product.description | replace: ' ', ' ' | split: label -%}
+                  {%- if desc_parts.size > 1 -%}
+                    {%- assign after_label = desc_parts[1] | strip -%}
+                    {%- assign after_label_first_char = after_label | slice: 0, 1 -%}
+                    {%- if after_label_first_char == '|' -%}
+                      {%- assign pipe_parts = after_label | split: '|' -%}
+                      {%- assign nominal_diameter_fallback = pipe_parts[1] | strip_html | strip -%}
+                    {%- else -%}
+                      {%- assign cell_parts = desc_parts[1] | split: '<td>' -%}
+                      {%- if cell_parts.size > 1 -%}
+                        {%- assign nominal_diameter_fallback = cell_parts[1] | split: '</td>' | first | strip_html | strip -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endunless -%}
+
+            {%- assign lining_material_values = product.metafields.custom.lining_material.value -%}
+            {%- assign lining_material_fallback = '' -%}
+            {%- unless lining_material_values.size > 0 -%}
+              {%- assign lm_labels = 'Lining material,Lining Material,Liner material,Liner Material' | split: ',' -%}
+              {%- for label in lm_labels -%}
+                {%- if lining_material_fallback == blank -%}
+                  {%- assign desc_parts = product.description | replace: ' ', ' ' | split: label -%}
+                  {%- if desc_parts.size > 1 -%}
+                    {%- assign after_label = desc_parts[1] | strip -%}
+                    {%- assign after_label_first_char = after_label | slice: 0, 1 -%}
+                    {%- if after_label_first_char == '|' -%}
+                      {%- assign pipe_parts = after_label | split: '|' -%}
+                      {%- assign lining_material_fallback = pipe_parts[1] | strip_html | strip -%}
+                    {%- else -%}
+                      {%- assign cell_parts = desc_parts[1] | split: '<td>' -%}
+                      {%- if cell_parts.size > 1 -%}
+                        {%- assign lining_material_fallback = cell_parts[1] | split: '</td>' | first | strip_html | strip -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endunless -%}
+
+            {%- if nominal_diameter_values.size > 0 or nominal_diameter_fallback != blank or lining_material_values.size > 0 or lining_material_fallback != blank -%}
+              <div class="product__spec-badges">
+                {%- if nominal_diameter_values.size > 0 or nominal_diameter_fallback != blank -%}
+                  <div class="product__spec-badge-group">
+                    <span class="product__spec-label">Nominal Diameter</span>
+                    <div class="product__spec-pill-row">
+                      {%- if nominal_diameter_values.size > 0 -%}
+                        {%- for value in nominal_diameter_values -%}
+                          <span class="product__spec-pill">{{ value | strip }}</span>
+                        {%- endfor -%}
+                      {%- else -%}
+                        <span class="product__spec-pill">{{ nominal_diameter_fallback }}</span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+                {%- if lining_material_values.size > 0 or lining_material_fallback != blank -%}
+                  <div class="product__spec-badge-group">
+                    <span class="product__spec-label">Lining Material</span>
+                    <div class="product__spec-pill-row">
+                      {%- if lining_material_values.size > 0 -%}
+                        {%- for value in lining_material_values -%}
+                          <span class="product__spec-pill">{{ value | strip }}</span>
+                        {%- endfor -%}
+                      {%- else -%}
+                        <span class="product__spec-pill">{{ lining_material_fallback }}</span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%}
+              Connection / Pressure: read-only dropdowns sourced from the
+              "custom.connection" / "custom.pressure" list metafields, shown
+              side by side. Same display-only pattern as the Nominal
+              Diameter / Lining Material pills above — no metafield set means
+              nothing renders.
+            {%- endcomment -%}
+            {%- assign connection_values = product.metafields.custom.connection.value -%}
+            {%- assign pressure_values = product.metafields.custom.pressure.value -%}
+            {%- if connection_values.size > 0 or pressure_values.size > 0 -%}
+              <div class="product__spec-dropdowns">
+                {%- if connection_values.size > 0 -%}
+                  <div class="product__spec-dropdown-group">
+                    <span class="product__spec-label">Connection</span>
+                    <div class="select">
+                      <select class="select__select product__spec-select">
+                        {%- for value in connection_values -%}
+                          <option value="{{ value | strip | escape }}">{{ value | strip }}</option>
+                        {%- endfor -%}
+                      </select>
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
+                      </svg>
+                    </div>
+                  </div>
+                {%- endif -%}
+                {%- if pressure_values.size > 0 -%}
+                  <div class="product__spec-dropdown-group">
+                    <span class="product__spec-label">Pressure</span>
+                    <div class="select">
+                      <select class="select__select product__spec-select">
+                        {%- for value in pressure_values -%}
+                          <option value="{{ value | strip | escape }}">{{ value | strip }}</option>
+                        {%- endfor -%}
+                      </select>
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
+                      </svg>
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           {%- when 'price' -%}
             <div class="no-js-hidden" id="price-{{ section.id }}">
               {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}

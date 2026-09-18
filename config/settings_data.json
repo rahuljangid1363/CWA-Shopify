@@ -318,7 +318,7 @@
       "popup": {
         "type": "popup",
         "settings": {
-          "enber_popup": true,
+          "enber_popup": false,
           "title_popup": "Join our newletter and get 20% discount",
           "text_popup": "This website uses cookies to ensure you get the best experience on our website.",
           "email_popup": true,
