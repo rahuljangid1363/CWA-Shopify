@@ -21,7 +21,6 @@
       <p><a href="/customer_authentication/login?return_to={{ routes.root_url | url_encode }}" title="Register">Register</a></p>
     {% endif %}
     <p><a href="/pages/wishlist" title="Wishlist">Wishlist (<span class="js-wishlist-count"></span>)</a></p>
-    <p><a href="/pages/compare" class="site-header__compare" title="Compare">Compare (<span class="js-compare-count text-center"></span>)</a></p>
     <p><a href="/cart" title="Checkout">Checkout</a></p>
     {% if customer %}
       <p><a href="{{ routes.account_logout_url }}" title="{{ 'layout.customer.log_out' | t }}" class="site-header__link">Logout</a></p>

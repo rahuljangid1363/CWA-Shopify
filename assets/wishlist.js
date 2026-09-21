@@ -293,35 +293,7 @@
     }, 2800);
   }
 
-  // ---- Wishlist page: item cards + price details --------------------------
-  var SPEC_FIELDS = [
-    { key: 'nominal_diameter', label: 'Nominal Diameter' },
-    { key: 'lining_material', label: 'Lining Material' },
-    { key: 'connection', label: 'Connection' },
-    { key: 'pressure', label: 'Pressure' }
-  ];
-  var PREFS_KEY = 'theme_wishlist_prefs';
-
-  function getPrefs() {
-    try { return JSON.parse(localStorage.getItem(PREFS_KEY)) || {}; } catch (e) { return {}; }
-  }
-
-  function savePref(handle, patch) {
-    try {
-      var prefs = getPrefs();
-      prefs[handle] = Object.assign({}, prefs[handle] || {}, patch);
-      localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
-    } catch (e) {}
-  }
-
-  function removePref(handle) {
-    try {
-      var prefs = getPrefs();
-      delete prefs[handle];
-      localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
-    } catch (e) {}
-  }
-
+  // ---- Wishlist page: product card grid ------------------------------------
   function formatCents(cents) {
     var format = (typeof theme !== 'undefined' && theme.moneyFormat) || '${{amount}}';
     if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
@@ -337,103 +309,37 @@
       url: '/products/' + handle,
       image: '',
       product_code: '',
-      data_sheet: '',
       available: false,
       variant_id: null,
-      price: 0,
-      compare_at_price: 0,
-      options: {}
+      price: 0
     };
   }
 
-  function buildWishlistItem(data) {
-    var pref = getPrefs()[data.handle] || {};
-    var sel = {};
-    SPEC_FIELDS.forEach(function(f) {
-      var vals = (data.options && data.options[f.key]) || [];
-      var saved = pref.sel && pref.sel[f.key];
-      sel[f.key] = vals.indexOf(saved) >= 0 ? saved : vals[0];
-    });
-    return { data: data, qty: Math.max(1, parseInt(pref.qty, 10) || 1), sel: sel };
-  }
-
-  function isOrderable(item) {
-    return !!(item.data.available && item.data.variant_id);
-  }
-
-  function renderWishlistItem(item) {
-    var d = item.data;
+  function renderWishlistItem(d) {
     var h = escapeHtml(d.handle);
+    var orderable = !!(d.available && d.variant_id);
 
     var img = d.image
       ? '<img src="' + escapeHtml(d.image) + '" alt="' + escapeHtml(d.title) + '" loading="lazy">'
-      : '<div class="fk-wl-noimg">No Image</div>';
-
-    var selects = SPEC_FIELDS.map(function(f) {
-      var vals = (d.options && d.options[f.key]) || [];
-      if (!vals.length) return '';
-      var opts = vals.map(function(v) {
-        return '<option value="' + escapeHtml(v) + '"' + (v === item.sel[f.key] ? ' selected' : '') + '>' + escapeHtml(v) + '</option>';
-      }).join('');
-      return '<label class="fk-wl-select"><span class="fk-wl-select__label">' + f.label + ' -</span>' +
-        '<select data-field="' + f.key + '" data-handle="' + h + '" aria-label="' + f.label + '">' + opts + '</select></label>';
-    }).join('');
-
-    var datasheet = d.data_sheet
-      ? '<a class="fk-wl-datasheet" href="' + escapeHtml(d.data_sheet) + '" target="_blank" rel="noopener">' +
-          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>' +
-          '<span>Download Data Sheet</span></a>'
-      : '';
-
-    var price = d.price > 0 ? '<div class="fk-wl-price">' + escapeHtml(formatCents(d.price)) + '</div>' : '';
-    var status = isOrderable(item) ? '' : '<div class="fk-wl-status">Currently unavailable</div>';
+      : '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#878787;font-size:12px;background:#f1f3f6;">No Image</div>';
 
     return (
-      '<div class="fk-wl-card" data-handle="' + h + '">' +
-        '<button type="button" class="fk-wl-remove" data-act="remove" data-handle="' + h + '" title="Remove from Wishlist" aria-label="Remove">' +
-          '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>' +
+      '<div class="fk-wishlist-item" data-handle="' + h + '">' +
+        '<button type="button" class="fk-wishlist-item__remove js-remove-wishlist" data-handle="' + h + '" title="Remove from Wishlist" aria-label="Remove">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>' +
         '</button>' +
-        '<a href="' + escapeHtml(d.url) + '" class="fk-wl-media">' + img + '</a>' +
-        '<div class="fk-wl-info">' +
-          '<a href="' + escapeHtml(d.url) + '" class="fk-wl-title">' + escapeHtml(d.title) + '</a>' +
-          (d.product_code ? '<div class="fk-wl-code">' + escapeHtml(d.product_code) + '</div>' : '') +
-          (selects ? '<div class="fk-wl-selects">' + selects + '</div>' : '') +
-          '<div class="fk-wl-qty-label">Quantity</div>' +
-          '<div class="fk-wl-qty">' +
-            '<button type="button" data-act="minus" data-handle="' + h + '" aria-label="Decrease quantity">&minus;</button>' +
-            '<input type="number" min="1" value="' + item.qty + '" data-handle="' + h + '" aria-label="Quantity">' +
-            '<button type="button" data-act="plus" data-handle="' + h + '" aria-label="Increase quantity">+</button>' +
-          '</div>' +
-          datasheet +
-          price +
-          status +
+        '<a href="' + escapeHtml(d.url) + '" class="fk-wishlist-item__image">' + img + '</a>' +
+        '<div class="fk-wishlist-item__body">' +
+          '<a href="' + escapeHtml(d.url) + '" class="fk-wishlist-item__title" title="' + escapeHtml(d.title) + '">' + escapeHtml(d.title) + '</a>' +
+          (d.product_code ? '<div class="fk-wishlist-item__sku">' + escapeHtml(d.product_code) + '</div>' : '') +
+          (d.price > 0 ? '<div class="fk-wishlist-item__price">' + escapeHtml(formatCents(d.price)) + '</div>' : '') +
+          (orderable ? '' : '<div class="fk-wishlist-item__status">Currently unavailable</div>') +
         '</div>' +
+        '<div class="fk-wishlist-item__divider"></div>' +
+        '<button type="button" class="fk-wishlist-item__move js-move-to-bag" data-handle="' + h + '" data-variant-id="' + escapeHtml(String(d.variant_id || '')) + '"' + (orderable ? '' : ' disabled') + '>' + (d.available ? 'Move to Bag' : 'Out of Stock') + '</button>' +
       '</div>'
     );
   }
-
-  function renderWishlistSummary(items) {
-    var qty = 0, mrp = 0, total = 0;
-    items.forEach(function(item) {
-      if (!isOrderable(item)) return;
-      var d = item.data;
-      qty += item.qty;
-      total += d.price * item.qty;
-      mrp += Math.max(d.compare_at_price || 0, d.price) * item.qty;
-    });
-    var discount = mrp - total;
-    var disabled = qty === 0 ? ' disabled' : '';
-
-    return (
-      '<div class="fk-wl-summary__title">Price Details (' + qty + (qty === 1 ? ' Item' : ' Items') + ')</div>' +
-      '<div class="fk-wl-summary__row"><span>Total MRP</span><span>' + escapeHtml(formatCents(mrp)) + '</span></div>' +
-      '<div class="fk-wl-summary__row"><span>Discount on MRP</span><span class="fk-wl-summary__discount">' + (discount > 0 ? '- ' : '') + escapeHtml(formatCents(discount)) + '</span></div>' +
-      '<div class="fk-wl-summary__row fk-wl-summary__row--total"><span>Total Amount</span><span>' + escapeHtml(formatCents(total)) + '</span></div>' +
-      '<p class="fk-wl-summary__terms">By placing the order, you agree to our <a href="/policies/terms-of-service">Terms of Use</a> and <a href="/policies/privacy-policy">Privacy Policy</a></p>' +
-      '<button type="button" class="fk-wl-summary__btn" data-act="place-order"' + disabled + '>Place Order</button>'
-    );
-  }
-
 
   // Extract card metadata when button is clicked
   function extractProductDataFromDOM(element, handle) {
@@ -581,14 +487,6 @@
       var listEl = self.querySelector('#fk-wishlist-list');
       var skeletonEl = self.querySelector('#fk-wishlist-skeleton');
       var emptyEl = self.querySelector('#fk-wishlist-empty');
-      var summaryEl = self.querySelector('#fk-wishlist-summary');
-      if (!summaryEl) {
-        summaryEl = document.createElement('aside');
-        summaryEl.id = 'fk-wishlist-summary';
-        summaryEl.className = 'fk-wl-summary';
-        summaryEl.style.display = 'none';
-        self.appendChild(summaryEl);
-      }
       if (!listEl) return;
 
       function setDisplay(el, value) {
@@ -598,83 +496,85 @@
       function showEmpty() {
         setDisplay(listEl, 'none');
         setDisplay(skeletonEl, 'none');
-        setDisplay(summaryEl, 'none');
         if (emptyEl) {
           emptyEl.classList.add('is-visible');
           setDisplay(emptyEl, 'block');
         }
       }
 
-      function refreshSummary() {
-        summaryEl.innerHTML = renderWishlistSummary(self._items || []);
-      }
-
       function draw(dataList) {
-        self._items = dataList.map(buildWishlistItem);
-        listEl.innerHTML = self._items.map(renderWishlistItem).join('');
-        refreshSummary();
+        listEl.innerHTML = dataList.map(renderWishlistItem).join('');
         setDisplay(skeletonEl, 'none');
         if (emptyEl) {
           emptyEl.classList.remove('is-visible');
           setDisplay(emptyEl, 'none');
         }
-        setDisplay(listEl, 'flex');
-        setDisplay(summaryEl, 'block');
+        setDisplay(listEl, 'grid');
         if (typeof updateCurrencies === 'function') updateCurrencies();
-      }
-
-      function findItem(handle) {
-        return (self._items || []).filter(function(i) { return i.data.handle === handle; })[0];
       }
 
       if (!self._wishlistBound) {
         self._wishlistBound = true;
 
         self.addEventListener('click', function(e) {
-          var btn = e.target.closest('[data-act]');
-          if (!btn || !self.contains(btn)) return;
-          var act = btn.getAttribute('data-act');
-          var handle = btn.getAttribute('data-handle');
+          var removeBtn = e.target.closest('.js-remove-wishlist');
+          var moveBtn = e.target.closest('.js-move-to-bag');
 
-          if (act === 'remove') {
+          if (removeBtn && self.contains(removeBtn)) {
             e.preventDefault();
+            var handle = removeBtn.getAttribute('data-handle');
             var curList = getWishlist();
             var idx = curList.indexOf(handle);
             if (idx >= 0) {
               curList.splice(idx, 1);
               removeProductCache(handle);
-              removePref(handle);
               setWishlist(curList);
               showWishlistToast('Item removed from wishlist');
             }
-          } else if (act === 'minus' || act === 'plus') {
-            var item = findItem(handle);
-            if (!item) return;
-            item.qty = Math.max(1, item.qty + (act === 'plus' ? 1 : -1));
-            savePref(handle, { qty: item.qty });
-            var input = self.querySelector('.fk-wl-qty input[data-handle="' + handle + '"]');
-            if (input) input.value = item.qty;
-            refreshSummary();
-          } else if (act === 'place-order') {
-            self.placeOrder(btn);
-          }
-        });
+          } else if (moveBtn && self.contains(moveBtn)) {
+            e.preventDefault();
+            if (moveBtn.hasAttribute('disabled')) return;
 
-        self.addEventListener('change', function(e) {
-          var el = e.target;
-          var handle = el.getAttribute && el.getAttribute('data-handle');
-          if (!handle) return;
-          var item = findItem(handle);
-          if (!item) return;
+            var mHandle = moveBtn.getAttribute('data-handle');
+            var variantId = moveBtn.getAttribute('data-variant-id');
+            if (!variantId) return;
 
-          if (el.matches('.fk-wl-qty input')) {
-            item.qty = Math.max(1, parseInt(el.value, 10) || 1);
-            el.value = item.qty;
-            savePref(handle, { qty: item.qty });
-            refreshSummary();
-          } else if (el.matches('select[data-field]')) {
-            item.sel[el.getAttribute('data-field')] = el.value;
-            savePref(handle, { sel: item.sel });
+            var originalLabel = moveBtn.textContent;
+            moveBtn.setAttribute('disabled', 'disabled');
+            moveBtn.textContent = 'Adding...';
+
+            fetch((window.routes && window.routes.cart_add_url) || '/cart/add.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({ items: [{ id: Number(variantId), quantity: 1 }] })
+            })
+              .then(function(response) { return response.json(); })
+              .then(function(data) {
+                if (data.status) {
+                  showWishlistToast(data.message || data.description || 'Could not add to bag', true);
+                  moveBtn.removeAttribute('disabled');
+                  moveBtn.textContent = originalLabel;
+                  return;
+                }
+                var list = getWishlist();
+                var i = list.indexOf(mHandle);
+                if (i >= 0) {
+                  list.splice(i, 1);
+                  removeProductCache(mHandle);
+                  setWishlist(list);
+                }
+                showWishlistToast('Moved to bag');
+
+                var miniCartEl = document.querySelector('mini-cart');
+                if (miniCartEl && typeof miniCartEl.update === 'function') {
+                  miniCartEl.update();
+                }
+              })
+              .catch(function() {
+                showWishlistToast('Could not add to bag', true);
+                moveBtn.removeAttribute('disabled');
+                moveBtn.textContent = originalLabel;
+              });
           }
         });
       }
@@ -714,50 +614,6 @@
         }
         draw(dataList);
       });
-    }
-
-    placeOrder(btn) {
-      var self = this;
-      var orderable = (self._items || []).filter(isOrderable);
-      if (!orderable.length) return;
-
-      var label = btn.textContent;
-      btn.setAttribute('disabled', 'disabled');
-      btn.textContent = 'Placing order...';
-
-      var lines = orderable.map(function(item) {
-        var properties = {};
-        SPEC_FIELDS.forEach(function(f) {
-          if (item.sel[f.key]) properties[f.label] = item.sel[f.key];
-        });
-        return { id: Number(item.data.variant_id), quantity: item.qty, properties: properties };
-      });
-
-      fetch((window.routes && window.routes.cart_add_url) || '/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ items: lines })
-      })
-        .then(function(response) { return response.json(); })
-        .then(function(data) {
-          if (data.status) {
-            showWishlistToast(data.message || data.description || 'Could not place order', true);
-            btn.removeAttribute('disabled');
-            btn.textContent = label;
-            return;
-          }
-          var remaining = getWishlist().filter(function(h) {
-            return !orderable.some(function(i) { return i.data.handle === h; });
-          });
-          orderable.forEach(function(i) { removeProductCache(i.data.handle); removePref(i.data.handle); });
-          setWishlist(remaining);
-          window.location.href = '/checkout';
-        })
-        .catch(function() {
-          showWishlistToast('Could not place order', true);
-          btn.removeAttribute('disabled');
-          btn.textContent = label;
-        });
     }
   }
 

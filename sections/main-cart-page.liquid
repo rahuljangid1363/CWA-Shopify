@@ -1,0 +1,163 @@
+{{ 'cart-page.css' | asset_url | stylesheet_tag }}
+
+<div class="cwa-cart page-width" id="CwaCart-{{ section.id }}">
+  {%- if cart.item_count == 0 -%}
+    <div class="cwa-cart__empty">
+      <h2>Your cart is empty</h2>
+      <p>Add products to your cart and they will show up here.</p>
+      <a href="{{ routes.all_products_collection_url }}">Continue Shopping</a>
+    </div>
+  {%- else -%}
+    {%- liquid
+      assign total_mrp = 0
+      for item in cart.items
+        assign line_mrp = item.variant.compare_at_price | default: 0
+        if line_mrp < item.original_price
+          assign line_mrp = item.original_price
+        endif
+        assign line_mrp_total = line_mrp | times: item.quantity
+        assign total_mrp = total_mrp | plus: line_mrp_total
+      endfor
+      assign total_discount = total_mrp | minus: cart.total_price
+    -%}
+    <div class="cwa-cart__layout">
+      <div class="cwa-cart__list">
+        {%- for item in cart.items -%}
+          {%- assign product_code = item.product.metafields.custom.product_code.value | default: item.sku -%}
+          {%- assign data_sheet = item.product.metafields.custom.data_sheet -%}
+          <div class="fk-wl-card" data-line="{{ forloop.index }}">
+            <button type="button" class="fk-wl-remove" data-cart-remove data-line="{{ forloop.index }}" title="Remove" aria-label="Remove {{ item.product.title | escape }}">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>
+            </button>
+            <a href="{{ item.url }}" class="fk-wl-media">
+              {%- if item.image -%}
+                <img src="{{ item.image | img_url: '400x' }}" alt="{{ item.image.alt | escape }}" loading="lazy">
+              {%- else -%}
+                <div class="fk-wl-noimg">No Image</div>
+              {%- endif -%}
+            </a>
+            <div class="fk-wl-info">
+              <a href="{{ item.url }}" class="fk-wl-title">{{ item.product.title | escape }}</a>
+              {%- if product_code != blank -%}
+                <div class="fk-wl-code">{{ product_code }}</div>
+              {%- endif -%}
+
+              {%- assign has_props = false -%}
+              {%- capture props_html -%}
+                {%- for property in item.properties -%}
+                  {%- assign prop_first_char = property.first | slice: 0 -%}
+                  {%- if prop_first_char != '_' and property.last != blank -%}
+                    {%- assign has_props = true -%}
+                    <span class="fk-wl-select"><span class="fk-wl-select__label">{{ property.first | escape }} -</span> <strong>{{ property.last | escape }}</strong></span>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endcapture -%}
+              {%- if has_props -%}
+                <div class="fk-wl-selects">{{ props_html }}</div>
+              {%- endif -%}
+
+              <div class="fk-wl-qty-label">Quantity</div>
+              <div class="fk-wl-qty">
+                <button type="button" data-cart-qty="{{ item.quantity | minus: 1 }}" data-line="{{ forloop.index }}" aria-label="Decrease quantity">&minus;</button>
+                <input type="number" min="0" value="{{ item.quantity }}" data-cart-input data-line="{{ forloop.index }}" aria-label="Quantity">
+                <button type="button" data-cart-qty="{{ item.quantity | plus: 1 }}" data-line="{{ forloop.index }}" aria-label="Increase quantity">+</button>
+              </div>
+
+              {%- if data_sheet != blank -%}
+                <a class="fk-wl-datasheet" href="{{ data_sheet | file_url }}" target="_blank" rel="noopener">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span>Download Data Sheet</span>
+                </a>
+              {%- endif -%}
+              <div class="fk-wl-price">{{ item.final_line_price | money }}</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <aside class="fk-wl-summary cwa-cart__summary">
+        <div class="fk-wl-summary__title">Price Details ({{ cart.item_count }}{% if cart.item_count == 1 %} Item{% else %} Items{% endif %})</div>
+        <div class="fk-wl-summary__row"><span>Total MRP</span><span>{{ total_mrp | money }}</span></div>
+        <div class="fk-wl-summary__row"><span>Discount on MRP</span><span class="fk-wl-summary__discount">{% if total_discount > 0 %}- {% endif %}{{ total_discount | money }}</span></div>
+        <div class="fk-wl-summary__row fk-wl-summary__row--total"><span>Total Amount</span><span>{{ cart.total_price | money }}</span></div>
+        <p class="fk-wl-summary__terms">By placing the order, you agree to our <a href="{{ routes.root_url }}policies/terms-of-service">Terms of Use</a> and <a href="{{ routes.root_url }}policies/privacy-policy">Privacy Policy</a></p>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button type="submit" name="checkout" class="fk-wl-summary__btn">Place Order</button>
+        </form>
+      </aside>
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  (function () {
+    var sectionId = {{ section.id | json }};
+    var rootId = 'CwaCart-' + sectionId;
+
+    function refresh() {
+      return Promise.all([
+        fetch(window.location.pathname + '?section_id=' + sectionId).then(function (r) { return r.text(); }),
+        fetch((window.routes && routes.root_url ? routes.root_url : '/') + '?sections=cart-icon-bubble').then(function (r) { return r.json(); }).catch(function () { return null; })
+      ]).then(function (res) {
+        var doc = new DOMParser().parseFromString(res[0], 'text/html');
+        var fresh = doc.getElementById(rootId);
+        var root = document.getElementById(rootId);
+        if (fresh && root) root.innerHTML = fresh.innerHTML;
+
+        if (res[1] && res[1]['cart-icon-bubble']) {
+          var bubbleDoc = new DOMParser().parseFromString(res[1]['cart-icon-bubble'], 'text/html');
+          var src = bubbleDoc.querySelector('.shopify-section');
+          var target = document.getElementById('cart-icon-bubble');
+          if (src && target) target.innerHTML = src.innerHTML;
+        }
+      });
+    }
+
+    function changeLine(line, quantity) {
+      var root = document.getElementById(rootId);
+      var layout = root && root.querySelector('.cwa-cart__layout');
+      if (layout) layout.classList.add('is-loading');
+      return fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ line: Number(line), quantity: Math.max(0, Number(quantity) || 0) })
+      })
+        .then(function (r) { return r.json(); })
+        .then(refresh)
+        .catch(function () {
+          if (layout) layout.classList.remove('is-loading');
+        });
+    }
+
+    document.addEventListener('click', function (e) {
+      var root = document.getElementById(rootId);
+      if (!root || !root.contains(e.target)) return;
+      var qtyBtn = e.target.closest('[data-cart-qty]');
+      if (qtyBtn) {
+        e.preventDefault();
+        changeLine(qtyBtn.getAttribute('data-line'), qtyBtn.getAttribute('data-cart-qty'));
+        return;
+      }
+      var removeBtn = e.target.closest('[data-cart-remove]');
+      if (removeBtn) {
+        e.preventDefault();
+        changeLine(removeBtn.getAttribute('data-line'), 0);
+      }
+    });
+
+    document.addEventListener('change', function (e) {
+      var input = e.target.closest && e.target.closest('[data-cart-input]');
+      if (!input) return;
+      var root = document.getElementById(rootId);
+      if (!root || !root.contains(input)) return;
+      changeLine(input.getAttribute('data-line'), input.value);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "settings": []
+}
+{% endschema %}

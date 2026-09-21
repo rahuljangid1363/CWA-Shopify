@@ -12,12 +12,35 @@
     "contact-banner": {
       "type": "contact-banner",
       "blocks": {
-        "quote": { "type": "card", "settings": { "title": "Request a Quote", "text": "Send your process details, quantities and delivery location. We’ll recommend the right CWA solution and pricing." } },
-        "support": { "type": "card", "settings": { "title": "Technical & Product Support", "text": "Get help with selection, installation, commissioning, troubleshooting and replacement parts." } },
-        "sales": { "type": "card", "settings": { "title": "Sales & General Enquiries", "text": "Ask about availability, orders, delivery, partnerships or general enquiries." } }
+        "quote": {
+          "type": "card",
+          "settings": {
+            "title": "Request a Quote",
+            "text": "Send your process details, quantities and delivery location. We’ll recommend the right CWA solution and pricing."
+          }
+        },
+        "support": {
+          "type": "card",
+          "settings": {
+            "title": "Technical & Product Support",
+            "text": "Get help with selection, installation, commissioning, troubleshooting and replacement parts."
+          }
+        },
+        "sales": {
+          "type": "card",
+          "settings": {
+            "title": "Sales & General Enquiries",
+            "text": "Ask about availability, orders, delivery, partnerships or general enquiries."
+          }
+        }
       },
-      "block_order": ["quote", "support", "sales"],
+      "block_order": [
+        "quote",
+        "support",
+        "sales"
+      ],
       "settings": {
+        "image": "shopify://shop_images/contact_cwa.webp",
         "heading": "Need instrumentation? Let’s get it moving.",
         "text": "Tell us what you need and our team will help you find the right product or solution for your application."
       }
@@ -28,7 +51,6 @@
         "2cd51af1-1562-4bad-be94-043f4c99c00e": {
           "type": "information",
           "settings": {
-            "icon": "shopify://shop_images/unsplash-QXevDflbl8A-1000x1000.jpg",
             "title": "Emma Stone",
             "description": "<div>Human Resource<br>\nPhone: + 844 123 444 77 88<br>\nEmail: demo@demo.com</div>"
           }
@@ -36,7 +58,6 @@
         "f539326d-d01f-4428-9e2e-d899df3f06fc": {
           "type": "information",
           "settings": {
-            "icon": "shopify://shop_images/unsplash-uJ8LNVCBjFQ-1000x1000.jpg",
             "title": "Linda",
             "description": "<div>Senior Marketing Manager<br>\nPhone: + 844 123 444 77 88<br>\nEmail: demo@demo.com<br>\n</div>"
           }
@@ -44,7 +65,6 @@
         "98d8926f-d8d5-45da-8163-71d42eda460e": {
           "type": "information",
           "settings": {
-            "icon": "shopify://shop_images/unsplash-WNoLnJo7tS8-1000x1000.jpg",
             "title": "William Smith",
             "description": "<div>Recruiting Manager<br>\nPhone: + 844 123 444 77 88<br>\nEmail: demo@demo.com</div>"
           }
@@ -64,7 +84,13 @@
         "contact_phone": "+844 123 456 789",
         "contact_mail": "demo@demo.com",
         "contact_web": "www.example.com",
-        "moreinfo_title": "Our staff"
+        "moreinfo_title": "Our staff",
+        "info_title": "Need more information?",
+        "info_text": "Contact us for more details about our solutions and services",
+        "qr_email_image": "shopify://shop_images/CWA_QR.png",
+        "info_email": "info@cwa.com",
+        "qr_whatsapp_image": "shopify://shop_images/CWA_QR.png",
+        "info_whatsapp": "+8615868103947"
       }
     }
   },
