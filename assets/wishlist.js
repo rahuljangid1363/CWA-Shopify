@@ -24,6 +24,14 @@
 
   injectWishlistStyles();
 
+  // Re-sync the shared mirror/cookie to whoever is (or isn't) logged in,
+  // before ap-theme.js reads the cookie for the header badge.
+  if (window.customerId) {
+    setWishlist(getWishlist());
+  } else {
+    clearWishlistMirror();
+  }
+
   function escapeHtml(str) {
     if (!str) return '';
     return String(str)
@@ -43,7 +51,43 @@
       });
   }
 
+  // The wishlist belongs to the logged-in customer: it's stored under a
+  // per-customer key, and the shared/legacy keys + 'wishlist' cookie (which
+  // ap-theme.js reads for the header badge) are only a mirror of the current
+  // customer's list. Logged out => empty and the mirror is wiped.
+  function userStorageKey() {
+    return window.customerId ? STORAGE_KEY + '_' + window.customerId : null;
+  }
+
+  function clearWishlistMirror() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem('wishlist');
+    } catch (e) {}
+    try {
+      document.cookie = 'wishlist=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    } catch (e) {}
+  }
+
   function getWishlist() {
+    var key = userStorageKey();
+    if (!key) return [];
+    try {
+      var raw = localStorage.getItem(key);
+      if (raw !== null) {
+        var saved = JSON.parse(raw);
+        if (Array.isArray(saved)) return saved;
+      }
+    } catch (e) {}
+    // First visit since wishlists became per-customer: adopt the existing list.
+    var legacy = readLegacyWishlist();
+    if (legacy.length) {
+      try { localStorage.setItem(key, JSON.stringify(legacy)); } catch (e) {}
+    }
+    return legacy;
+  }
+
+  function readLegacyWishlist() {
     var rawList = [];
 
     // 1. Try localStorage theme_wishlist (JSON array)
@@ -153,6 +197,16 @@
 
     var str = cleanList.join(',');
 
+    var userKey = userStorageKey();
+    if (!userKey) {
+      clearWishlistMirror();
+      updateWishlistUI([]);
+      return;
+    }
+    try {
+      localStorage.setItem(userKey, JSON.stringify(cleanList));
+    } catch (e) {}
+
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cleanList));
       localStorage.setItem('wishlist', str);
@@ -239,62 +293,147 @@
     }, 2800);
   }
 
-  // Render a Single Wishlist Card (image, title, sku, price, Move to Bag)
-  function renderWishlistItem(product) {
-    var priceVal = 0;
-    if (typeof product.price === 'number') {
-      priceVal = product.price;
-    } else if (product.price) {
-      priceVal = Math.round((parseFloat(String(product.price).replace(/[^0-9.]/g, '')) || 0) * 100);
+  // ---- Wishlist page: item cards + price details --------------------------
+  var SPEC_FIELDS = [
+    { key: 'nominal_diameter', label: 'Nominal Diameter' },
+    { key: 'lining_material', label: 'Lining Material' },
+    { key: 'connection', label: 'Connection' },
+    { key: 'pressure', label: 'Pressure' }
+  ];
+  var PREFS_KEY = 'theme_wishlist_prefs';
+
+  function getPrefs() {
+    try { return JSON.parse(localStorage.getItem(PREFS_KEY)) || {}; } catch (e) { return {}; }
+  }
+
+  function savePref(handle, patch) {
+    try {
+      var prefs = getPrefs();
+      prefs[handle] = Object.assign({}, prefs[handle] || {}, patch);
+      localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+    } catch (e) {}
+  }
+
+  function removePref(handle) {
+    try {
+      var prefs = getPrefs();
+      delete prefs[handle];
+      localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+    } catch (e) {}
+  }
+
+  function formatCents(cents) {
+    var format = (typeof theme !== 'undefined' && theme.moneyFormat) || '${{amount}}';
+    if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
+      return Shopify.formatMoney(cents, format);
     }
+    return '$' + (cents / 100).toFixed(2);
+  }
 
-    var priceFormatted = '';
-    if (priceVal > 0 && typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
-      priceFormatted = Shopify.formatMoney(priceVal, (typeof theme !== 'undefined' && theme.moneyFormat) || '${{amount}}');
-    } else if (product.price_formatted) {
-      priceFormatted = product.price_formatted;
-    }
+  function fallbackProductData(handle) {
+    return {
+      handle: handle,
+      title: formatHandleToTitle(handle),
+      url: '/products/' + handle,
+      image: '',
+      product_code: '',
+      data_sheet: '',
+      available: false,
+      variant_id: null,
+      price: 0,
+      compare_at_price: 0,
+      options: {}
+    };
+  }
 
-    var imageSrc = product.featured_image || (product.images && product.images[0]) || product.image || '';
-    var url = product.url || ('/products/' + product.handle);
-    var title = product.title || formatHandleToTitle(product.handle);
-    var available = (product.available !== undefined) ? product.available : true;
-    var variant = (product.variants && product.variants[0]) || null;
-    var variantId = variant ? variant.id : '';
-    var sku = variant ? variant.sku : '';
+  function buildWishlistItem(data) {
+    var pref = getPrefs()[data.handle] || {};
+    var sel = {};
+    SPEC_FIELDS.forEach(function(f) {
+      var vals = (data.options && data.options[f.key]) || [];
+      var saved = pref.sel && pref.sel[f.key];
+      sel[f.key] = vals.indexOf(saved) >= 0 ? saved : vals[0];
+    });
+    return { data: data, qty: Math.max(1, parseInt(pref.qty, 10) || 1), sel: sel };
+  }
 
-    var statusHtml = '';
-    if (available === false) {
-      statusHtml = '<div class="fk-wishlist-item__status">Currently unavailable</div>';
-    }
+  function isOrderable(item) {
+    return !!(item.data.available && item.data.variant_id);
+  }
 
-    var skuHtml = sku ? '<div class="fk-wishlist-item__sku">' + escapeHtml(sku) + '</div>' : '';
-    var priceHtml = priceFormatted ? '<div class="fk-wishlist-item__price">' + escapeHtml(priceFormatted) + '</div>' : '';
+  function renderWishlistItem(item) {
+    var d = item.data;
+    var h = escapeHtml(d.handle);
 
-    var imageTag = imageSrc ?
-      '<img src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(title) + '" loading="lazy">' :
-      '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#878787;font-size:12px;background:#f1f3f6;">No Image</div>';
+    var img = d.image
+      ? '<img src="' + escapeHtml(d.image) + '" alt="' + escapeHtml(d.title) + '" loading="lazy">'
+      : '<div class="fk-wl-noimg">No Image</div>';
 
-    var moveDisabled = (!available || !variantId);
-    var moveLabel = available ? 'Move to Bag' : 'Out of Stock';
+    var selects = SPEC_FIELDS.map(function(f) {
+      var vals = (d.options && d.options[f.key]) || [];
+      if (!vals.length) return '';
+      var opts = vals.map(function(v) {
+        return '<option value="' + escapeHtml(v) + '"' + (v === item.sel[f.key] ? ' selected' : '') + '>' + escapeHtml(v) + '</option>';
+      }).join('');
+      return '<label class="fk-wl-select"><span class="fk-wl-select__label">' + f.label + ' -</span>' +
+        '<select data-field="' + f.key + '" data-handle="' + h + '" aria-label="' + f.label + '">' + opts + '</select></label>';
+    }).join('');
+
+    var datasheet = d.data_sheet
+      ? '<a class="fk-wl-datasheet" href="' + escapeHtml(d.data_sheet) + '" target="_blank" rel="noopener">' +
+          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>' +
+          '<span>Download Data Sheet</span></a>'
+      : '';
+
+    var price = d.price > 0 ? '<div class="fk-wl-price">' + escapeHtml(formatCents(d.price)) + '</div>' : '';
+    var status = isOrderable(item) ? '' : '<div class="fk-wl-status">Currently unavailable</div>';
 
     return (
-      '<div class="fk-wishlist-item" data-handle="' + escapeHtml(product.handle) + '">' +
-        '<button type="button" class="fk-wishlist-item__remove js-remove-wishlist" data-handle="' + escapeHtml(product.handle) + '" title="Remove from Wishlist" aria-label="Remove">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>' +
+      '<div class="fk-wl-card" data-handle="' + h + '">' +
+        '<button type="button" class="fk-wl-remove" data-act="remove" data-handle="' + h + '" title="Remove from Wishlist" aria-label="Remove">' +
+          '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>' +
         '</button>' +
-        '<a href="' + escapeHtml(url) + '" class="fk-wishlist-item__image">' + imageTag + '</a>' +
-        '<div class="fk-wishlist-item__body">' +
-          '<a href="' + escapeHtml(url) + '" class="fk-wishlist-item__title" title="' + escapeHtml(title) + '">' + escapeHtml(title) + '</a>' +
-          skuHtml +
-          priceHtml +
-          statusHtml +
+        '<a href="' + escapeHtml(d.url) + '" class="fk-wl-media">' + img + '</a>' +
+        '<div class="fk-wl-info">' +
+          '<a href="' + escapeHtml(d.url) + '" class="fk-wl-title">' + escapeHtml(d.title) + '</a>' +
+          (d.product_code ? '<div class="fk-wl-code">' + escapeHtml(d.product_code) + '</div>' : '') +
+          (selects ? '<div class="fk-wl-selects">' + selects + '</div>' : '') +
+          '<div class="fk-wl-qty-label">Quantity</div>' +
+          '<div class="fk-wl-qty">' +
+            '<button type="button" data-act="minus" data-handle="' + h + '" aria-label="Decrease quantity">&minus;</button>' +
+            '<input type="number" min="1" value="' + item.qty + '" data-handle="' + h + '" aria-label="Quantity">' +
+            '<button type="button" data-act="plus" data-handle="' + h + '" aria-label="Increase quantity">+</button>' +
+          '</div>' +
+          datasheet +
+          price +
+          status +
         '</div>' +
-        '<div class="fk-wishlist-item__divider"></div>' +
-        '<button type="button" class="fk-wishlist-item__move js-move-to-bag" data-handle="' + escapeHtml(product.handle) + '" data-variant-id="' + escapeHtml(String(variantId)) + '"' + (moveDisabled ? ' disabled' : '') + '>' + moveLabel + '</button>' +
       '</div>'
     );
   }
+
+  function renderWishlistSummary(items) {
+    var qty = 0, mrp = 0, total = 0;
+    items.forEach(function(item) {
+      if (!isOrderable(item)) return;
+      var d = item.data;
+      qty += item.qty;
+      total += d.price * item.qty;
+      mrp += Math.max(d.compare_at_price || 0, d.price) * item.qty;
+    });
+    var discount = mrp - total;
+    var disabled = qty === 0 ? ' disabled' : '';
+
+    return (
+      '<div class="fk-wl-summary__title">Price Details (' + qty + (qty === 1 ? ' Item' : ' Items') + ')</div>' +
+      '<div class="fk-wl-summary__row"><span>Total MRP</span><span>' + escapeHtml(formatCents(mrp)) + '</span></div>' +
+      '<div class="fk-wl-summary__row"><span>Discount on MRP</span><span class="fk-wl-summary__discount">' + (discount > 0 ? '- ' : '') + escapeHtml(formatCents(discount)) + '</span></div>' +
+      '<div class="fk-wl-summary__row fk-wl-summary__row--total"><span>Total Amount</span><span>' + escapeHtml(formatCents(total)) + '</span></div>' +
+      '<p class="fk-wl-summary__terms">By placing the order, you agree to our <a href="/policies/terms-of-service">Terms of Use</a> and <a href="/policies/privacy-policy">Privacy Policy</a></p>' +
+      '<button type="button" class="fk-wl-summary__btn" data-act="place-order"' + disabled + '>Place Order</button>'
+    );
+  }
+
 
   // Extract card metadata when button is clicked
   function extractProductDataFromDOM(element, handle) {
@@ -439,203 +578,186 @@
       var wishlist = getWishlist();
       var cache = getProductCache();
 
-      var skeletonEls = document.querySelectorAll('#fk-wishlist-skeleton');
-      var listEls = document.querySelectorAll('#fk-wishlist-list, .fk-wishlist-list');
-      var emptyEls = document.querySelectorAll('#fk-wishlist-empty, .fk-wishlist-empty');
+      var listEl = self.querySelector('#fk-wishlist-list');
+      var skeletonEl = self.querySelector('#fk-wishlist-skeleton');
+      var emptyEl = self.querySelector('#fk-wishlist-empty');
+      var summaryEl = self.querySelector('#fk-wishlist-summary');
+      if (!summaryEl) {
+        summaryEl = document.createElement('aside');
+        summaryEl.id = 'fk-wishlist-summary';
+        summaryEl.className = 'fk-wl-summary';
+        summaryEl.style.display = 'none';
+        self.appendChild(summaryEl);
+      }
+      if (!listEl) return;
 
-      function hideEmptyState() {
-        emptyEls.forEach(function(el) {
-          el.classList.remove('is-visible');
-          el.style.setProperty('display', 'none', 'important');
-        });
+      function setDisplay(el, value) {
+        if (el) el.style.setProperty('display', value, 'important');
       }
 
-      function showEmptyState() {
-        emptyEls.forEach(function(el) {
-          el.classList.add('is-visible');
-          el.style.setProperty('display', 'block', 'important');
-        });
-      }
-
-      function hideSkeletons() {
-        skeletonEls.forEach(function(el) {
-          el.style.setProperty('display', 'none', 'important');
-        });
-      }
-
-      function removeItemFromGrid(container, handleToRemove, curList) {
-        var itemEl = container.querySelector('.fk-wishlist-item[data-handle="' + handleToRemove + '"]');
-        if (itemEl) {
-          itemEl.classList.add('removing');
-          setTimeout(function() {
-            itemEl.remove();
-            if (curList.length === 0) {
-              listEls.forEach(function(l) { l.style.setProperty('display', 'none', 'important'); });
-              showEmptyState();
-            }
-          }, 250);
+      function showEmpty() {
+        setDisplay(listEl, 'none');
+        setDisplay(skeletonEl, 'none');
+        setDisplay(summaryEl, 'none');
+        if (emptyEl) {
+          emptyEl.classList.add('is-visible');
+          setDisplay(emptyEl, 'block');
         }
       }
 
-      function bindListEvents(container) {
-        if (!container) return;
+      function refreshSummary() {
+        summaryEl.innerHTML = renderWishlistSummary(self._items || []);
+      }
 
-        // Remove Item
-        container.querySelectorAll('.js-remove-wishlist').forEach(function(btn) {
-          btn.onclick = function(e) {
+      function draw(dataList) {
+        self._items = dataList.map(buildWishlistItem);
+        listEl.innerHTML = self._items.map(renderWishlistItem).join('');
+        refreshSummary();
+        setDisplay(skeletonEl, 'none');
+        if (emptyEl) {
+          emptyEl.classList.remove('is-visible');
+          setDisplay(emptyEl, 'none');
+        }
+        setDisplay(listEl, 'flex');
+        setDisplay(summaryEl, 'block');
+        if (typeof updateCurrencies === 'function') updateCurrencies();
+      }
+
+      function findItem(handle) {
+        return (self._items || []).filter(function(i) { return i.data.handle === handle; })[0];
+      }
+
+      if (!self._wishlistBound) {
+        self._wishlistBound = true;
+
+        self.addEventListener('click', function(e) {
+          var btn = e.target.closest('[data-act]');
+          if (!btn || !self.contains(btn)) return;
+          var act = btn.getAttribute('data-act');
+          var handle = btn.getAttribute('data-handle');
+
+          if (act === 'remove') {
             e.preventDefault();
-            e.stopPropagation();
-            var handleToRemove = this.getAttribute('data-handle');
-            if (!handleToRemove) return;
-
             var curList = getWishlist();
-            var idx = curList.indexOf(handleToRemove);
+            var idx = curList.indexOf(handle);
             if (idx >= 0) {
               curList.splice(idx, 1);
-              removeProductCache(handleToRemove);
+              removeProductCache(handle);
+              removePref(handle);
               setWishlist(curList);
               showWishlistToast('Item removed from wishlist');
             }
-
-            removeItemFromGrid(container, handleToRemove, curList);
-          };
+          } else if (act === 'minus' || act === 'plus') {
+            var item = findItem(handle);
+            if (!item) return;
+            item.qty = Math.max(1, item.qty + (act === 'plus' ? 1 : -1));
+            savePref(handle, { qty: item.qty });
+            var input = self.querySelector('.fk-wl-qty input[data-handle="' + handle + '"]');
+            if (input) input.value = item.qty;
+            refreshSummary();
+          } else if (act === 'place-order') {
+            self.placeOrder(btn);
+          }
         });
 
-        // Move to Bag: add to cart, then drop it from the wishlist
-        container.querySelectorAll('.js-move-to-bag').forEach(function(btn) {
-          btn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+        self.addEventListener('change', function(e) {
+          var el = e.target;
+          var handle = el.getAttribute && el.getAttribute('data-handle');
+          if (!handle) return;
+          var item = findItem(handle);
+          if (!item) return;
 
-            if (this.hasAttribute('disabled')) return;
-
-            var handle = this.getAttribute('data-handle');
-            var variantId = this.getAttribute('data-variant-id');
-            if (!variantId) return;
-
-            var moveBtn = this;
-            var originalLabel = moveBtn.textContent;
-            moveBtn.setAttribute('disabled', 'disabled');
-            moveBtn.textContent = 'Adding...';
-
-            fetch((window.routes && window.routes.cart_add_url) || '/cart/add.js', Object.assign(
-              { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } },
-              { body: JSON.stringify({ items: [{ id: Number(variantId), quantity: 1 }] }) }
-            ))
-              .then(function(response) { return response.json(); })
-              .then(function(data) {
-                if (data.status) {
-                  showWishlistToast(data.message || data.description || 'Could not add to bag', true);
-                  moveBtn.removeAttribute('disabled');
-                  moveBtn.textContent = originalLabel;
-                  return;
-                }
-
-                var curList = getWishlist();
-                var idx = curList.indexOf(handle);
-                if (idx >= 0) {
-                  curList.splice(idx, 1);
-                  removeProductCache(handle);
-                  setWishlist(curList);
-                }
-
-                showWishlistToast('Moved to bag');
-                removeItemFromGrid(container, handle, curList);
-
-                var miniCartEl = document.querySelector('mini-cart');
-                if (miniCartEl && typeof miniCartEl.update === 'function') {
-                  miniCartEl.update();
-                }
-              })
-              .catch(function() {
-                showWishlistToast('Could not add to bag', true);
-                moveBtn.removeAttribute('disabled');
-                moveBtn.textContent = originalLabel;
-              });
-          };
+          if (el.matches('.fk-wl-qty input')) {
+            item.qty = Math.max(1, parseInt(el.value, 10) || 1);
+            el.value = item.qty;
+            savePref(handle, { qty: item.qty });
+            refreshSummary();
+          } else if (el.matches('select[data-field]')) {
+            item.sel[el.getAttribute('data-field')] = el.value;
+            savePref(handle, { sel: item.sel });
+          }
         });
       }
 
-      // Empty list condition
       if (!wishlist.length) {
-        hideSkeletons();
-        listEls.forEach(function(l) { l.style.setProperty('display', 'none', 'important'); });
-        showEmptyState();
+        showEmpty();
         return;
       }
 
-      // We have items -> HIDE empty state immediately
-      hideEmptyState();
+      // Instant paint from cached product data, if every item has some.
+      var token = (self._renderToken = (self._renderToken || 0) + 1);
+      var cached = wishlist.map(function(h) { return cache[h] && cache[h].wl; });
+      if (cached.every(Boolean)) draw(cached);
 
-      // 1. Instantly render items from cache or fallback
-      var initialProducts = wishlist.map(function(handle) {
-        if (cache[handle]) return cache[handle];
-        return {
-          handle: handle,
-          title: formatHandleToTitle(handle),
-          url: '/products/' + handle,
-          price_formatted: '',
-          image: ''
-        };
-      });
-
-      var renderedHtml = initialProducts.map(renderWishlistItem).join('');
-      listEls.forEach(function(listEl) {
-        listEl.innerHTML = renderedHtml;
-        listEl.style.setProperty('display', 'grid', 'important');
-        bindListEvents(listEl);
-      });
-      hideSkeletons();
-      hideEmptyState();
-
-      // 2. Fetch live data for up-to-date prices, variants and stock
       var rootUrl = (window.Shopify && Shopify.routes && Shopify.routes.root) ? Shopify.routes.root : '/';
       if (!rootUrl.endsWith('/')) rootUrl += '/';
 
-      var fetchPromises = wishlist.map(function(handle) {
-        var apiUrl = rootUrl + 'products/' + encodeURIComponent(handle) + '.js';
-        return fetch(apiUrl)
+      Promise.all(wishlist.map(function(handle) {
+        return fetch(rootUrl + 'products/' + encodeURIComponent(handle) + '?view=wishlist-data')
           .then(function(res) {
             if (!res.ok) throw new Error('Status: ' + res.status);
-            return res.json();
+            return res.text();
           })
-          .then(function(product) {
-            saveProductCache(handle, product);
-            return product;
+          .then(function(text) {
+            var data = JSON.parse(text);
+            saveProductCache(handle, { wl: data });
+            return data;
           })
           .catch(function() {
-            return cache[handle] || {
-              handle: handle,
-              title: formatHandleToTitle(handle),
-              url: '/products/' + handle,
-              price_formatted: '',
-              image: ''
-            };
+            return (cache[handle] && cache[handle].wl) || fallbackProductData(handle);
           });
-      });
-
-      Promise.all(fetchPromises).then(function(liveProducts) {
-        hideSkeletons();
-
-        var curWishlist = getWishlist();
-        if (!curWishlist.length) {
-          listEls.forEach(function(l) { l.style.setProperty('display', 'none', 'important'); });
-          showEmptyState();
+      })).then(function(dataList) {
+        if (token !== self._renderToken) return;
+        if (!getWishlist().length) {
+          showEmpty();
           return;
         }
-
-        var liveHtml = liveProducts.map(renderWishlistItem).join('');
-        listEls.forEach(function(listEl) {
-          listEl.innerHTML = liveHtml;
-          listEl.style.setProperty('display', 'grid', 'important');
-          bindListEvents(listEl);
-        });
-        hideEmptyState();
-
-        if (typeof updateCurrencies === 'function') {
-          updateCurrencies();
-        }
+        draw(dataList);
       });
+    }
+
+    placeOrder(btn) {
+      var self = this;
+      var orderable = (self._items || []).filter(isOrderable);
+      if (!orderable.length) return;
+
+      var label = btn.textContent;
+      btn.setAttribute('disabled', 'disabled');
+      btn.textContent = 'Placing order...';
+
+      var lines = orderable.map(function(item) {
+        var properties = {};
+        SPEC_FIELDS.forEach(function(f) {
+          if (item.sel[f.key]) properties[f.label] = item.sel[f.key];
+        });
+        return { id: Number(item.data.variant_id), quantity: item.qty, properties: properties };
+      });
+
+      fetch((window.routes && window.routes.cart_add_url) || '/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: lines })
+      })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+          if (data.status) {
+            showWishlistToast(data.message || data.description || 'Could not place order', true);
+            btn.removeAttribute('disabled');
+            btn.textContent = label;
+            return;
+          }
+          var remaining = getWishlist().filter(function(h) {
+            return !orderable.some(function(i) { return i.data.handle === h; });
+          });
+          orderable.forEach(function(i) { removeProductCache(i.data.handle); removePref(i.data.handle); });
+          setWishlist(remaining);
+          window.location.href = '/checkout';
+        })
+        .catch(function() {
+          showWishlistToast('Could not place order', true);
+          btn.removeAttribute('disabled');
+          btn.textContent = label;
+        });
     }
   }
 

@@ -9,6 +9,19 @@
  */
 {
   "sections": {
+    "contact-banner": {
+      "type": "contact-banner",
+      "blocks": {
+        "quote": { "type": "card", "settings": { "title": "Request a Quote", "text": "Send your process details, quantities and delivery location. We’ll recommend the right CWA solution and pricing." } },
+        "support": { "type": "card", "settings": { "title": "Technical & Product Support", "text": "Get help with selection, installation, commissioning, troubleshooting and replacement parts." } },
+        "sales": { "type": "card", "settings": { "title": "Sales & General Enquiries", "text": "Ask about availability, orders, delivery, partnerships or general enquiries." } }
+      },
+      "block_order": ["quote", "support", "sales"],
+      "settings": {
+        "heading": "Need instrumentation? Let’s get it moving.",
+        "text": "Tell us what you need and our team will help you find the right product or solution for your application."
+      }
+    },
     "contact-content": {
       "type": "contact-content",
       "blocks": {
@@ -43,7 +56,7 @@
         "98d8926f-d8d5-45da-8163-71d42eda460e"
       ],
       "settings": {
-        "gmap": true,
+        "gmap": false,
         "gmap_iframe": "<div class=\"mapouter\">\n<div class=\"gmap_canvas\">\n<iframe width=\"1080\" height=\"500\" id=\"gmap_canvas\" src=\"https://maps.google.com/maps?q=68%20nguyen%20co%20thach&t=&z=15&ie=UTF8&iwloc=&output=embed\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"></iframe>Google Maps Generator by <a href=\"https://www.embedgooglemap.net\">embedgooglemap.net</a>\n</div>\n<style>.mapouter{position:relative;text-align:right;height:500px;width:1080px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:1080px;}.gmap-iframe .mapouter, .gmap-iframe .gmap_canvas, .gmap-iframe iframe{ width:100% !important; } @media (max-width:767px){ .gmap-iframe .mapouter, .gmap-iframe .gmap_canvas, .gmap-iframe iframe{ height:350px !important; } }</style>\n</div>",
         "contact_title": "Visit one of our agency locations or contact us today.",
         "contact_des": "<div class=\"mb-3\">\n<a href=\"https://ap-sharon.myshopify.com/\">Apollo themes</a> features beautifully sectioned layout that allows you to showcase featured items for each category on the homepage. It comes with many different homepage layouts, so you can choose any suitable homepage for you store.</div>\n\n<h5 class=\"mb-1\">Head Office</h5>",
@@ -56,6 +69,7 @@
     }
   },
   "order": [
+    "contact-banner",
     "contact-content"
   ]
 }

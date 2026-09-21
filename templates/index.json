@@ -366,7 +366,7 @@
         "padding_mobile": "0px 0px 0px 0px",
         "sub_title": "",
         "color_sub_title": "#59805b",
-        "heading": "Most Searched Products",
+        "heading": "Most Frequently Ordered",
         "color_section_header": "#ffffff",
         "text_decoration": "",
         "color_section_text": "#ffffff",
@@ -453,7 +453,7 @@
       "type": "blog-post",
       "settings": {
         "fullwidth": false,
-        "background-color": "#FFFFFF",
+        "background-color": "#ffffff",
         "margin_desktop": "",
         "padding_desktop": "",
         "margin_mobile": "",

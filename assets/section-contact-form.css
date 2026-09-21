@@ -41,3 +41,148 @@
 .grecaptcha-badge {
   visibility: hidden;
 }
+
+/* ==========================================================================
+   Contact page — "Need more information?" info column + form card
+   ========================================================================== */
+.cwa-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 80px;
+  align-items: start;
+  padding: 60px 0;
+  margin-bottom: 0;
+  background: #f5f5f5;
+  box-shadow: 0 0 0 100vmax #f5f5f5;
+  clip-path: inset(0 -100vmax);
+}
+
+.cwa-contact__info {
+  padding-top: 8px;
+}
+
+.cwa-contact__title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #222;
+}
+
+.cwa-contact__text {
+  max-width: 380px;
+  margin: 0 0 40px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #888;
+}
+
+.cwa-contact__qrs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.cwa-contact__qr img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 18px;
+}
+
+.cwa-contact__qr-label {
+  display: block;
+  font-size: 11px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.cwa-contact__qr-value {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0b2a55;
+  text-decoration: none;
+}
+
+.cwa-contact__card {
+  padding: 30px 38px 40px;
+  background: #fafafa;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+.cwa-field {
+  padding: 8px 0 0;
+  border-bottom: 1px solid #d3d3d3;
+  margin-bottom: 26px;
+}
+
+.cwa-field label {
+  display: block;
+  font-size: 15px;
+  color: #333;
+  margin: 0;
+}
+
+.cwa-field__req {
+  color: #e53935;
+}
+
+.cwa-contact .cwa-field input,
+.cwa-contact .cwa-field textarea {
+  display: block;
+  width: 100%;
+  min-height: 34px;
+  padding: 6px 0;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  font-size: 15px;
+  color: #111;
+}
+
+.cwa-contact .cwa-field textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.cwa-field:focus-within {
+  border-bottom-color: var(--g-main, #3075cc);
+}
+
+.cwa-contact__submit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.cwa-contact__btn {
+  min-width: 114px;
+  padding: 14px 24px;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #3c88ea, #2264b4);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.cwa-contact__btn:hover {
+  filter: brightness(1.08);
+}
+
+@media (max-width: 991px) {
+  .cwa-contact {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 50px 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .cwa-contact__card {
+    padding: 20px 20px 28px;
+  }
+}

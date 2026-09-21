@@ -338,6 +338,7 @@
       to require a logged-in customer before adding to cart / wishlisting.
       {%- endcomment -%}
       window.customerLoggedIn = {% if customer %}true{% else %}false{% endif %};
+      window.customerId = {% if customer %}{{ customer.id | json }}{% else %}null{% endif %};
 
       window.cartStrings = {
         error: `{{ 'sections.cart.cart_error' | t }}`,

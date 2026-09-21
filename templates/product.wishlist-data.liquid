@@ -1,0 +1,20 @@
+{% layout none %}
+{%- assign v = product.selected_or_first_available_variant -%}
+{
+  "handle": {{ product.handle | json }},
+  "title": {{ product.title | json }},
+  "url": {{ product.url | json }},
+  "image": {% if product.featured_image %}{{ product.featured_image | img_url: '400x' | json }}{% else %}""{% endif %},
+  "product_code": {{ product.metafields.custom.product_code.value | default: v.sku | default: '' | json }},
+  "data_sheet": {% if product.metafields.custom.data_sheet != blank %}{{ product.metafields.custom.data_sheet | file_url | json }}{% else %}""{% endif %},
+  "available": {{ v.available | json }},
+  "variant_id": {{ v.id | json }},
+  "price": {{ v.price | default: 0 }},
+  "compare_at_price": {{ v.compare_at_price | default: 0 }},
+  "options": {
+    "nominal_diameter": {{ product.metafields.custom.nominal_diameter.value | json }},
+    "lining_material": {{ product.metafields.custom.lining_material.value | json }},
+    "connection": {{ product.metafields.custom.connection.value | json }},
+    "pressure": {{ product.metafields.custom.pressure.value | json }}
+  }
+}

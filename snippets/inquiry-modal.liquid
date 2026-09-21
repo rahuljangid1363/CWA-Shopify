@@ -1,0 +1,266 @@
+{%- comment -%}
+  "Online Inquiry" modal: the same contact form as the contact page (posts to
+  /contact with the same field names), opened from the hero's
+  "Talk To A Specialist" button. The button still links to /pages/contact
+  if JavaScript is unavailable.
+{%- endcomment -%}
+<style>
+  .cwa-inquiry {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
+
+  .cwa-inquiry.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
+  }
+
+  .cwa-inquiry__dialog {
+    width: 100%;
+    max-width: 514px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(28px) scale(0.96);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  }
+
+  .cwa-inquiry.is-open .cwa-inquiry__dialog {
+    transform: none;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cwa-inquiry,
+    .cwa-inquiry__dialog {
+      transition: none;
+    }
+  }
+
+  .cwa-inquiry__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e9edf2;
+  }
+
+  .cwa-inquiry__logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 30px;
+    width: auto;
+  }
+
+  .cwa-inquiry__title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #111;
+  }
+
+  .cwa-inquiry__close {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px;
+    background: none;
+    border: 0;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .cwa-inquiry__body {
+    padding: 20px;
+  }
+
+  .cwa-inquiry__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 14px;
+  }
+
+  .cwa-inquiry__field--full {
+    grid-column: 1 / -1;
+  }
+
+  .cwa-inquiry__field label {
+    display: block;
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: #111;
+  }
+
+  .cwa-inquiry__field input,
+  .cwa-inquiry__field textarea {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #111;
+    background: #fff;
+    border: 1px solid #d9dde3;
+    border-radius: 6px;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .cwa-inquiry__field input {
+    height: 38px;
+  }
+
+  .cwa-inquiry__field textarea {
+    min-height: 96px;
+    resize: vertical;
+  }
+
+  .cwa-inquiry__field input:focus,
+  .cwa-inquiry__field textarea:focus {
+    border-color: var(--g-main, #3075cc);
+  }
+
+  .cwa-inquiry__field ::placeholder {
+    color: #9aa3ae;
+  }
+
+  .cwa-inquiry__submit {
+    display: block;
+    width: 100%;
+    margin-top: 22px;
+    padding: 12px;
+    border: 0;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #3c88ea, #2264b4);
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .cwa-inquiry__submit:hover {
+    filter: brightness(1.08);
+  }
+
+  .cwa-inquiry__success {
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #03a685;
+    background: #e8f7f3;
+    border-radius: 6px;
+  }
+
+  body.cwa-inquiry-open {
+    overflow: hidden;
+  }
+
+  @media (max-width: 575px) {
+    .cwa-inquiry__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cwa-inquiry__logo {
+      display: none;
+    }
+  }
+</style>
+
+<div class="cwa-inquiry" id="CwaInquiryModal" role="dialog" aria-modal="true" aria-labelledby="CwaInquiryTitle" aria-hidden="true">
+  <div class="cwa-inquiry__dialog">
+    <div class="cwa-inquiry__header">
+      {%- if settings.logo != blank -%}
+        <img class="cwa-inquiry__logo" src="{{ settings.logo | img_url: '200x' }}" alt="{{ shop.name | escape }}">
+      {%- endif -%}
+      <h2 class="cwa-inquiry__title" id="CwaInquiryTitle">Online Inquiry</h2>
+      <button type="button" class="cwa-inquiry__close" data-inquiry-close aria-label="Close">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+      </button>
+    </div>
+
+    <div class="cwa-inquiry__body">
+      {%- form 'contact', id: 'ContactFormModal', return_to: request.path -%}
+        {%- if form.posted_successfully? -%}
+          <div class="cwa-inquiry__success" data-inquiry-success>{{ 'templates.contact.form.post_success' | t }}</div>
+        {%- endif -%}
+        <div class="cwa-inquiry__grid">
+          <div class="cwa-inquiry__field">
+            <label for="ContactFormModal-name">Name</label>
+            <input autocomplete="name" type="text" id="ContactFormModal-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if customer %}{{ customer.name }}{% endif %}" placeholder="Enter your name">
+          </div>
+          <div class="cwa-inquiry__field">
+            <label for="ContactFormModal-email">Email</label>
+            <input autocomplete="email" type="email" id="ContactFormModal-email" name="contact[email]" spellcheck="false" autocapitalize="off" value="{% if customer %}{{ customer.email }}{% endif %}" aria-required="true" placeholder="Enter your email">
+          </div>
+          <div class="cwa-inquiry__field">
+            <label for="ContactFormModal-phone">Contact</label>
+            <input type="tel" id="ContactFormModal-phone" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if customer %}{{ customer.phone }}{% endif %}" placeholder="Contact No.">
+          </div>
+          <div class="cwa-inquiry__field cwa-inquiry__field--full">
+            <label for="ContactFormModal-body">Inquiry Content</label>
+            <textarea rows="4" id="ContactFormModal-body" name="contact[{{ 'templates.contact.form.comment' | t }}]" placeholder="Inquiry Content"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="cwa-inquiry__submit">Send Message</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var modal = document.getElementById('CwaInquiryModal');
+    if (!modal) return;
+    var lastFocus = null;
+
+    function open() {
+      lastFocus = document.activeElement;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('cwa-inquiry-open');
+      var first = modal.querySelector('input');
+      if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 50);
+    }
+
+    function close() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('cwa-inquiry-open');
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('a.hero-btn-secondary');
+      if (trigger && /\/pages\/contact\/?(\?|#|$)/.test(trigger.getAttribute('href') || '')) {
+        e.preventDefault();
+        open();
+        return;
+      }
+      if (e.target.closest('[data-inquiry-close]') || e.target === modal) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+    });
+
+    // After a successful send (Shopify returns to this page), show the confirmation.
+    if (modal.querySelector('[data-inquiry-success]')) open();
+  })();
+</script>
