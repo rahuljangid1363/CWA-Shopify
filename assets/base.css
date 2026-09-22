@@ -4093,7 +4093,8 @@ product-wishlist.active svg {
 }
 
 .product-thumb-image .slick-slide {
-  margin: 0 10px;
+  margin: 10px 10px;
+  box-shadow: rgba(0, 0, 0, 0.008) 0px 0px 0px 1px;
 }
 
 .product-thumb-image .slick-list {

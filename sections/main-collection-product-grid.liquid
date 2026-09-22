@@ -157,6 +157,19 @@
                 endif
               endfor
             endif
+
+            comment
+              Landing directly on the parent's own page (e.g. clicking
+              "Flow Measurement" in the header) with no specific child
+              selected yet: default-highlight its first child (e.g.
+              "Electromagnetic Flowmeter") instead of leaving nothing
+              selected in the submenu.
+            endcomment
+            assign default_first_child = false
+            if is_current_page and has_active_child == false and request.path == link.url
+              assign default_first_child = true
+              assign has_active_child = true
+            endif
           -%}
 
           <li class="collection-categories__item{% if has_sub %} has-submenu{% if is_current_page %} is-open{% endif %}{% endif %}{% if is_current_page %} is-active{% endif %}">
@@ -175,6 +188,8 @@
                 {%- for child in link.links -%}
                   {%- assign is_child_active = false -%}
                   {%- if child.active or request.path == child.url -%}
+                    {%- assign is_child_active = true -%}
+                  {%- elsif default_first_child and forloop.first -%}
                     {%- assign is_child_active = true -%}
                   {%- endif -%}
                   <li class="collection-categories__subitem">

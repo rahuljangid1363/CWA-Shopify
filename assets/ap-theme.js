@@ -487,12 +487,25 @@ function productImageGallery(){
        var slider = $('#product-gallery-image-zoom');
        slider[0].slick.slickGoTo(parseInt($(this).parent().data('slick-index')));
       if($(this).hasClass('video-product')) {
-        
+
       } else {
-        $("img.product-full-image-zoom").attr('src', $(this).data('url'));
-        $("img.product-full-image-zoom").attr('srcset', $(this).data('url'));
-        $("img.product-full-image-zoom").attr('zoom-image', $(this).data('url'));
-        $(".zoomWindowContainer .zoomWindow").css('background-image', 'url("' +$(this).data('url') + '")');
+        var $mainImg = $("img.product-full-image-zoom");
+        var newUrl = $(this).data('url');
+
+        // Fade/slide the current image out, swap the source once it's
+        // invisible, then fade/slide it back in — a smooth transition
+        // instead of an instant swap.
+        $mainImg.addClass('is-swapping');
+        setTimeout(function() {
+          $mainImg.attr('src', newUrl);
+          $mainImg.attr('srcset', newUrl);
+          $mainImg.attr('zoom-image', newUrl);
+          $(".zoomWindowContainer .zoomWindow").css('background-image', 'url("' + newUrl + '")');
+          // Force layout so the removal of is-swapping transitions in,
+          // rather than jumping straight to the end state.
+          $mainImg[0] && $mainImg[0].offsetWidth;
+          $mainImg.removeClass('is-swapping');
+        }, 250);
       }
     });
   }

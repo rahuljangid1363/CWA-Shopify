@@ -1139,6 +1139,15 @@ img.product-full-image-zoom,
   object-fit: contain !important;
   margin: 0 auto !important;
   display: block !important;
+  transition: opacity 0.25s ease, transform 0.25s ease !important;
+}
+
+/* Smooth crossfade + slight slide when a thumbnail swaps the main image
+   (see productImageGallery() in ap-theme.js). */
+img.product-full-image-zoom.is-swapping,
+#product-full-image-zoom.is-swapping {
+  opacity: 0 !important;
+  transform: translateX(12px) !important;
 }
 
 .product-thumb-image {
@@ -1151,6 +1160,20 @@ img.product-full-image-zoom,
 .product-thumb-image .product-thumb-image-slick {
   position: relative !important;
   margin: 0 !important;
+}
+
+/* Thumbnail hover: a small, smooth scale-up — matches the reference site's
+   .thumbnail:hover>img (transform: scale(1.02), 0.2s linear transition). */
+#product-gallery-image-zoom li {
+  overflow: hidden;
+}
+
+#product-gallery-image-zoom li img {
+  transition: transform 0.2s linear;
+}
+
+#product-gallery-image-zoom li:hover img {
+  transform: scale(1.02);
 }
 
 .product-thumb-image .slick-arrow,
@@ -1279,7 +1302,7 @@ button.product-form__submit,
   background-color: #ffffff !important;
   color: #121212 !important;
   border: 1px solid #dcdfe4 !important;
-  border-radius: 0px !important;
+  border-radius: 4px !important;
   font-size: 15px !important;
   font-weight: 500 !important;
   letter-spacing: 0px !important;
