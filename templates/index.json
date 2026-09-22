@@ -240,10 +240,10 @@
           "settings": {
             "image": "shopify://shop_images/two.png",
             "subheader_image": "Liquid Analysis",
-            "btn_link": "shopify://collections",
+            "btn_link": "shopify://collections/liquid-analysis",
             "image2": "shopify://shop_images/three.png",
             "subheader_image2": "Level Measurement",
-            "btn_link2": "shopify://collections"
+            "btn_link2": "shopify://collections/level-measurement"
           }
         },
         "16490453142a9d24a3-1": {
@@ -251,7 +251,7 @@
           "settings": {
             "image": "shopify://shop_images/four.png",
             "subheader_image": "Pressure Measurement",
-            "btn_link": "shopify://collections"
+            "btn_link": "shopify://collections/pressure-measurement"
           }
         }
       },
