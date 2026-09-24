@@ -1,10 +1,7 @@
 <style>
+  /* ============ Hero ============ */
   .cwa-cbanner__hero {
     position: relative;
-    display: flex;
-    align-items: center;
-    min-height: 370px;
-    padding: 60px 0;
     overflow: hidden;
     background: #0b1a2e;
     color: #fff;
@@ -22,18 +19,22 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 55%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(100deg, rgba(4, 12, 26, 0.82) 0%, rgba(4, 12, 26, 0.55) 45%, rgba(4, 12, 26, 0.25) 100%);
   }
 
-  .cwa-cbanner__content {
+  .cwa-cbanner__hero-inner {
     position: relative;
     z-index: 1;
-    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 400px;
+    gap: 40px;
+    align-items: center;
+    padding: 70px 0;
   }
 
   .cwa-cbanner__title {
-    max-width: 620px;
-    margin: 0 0 24px;
+    max-width: 560px;
+    margin: 0 0 16px;
     font-size: 40px;
     font-weight: 700;
     line-height: 1.2;
@@ -41,55 +42,347 @@
   }
 
   .cwa-cbanner__text {
-    max-width: 560px;
-    margin: 0;
-    font-size: 16px;
+    max-width: 620px;
+    margin: 30px 0 40px;
+    font-size: 18px;
     line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .cwa-cbanner__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  .cwa-cbanner__feature {
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 220px;
+  }
+
+  .cwa-cbanner__feature svg {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
     color: #fff;
   }
 
-  .cwa-cbanner__cards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
-    padding: 60px 0 60px;
+  .cwa-cbanner__feature-title {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
   }
 
-  .cwa-cbanner__card {
-    padding: 38px 16px 30px;
+  .cwa-cbanner__feature-text {
+    margin: 2px 0 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  /* ============ Enquiry form card ============ */
+  .cwa-cform {
+    padding: 28px 26px 30px;
     background: #fff;
-    border: 1px solid #e5e8eb;
-    border-radius: 4px;
-  }
-
-  .cwa-cbanner__card-title {
-    margin: 0 0 12px;
-    font-size: 20px;
-    font-weight: 400;
+    border-radius: 8px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
     color: #111;
   }
 
-  .cwa-cbanner__card-text {
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.7;
+  .cwa-cform__title {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0b2a55;
+  }
+
+  .cwa-cform__subtitle {
+    margin: 0 0 18px;
+    font-size: 12.5px;
+    color: #6b7280;
+  }
+
+  .cwa-cform .cwa-field {
+    margin-bottom: 14px;
+  }
+
+  .cwa-cform .cwa-field label {
+    display: block;
+    margin: 0 0 6px;
+    font-size: 12.5px;
     color: #333;
   }
 
+  .cwa-cform .cwa-field input,
+  .cwa-cform .cwa-field textarea {
+    display: block;
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 13px;
+    color: #111;
+    background: #fff;
+    border: 1px solid #d9dde3;
+    border-radius: 6px;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .cwa-cform .cwa-field textarea {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  .cwa-cform .cwa-field input:focus,
+  .cwa-cform .cwa-field textarea:focus {
+    border-color: var(--g-main, #3075cc);
+  }
+
+  .cwa-cform .cwa-field ::placeholder {
+    color: #9aa3ae;
+  }
+
+  .cwa-cform__submit {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px;
+    border: 0;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #3c88ea, #2264b4);
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .cwa-cform__submit:hover {
+    filter: brightness(1.08);
+  }
+
+  .cwa-cform__success {
+    margin: 0 0 14px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #03a685;
+    background: #e8f7f3;
+    border-radius: 6px;
+  }
+
+  /* ============ Feature strip ============ */
+  .cwa-cstrip {
+    padding: 40px 0;
+    background: #fff;
+  }
+
+  .cwa-cstrip__list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .cwa-cstrip__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .cwa-cstrip__item svg {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    color: var(--g-main, #2264b4);
+  }
+
+  .cwa-cstrip__item-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #23586C;
+  }
+
+  .cwa-cstrip__item-text {
+    margin: 1px 0 0;
+    font-size: 15px;
+    font-weight:500;
+    color: #8C8C8C;
+  }
+
+  /* ============ How can we help ============ */
+  .cwa-chelp {
+    padding: 60px 0;
+    background: #f3f4f6;
+  }
+
+  .cwa-csection__head {
+    max-width: 640px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+
+  .cwa-csection__title {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #111;
+  }
+
+  .cwa-csection__text {
+    margin: 0;
+    font-size: 16px;
+    color: #6b7280;
+  }
+
+  .cwa-chelp__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .cwa-chelp__card {
+    padding: 36px 26px;
+    background: #fff;
+    border: 1px solid #e5e8eb;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .cwa-chelp__card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background: #eaf2fe;
+    color: var(--g-main, #2264b4);
+  }
+
+  .cwa-chelp__card-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cwa-chelp__card-title {
+    margin: 0 0 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #111;
+  }
+
+  .cwa-chelp__card-text {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: #6b7280;
+  }
+
+  /* ============ Other ways to reach us ============ */
+  .cwa-creach {
+    padding: 60px 0;
+    background: #fff;
+  }
+
+  .cwa-creach__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cwa-creach__item {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 0 30px;
+    border-left: 1px solid #e5e8eb;
+  }
+
+  .cwa-creach__item:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .cwa-creach__qr {
+    flex-shrink: 0;
+    width: 84px;
+    height: 84px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f3f4f6;
+  }
+
+  .cwa-creach__qr img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .cwa-creach__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .cwa-creach__label svg {
+    width: 18px;
+    height: 18px;
+    color: var(--g-main, #2264b4);
+  }
+
+  .cwa-creach__value {
+    display: block;
+    font-size: 13.5px;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .cwa-creach__value + .cwa-creach__value {
+    margin-top: 2px;
+  }
+
+  .cwa-creach__note {
+    margin: 4px 0 0;
+    font-size: 12.5px;
+    color: #8a97a6;
+  }
+
   @media (max-width: 991px) {
-    .cwa-cbanner__cards {
+    .cwa-cbanner__hero-inner {
       grid-template-columns: 1fr;
+    }
+
+    .cwa-cstrip__list,
+    .cwa-chelp__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cwa-creach__list {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .cwa-creach__item {
+      border-left: 0;
+      padding: 0;
     }
   }
 
   @media (max-width: 575px) {
-    .cwa-cbanner__hero {
-      min-height: 300px;
-      padding: 40px 0;
+    .cwa-cbanner__title {
+      font-size: 28px;
     }
 
-    .cwa-cbanner__title {
-      font-size: 30px;
+    .cwa-cstrip__list,
+    .cwa-chelp__cards {
+      grid-template-columns: 1fr;
     }
   }
 </style>
@@ -99,28 +392,188 @@
     {%- if section.settings.image != blank -%}
       <img src="{{ section.settings.image | img_url: '2000x' }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
     {%- endif -%}
-    <div class="cwa-cbanner__content container">
-      {%- if section.settings.heading != blank -%}
-        <h1 class="cwa-cbanner__title">{{ section.settings.heading }}</h1>
-      {%- endif -%}
-      {%- if section.settings.text != blank -%}
-        <p class="cwa-cbanner__text">{{ section.settings.text }}</p>
-      {%- endif -%}
+    <div class="cwa-cbanner__hero-inner container">
+      <div>
+        {%- if section.settings.heading != blank -%}
+          <h1 class="cwa-cbanner__title">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="cwa-cbanner__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+
+        <div class="cwa-cbanner__features">
+          <div class="cwa-cbanner__feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            <div>
+              <p class="cwa-cbanner__feature-title">Right Solutions</p>
+              <p class="cwa-cbanner__feature-text">for real-world challenges</p>
+            </div>
+          </div>
+          <div class="cwa-cbanner__feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <div>
+              <p class="cwa-cbanner__feature-title">Experts who understand</p>
+              <p class="cwa-cbanner__feature-text">your industry</p>
+            </div>
+          </div>
+          <div class="cwa-cbanner__feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+            <div>
+              <p class="cwa-cbanner__feature-title">Support at every stage</p>
+              <p class="cwa-cbanner__feature-text">from enquiry to supply</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cwa-cform">
+        <h2 class="cwa-cform__title">Send us an enquiry</h2>
+        <p class="cwa-cform__subtitle">Fill in the details and our team will get back to you shortly.</p>
+        {%- form 'contact', id: 'ContactFormBanner' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="cwa-cform__success">{{ 'templates.contact.form.post_success' | t }}</div>
+          {%- endif -%}
+          <div class="cwa-field">
+            <label for="ContactFormBanner-name">Name</label>
+            <input autocomplete="name" type="text" id="ContactFormBanner-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="Enter your name">
+          </div>
+          <div class="cwa-field">
+            <label for="ContactFormBanner-email">Email</label>
+            <input
+              autocomplete="email"
+              type="email"
+              id="ContactFormBanner-email"
+              name="contact[email]"
+              spellcheck="false"
+              autocapitalize="off"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              aria-required="true"
+              placeholder="Enter your email"
+            >
+          </div>
+          <div class="cwa-field">
+            <label for="ContactFormBanner-body">Inquiry Content <span aria-hidden="true">*</span></label>
+            <textarea rows="4" id="ContactFormBanner-body" name="contact[{{ 'templates.contact.form.comment' | t }}]" placeholder="Tell us what you need">{{- form.body -}}</textarea>
+          </div>
+          <button type="submit" class="cwa-cform__submit">Submit</button>
+        {%- endform -%}
+      </div>
     </div>
   </div>
 
-  {%- if section.blocks.size > 0 -%}
+  <!-- Feature strip -->
+  <div class="cwa-cstrip">
     <div class="container">
-      <div class="cwa-cbanner__cards">
-        {%- for block in section.blocks -%}
-          <div class="cwa-cbanner__card" {{ block.shopify_attributes }}>
-            <h3 class="cwa-cbanner__card-title">{{ block.settings.title }}</h3>
-            <p class="cwa-cbanner__card-text">{{ block.settings.text }}</p>
+      <div class="cwa-cstrip__list">
+        <div class="cwa-cstrip__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="15" height="12"></rect><path d="M16 11h4l3 3v5h-7z"></path><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="19" r="2"></circle></svg>
+          <div>
+            <p class="cwa-cstrip__item-title">AUSTRALIAN STOCK</p>
+            <p class="cwa-cstrip__item-text">FAST LOCAL DISPATCH</p>
           </div>
-        {%- endfor -%}
+        </div>
+        <div class="cwa-cstrip__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="14" x2="15" y2="14"></line><line x1="9" y1="18" x2="15" y2="18"></line></svg>
+          <div>
+            <p class="cwa-cstrip__item-title">TECHNICAL DATA SHEETS</p>
+            <p class="cwa-cstrip__item-text">DOWNLOAD BEFORE YOU BUY</p>
+          </div>
+        </div>
+        <div class="cwa-cstrip__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          <div>
+            <p class="cwa-cstrip__item-title">SECURE ONLINE CHECKOUT</p>
+            <p class="cwa-cstrip__item-text">SIMPLE, RELIABLE ORDERING</p>
+          </div>
+        </div>
+        <div class="cwa-cstrip__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg>
+          <div>
+            <p class="cwa-cstrip__item-title">BULK &amp; MULTI-LINE ORDERS</p>
+            <p class="cwa-cstrip__item-text">BUILT FOR PROJECT PROCUREMENT</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How can we help -->
+  {%- if section.blocks.size > 0 -%}
+    <div class="cwa-chelp">
+      <div class="container">
+        <div class="cwa-csection__head">
+          <h2 class="cwa-csection__title">HOW CAN WE HELP?</h2>
+          <p class="cwa-csection__text">Choose what you need and we'll route your enquiry to the right team.</p>
+        </div>
+        <div class="cwa-chelp__cards">
+          {%- for block in section.blocks -%}
+            <div class="cwa-chelp__card" {{ block.shopify_attributes }}>
+              <span class="cwa-chelp__card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="14" x2="15" y2="14"></line><line x1="9" y1="18" x2="15" y2="18"></line></svg>
+              </span>
+              <h3 class="cwa-chelp__card-title">{{ block.settings.title }}</h3>
+              <p class="cwa-chelp__card-text">{{ block.settings.text }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   {%- endif -%}
+
+  <!-- Other ways to reach us -->
+  <div class="cwa-creach">
+    <div class="container">
+      <div class="cwa-csection__head">
+        <h2 class="cwa-csection__title">OTHER WAYS TO REACH US</h2>
+        <p class="cwa-csection__text">Prefer to contact us directly? Here are the other ways to get in touch.</p>
+      </div>
+      <div class="cwa-creach__list">
+        <div class="cwa-creach__item">
+          {%- if section.settings.qr_phone_image != blank -%}
+            <div class="cwa-creach__qr"><img src="{{ section.settings.qr_phone_image | img_url: '200x' }}" alt="Phone QR code" loading="lazy"></div>
+          {%- endif -%}
+          <div>
+            <p class="cwa-creach__label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              Phone
+            </p>
+            {%- if section.settings.phone_1 != blank -%}
+              <a class="cwa-creach__value" href="tel:{{ section.settings.phone_1 | remove: ' ' }}">{{ section.settings.phone_1 }}</a>
+            {%- endif -%}
+            {%- if section.settings.phone_2 != blank -%}
+              <a class="cwa-creach__value" href="tel:{{ section.settings.phone_2 | remove: ' ' }}">{{ section.settings.phone_2 }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="cwa-creach__item">
+          {%- if section.settings.qr_email_image != blank -%}
+            <div class="cwa-creach__qr"><img src="{{ section.settings.qr_email_image | img_url: '200x' }}" alt="Email QR code" loading="lazy"></div>
+          {%- endif -%}
+          <div>
+            <p class="cwa-creach__label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="M22 6l-10 7L2 6"></path></svg>
+              Email
+            </p>
+            {%- if section.settings.email != blank -%}
+              <a class="cwa-creach__value" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+            {%- endif -%}
+            <p class="cwa-creach__note">We usually reply within 1 business day</p>
+          </div>
+        </div>
+
+        <div class="cwa-creach__item">
+          <div>
+            <p class="cwa-creach__label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Australian Support
+            </p>
+            <p class="cwa-creach__note">Proudly supporting water &amp; wastewater industries across Australia</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% schema %}
@@ -128,6 +581,10 @@
   "name": "Contact banner",
   "tag": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
     {
       "type": "image_picker",
       "id": "image",
@@ -143,32 +600,69 @@
       "type": "textarea",
       "id": "text",
       "label": "Text",
-      "default": "Tell us what you need and our team will help you find the right product or solution for your application."
+      "default": "From product enquiries to technical support or a quote, our team is here to help you find the right solution for your water and wastewater application."
+    },
+    {
+      "type": "header",
+      "content": "Other ways to reach us"
+    },
+    {
+      "type": "text",
+      "id": "phone_1",
+      "label": "Phone number 1",
+      "default": "+61 391234567"
+    },
+    {
+      "type": "text",
+      "id": "phone_2",
+      "label": "Phone number 2",
+      "default": "+61 391234567"
+    },
+    {
+      "type": "image_picker",
+      "id": "qr_phone_image",
+      "label": "Phone QR code"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "sales@cwa.au"
+    },
+    {
+      "type": "image_picker",
+      "id": "qr_email_image",
+      "label": "Email QR code"
     }
   ],
   "blocks": [
     {
       "type": "card",
-      "name": "Card",
+      "name": "How can we help — card",
       "settings": [
         {
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Request a Quote"
+          "default": "Product Enquiry"
         },
         {
           "type": "textarea",
           "id": "text",
           "label": "Text",
-          "default": "Send your process details, quantities and delivery location."
+          "default": "Looking for a specific instrument? Tell us the product code, model or application and we'll help you find the right product."
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Contact banner"
+      "name": "Contact banner",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
     }
   ]
 }

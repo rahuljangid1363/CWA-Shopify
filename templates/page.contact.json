@@ -12,90 +12,46 @@
     "contact-banner": {
       "type": "contact-banner",
       "blocks": {
-        "quote": {
+        "enquiry": {
           "type": "card",
           "settings": {
-            "title": "Request a Quote",
-            "text": "Send your process details, quantities and delivery location. We’ll recommend the right CWA solution and pricing."
+            "title": "Product Enquiry",
+            "text": "Looking for a specific instrument? Tell us the product code, model or application and we’ll help you find the right product."
           }
         },
         "support": {
           "type": "card",
           "settings": {
-            "title": "Technical & Product Support",
-            "text": "Get help with selection, installation, commissioning, troubleshooting and replacement parts."
+            "title": "Technical Support",
+            "text": "Need help selecting or specifying? Share your application, requirements or technical question with our experts."
           }
         },
-        "sales": {
+        "quote": {
           "type": "card",
           "settings": {
-            "title": "Sales & General Enquiries",
-            "text": "Ask about availability, orders, delivery, partnerships or general enquiries."
+            "title": "Request a Quote",
+            "text": "Ready to purchase? Send us the products or quantities you need and we’ll get back with a quote."
           }
         }
       },
       "block_order": [
-        "quote",
+        "enquiry",
         "support",
-        "sales"
+        "quote"
       ],
       "settings": {
         "image": "shopify://shop_images/contact_cwa.webp",
         "heading": "Need instrumentation? Let’s get it moving.",
-        "text": "Tell us what you need and our team will help you find the right product or solution for your application."
-      }
-    },
-    "contact-content": {
-      "type": "contact-content",
-      "blocks": {
-        "2cd51af1-1562-4bad-be94-043f4c99c00e": {
-          "type": "information",
-          "settings": {
-            "title": "Emma Stone",
-            "description": "<div>Human Resource<br>\nPhone: + 844 123 444 77 88<br>\nEmail: demo@demo.com</div>"
-          }
-        },
-        "f539326d-d01f-4428-9e2e-d899df3f06fc": {
-          "type": "information",
-          "settings": {
-            "title": "Linda",
-            "description": "<div>Senior Marketing Manager<br>\nPhone: + 844 123 444 77 88<br>\nEmail: demo@demo.com<br>\n</div>"
-          }
-        },
-        "98d8926f-d8d5-45da-8163-71d42eda460e": {
-          "type": "information",
-          "settings": {
-            "title": "William Smith",
-            "description": "<div>Recruiting Manager<br>\nPhone: + 844 123 444 77 88<br>\nEmail: demo@demo.com</div>"
-          }
-        }
-      },
-      "block_order": [
-        "2cd51af1-1562-4bad-be94-043f4c99c00e",
-        "f539326d-d01f-4428-9e2e-d899df3f06fc",
-        "98d8926f-d8d5-45da-8163-71d42eda460e"
-      ],
-      "settings": {
-        "gmap": false,
-        "gmap_iframe": "<div class=\"mapouter\">\n<div class=\"gmap_canvas\">\n<iframe width=\"1080\" height=\"500\" id=\"gmap_canvas\" src=\"https://maps.google.com/maps?q=68%20nguyen%20co%20thach&t=&z=15&ie=UTF8&iwloc=&output=embed\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"></iframe>Google Maps Generator by <a href=\"https://www.embedgooglemap.net\">embedgooglemap.net</a>\n</div>\n<style>.mapouter{position:relative;text-align:right;height:500px;width:1080px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:1080px;}.gmap-iframe .mapouter, .gmap-iframe .gmap_canvas, .gmap-iframe iframe{ width:100% !important; } @media (max-width:767px){ .gmap-iframe .mapouter, .gmap-iframe .gmap_canvas, .gmap-iframe iframe{ height:350px !important; } }</style>\n</div>",
-        "contact_title": "Visit one of our agency locations or contact us today.",
-        "contact_des": "<div class=\"mb-3\">\n<a href=\"https://ap-sharon.myshopify.com/\">Apollo themes</a> features beautifully sectioned layout that allows you to showcase featured items for each category on the homepage. It comes with many different homepage layouts, so you can choose any suitable homepage for you store.</div>\n\n<h5 class=\"mb-1\">Head Office</h5>",
-        "contact_addess": "123 Sky Tower, West 21th Street, Suite 721, NY",
-        "contact_phone": "+844 123 456 789",
-        "contact_mail": "demo@demo.com",
-        "contact_web": "www.example.com",
-        "moreinfo_title": "Our staff",
-        "info_title": "Need more information?",
-        "info_text": "Contact us for more details about our solutions and services",
-        "qr_email_image": "shopify://shop_images/CWA_QR.png",
-        "info_email": "info@cwa.com",
-        "qr_whatsapp_image": "shopify://shop_images/CWA_QR.png",
-        "info_whatsapp": "+8615868103947"
+        "text": "From product enquiries to technical support or a quote, our team is here to help you find the right solution for your water and wastewater application.",
+        "phone_1": "+61 391234567",
+        "phone_2": "+61 391234567",
+        "qr_phone_image": "shopify://shop_images/CWA_QR.png",
+        "email": "sales@cwa.au",
+        "qr_email_image": "shopify://shop_images/CWA_QR.png"
       }
     }
   },
   "order": [
-    "contact-banner",
-    "contact-content"
+    "contact-banner"
   ]
 }

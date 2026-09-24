@@ -1084,6 +1084,12 @@ button.add-group-cart {
   order: 1;
 }
 
+.zoomContainer{
+ box-shadow: rgba(0, 0, 0, 0.008) 0px 0px 0px 1px !important;
+  border : 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 4px;
+}
+
 .left-thumbnails .product-thumb-image.popup-gallery {
   order: 0;
 }
@@ -1323,7 +1329,7 @@ button.product-form__submit,
 .product-form__submit:hover,
 button.product-form__submit:hover,
 .product-form__buttons .product-form__submit:hover {
-  background-color: #f9fafb !important;
+  background-color: #205eb0 !important;
   border-color: #b0b7c3 !important;
   color: #121212 !important;
   box-shadow: none !important;
@@ -1413,7 +1419,7 @@ quantity-input.quantity {
   border: 1px solid #dcdfe4 !important;
   border-radius: 4px !important;
   background: #ffffff !important;
-  min-height: 50px !important;
+  min-height: 40px !important;
   display: inline-flex !important;
   align-items: center !important;
   overflow: hidden !important;

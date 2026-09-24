@@ -96,7 +96,7 @@
             "color_button": "#ffffff",
             "border_button": "rgba(0,0,0,0)",
             "link_2": "Talk To A Specialist",
-            "btn_link_2": "/pages/contact",
+            "btn_link_2": "tel:+61391234567",
             "bg_button_2": "#ffffff",
             "color_button_2": "#0f172a",
             "border_button_2": "#e2e8f0",
