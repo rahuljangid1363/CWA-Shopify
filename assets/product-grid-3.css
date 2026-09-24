@@ -133,15 +133,9 @@
   border: none;
 }
 
-/* Price & Download Data Sheet Row */
-.product-grid-3 .card-price-datasheet-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+/* Price (its own row, above the datasheet/add-to-cart row) */
+.product-grid-3 .card-price-row {
   margin-top: auto;
-  border-top: 1.5px solid #dddddd;
-  padding-top: 14px;
 }
 
 .product-grid-3 .price {
@@ -186,7 +180,7 @@
   pointer-events: none;
 }
 
-/* Hover Action Row - Reserved Whitespace Inside the Card */
+/* Datasheet link + Add to Cart row (bottom of the card) */
 .product-grid-3 .card-hover-actions {
   display: flex;
   align-items: center;
@@ -198,22 +192,30 @@
   position: relative;
 }
 
-/* Wishlist Button Styling (Bottom action row next to Add to Cart, Visible Initially) */
+/* Wishlist heart: a circular icon button pinned over the top-right corner
+   of the product image, mirroring .card__category-badge pinned top-left.
+   It now lives inside .card__inner right alongside the category badge, so
+   it shares the exact same positioning context (.card--product) and the
+   exact same 12px offset — guaranteeing it tracks the image, not the card
+   shell below it. */
 .product-grid-3 .card-wishlist-action {
-  flex-shrink: 0;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 4;
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist {
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  min-height: 38px;
-  border: none !important;
-  border-radius: 0;
-  background-color: transparent !important;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  border: 1px solid #dbe6f3 !important;
+  border-radius: 50%;
+  background-color: #ffffff !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -221,13 +223,13 @@
   cursor: pointer;
   padding: 0;
   margin: 0;
-  box-shadow: none !important;
-  transition: transform 0.2s ease;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12) !important;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist svg {
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
   fill: none !important;
   stroke: #0075ff !important;
   stroke-width: 2.2px !important;
@@ -249,7 +251,7 @@
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  transform: scale(1.15);
+  transform: scale(1.15) !important;
 }
 
 .product-grid-3 .card-wishlist-action .js-btn-wishlist:not(.active):hover svg {
@@ -326,8 +328,15 @@ product-wishlist.active:hover svg {
   min-height: 42px;
   max-width: 100%;
   min-width: unset;
-  background: linear-gradient(90deg, #3d89e9 0%, #2a6dbf 100%);
-  /* border: 1px solid #3075cc; */
+  /* !important: a shared legacy rule (.card-wrapper .button:hover in
+     component-card.css) sets background: #000 and transform: translateY(-1rem)
+     on hover. Since this button's normal state is a gradient, that swap
+     flips background-image to none — a change CSS can never animate
+     smoothly no matter what transition is set, which is what caused the
+     hover to feel like a sudden snap instead of a smooth fade. Locking the
+     gradient + transform here for both states and only transitioning
+     filter (which does animate smoothly) fixes that. */
+  background: linear-gradient(90deg, #3d89e9 0%, #2a6dbf 100%) !important;
   border-radius: 6px;
   color: #ffffff;
   font-size: 14px;
@@ -339,21 +348,17 @@ product-wishlist.active:hover svg {
   padding: 0 16px;
   margin: 0;
   box-shadow: none;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.15s ease;
+  transform: none !important;
+  transition: filter 0.2s ease !important;
 }
 
 .product-grid-3 .card-addtocart-action .product-form__submit:hover {
-  background-color: #225a9e;
-  /* border-color: #225a9e; */
+  filter: brightness(0.9);
   color: #ffffff;
-  transform: none;
 }
 
 .product-grid-3 .card-addtocart-action .product-form__submit:active {
-  transform: scale(0.98);
+  transform: scale(0.98) !important;
 }
 
 .product-grid-3 .card-addtocart-action .product-form__submit svg {
@@ -362,8 +367,8 @@ product-wishlist.active:hover svg {
 
 .product-grid-3 .card-addtocart-action .product-form__submit .text-btn-product {
   display: inline-block !important;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   color: #ffffff;
   line-height: 1;
   font-style: normal;
@@ -374,37 +379,12 @@ product-wishlist.active:hover svg {
 }
 
 /* ==========================================================================
-   Desktop Hover Reveal Behavior: Add to Cart reveals on hover
-   Wishlist button remains visible initially at earlier position
+   Add to Cart is visible at all times (initial render, not just on hover),
+   on every device.
    ========================================================================== */
-@media (hover: hover) and (min-width: 769px) {
-  .product-grid-3 .card-addtocart-action {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(4px);
-    transition:
-      opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-      transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-      visibility 0.25s;
-  }
-
-  .card-wrapper.product-grid-3:hover .card-addtocart-action {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-}
-
-/* ==========================================================================
-   Mobile / Touch Device Behavior (Always Visible)
-   ========================================================================== */
-@media (max-width: 768px), (hover: none) {
-  .product-grid-3 .card-addtocart-action {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: none;
-  }
+.product-grid-3 .card-addtocart-action {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
 }

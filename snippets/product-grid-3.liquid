@@ -81,6 +81,13 @@
           <span>{{ product_card_product.type }}</span>
         </div>
         {%- endif -%}
+        <!-- wishlist heart: pinned to the top-right corner of the product
+             image itself (same positioning context as .card__category-badge
+             above, i.e. relative to .card--product) so it always tracks the
+             image regardless of card content below it -->
+        <div class="card-wishlist-action">
+          {% render 'wishlist-button', handle: product_card_product.handle %}
+        </div>
         <div class="card__badge">
           {%- if product_card_product.available == false -%}
             <span class="badge badge--bottom-left" aria-hidden="true">{{ 'products.product.sold_out' | t }}</span>
@@ -120,10 +127,13 @@
 
         <div class="card-divider"></div>
 
-        <div class="card-price-datasheet-row">
-          <!-- price -->
+        <!-- price (its own row) -->
+        <div class="card-price-row">
           {% render 'price', product: product_card_product, price_class: '' %}
-          <!-- download data sheet -->
+        </div>
+
+        <!-- datasheet link + add to cart, same row -->
+        <div class="card-hover-actions">
           {%- if product_card_product.metafields.custom.data_sheet != blank -%}
             <a class="card-datasheet-link" href="{{ product_card_product.metafields.custom.data_sheet | file_url }}" target="_blank" rel="noopener">
               {%- render 'icon-download' -%}
@@ -135,13 +145,6 @@
               <span>Download Data Sheet</span>
             </a>
           {%- endif -%}
-        </div>
-
-        <!-- actions: wishlist + full add to cart button -->
-        <div class="card-hover-actions">
-          <div class="card-wishlist-action">
-            {% render 'wishlist-button', handle: product_card_product.handle %}
-          </div>
           <div class="card-addtocart-action">
             {% render 'addcart-button', product_card_product: product_card_product, product_form_id: product_form_id %}
           </div>

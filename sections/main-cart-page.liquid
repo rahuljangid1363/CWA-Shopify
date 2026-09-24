@@ -42,13 +42,35 @@
                 <div class="fk-wl-code">{{ product_code }}</div>
               {%- endif -%}
 
+              {%- comment -%}
+                Show every option the actual variant in this cart line has
+                (item.options_with_values — always accurate, no matter how
+                the item was added), plus any custom line-item properties
+                (e.g. from a form that collects extra notes) not already
+                covered by an option of the same name.
+              {%- endcomment -%}
               {%- assign has_props = false -%}
+              {%- assign shown_labels = '' -%}
               {%- capture props_html -%}
+                {%- for option in item.options_with_values -%}
+                  {%- if option.name != 'Title' and option.value != blank and option.value != 'Default Title' -%}
+                    {%- assign has_props = true -%}
+                    {%- assign shown_labels = shown_labels | append: option.name | downcase | append: '|' -%}
+                    <span class="fk-wl-select"><span class="fk-wl-select__label">{{ option.name | escape }} -</span> <strong>{{ option.value | escape }}</strong>
+                      <svg class="fk-wl-select__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  {%- endif -%}
+                {%- endfor -%}
                 {%- for property in item.properties -%}
                   {%- assign prop_first_char = property.first | slice: 0 -%}
+                  {%- assign prop_label_key = property.first | downcase | append: '|' -%}
                   {%- if prop_first_char != '_' and property.last != blank -%}
-                    {%- assign has_props = true -%}
-                    <span class="fk-wl-select"><span class="fk-wl-select__label">{{ property.first | escape }} -</span> <strong>{{ property.last | escape }}</strong></span>
+                    {%- unless shown_labels contains prop_label_key -%}
+                      {%- assign has_props = true -%}
+                      <span class="fk-wl-select"><span class="fk-wl-select__label">{{ property.first | escape }} -</span> <strong>{{ property.last | escape }}</strong>
+                        <svg class="fk-wl-select__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </span>
+                    {%- endunless -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- endcapture -%}

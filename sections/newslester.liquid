@@ -59,6 +59,7 @@
 }
 .newsletter .field--with-icon .field__input{
   padding-left: 42px;
+  padding-right: 16px;
 }
 .newsletter .field--with-icon .field__label{
   left: 42px;
@@ -69,12 +70,14 @@
   top: 50%;
   transform: translateY(-50%);
   display: flex;
+  align-items: center;
   color: #9a9a9a;
   pointer-events: none;
 }
 .newsletter .field__icon svg{
   width: 15px;
   height: 12px;
+  display: block;
 }
 .newsletter .field__icon svg path{
   fill: currentColor;
@@ -82,10 +85,14 @@
 .newsletter .field__input{
   margin-bottom: 0;
   height: 48px;
+  padding-top: 0;
+  padding-bottom: 0;
   border-radius: 6px;
   background-color: #fff;
   box-shadow: none;
   border: none;
+  box-sizing: border-box;
+  line-height: 48px;
 }
 .newsletter .footer-block__newsletter form{
   display: flex;
