@@ -320,6 +320,14 @@ a.product__text {
   background-color: #ffffff;
 }
 
+/* Visual "selected" look for the first pill in each row — display-only,
+   matches the reference design; no click/selection behavior is attached. */
+.product__spec-pill-row .product__spec-pill:first-child {
+  border-color: var(--g-main, #3075cc);
+  background-color: #eaf2fe;
+  color: var(--g-main, #3075cc);
+}
+
 /* Connection / Pressure read-only dropdowns, shown side by side —
    see sections/main-product.liquid */
 .product__spec-dropdowns {
@@ -1276,27 +1284,36 @@ cart-freeshipping,
 
 .product-form__buttons--with-wishlist .product-form__submit {
   flex: 1 !important;
-  background-color: var(--g-main, #3075cc) !important;
-  color: #ffffff !important;
-  border: none !important;
+  background-color: #ffffff !important;
+  color: var(--g-main, #3075cc) !important;
+  border: 1px solid var(--g-main, #3075cc) !important;
   border-radius: 4px !important;
   margin-bottom: 0 !important;
 }
 
 .product-form__buttons--with-wishlist .product-form__submit:hover {
-  background-color: #205eb0 !important;
+  background-color: #eaf2fe !important;
 }
 
 .product-form__buttons--with-wishlist .product-form__submit[disabled] {
-  background-color: #9ca3af !important;
-  color: #ffffff !important;
+  background-color: #f3f4f6 !important;
+  border-color: #d1d5db !important;
+  color: #9ca3af !important;
 }
 
-/* If the dynamic checkout ("Buy it now") button is also present, drop it to
-   its own full-width line below the heart + Add to Cart row. */
+/* Dynamic checkout ("Buy it now") button, when present (only shown to
+   logged-in customers — see block.settings.show_dynamic_checkout in
+   sections/main-product.liquid): sit inline, same row, same width as
+   Add to Cart, instead of dropping to its own line below. Its own label/
+   look ("Buy with Shop", express-pay icons, etc.) is rendered by Shopify
+   itself and isn't something theme CSS can relabel. */
 .product-form__buttons--with-wishlist .shopify-payment-button {
-  order: 3;
-  flex-basis: 100% !important;
+  flex: 1 !important;
+  min-width: 140px;
+}
+
+.product-form__buttons--with-wishlist .shopify-payment-button__button {
+  border-radius: 4px !important;
 }
 
 /* 1. Add to Cart Button */
@@ -1582,7 +1599,7 @@ quantity-input.quantity {
 /* 5. Variant Swatches / Radio Buttons */
 .product-form__input input[type='radio']+label {
   border: 1px solid #dcdfe4 !important;
-  border-radius: 4px !important;
+  border-radius: 20px !important;
   padding: 8px 18px !important;
   font-size: 13px !important;
   font-weight: 500 !important;
@@ -1591,6 +1608,7 @@ quantity-input.quantity {
   transition: all 0.2s ease !important;
   margin: 4px 6px 4px 0 !important;
   cursor: pointer !important;
+  box-shadow: none !important;
 }
 
 .product-form__input input[type='radio']+label:hover {
@@ -1599,10 +1617,10 @@ quantity-input.quantity {
 }
 
 .product-form__input input[type='radio']:checked+label {
-  background-color: var(--g-main, #3075cc) !important;
-  color: #ffffff !important;
+  background-color: #eaf2fe !important;
+  color: var(--g-main, #3075cc) !important;
   border-color: var(--g-main, #3075cc) !important;
-  box-shadow: 0 2px 8px rgba(48, 117, 204, 0.3) !important;
+  box-shadow: none !important;
 }
 
 /* 6. Tabs (Description, Reviews, Specs) */

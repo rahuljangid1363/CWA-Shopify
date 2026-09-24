@@ -123,9 +123,17 @@ class VariantRadios extends VariantSelects {
   }
 
   updateOptions() {
-    const fieldsets = Array.from(this.querySelectorAll('fieldset'));
-    this.options = fieldsets.map((fieldset) => {
-      return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
+    // Most options render as a <fieldset> of radio pills, but some (e.g.
+    // Connection / Pressure — see sections/main-product.liquid) render as
+    // a plain <select> dropdown instead. Read both, in DOM order, so
+    // this.options still lines up with each variant's options array
+    // regardless of which widget a given option uses.
+    const inputs = Array.from(this.querySelectorAll('.product-form__input'));
+    this.options = inputs.map((input) => {
+      const select = input.querySelector('select');
+      if (select) return select.value;
+      const checkedRadio = input.querySelector('input[type="radio"]:checked');
+      return checkedRadio ? checkedRadio.value : undefined;
     });
   }
 }

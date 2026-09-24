@@ -323,8 +323,8 @@
   width: 100% !important;
   height: 44px !important;
   min-height: 44px !important;
-  background: #00a2db !important;
-  background-color: #00a2db !important;
+  background: linear-gradient(110deg,#3c88e9,#2564b4)!important;
+  background-color: #3075cc !important;
   color: #ffffff !important;
   border-radius: 8px !important;
   border: none !important;
@@ -341,8 +341,8 @@
 .bottom-minicart .cart__checkout-button.button-checkout-cwa:hover,
 .bottom-minicart .cart__checkout-button:hover,
 .product-minincart .cart__checkout-button:hover {
-  background: #008ec0 !important;
-  background-color: #008ec0 !important;
+  background: #2563eb !important;
+  background-color: #2563eb !important;
   color: #ffffff !important;
 }
 
